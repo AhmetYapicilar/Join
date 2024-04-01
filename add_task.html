@@ -11,13 +11,48 @@
 
 <body onload="includeHTML()">
 
-    <div w3-include-html="./assets/templates/header.html"></div>
+    <!-- <div w3-include-html="./assets/templates/header.html"></div> -->
 
     <div>
         <h1>Add Task</h1>
     </div>
 
-    <div w3-include-html="./assets/templates/side_menu.html"></div>
+    <form>
+        <div>
+            <span>Title *</span>
+            <input type="text" placeholder="Enter a title">
+
+            <span>Description</span>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Enter a Description"></textarea>
+
+
+            <select id="contacts" name="contacts">
+                <option value="">Select contacts to assign</option>
+            </select>
+        </div>
+
+        <div>Trennbalken ?</div>
+
+        <div>
+            <span>Due date *</span>
+            <input type="date" name="date" id="date">
+
+            <span>Prio</span>
+            <button>Urgent</button>
+            <button>Medium</button>
+            <button>Low</button>
+
+            <span>Category *</span>
+            <select id="category" name="category">
+                <option value="">Select task category</option>
+            </select>
+
+            <span>Subtasks</span>
+            <input type="text" placeholder="Add new Subtask">
+        </div>
+    </form>
+
+    <!-- <div w3-include-html="./assets/templates/side_menu.html"></div> -->
 
 </body>
 
