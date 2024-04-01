@@ -91,6 +91,7 @@ header{
     width: 100.03px;
     height: 121.97px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .menu{
@@ -107,6 +108,7 @@ header{
     font-weight: 400;
     padding: 8px, 56px, 8px, 56px;
     gap: 8px;
+    cursor: pointer;
 }
 
 .sidebar_nav img{
@@ -134,4 +136,5 @@ header{
 .data_nav{
     width: 121px;
     height: 35px;
+    cursor: pointer;
 }
