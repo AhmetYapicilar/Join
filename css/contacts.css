@@ -1,0 +1,148 @@
+body {
+    margin: 0px;
+}
+
+
+.main {
+    display: flex;
+    position: relative;
+    top: 96px;
+    left: 232px;
+    height: 89vh;
+    width: 100%;
+    right: 0px;
+}
+
+.leftContainer {
+    display: flex;
+    width: 456px;
+    gap: 0px;
+    opacity: 0px;
+    justify-content: center;
+    background-color: white;
+    border-top: solid 1px rgb(221, 221, 221);
+    z-index: 1;
+    box-shadow: 0px 4px 8px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.rightContainer {
+    display: flex;
+    width: 100%;
+    background-color: rgb(246,247,248);
+    flex-direction: column;
+}
+
+
+.contacts-BetterWaT {
+    position: relative;
+    width: 569px;
+    height: 73px;
+    top: 110px;
+    left: 55px;
+    gap: 30px;
+    opacity: 0px;
+}
+
+
+.addNewContact {
+    position: relative; /*sticky?*/
+    width: 302px;
+    height: 56px;
+    top: 22.5px;
+    padding: 6px 0px 6px 0px;
+    gap: 16px;
+    border-radius: 10px;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.addNewContact:hover {
+    cursor: pointer;
+}
+
+
+.personAdd {
+    width: 30px;
+}
+
+.showContacts {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+
+.editDelteContacts {
+    display: flex;
+    gap: 18px;
+}
+
+
+.editShowContacts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.deleteShowContacts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contacts-icon-delete-showContacts {
+    width: 15px;
+}
+
+.contacts-icon-edit-showContacts {
+    width: 17px;
+}
+
+.showContactsNameEditDelete {
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.showContactsDetails {
+    position: relative;
+    top: 145px;
+    left: 55px;
+    display: flex;
+    gap: 54px;
+    flex-direction: column;
+}
+
+.emailPhone {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.lightblue {
+    color: #007CEE;
+}
+
+.a:hover {
+    cursor: pointer;
+}
+
+.font-size-15 {
+    font-size: 15px;
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.cursorPointer:hover {
+    cursor: pointer;
+}

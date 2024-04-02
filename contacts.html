@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="css/contacts.css">
+    <script src="include.js"></script>
+    <script src="js/contacts.js"></script>
+    <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
+</head>
+<body onload="includeHTML()">
+
+    <div w3-include-html="./assets/templates/header.html"></div>
+    <div w3-include-html="./assets/templates/side_menu.html"></div>
+
+    <div class="main">
+        <div class="leftContainer">
+            <div>
+                <button class="addNewContact">Add new contact <img class="personAdd" src="assets/img/person_add.png" alt=""></button>
+            </div>
+        </div>
+
+        <div class="rightContainer">
+                <img class="contacts-BetterWaT" src="assets/img/contacts-BetterWaT.png" alt="">
+
+                <div class="showContactsDetails">
+
+                    <div class="showContacts">
+                        <img src="assets/img/pb-contacts.png" alt="">
+                        <div class="showContactsNameEditDelete">
+                            <h1>Anton Mayer</h1>
+                            <div class="editDelteContacts">
+                                <div class="editShowContacts cursorPointer">
+                                    <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
+                                    <p>Edit</p>
+                                </div>
+                                <div class="deleteShowContacts cursorPointer">
+                                    <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
+                                    <p>Delete</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="font-size-20">Contact Information</p>
+
+                    <div class="emailPhone">
+                        <h4>Email</h4>
+
+                        <a href="https://gmail.com" class="lightblue">antom@gmail.com</a>
+    
+                        <h4>Phone</h4>
+    
+                        <p class="font-size-15 cursorPointer">+49 1523 378 23 8</p>
+                    </div>
+
+
+
+
+                </div>
+        </div>
+    </div>
+    
+</body>
+</html>
