@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="css/signUp.css">
+    <script src="js/signUp.js"></script>
+</head>
+<body>
+<div class="centerAll">
+
+
+    <div class="displayFLex justifyContent">
+        <div>
+            <img class="joinLogo" src="assets/img/Capa 2.png" alt="">
+        </div>
+
+        <div class="signedUpSuccessfullyDiv">
+            <img class="signedUpSuccessfullyimg" src="assets/img/signedUpSuccessfully.png" alt="">
+        </div>
+    </div>
+
+
+    <div class="LogInField">
+        <div class="displayFLex titleLogIn">
+            <img class="signUpLogo" src="assets/img/Signup.png" alt="">
+            <a href="#" class="arrow-left">
+                <img src="assets/img/arrow-left-line.png" alt="">
+            </a>
+        </div>
+    <div class="emailPassword">
+        <div class="outer-container emailPasswordInputColumn">
+            <div class="input-container">
+                <input class="inputEmail" required type="text" placeholder="Name">
+                <img src="assets/img/person.png" class="inputfield-icon">
+            </div>
+            <div class="input-container">
+                <input class="inputPassword inputColor" required type="email" placeholder="Email">
+                <img src="assets/img/mail.png" class="inputfield-icon">
+            </div>
+            <div class="input-container">
+                <input id="passwordInput" class="inputPassword" required type="password" placeholder="Password">
+                <img onclick="toggleShowPassword()" src="assets/img/lock.png" class="inputfield-icon lock-icon">
+            </div>
+            <div class="input-container">
+                <input id="confirmPasswordInput" class="inputPassword" required type="password" placeholder="Confirm Password">
+                <img onclick="toggleShowConfirmPassword()" src="assets/img/lock.png" class="inputfield-icon lock-icon">
+            </div>
+        </div>
+        <div class="displayFLex rememberMe">
+            <label class="custom-checkbox">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+              <p class="greytext">I accept the <span class="highlight">Privacy policy </span></p>
+        </div>
+    </div>       
+        <div class="LogInBottomLogIn">
+           <button class="logInButton">Sign up</button>
+        </div>
+    </div>
+
+    <div class="privacyPolicyLegalNotice">
+        <span class="hoverPrivacyPolicy">Privacy Policy</span>
+        <span class="hoverLegalNotice">Legal notice</span>
+    </div>
+</div>
+
+
+
+</body>
+</html>

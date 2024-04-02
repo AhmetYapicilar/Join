@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="css/logIn.css">
+    <script src="js/logIn.js"></script>
+</head>
+<body>
+<div class="centerAll">
+
+
+    <div class="displayFLex justifyContent">
+        <div>
+            <img class="joinLogo" src="assets/img/Capa 2.png" alt="">
+        </div>
+
+        <div class="notAJoinUser">
+            <div class="notAJoinUserText">Not a Join user?</div>
+            <button class="notAJoinUserButton">Sign up</button>
+        </div>
+    </div>
+
+
+    <div class="LogInField">
+        <div class="displayFLex titleLogIn">
+            <img src="assets/img/LogIn.png" alt="">
+        </div>
+    <div class="emailPassword">
+        <div class="outer-container emailPasswordInputColumn">
+            <div class="input-container">
+                <input class="inputEmail" required type="email" placeholder="Email">
+                <img src="assets/img/mail.png" class="inputfield-icon">
+            </div>
+            <div class="input-container">
+                <input id="passwordInput" class="inputPassword" required type="password" placeholder="Password">
+                <img onclick="toggleShowPassword()" src="assets/img/lock.png" class="inputfield-icon lock-icon">
+            </div>
+        </div>
+        <div class="displayFLex rememberMe">
+            <label class="custom-checkbox">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+              <p>Remember me</p>
+        </div>
+    </div>       
+        <div class="LogInBottomLogIn">
+           <button class="logInButton">Log in</button>
+           <button class="guestLogInButton">Guest Log in</button>
+        </div>
+    </div>
+
+    <div class="privacyPolicyLegalNotice">
+        <span class="hoverPrivacyPolicy">Privacy Policy</span>
+        <span class="hoverLegalNotice">Legal notice</span>
+    </div>
+</div>
+
+
+
+</body>
+</html>
