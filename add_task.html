@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./include.js"></script>
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
+    <link rel="stylesheet" href="./css/add_task.css">
     <title>Join</title>
 </head>
 
@@ -13,45 +14,60 @@
 
     <div w3-include-html="./assets/templates/header.html"></div>
 
-    <div>
-        <h1>Add Task</h1>
+    <div class="addTaskContentContainer">
+        <div class="headlineAddTaskContainer">
+            <h1 class="headlineAddTask">Add Task</h1>
+        </div>
+
+        <form>
+            <div class="leftAddTaskContainer">
+                <div class="titleContainer">
+                    <span>Title *</span>
+                    <input class="titleInputAddTask" type="text" placeholder="Enter a title">
+                </div>
+
+                <div class="descriptionContainer">
+                    <span>Description</span>
+                    <textarea class="descriptionTextArea" name="" id="" cols="30" rows="10"
+                        placeholder="Enter a Description"></textarea>
+                </div>
+
+                <div class="assignContactsContainer">
+                    <span>Assigned to</span>
+                    <select class="assignContacts" id="contacts" name="contacts">
+                        <option value="">Select contacts to assign</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="addTaskDividingBar"></div>
+
+            <div class="rightAddTaskContainer">
+                <div class="taskDateContainer">
+                    <span>Due date *</span>
+                    <input class="dateInput" type="date" name="date" id="date">
+                </div>
+                <div class="prioPickerContainer">
+                    <span>Prio</span>
+                    <div>
+                        <button>Urgent</button>
+                        <button>Medium</button>
+                        <button>Low</button>
+                    </div>
+                </div>
+                <div class="categoryContainer">
+                    <span>Category *</span>
+                    <select id="category" name="category">
+                        <option value="">Select task category</option>
+                    </select>
+                </div>
+                <div class="subtaskContainer">
+                    <span>Subtasks</span>
+                    <input type="text" placeholder="Add new Subtask">
+                </div>
+            </div>
+        </form>
     </div>
-
-    <form>
-        <div>
-            <span>Title *</span>
-            <input type="text" placeholder="Enter a title">
-
-            <span>Description</span>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Enter a Description"></textarea>
-
-
-            <select id="contacts" name="contacts">
-                <option value="">Select contacts to assign</option>
-            </select>
-        </div>
-
-        <div>Trennbalken ?</div>
-
-        <div>
-            <span>Due date *</span>
-            <input type="date" name="date" id="date">
-
-            <span>Prio</span>
-            <button>Urgent</button>
-            <button>Medium</button>
-            <button>Low</button>
-
-            <span>Category *</span>
-            <select id="category" name="category">
-                <option value="">Select task category</option>
-            </select>
-
-            <span>Subtasks</span>
-            <input type="text" placeholder="Add new Subtask">
-        </div>
-    </form>
-
     <div w3-include-html="./assets/templates/side_menu.html"></div>
 
 </body>
