@@ -49,24 +49,31 @@
                 </div>
                 <div class="prioPickerContainer">
                     <span>Prio</span>
-                    <div>
-                        <button>Urgent</button>
-                        <button>Medium</button>
-                        <button>Low</button>
+                    <div class="prioPickerButtonsContainer">
+                        <button class="urgentButton">Urgent <img src="./assets/img/prioUp.png" alt=""></button>
+                        <button class="mediumButton">Medium <img src="./assets/img/prioEven.png" alt=""></button>
+                        <button class="lowButton">Low <img src="./assets/img/prioDown.png" alt=""></button>
                     </div>
                 </div>
                 <div class="categoryContainer">
                     <span>Category *</span>
-                    <select id="category" name="category">
+                    <select class="categoryPicker" id="category" name="category">
                         <option value="">Select task category</option>
                     </select>
                 </div>
                 <div class="subtaskContainer">
                     <span>Subtasks</span>
-                    <input type="text" placeholder="Add new Subtask">
+                    <input class="subtaskPicker" type="text" placeholder="Add new Subtask">
                 </div>
             </div>
         </form>
+        <div class="fieldRequiredText">
+            *<span>This field is required</span>
+        </div>
+        <div class="clearCreateButtonsContainer">
+            <button class="clearButton">Clear <img src="./assets/img/iconoir_cancel.png" alt=""></button>
+            <button class="createButton">Create Task <img src="./assets/img/check.png" alt=""></button>
+        </div>
     </div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
 
