@@ -146,3 +146,51 @@ body {
 .cursorPointer:hover {
     cursor: pointer;
 }
+
+.showAllContacts {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 90%;
+    top: 25px;
+}
+
+
+.firstLetterFromContacts {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    padding-left: 30px;
+}   
+
+.firstLetterFromContacts p {
+    font-size: 20px;
+}
+
+.firstLetterFromContacts img {
+    width: 302px;
+}
+
+
+.contactChamberLeftContainer {
+    display: flex;
+    gap: 35px;
+    padding: 15px;
+    align-items: center;
+}
+
+.contactChamberLeftContainer img  {
+    height: 42px;
+    width: 42px;
+}
+
+.nameAndEmailLeftContainer p {
+    font-size: 13px;
+    color: #007CEE;
+}
+
+.nameAndEmailLeftContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
