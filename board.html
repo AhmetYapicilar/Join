@@ -5,111 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./fonts/inter-v13-latin/fonts.css">
+    <link rel="stylesheet" href="./css/board.css">
     <script src="./include.js"></script>
 </head>
-<style>
-    body{
-        font-family: "Inter", sans-serif;
-        overflow-x: hidden;
-    }
 
-    .section-board{
-        margin-left: 296px;
-        margin-right: 64px;
-        margin-top: 96px;
-    }
-
-
-    .space-between-board{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .space-between-board h1{
-        font-weight: 700;
-        font-size: 61px;
-        color: black;
-    }
-
-    .flex-board{
-        display: flex;
-        align-items: center;
-    }
-
-    .input-board{
-        position: relative;
-        width: 312px;
-        height: 48px;
-        border: 1px solid #A8A8A8;
-        border-radius: 10px;
-        padding: 8px 16px 8px 16px;
-        gap: 10px;
-        background-image: url('./assets/img/search-icon.png');
-        background-repeat: no-repeat;
-        background-size: 17.58px 17.58px;
-        color: #2A3647;
-        background-position: calc(100% - 16px) center;
-    }
-
-    .input-board ::placeholder{
-        font-weight: 400;
-        font-size: 20px;
-        color: #D1D1D1;
-    }
-
-    .input-board::before {
-    content: ''; /* Fügt den Inhalt des Pseudo-Elements hinzu */
-    position: absolute;
-    top: 8px; /* Ausrichtung zum oberen Rand */
-    left: 8px; /* Abstand vom linken Rand */
-    height: calc(100% - 16px); /* Setzt die Höhe des Pseudo-Elements auf die gleiche Höhe wie das Eingabefeld */
-    width: 1px; /* Breite des Rahmens */
-    background-color: #A8A8A8; /* Farbe des Rahmens */
-}
-
-.flex-board button{
-    width: 160px;
-    height: 48px;
-    border: 1px solid #2A3647;
-    border-radius: 10px;
-    padding: 8px 16px 8px 16px;
-    gap: 4px;
-    background-color: #2A3647;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: 700;
-    font-size: 21px;
-}
-
-.button-plus-board{
-    width: 18.67px;
-    height: 18.67px;
-    color: white;
-}
-
-.gap-32{
-    gap: 32px;
-}
-</style>
 <body>
 <section class="section-board">
     <div class="space-between-board">
         <h1>Board</h1>
         <div class="flex-board gap-32">
-            <input type="search" class="input-board" placeholder="Find Task">
-            <button>Add Task <span class="button-plus-board">+</span></button>
+            <div class="input-container">
+                <input class="inputFindTask" required type="text" placeholder="Find Task">
+                <img class="inputfield-icon-search" src="./assets/img/search-icon.png">
+                <img class="inputfield-icon-vertical-line" src="./assets/img/vertical-line-board.png">
+            </div>
+            <button>Add Task <img src="./assets/img/button-plus-board.png"></button>
         </div>
     </div>
-    <div class="column-board">
+<div class="board-distribution">
+    <div class="card-board">
         <div class="space-between-board">
             <span class="title-board">To do</span>
-            <div class="plus-icon-board">+</div>
+            <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
         <div class="no-tasks-board">No tasks To do</div>
     </div>
+
+    <div class="card-board">
+        <div class="space-between-board">
+            <span class="title-board">In progress</span>
+            <img class="plus-border-board" src="./assets/img/plus-button-board.png">
+        </div>
+        <div class="tasks-board">
+            <div class="user-story-board">User Story</div>
+            <div class="name-of-task-board"><span>Kochwelt Page & Recipe Recommender</span><p>Build start page with recipe recommendation...</p></div>
+            <div class="space-between-board width-100percent">
+                <div class="progressbar-background">
+                    <div class="progressbar-board" role="progressbar"></div>
+                </div>
+                <span class="sub-tasks">1/2 Subtasks</span>
+            </div>
+            <div class="space-between-board width-100percent margin-top-16">
+                <div class="flex-board">
+                    <div class="circle-board">AM</div>
+                    <div class="circle-board">EM</div>
+                    <div class="circle-board">MB</div>
+                </div>
+                <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
+            </div>
+        </div>
+    </div>
+
+    <div class="card-board">
+        <div class="space-between-board">
+            <span class="title-board">Await feedback</span>
+            <img class="plus-border-board" src="./assets/img/plus-button-board.png">
+        </div>
+        <div class="tasks-board">
+            <div class="user-story-board">User Story</div>
+            <div class="name-of-task-board"><span>Kochwelt Page & Recipe Recommender</span><p>Build start page with recipe recommendation...</p></div>
+            <div class="space-between-board width-100percent">
+                <div class="progressbar-background">
+                    <div class="progressbar-board" role="progressbar"></div>
+                </div>
+                <span class="sub-tasks">1/2 Subtasks</span>
+            </div>
+            <div class="space-between-board width-100percent margin-top-16">
+                <div class="flex-board">
+                    <div class="circle-board">AM</div>
+                    <div class="circle-board">EM</div>
+                    <div class="circle-board">MB</div>
+                </div>
+                <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
+            </div>
+        </div>
+    </div>
+
+    <div class="card-board">
+            <span class="title-board">Done</span>
+        <div class="tasks-board">
+            <div class="user-story-board">User Story</div>
+            <div class="name-of-task-board"><span>Kochwelt Page & Recipe Recommender</span><p>Build start page with recipe recommendation...</p></div>
+            <div class="space-between-board width-100percent">
+                <div class="progressbar-background">
+                    <div class="progressbar-board" role="progressbar"></div>
+                </div>
+                <span class="sub-tasks">1/2 Subtasks</span>
+            </div>
+            <div class="space-between-board width-100percent margin-top-16">
+                <div class="flex-board">
+                    <div class="circle-board">AM</div>
+                    <div class="circle-board">EM</div>
+                    <div class="circle-board">MB</div>
+                </div>
+                <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
+            </div>
+        </div>
+    </div>
+</div>
 
 </section>
     
