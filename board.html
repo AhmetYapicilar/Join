@@ -6,10 +6,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="./fonts/inter-v13-latin/fonts.css">
     <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
     <script src="./include.js"></script>
 </head>
 
-<body>
+<body onload="includeHTML()">
+    <div w3-include-html="./assets/templates/header.html"></div>
+    <div w3-include-html="./assets/templates/side_menu.html"></div>
+
 <section class="section-board">
     <div class="space-between-board">
         <h1>Board</h1>
@@ -24,7 +28,7 @@
     </div>
 <div class="board-distribution">
     <div class="card-board">
-        <div class="space-between-board">
+        <div class="space-between-board height-board">
             <span class="title-board">To do</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
@@ -32,14 +36,14 @@
     </div>
 
     <div class="card-board">
-        <div class="space-between-board">
+        <div class="space-between-board height-board">
             <span class="title-board">In progress</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
         <div class="tasks-board">
             <div class="user-story-board">User Story</div>
             <div class="name-of-task-board"><span>Kochwelt Page & Recipe Recommender</span><p>Build start page with recipe recommendation...</p></div>
-            <div class="space-between-board width-100percent">
+            <div class="space-between-board width-100percent margin-top-16">
                 <div class="progressbar-background">
                     <div class="progressbar-board" role="progressbar"></div>
                 </div>
@@ -47,9 +51,9 @@
             </div>
             <div class="space-between-board width-100percent margin-top-16">
                 <div class="flex-board">
-                    <div class="circle-board">AM</div>
-                    <div class="circle-board">EM</div>
-                    <div class="circle-board">MB</div>
+                    <div class="circle-board background-color-orange">AM</div>
+                    <div class="circle-board background-color-green">EM</div>
+                    <div class="circle-board background-color-darkblue">MB</div>
                 </div>
                 <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
             </div>
@@ -57,24 +61,32 @@
     </div>
 
     <div class="card-board">
-        <div class="space-between-board">
+        <div class="space-between-board height-board">
             <span class="title-board">Await feedback</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
         <div class="tasks-board">
-            <div class="user-story-board">User Story</div>
-            <div class="name-of-task-board"><span>Kochwelt Page & Recipe Recommender</span><p>Build start page with recipe recommendation...</p></div>
-            <div class="space-between-board width-100percent">
-                <div class="progressbar-background">
-                    <div class="progressbar-board" role="progressbar"></div>
-                </div>
-                <span class="sub-tasks">1/2 Subtasks</span>
-            </div>
+            <div class="technical-task-board">Technical Task</div>
+            <div class="name-of-task-board"><span>HTML Base Template Creation</span><p>Create reusable HTML base templates...</p></div>
             <div class="space-between-board width-100percent margin-top-16">
                 <div class="flex-board">
-                    <div class="circle-board">AM</div>
-                    <div class="circle-board">EM</div>
-                    <div class="circle-board">MB</div>
+                    <div class="circle-board background-color-pink">DE</div>
+                    <div class="circle-board background-color-violet">BZ</div>
+                    <div class="circle-board background-color-violet2">AS</div>
+                </div>
+                <img class="priority-icon-board" src="./assets/img/arrow-down-icon.png">
+            </div>
+        </div>
+            
+
+        <div class="tasks-board">
+            <div class="user-story-board">User Story</div>
+            <div class="name-of-task-board"><span>Daily Kochwelt Recipe</span><p>Implement daily recipe amd portion calculator</p></div>
+            <div class="space-between-board width-100percent margin-top-16">
+                <div class="flex-board">
+                    <div class="circle-board background-color-yellow">EF</div>
+                    <div class="circle-board background-color-violet2">AS</div>
+                    <div class="circle-board background-color-red">TW</div>
                 </div>
                 <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
             </div>
@@ -82,23 +94,22 @@
     </div>
 
     <div class="card-board">
-            <span class="title-board">Done</span>
+            <span class="title-board align-center-board height-board">Done</span>
         <div class="tasks-board">
-            <div class="user-story-board">User Story</div>
-            <div class="name-of-task-board"><span>Kochwelt Page & Recipe Recommender</span><p>Build start page with recipe recommendation...</p></div>
-            <div class="space-between-board width-100percent">
+            <div class="technical-task-board">Technical Task</div>
+            <div class="name-of-task-board"><span>CSS Architecture Planning</span><p>Define CSS naming conventions and structure...</p></div>
+            <div class="space-between-board width-100percent margin-top-16">
                 <div class="progressbar-background">
-                    <div class="progressbar-board" role="progressbar"></div>
+                    <div class="progressbar-board" style="width: 100%;" role="progressbar"></div>
                 </div>
-                <span class="sub-tasks">1/2 Subtasks</span>
+                <span class="sub-tasks">2/2 Subtasks</span>
             </div>
             <div class="space-between-board width-100percent margin-top-16">
                 <div class="flex-board">
-                    <div class="circle-board">AM</div>
-                    <div class="circle-board">EM</div>
-                    <div class="circle-board">MB</div>
+                    <div class="circle-board background-color-lightblue">SM</div>
+                    <div class="circle-board background-color-violet">BZ</div>
                 </div>
-                <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
+                <img class="priority-icon-board" src="./assets/img/arrow-up-icon.png">
             </div>
         </div>
     </div>
