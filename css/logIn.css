@@ -21,6 +21,30 @@ body {
     left: 77px;
 }
 
+.blur {
+    opacity: 0; 
+    filter: blur(5px); 
+    transition: opacity 1s ease, filter 1s ease; 
+  }
+
+#meinBild {
+    position: fixed;
+    top: 35%;
+    left: 45%;
+    width: 10%; 
+    transition: all 1s ease; 
+    z-index: 100; 
+    object-fit: cover;
+  }
+  
+  #zielbereich {
+    position: absolute;
+    width: 100px;
+    height: 122px;
+    top: 67px;
+    left: 77px;
+}
+
 
 .notAJoinUser {
     position: fixed;
