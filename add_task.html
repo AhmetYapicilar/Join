@@ -22,7 +22,10 @@
         <form>
             <div class="leftAddTaskContainer">
                 <div class="titleContainer">
-                    <span>Title *</span>
+                    <div class="flex-start">
+                        <span>Title</span>
+                        <p class="redText">*</p>
+                    </div>
                     <input class="titleInputAddTask" type="text" placeholder="Enter a title">
                 </div>
 
@@ -44,7 +47,10 @@
 
             <div class="rightAddTaskContainer">
                 <div class="taskDateContainer">
-                    <span>Due date *</span>
+                    <div class="flex-start">
+                        <span>Due Date</span>
+                        <p class="redText">*</p>
+                    </div>
                     <input class="dateInput" type="date" name="date" id="date">
                 </div>
                 <div class="prioPickerContainer">
@@ -56,7 +62,10 @@
                     </div>
                 </div>
                 <div class="categoryContainer">
-                    <span>Category *</span>
+                    <div class="flex-start">
+                        <span>Category</span>
+                        <p class="redText">*</p>
+                    </div>
                     <select class="categoryPicker" id="category" name="category">
                         <option value="">Select task category</option>
                     </select>
@@ -68,7 +77,10 @@
             </div>
         </form>
         <div class="fieldRequiredText">
-            *<span>This field is required</span>
+            <div class="flex-start">
+                <p class="redText">*</p>
+                <span>This field is required</span>
+            </div>
         </div>
         <div class="clearCreateButtonsContainer">
             <button class="clearButton">Clear <img src="./assets/img/iconoir_cancel.png" alt=""></button>
