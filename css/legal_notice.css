@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.legalNoticeContentContainer {
+    display: flex;
+    height: 100vh;
+    width: auto;
+    background: #F6F7F8;
+}
