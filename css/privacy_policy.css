@@ -37,6 +37,11 @@ body {
     background: #F6F7F8;
 }
 
+a {
+    text-decoration: none;
+    color: #29abe2;
+}
+
 .privacyPolicyContentContainer {
     display: flex;
     height: 100vh;
