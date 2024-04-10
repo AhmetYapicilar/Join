@@ -23,7 +23,7 @@
                         <p>A</p>
                     </div>
                     <img class="vectorContacts" src="assets/img/Vector 10.png">
-                    <div class="contactChamberLeftContainer">
+                    <div class="contactChamberLeftContainer" onclick="slideInContacts()">
                         <img src="assets/img/pb-contacts.png">
                         <div class="nameAndEmailLeftContainer">
                             <h4>Anton Mayer</h4>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <div class="contactChamberLeftContainer">
+                    <div class="contactChamberLeftContainer" onclick="closeSlide()">
                         <img src="assets/img/pb-contacts.png">
                         <div class="nameAndEmailLeftContainer">
                             <h4>Anton Mayer</h4>
@@ -90,11 +90,17 @@
             </div>
         </div>
 
+        
+
         <div class="rightContainer">
-                <img class="contacts-BetterWaT" src="assets/img/contacts-BetterWaT.png" alt="">
+            <img class="contacts-BetterWaT" src="assets/img/contacts-BetterWaT.png" alt="">  
+            
+            <div id="zielbereich"></div>
+        </div>
 
-                <div class="showContactsDetails">
-
+        <div id="showContactDetailsOnSlide">
+                <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
+    
                     <div class="showContacts">
                         <img src="assets/img/pb-contacts.png" alt="">
                         <div class="showContactsNameEditDelete">
@@ -111,24 +117,21 @@
                             </div>
                         </div>
                     </div>
-
+    
                     <p class="font-size-20">Contact Information</p>
-
+    
                     <div class="emailPhone">
                         <h4>Email</h4>
-
+    
                         <a href="https://gmail.com" class="lightblue">antom@gmail.com</a>
     
                         <h4>Phone</h4>
     
                         <p class="font-size-15 cursorPointer">+49 1523 378 23 8</p>
                     </div>
-
-
-
-
-                </div>
-        </div>
+        </div>   
+    
+        </div>  
     </div>
     
 </body>
