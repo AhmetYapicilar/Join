@@ -117,7 +117,6 @@ body {
 .showContactsDetails {
     position: relative;
     top: 145px;
-    left: 55px;
     display: flex;
     gap: 54px;
     flex-direction: column;
@@ -203,4 +202,27 @@ body {
     display: flex;
     flex-direction: column;
     gap: 7px;
+}
+
+
+
+
+
+
+#showContactDetailsOnSlide {
+    position: fixed;
+    top: 18.5%;
+    left: 105%;
+    width: 500px !important; 
+    transition: all 1s ease; 
+    z-index: 100; 
+    object-fit: cover;
+  }
+  
+  #zielbereich {
+    position: relative;
+    width: 500px;
+    height: 522px;
+    top: 145px;
+    left: 55px;
 }
