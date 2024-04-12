@@ -11,6 +11,7 @@ function toggleShowConfirmPassword() {
     passwordInput.setAttribute('type', type);
 }
 
+<<<<<<< HEAD
 const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item'
 
@@ -43,3 +44,22 @@ function getLocalStorage(){
     savedEmail = JSON.parse(localStorage.getItem('email'));
     savedPassword = JSON.parse(localStorage.getItem('savedPassword'));
 }
+=======
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(() => {
+      const bild = document.getElementById('meinBild');
+      const ziel = document.getElementById('zielbereich');
+      const inhalt = document.getElementById('inhalt');
+      const zielRect = ziel.getBoundingClientRect();
+      bild.style.width = '100px'; 
+      bild.style.top = zielRect.top + 'px';
+      bild.style.left = zielRect.left + 'px';
+  
+      setTimeout(() => {
+        inhalt.style.opacity = 1; 
+        inhalt.style.filter = 'blur(0px)'; 
+      }, 1000); 
+    }, 1000); 
+  });
+>>>>>>> 7fdec27b69ec13264ff7c75c0113909363562437
