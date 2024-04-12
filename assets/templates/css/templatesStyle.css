@@ -101,15 +101,17 @@ header{
     gap: 15px;
 }
 
+
 .sidebar_nav{
-    width: 232px;
+    width: 100%;
     height: 46px;
     color: #CDCDCD;
     font-size: 16px;
     font-weight: 400;
-    padding: 8px, 56px, 8px, 56px;
+    padding: 8px 56px 8px 56px;
     gap: 8px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .sidebar_nav img{
@@ -118,7 +120,7 @@ header{
 }
 
 .sidebar_nav span{
-    width: 72px;
+    width: 95px;
 }
 
 .data{

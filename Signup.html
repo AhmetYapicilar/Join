@@ -7,8 +7,9 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="css/signUp.css">
     <script src="js/signUp.js"></script>
+    <script src="js/register.js"></script>
 </head>
-<body>
+<body onload="init()">
 <div class="centerAll">
 
 
@@ -23,6 +24,7 @@
     </div>
 
 
+    <form onsubmit="register(); return false;">
     <div class="LogInField">
         <div class="displayFLex titleLogIn">
             <img class="signUpLogo" src="assets/img/Signup.png" alt="">
@@ -33,11 +35,11 @@
     <div class="emailPassword">
         <div class="outer-container emailPasswordInputColumn">
             <div class="input-container">
-                <input class="inputEmail" required type="text" placeholder="Name">
+                <input class="inputEmail" required type="text" placeholder="Name" id="name1">
                 <img src="assets/img/person.png" class="inputfield-icon">
             </div>
             <div class="input-container">
-                <input class="inputPassword inputColor" required type="email" placeholder="Email">
+                <input class="inputPassword inputColor" required type="email" placeholder="Email" id="email">
                 <img src="assets/img/mail.png" class="inputfield-icon">
             </div>
             <div class="input-container">
@@ -58,9 +60,10 @@
         </div>
     </div>       
         <div class="LogInBottomLogIn">
-           <button class="logInButton">Sign up</button>
+           <button class="logInButton" id="registerBTN">Sign up</button>
         </div>
     </div>
+    </form>
 
     <div class="privacyPolicyLegalNotice">
         <span class="hoverPrivacyPolicy">Privacy Policy</span>
