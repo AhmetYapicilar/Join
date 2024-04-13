@@ -19,10 +19,19 @@ async function register(){
         email: email.value,
         password: passwordInput.value
     });
-
     await setItem('users', JSON.stringify(users));
     resetForm();
-    window.location.href = 'Login.html';
+    succesfullySignedUp();
+    setTimeout(function() {
+        window.location.href = 'Login.html';
+    }, 2000);
+}
+
+function succesfullySignedUp(){
+    let loadingImage = document.getElementById('signedUp');
+    if (loadingImage) {
+        loadingImage.style.visibility = 'visible';
+    }
 }
 
 function resetForm(){

@@ -11,7 +11,7 @@ function toggleShowConfirmPassword() {
     passwordInput.setAttribute('type', type);
 }
 
-<<<<<<< HEAD
+
 const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item'
 
@@ -44,7 +44,6 @@ function getLocalStorage(){
     savedEmail = JSON.parse(localStorage.getItem('email'));
     savedPassword = JSON.parse(localStorage.getItem('savedPassword'));
 }
-=======
 
 document.addEventListener('DOMContentLoaded', (event) => {
     setTimeout(() => {
@@ -62,4 +61,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }, 1000); 
     }, 1000); 
   });
->>>>>>> 7fdec27b69ec13264ff7c75c0113909363562437

@@ -91,6 +91,7 @@ body {
     gap: 35px;
     align-items: center;
     justify-content: center;
+    visibility: hidden;
 }
 
 

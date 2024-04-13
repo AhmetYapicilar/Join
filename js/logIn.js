@@ -4,7 +4,7 @@ function toggleShowPassword() {
     passwordInput.setAttribute('type', type);
 }
 
-<<<<<<< HEAD
+
 async function initLogIn(){
     if(document.getElementById("check").checked){
         fillLogInAuto();
@@ -34,7 +34,7 @@ function fillLogInAuto(){
      savedEmail = document.getElementById('inputEmail').value;
      savedPassword = document.getElementById('passwordInput').value;
 }
-=======
+
 document.addEventListener('DOMContentLoaded', (event) => {
     setTimeout(() => {
       const bild = document.getElementById('meinBild');
@@ -51,4 +51,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }, 1000); 
     }, 1000); 
   });
->>>>>>> 7fdec27b69ec13264ff7c75c0113909363562437
+
