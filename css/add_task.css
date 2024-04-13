@@ -1,3 +1,6 @@
+button {
+    cursor: pointer;
+}
 .headlineAddTask {
     font-size: 60px;
 }
@@ -45,6 +48,7 @@
 }
 
 .assignContacts {
+    cursor: pointer;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -72,6 +76,7 @@
 }
 
 .dateInput {
+    cursor: pointer;
     color: #D1D1D1;
     box-sizing: border-box;
     display: flex;
@@ -142,6 +147,7 @@
 }
 
 .categoryPicker {
+    cursor: pointer;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
