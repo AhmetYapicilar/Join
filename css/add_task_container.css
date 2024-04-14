@@ -1,0 +1,160 @@
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.addTaskContentContainer {
+    display: flex;
+    height: 100vh;
+    width: auto;
+    background: #F6F7F8;
+}
+
+.headlineAddTaskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 1px;
+    position: absolute;
+    width: 278px;
+    height: 73px;
+    left: 328px;
+    top: 206px;
+}
+
+.leftAddTaskContainer {
+    position: absolute;
+    width: 440px;
+    height: 376px;
+    left: 328px;
+    top: 327px;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 96px;
+    left: 0px;
+    top: 0px;
+}
+
+.descriptionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 168px;
+    left: 0px;
+    top: 112px;
+}
+
+.assignContactsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 80px;
+    left: 0px;
+    top: 296px;
+}
+
+.rightAddTaskContainer {
+    position: absolute;
+    width: 440px;
+    height: 416px;
+    left: 864.25px;
+    top: 327px;
+}
+
+.taskDateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 96px;
+    left: 0px;
+    top: 0px;
+}
+
+.prioPickerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 88px;
+    left: 0px;
+    top: 120px;
+}
+
+.prioPickerButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    width: 440px;
+    height: 56px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.categoryContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 80px;
+    left: 0px;
+    top: 232px;
+}
+
+.subtaskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 80px;
+    left: 0px;
+    top: 336px;
+}
+
+.clearCreateButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    position: absolute;
+    width: 309px;
+    height: 56px;
+    left: 995.25px;
+    top: 889px;
+}
