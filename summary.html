@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="./fonts.css">
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
     <link rel="stylesheet" href="./css/summary.css">
+    <script src="./js/logIn.js"></script>
+    <script src="./js/summary.js"></script>
   </head>
-  <body onload="includeHTML()">
+  <body onload="includeHTML(); extractInitials()">
 
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
@@ -70,7 +72,7 @@
       </div>
 
       <div class="right-content">
-        <span>Good Morning,<br> <b class="greeting-name">Sofia Müller</b></span>
+        <span>Good Morning,<br> <b id="greeting-name" class="greeting-name"></b></span>
       </div>
     </div>
   </body>

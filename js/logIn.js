@@ -13,12 +13,13 @@ async function initLogIn(){
     }
 }
 
+
 async function logIn(){
     let email = document.getElementById('inputEmail').value;
     let password = document.getElementById('passwordInput').value;
     let user = users.find(u => u.email == email && u.password == password);
     if(user){
-        window.location.href = 'summary.html';
+        window.location.href = 'summary.html?user=' + user.name;
     } else {
         window.location.reload();
         alert('User ist nicht registriert');
