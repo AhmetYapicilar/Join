@@ -19,6 +19,7 @@ async function logIn(){
     let password = document.getElementById('passwordInput').value;
     let user = users.find(u => u.email == email && u.password == password);
     if(user){
+        localStorage.setItem('user-name', JSON.stringify(user.name));
         window.location.href = 'summary.html?user=' + user.name;
     } else {
         window.location.reload();
@@ -27,7 +28,9 @@ async function logIn(){
 }
 
 function guestLogIn(){
-    window.location.href = 'summary.html';
+    let guest = 'Guest';
+    localStorage.setItem('user-name', JSON.stringify(guest));
+    window.location.href = 'summary.html?user=Guest' ;
 }
 
 function fillLogInAuto(){

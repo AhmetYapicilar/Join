@@ -2,6 +2,8 @@ let users = [];
 
 async function init(){
     loadUsers();
+    document.getElementById('signUP-Div').classList.remove('overlay-signUp');
+    document.getElementById('signedUp').style.visibility = 'hidden';
 }
 
 async function loadUsers(){
@@ -30,6 +32,7 @@ async function register(){
 function succesfullySignedUp(){
     let loadingImage = document.getElementById('signedUp');
     if (loadingImage) {
+        document.getElementById('signUP-Div').classList.add('overlay-signUp');
         loadingImage.style.visibility = 'visible';
     }
 }
