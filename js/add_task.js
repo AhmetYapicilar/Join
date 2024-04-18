@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // Konstanten für den Zugriff auf den Remote-Speicher definieren
 const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
@@ -49,7 +47,6 @@ function getSubtasks() {
 }
 
 // Funktion zum Zurücksetzen des Formulars
->>>>>>> 9697db91b8335ecf3dce094a4ac6380e3fbeb2fb
 function clearForm() {
     let form = document.getElementById("addTaskForm");
     form.reset();
