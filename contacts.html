@@ -6,7 +6,6 @@
     <title>Contacts</title>
     <link rel="stylesheet" href="css/contacts.css">
     <script src="include.js"></script>
-    <script src="./js/logIn.js"></script>
     <script src="./js/templates.js"></script>
     <script src="js/contacts.js"></script>
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
@@ -19,8 +18,13 @@
     <div class="main">
         <div class="leftContainer">
             <div>
-                <button class="addNewContact">Add new contact <img class="personAdd" src="assets/img/person_add.png" alt=""></button>
+                <button class="addNewContact" id="openButton">Add new contact <img class="personAdd" src="assets/img/person_add.png" alt=""></button>
                 <div class="showAllContacts">
+
+                    <div id="telefonliste">
+                        
+                    </div>
+
                     <div class="firstLetterFromContacts">
                         <p>A</p>
                     </div>
@@ -134,6 +138,57 @@
         </div>   
     
         </div>  
+
+
+        <div class="container" id="modal">
+            <div class="panel" id="panel">
+                <div class="centerAll">
+                    <div class="leftrightContainer">
+                        <div class="addContactImg">
+                            <img src="assets/img/Frame 194.png">
+                        </div>
+                        <div class="addContactInputFields">
+                            <div class="imgAndInputfields">
+                                <img class="profilepictureSize" src="assets/img/Frame 79 (1).png">
+                                <div class="right-Container">
+                                    <div class="inPutfields">
+                                        <div class="closeButton" id="closeButton">
+                                            <img class="closeImgAdd" src="assets/img/close.png">
+                                        </div>
+                                        <div class="neuerKontaktFormular">
+                                        <div class="inputs">
+                                            <form id="kontaktForm">
+                                            <div class="Name">
+                                                <input class="inputfieldAddContact" id="neuerKontaktName" type="text" placeholder="Name">
+                                                <img src="assets/img/person.png" class="inputfield-icon">
+                                            </div>
+                                            <div class="Name">
+                                                <input class="inputfieldAddContact" id="neuerKontaktEmail" type="text" placeholder="Email">
+                                                <img src="assets/img/mail.png" class="inputfield-icon">
+                                            </div>
+                                            <div class="Name">
+                                                <input class="inputfieldAddContact" id="neuerKontaktNummer" type="text" placeholder="Phone">
+                                                <img src="assets/img/call.png" class="inputfield-icon">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <div class="cancelOrCreateContact">
+                                            <button class="cancelButton">Cancel <img class="vectorCancelButton" src="assets/img/Vector.png"></button>
+                                            <button type="submit" id="createAccountSubmit" class="createAccountButton">Create Account <img class="checkCreateAccountButton" src="assets/img/check.png" alt=""></button>
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+
+
     </div>
     
 </body>

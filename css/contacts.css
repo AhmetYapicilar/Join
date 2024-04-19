@@ -1,5 +1,6 @@
 body {
     margin: 0px;
+    height: 100vh;
 }
 
 
@@ -154,6 +155,7 @@ body {
     flex-direction: column;
     height: 90%;
     top: 25px;
+    overflow-x: overlay;
 }
 
 
@@ -225,4 +227,305 @@ body {
     height: 522px;
     top: 145px;
     left: 55px;
+}
+
+
+.container {
+    position: fixed;
+    display: none; 
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+    backdrop-filter: blur(8px); /* Blur-Effekt für den Hintergrund */
+    transition: opacity 0.5s, visibility 0.5s;
+  }
+  
+  .panel {
+    width: 34%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateX(100%);
+    transition: transform 0.5s;
+    right: -50%; /* Startposition außerhalb des Bildschirms */
+    transition: right 0.5s ease-out;
+  }
+  
+  /* CSS-Klassen zur Steuerung der Anzeige */
+  .container.active, .panel.active {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .container.notactive, .panel.notactive {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+
+  .panel.active {
+    width: 34%;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+
+  .centerAll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25%;
+}
+
+.leftrightContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 592px;
+    width: 1212px;
+    border-radius: 10px;
+}
+
+.addContactImg {
+    width: 38.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addContactImg img {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.addContactInputFields {
+    width: 61.5%;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    background-color: white;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.inPutfields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 52px;
+    width: 90%;
+    padding-left: 40px;
+}
+
+.imgAndInputfields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    margin-top: -60px;
+}
+
+.profilepictureSize {
+    width: 120px;
+    height: 120px;
+}
+
+.inputfieldAddContact {
+    padding: 13px;
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    color: #D1D1D1;
+    font-weight: 400;
+}
+
+.cancelOrCreateContact {
+    display: flex;
+    gap: 24px;
+}
+
+.cancelButton {
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    background-color: white;
+    color: #2A3647;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.createAccountButton {
+    width: 214px;
+    height: 57px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.vectorCancelButton {
+    width: 13px;
+    height: 13px;
+    margin-left: 5px;
+}
+
+.checkCreateAccountButton {
+    width: 13px;
+    height: 13px;
+    margin-left: 5px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    width: 90%;
+}
+
+.closeButton {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+    padding-right: 25px;
+}
+
+.closeImgAdd:hover {
+    cursor: pointer;
+}
+
+.closeButton img {
+    width: 13px;
+    height: 13px;
+    object-fit: cover;
+}
+
+.right-Container {
+    width: 80%;
+}
+
+.inputfield-icon {
+    position: absolute;
+    right: -10px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    width: 18px; 
+}
+
+.Name {
+    position: relative;
+    display: inline-block;
+}
+
+
+#clearButton:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+#telefonliste h2 {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    padding-left: 30px;
+}
+
+#telefonliste ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0px;
+}
+
+#telefonliste li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    padding-left: 20px;
+}
+
+#neuerKontaktFormular {
+    margin-bottom: 20px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.edit-button {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.edit-button:hover {
+    color: blue;
+}
+
+.bestaetigen-button {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#kontaktForm {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 15px;
+    justify-content: center;
+}
+
+.initialen-kreis {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 100%;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    margin-right: 10px;
+    font-size: 16px;
+    justify-content: center;
+    display: flex;
+    border-color: solid 1px white;
+}
+
+.kontakt-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+li:hover{
+    background-color: #2A3647;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+li {
+    display: flex;
+    gap: 35px;
+    padding: 15px;
+    align-items: center;
 }
