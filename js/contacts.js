@@ -115,7 +115,7 @@ function createInitialenKreis(initialen) {
 }
 
 function zufaelligeFarbe() {
-    const farben = ['#FFA500', '#FFFZ60', '#FF4500', '#FFD700', '#FF8C00']; 
+    const farben = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', `#ADD8E6`]; 
     return farben[Math.floor(Math.random() * farben.length)];
 }
 
