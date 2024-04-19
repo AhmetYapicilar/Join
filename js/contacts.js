@@ -78,7 +78,7 @@ function addKontakt(name, email, nummer, targetElement = null) {
     const li = document.createElement('li');
     const infoDiv = document.createElement('div');
     infoDiv.className = 'kontakt-info';
-    infoDiv.innerHTML = `<strong>${name}</strong><div>${email}`;
+    infoDiv.innerHTML = `<strong>${name}</strong><div class="showEmailLi">${email}`;
 
     const initialen = getInitialen(name);
     const initialenKreis = createInitialenKreis(initialen);
