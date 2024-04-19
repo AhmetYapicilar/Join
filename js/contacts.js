@@ -23,7 +23,7 @@ function slideInContacts() {
     document.getElementById('panel').classList.add('notactive');
     setTimeout(() => {
       document.getElementById('panel').style.right = "-50%"; 
-    }, 500); tion
+    }, 500);
   });
 
   document.getElementById('createAccountSubmit').addEventListener('click', function() {
@@ -32,7 +32,7 @@ function slideInContacts() {
     document.getElementById('panel').classList.add('notactive');
     setTimeout(() => {
       document.getElementById('panel').style.right = "-50%"; 
-    }, 500); tion
+    }, 500);
   });
 });  
 

@@ -352,7 +352,6 @@ body {
     width: 100%;
     border: 1px solid #ccc;
     font-size: 20px;
-    color: #D1D1D1;
     font-weight: 400;
 }
 
@@ -531,4 +530,8 @@ li {
     gap: 35px;
     padding: 15px;
     align-items: center;
+}
+
+.inputfieldAddContact::placeholder {
+    color: #D1D1D1;
 }
