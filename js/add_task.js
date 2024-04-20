@@ -52,9 +52,4 @@ function clearForm() {
     form.reset();
 }
 
-// Event Listener zum Hinzufügen eines Event Handlers für das Formular
-document.getElementById("addTaskForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Verhindert das Standardverhalten des Formulars (das Neuladen der Seite)
-    createTask(); // Aufruf der Funktion zum Erstellen eines neuen Tasks
-});
 
