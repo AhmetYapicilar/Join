@@ -29,7 +29,7 @@ function createTask() {
 
 
 function setPriority() {
-    
+
 }
 
 
@@ -61,3 +61,5 @@ function clearForm() {
 }
 
 
+document.getElementById('taskDate').min = new Date().toISOString().split('T')[0];
+                                    
