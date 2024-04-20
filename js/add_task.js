@@ -26,6 +26,14 @@ function createTask() {
     .catch(error => console.error('Error saving task:', error.message)); // Fehlerbehandlung
 }
 
+
+
+function setPriority() {
+    
+}
+
+
+
 // Funktion zum Abrufen der ausgewählten Priorität
 function getPriority() {
     return (document.querySelector(".urgentButton").classList.contains("selected") && "Urgent") || // Priorität: Dringend
