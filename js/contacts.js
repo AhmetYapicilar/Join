@@ -70,15 +70,17 @@ function addKontakt(name, email, nummer, targetElement = null) {
     if (!buchstabenDiv) {
         buchstabenDiv = document.createElement('div');
         buchstabenDiv.id = anfangsbuchstabe;
-        buchstabenDiv.innerHTML = `<h2>${anfangsbuchstabe}</h2><ul></ul>`;
+        buchstabenDiv.innerHTML = `<h2>${anfangsbuchstabe}</h2><img class="display-flex" src="assets/img/Vector10.png"><ul></ul>`;
         einfuegenInRichtigerReihenfolge(buchstabenDiv, anfangsbuchstabe);
     }
 
     const ul = buchstabenDiv.querySelector('ul');
     const li = document.createElement('li');
+    li.id = `kontakt-${kontaktId}`;
+
     const infoDiv = document.createElement('div');
     infoDiv.className = 'kontakt-info';
-    infoDiv.innerHTML = `<strong>${name}</strong><div class="showEmailLi">${email}`;
+    infoDiv.innerHTML = `<strong>${name}</strong><div class="showEmailLi">${email}</div>`;
 
     const initialen = getInitialen(name);
     const initialenKreis = createInitialenKreis(initialen);
@@ -86,12 +88,35 @@ function addKontakt(name, email, nummer, targetElement = null) {
     li.appendChild(infoDiv);
     ul.appendChild(li);
 
+    kontaktListe.push({
+        id: kontaktId,
+        name: name,
+        email: email,
+        nummer: nummer
+    });
+    li.onclick = function() {
+        handleKontaktClick(kontaktId);
+    };
+
+    kontaktId++;
+
     if (targetElement) {
         targetElement.remove();
     }
 
     versteckeLeereAbschnitte();
 }
+
+function handleKontaktClick(id) {
+
+    console.log(`Du hast alles geschafft ${id}`)
+
+    console.log(`Kontakt mit ID ${id} wurde angeklickt.`);
+    const kontakt = kontaktListe.find(k => k.id === id);
+    console.log(kontakt);
+}
+
+
 
 
 

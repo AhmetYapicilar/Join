@@ -451,6 +451,11 @@ body {
     padding: 20px;
     align-items: center;
     padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+.display-flex {
+    display: flex;
 }
 
 #telefonliste ul {
