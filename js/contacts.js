@@ -40,6 +40,8 @@ function slideInContacts() {
 let kontaktListe = [];
 let kontaktId = 0;
 
+let letzteFarbe = null;
+
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('kontaktForm').addEventListener('submit', function(event) {
@@ -107,20 +109,13 @@ function addKontakt(name, email, nummer, targetElement = null) {
     versteckeLeereAbschnitte();
 }
 
-function handleKontaktClick(id) {
 
-    console.log(`Du hast alles geschafft ${id}`)
+function handleKontaktClick(id) {
 
     console.log(`Kontakt mit ID ${id} wurde angeklickt.`);
     const kontakt = kontaktListe.find(k => k.id === id);
     console.log(kontakt);
 }
-
-
-
-
-
-
 
 function getInitialen(name) {
     const namensteile = name.split(' ');
@@ -139,10 +134,27 @@ function createInitialenKreis(initialen) {
     return kreis;
 }
 
+
+
 function zufaelligeFarbe() {
-    const farben = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', `#ADD8E6`]; 
-    return farben[Math.floor(Math.random() * farben.length)];
+    const farben = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', '#ADD8E6', '#FF6347', '#FFC0CB', '#00FF00', '#00BFFF', '#9370DB', '#FF69B4', '#FFA07A', '#BA55D3', '#7FFFD4'];
+    
+    if (farben.length === 1) return farben[0]; 
+
+    let zufallsIndex;
+    do {
+        zufallsIndex = Math.floor(Math.random() * farben.length);
+    } while (farben[zufallsIndex] === letzteFarbe); 
+
+    letzteFarbe = farben[zufallsIndex];
+    return farben[zufallsIndex];
 }
+
+
+
+
+
+
 
 
 function bearbeiteKontakt(li) {
@@ -176,6 +188,13 @@ function aktualisiereKontakt(alterName, li) {
         versteckeLeereAbschnitte();
     }
 }
+
+
+
+
+
+
+
 
 function einfuegenInRichtigerReihenfolge(buchstabenDiv, buchstabe) {
     const telefonliste = document.getElementById('telefonliste');
