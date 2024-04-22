@@ -150,13 +150,10 @@ function showContactsSlideInRightContainer(index) {
     contacts.style.width = '0px'; // Setzt die Breite auf 0
     contacts.style.opacity = '0'; // Unsichtbar machen
     slideInContacts.innerHTML = '';
-    contacts.style.left = `2000px`; // Inhalte des Containers leeren
+    contacts.style.left = `5000px`; // Inhalte des Containers leeren
 
     setTimeout(() => {
         const zielRect = ziel.getBoundingClientRect();
-
-        // Konsolenlog zum Überprüfen des Zustands nach Timeout
-        console.log('Setze Stile und Inhalte...');
 
         // Bereite das Element für die Animation vor
         contacts.style.width = '500px';
@@ -173,11 +170,11 @@ function showContactsSlideInRightContainer(index) {
                 <div class="showContactsNameEditDelete">
                     <h1>${List[index][`Name`]}</h1>
                     <div class="editDelteContacts">
-                        <div class="editShowContacts cursorPointer">
+                        <div onclick="editContacts(${index})" class="editShowContacts cursorPointer">
                             <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
                             <p>Edit</p>
                         </div>
-                        <div class="deleteShowContacts cursorPointer">
+                        <div onclick="deleteContacts(${index})" class="deleteShowContacts cursorPointer">
                             <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
                             <p>Delete</p>
                         </div>
@@ -193,7 +190,7 @@ function showContactsSlideInRightContainer(index) {
                 </div>
             </div>
         `;
-    }, 250);
+    }, 350);
 }
 
 
