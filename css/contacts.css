@@ -49,7 +49,7 @@ body {
 
 
 .addNewContact {
-    position: relative; /*sticky?*/
+    position: relative;
     width: 302px;
     height: 56px;
     top: 22.5px;
@@ -242,8 +242,8 @@ body {
     align-items: center;
     visibility: hidden;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
-    backdrop-filter: blur(8px); /* Blur-Effekt für den Hintergrund */
+    background: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(8px);
     transition: opacity 0.5s, visibility 0.5s;
   }
   
@@ -252,7 +252,7 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transform: translateX(100%);
     transition: transform 0.5s;
-    right: -50%; /* Startposition außerhalb des Bildschirms */
+    right: -50%; 
     transition: right 0.5s ease-out;
   }
   
@@ -539,4 +539,32 @@ li {
 
 .inputfieldAddContact::placeholder {
     color: #D1D1D1;
+}
+
+
+
+.slide-out-right {
+    animation: slideOut 0.5s forwards;
+}
+
+.slide-in-right {
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }

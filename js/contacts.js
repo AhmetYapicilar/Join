@@ -48,6 +48,7 @@ const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 
+//speichern und abrufen der Daten für die Telefonliste
 function init() {
     loadUsers();
 }
@@ -57,6 +58,7 @@ async function setItem(key, value) {
     const payload = { key, value, token: STORAGE_TOKEN };
     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
 }
+
 
 async function getItem(key) {
     const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
@@ -80,6 +82,7 @@ async function setItemLocalStorage(kontaktId, name, email, nummer, initialen,anf
     await setItem('users', JSON.stringify(kontaktListe));
 }
 
+
 async function loadUsers(){
     try{
     kontaktListe = JSON.parse(await getItem('users'));
@@ -91,42 +94,99 @@ async function loadUsers(){
 }
 
 
+// Zeigt die kontakte aus dem localStorage an
 function showSomething() {
     let List = kontaktListe;
     let telefonbook = document.getElementById('telefonliste');
-
+    let gruppen = {};
     for (let i = 0; i < List.length; i++) {
         if (!List[i]['Anfangsbuchstabe'] || !List[i]['Initialen'] || !List[i]['Name'] || !List[i]['Email']) {
             continue; 
         }
-        let anfangsbuchstabe = List[i]['Anfangsbuchstabe'];
-        let initialen = List[i]['Initialen'];
-        let name = List[i]['Name'];
-        let email = List[i]['Email'];
-        let farbe = zufaelligeFarbe();
 
+        let anfangsbuchstabe = List[i]['Anfangsbuchstabe'];
+        if (!gruppen[anfangsbuchstabe]) {
+            gruppen[anfangsbuchstabe] = [];
+        }
+        gruppen[anfangsbuchstabe].push(List[i]);
+    }
+    for (let buchstabe in gruppen) {
         telefonbook.innerHTML += `
         <div>
-            <h2>${anfangsbuchstabe}</h2>
+            <h2>${buchstabe}</h2>
             <img class="display-flex" src="assets/img/Vector10.png">
-            <ul>
-                <li onclick="slideInContacts(${i})">
+            <ul>`;
+
+        for (let kontakt of gruppen[buchstabe]) {
+            let initialen = kontakt['Initialen'];
+            let name = kontakt['Name'];
+            let email = kontakt['Email'];
+            let farbe = zufaelligeFarbe();
+
+            telefonbook.innerHTML += `
+                <li onclick="showContactsSlideInRightContainer(${kontaktListe.indexOf(kontakt)})">
                     <span class="initialen-kreis" style="background-color: ${farbe};">${initialen}</span>
                     <div class="kontakt-info">
                         <strong>${name}</strong>
                         <div class="showEmailLi">${email}</div>
                     </div>
-                </li>
-            </ul>
-        </div>`;
+                </li>`;
+        }
+
+        telefonbook.innerHTML += `</ul></div>`;
     }
 }
 
 
+//slide in contacts richtig anzeigen lassen
+function showContactsSlideInRightContainer(i) {
+    setTimeout(() => {
+        const contacts = document.getElementById('showContactDetailsOnSlide');
+        const ziel = document.getElementById('zielbereich');
+        const zielRect = ziel.getBoundingClientRect();
+        contacts.style.width = '500px'; 
+        contacts.style.top = '190px';
+        contacts.style.left = zielRect.left + 'px';
+      }, 250); 
+    let List = kontaktListe;
+    let slideInContacts = document.getElementById(`showInnerHTML`);
+    slideInContacts.innerHTML = `
+    <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
+    
+    <div class="showContacts">
+        <img src="assets/img/pb-contacts.png" alt="">
+        <div class="showContactsNameEditDelete">
+            <h1>${List[i][`Name`]}</h1>
+            <div class="editDelteContacts">
+                <div class="editShowContacts cursorPointer">
+                    <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
+                    <p>Edit</p>
+                </div>
+                <div class="deleteShowContacts cursorPointer">
+                    <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
+                    <p>Delete</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="font-size-20">Contact Information</p>
+
+    <div class="emailPhone">
+        <h4>Email</h4>
+
+        <a href="https://gmail.com" class="lightblue">${List[i][`Email`]}</a>
+
+        <h4>Phone</h4>
+
+        <p class="font-size-15 cursorPointer">+${List[i][`Number`]}</p>
+    </div>
+    `
+    slideInContacts();
+}
 
 
-
-
+//noch überarbeiten!!!
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('kontaktForm').addEventListener('submit', function(event) {
         event.preventDefault(); 
@@ -149,6 +209,8 @@ function neuenKontaktHinzufuegen() {
     }
 }
 
+
+//auch überarbeiten
 function addKontakt(name, email, nummer, targetElement = null) {
     const anfangsbuchstabe = name.charAt(0).toUpperCase();
     let buchstabenDiv = document.getElementById(anfangsbuchstabe);
@@ -176,10 +238,6 @@ function addKontakt(name, email, nummer, targetElement = null) {
 
     setItemLocalStorage(kontaktId, name, email, nummer, initialen, anfangsbuchstabe);
 
-    li.onclick = function() {
-        handleKontaktClick(kontaktId);
-    };
-
     kontaktId++;
 
     if (targetElement) {
@@ -187,17 +245,8 @@ function addKontakt(name, email, nummer, targetElement = null) {
     }
 
     versteckeLeereAbschnitte();
+    showSomething();
 }
-
-
-
-function handleKontaktClick(id) {
-
-    console.log(`Kontakt mit ID ${id} wurde angeklickt.`);
-    const kontakt = kontaktListe.find(k => k.id === id);
-    console.log(kontakt);
-}
-
 
 
 function getInitialen(name) {
@@ -209,6 +258,7 @@ function getInitialen(name) {
     }
 }
 
+
 function createInitialenKreis(initialen) {
     const kreis = document.createElement('span');
     kreis.className = 'initialen-kreis';
@@ -218,12 +268,9 @@ function createInitialenKreis(initialen) {
 }
 
 
-
 function zufaelligeFarbe() {
-    const farben = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', '#ADD8E6', '#FF6347', '#FFC0CB', '#00FF00', '#00BFFF', '#9370DB', '#FF69B4', '#FFA07A', '#BA55D3', '#7FFFD4'];
-    
+    const farben = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', '#ADD8E6', '#FF6347', '#FFC0CB', '#00FF00', '#00BFFF', '#9370DB', '#FF69B4', '#FFA07A', '#BA55D3', '#7FFFD4']; 
     if (farben.length === 1) return farben[0]; 
-
     let zufallsIndex;
     do {
         zufallsIndex = Math.floor(Math.random() * farben.length);
@@ -239,7 +286,7 @@ function zufaelligeFarbe() {
 
 
 
-
+//gerade keinen nutzen
 function bearbeiteKontakt(li) {
     const originalContent = li.innerHTML;
     const details = originalContent.split('<br>');
