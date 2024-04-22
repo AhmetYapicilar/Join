@@ -34,6 +34,16 @@ function slideInContacts() {
       document.getElementById('panel').style.right = "-50%"; 
     }, 500);
   });
+
+  document.getElementById('cancelAccountSubmit').addEventListener('click', function() {
+    document.getElementById('modal').classList.remove('active');
+    document.getElementById('modal').classList.add('notactive');
+    document.getElementById('panel').classList.add('notactive');
+    setTimeout(() => {
+      document.getElementById('panel').style.right = "-50%"; 
+    }, 500);
+  });
+
 });  
 
 

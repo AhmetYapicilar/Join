@@ -370,6 +370,10 @@ body {
     font-size: 20px;
 }
 
+.cancelButton:hover {
+    cursor: pointer;
+}
+
 .createAccountButton {
     width: 214px;
     height: 57px;
@@ -378,6 +382,10 @@ body {
     color: white;
     font-size: 21px;
     font-weight: 700;
+}
+
+.createAccountButton:hover {
+    cursor: pointer;
 }
 
 .vectorCancelButton {
