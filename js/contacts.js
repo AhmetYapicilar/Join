@@ -43,6 +43,90 @@ let kontaktId = 0;
 let letzteFarbe = null;
 
 
+
+const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
+const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+
+
+function init() {
+    loadUsers();
+}
+
+
+async function setItem(key, value) {
+    const payload = { key, value, token: STORAGE_TOKEN };
+    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
+}
+
+async function getItem(key) {
+    const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+    return fetch(URL).then(res => res.json()).then(res => {
+        if (res.data) {
+            return res.data.value;
+        } throw `Could not find data with key "${key}".`;
+    });
+}
+
+
+async function setItemLocalStorage(kontaktId, name, email, nummer, initialen,anfangsbuchstabe) {
+    kontaktListe.push({
+        id: kontaktId,
+        Name: name,
+        Email: email,
+        Number: nummer,
+        Initialen: initialen,
+        Anfangsbuchstabe: anfangsbuchstabe
+    });
+    await setItem('users', JSON.stringify(kontaktListe));
+}
+
+async function loadUsers(){
+    try{
+    kontaktListe = JSON.parse(await getItem('users'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+
+    showSomething();
+}
+
+
+function showSomething() {
+    let List = kontaktListe;
+    let telefonbook = document.getElementById('telefonliste');
+
+    for (let i = 0; i < List.length; i++) {
+        if (!List[i]['Anfangsbuchstabe'] || !List[i]['Initialen'] || !List[i]['Name'] || !List[i]['Email']) {
+            continue; 
+        }
+        let anfangsbuchstabe = List[i]['Anfangsbuchstabe'];
+        let initialen = List[i]['Initialen'];
+        let name = List[i]['Name'];
+        let email = List[i]['Email'];
+        let farbe = zufaelligeFarbe();
+
+        telefonbook.innerHTML += `
+        <div>
+            <h2>${anfangsbuchstabe}</h2>
+            <img class="display-flex" src="assets/img/Vector10.png">
+            <ul>
+                <li onclick="slideInContacts(${i})">
+                    <span class="initialen-kreis" style="background-color: ${farbe};">${initialen}</span>
+                    <div class="kontakt-info">
+                        <strong>${name}</strong>
+                        <div class="showEmailLi">${email}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>`;
+    }
+}
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('kontaktForm').addEventListener('submit', function(event) {
         event.preventDefault(); 
@@ -90,12 +174,8 @@ function addKontakt(name, email, nummer, targetElement = null) {
     li.appendChild(infoDiv);
     ul.appendChild(li);
 
-    kontaktListe.push({
-        id: kontaktId,
-        name: name,
-        email: email,
-        nummer: nummer
-    });
+    setItemLocalStorage(kontaktId, name, email, nummer, initialen, anfangsbuchstabe);
+
     li.onclick = function() {
         handleKontaktClick(kontaktId);
     };
@@ -110,12 +190,15 @@ function addKontakt(name, email, nummer, targetElement = null) {
 }
 
 
+
 function handleKontaktClick(id) {
 
     console.log(`Kontakt mit ID ${id} wurde angeklickt.`);
     const kontakt = kontaktListe.find(k => k.id === id);
     console.log(kontakt);
 }
+
+
 
 function getInitialen(name) {
     const namensteile = name.split(' ');

@@ -10,7 +10,7 @@
     <script src="js/contacts.js"></script>
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
 </head>
-<body onload="includeHTML()">
+<body onload="includeHTML(); init()">
 
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
@@ -24,74 +24,6 @@
                     <div id="telefonliste">
                         
                     </div>
-
-                    <div class="firstLetterFromContacts">
-                        <p>A</p>
-                    </div>
-                    <img class="vectorContacts" src="assets/img/Vector 10.png">
-                    <div class="contactChamberLeftContainer" onclick="slideInContacts()">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <div class="contactChamberLeftContainer" onclick="closeSlide()">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <div class="firstLetterFromContacts">
-                        <p>B</p>
-                    </div>
-                    <img class="vectorContacts" src="assets/img/Vector 10.png">
-
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -103,6 +35,10 @@
             
             <div id="zielbereich"></div>
         </div>
+
+
+
+        
 
         <div id="showContactDetailsOnSlide">
                 <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
@@ -138,6 +74,14 @@
         </div>   
     
         </div>  
+
+
+
+
+
+
+
+
 
 
         <div class="container" id="modal">
