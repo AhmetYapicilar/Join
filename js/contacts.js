@@ -140,33 +140,36 @@ function showContactsSlideInRightContainer(index) {
     const ziel = document.getElementById('zielbereich');
     const slideInContacts = document.getElementById('showInnerHTML');
 
-    // Stellen Sie sicher, dass alle notwendigen Elemente vorhanden sind
+    // Stellen sicher, dass alle notwendigen Elemente vorhanden sind
     if (!contacts || !ziel || !slideInContacts) {
         console.error('Eines der benötigten Elemente fehlt im DOM.');
         return;
     }
 
     // Reset der Stile und Inhalte
-    contacts.style.width = '0px'; // Setzt die Breite auf 0
-    contacts.style.opacity = '0'; // Unsichtbar machen
+    contacts.style.width = '0px'; 
+    contacts.style.opacity = '0'; 
     slideInContacts.innerHTML = '';
-    contacts.style.left = `5000px`; // Inhalte des Containers leeren
+    contacts.style.left = `5000px`; 
 
     setTimeout(() => {
         const zielRect = ziel.getBoundingClientRect();
 
-        // Bereite das Element für die Animation vor
         contacts.style.width = '500px';
         contacts.style.top = '190px';
         contacts.style.left = `${zielRect.left}px`;
         contacts.style.opacity = '1';
+        let farbe = zufaelligeFarbe();
+
+        //Farbe im local storage abspeichern und dann hier anzeigen lassen, keine random farben
+        // animation langsamer machen
 
         let List = kontaktListe;
         slideInContacts.innerHTML = `
         <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
             <div class="showContacts">
             <div class="align-items-contacts-slide-in">    
-            <img src="assets/img/pb-contacts.png" alt="">
+            <span class="initialen-kreis-show-contacts" style="background-color: ${farbe};">${List[index][`Initialen`]}</span>
                 <div class="showContactsNameEditDelete">
                     <h1>${List[index][`Name`]}</h1>
                     <div class="editDelteContacts">
@@ -195,7 +198,7 @@ function showContactsSlideInRightContainer(index) {
 
 
 
-//noch überarbeiten!!!
+//noch überarbeiten!!! es wird angezeigt, obwohl es nicht brauch beim addkontakt 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('kontaktForm').addEventListener('submit', function(event) {
         event.preventDefault(); 
@@ -218,43 +221,25 @@ function neuenKontaktHinzufuegen() {
     }
 }
 
+
+
 //auch überarbeiten
 function addKontakt(name, email, nummer, targetElement = null) {
     const anfangsbuchstabe = name.charAt(0).toUpperCase();
-    let buchstabenDiv = document.getElementById(anfangsbuchstabe);
-
-    if (!buchstabenDiv) {
-        buchstabenDiv = document.createElement('div');
-        buchstabenDiv.id = anfangsbuchstabe;
-        buchstabenDiv.innerHTML = `<h2>${anfangsbuchstabe}</h2><img class="display-flex" src="assets/img/Vector10.png"><ul></ul>`;
-        einfuegenInRichtigerReihenfolge(buchstabenDiv, anfangsbuchstabe);
-    }
-
-    const ul = buchstabenDiv.querySelector('ul');
-    const li = document.createElement('li');
-    li.id = `kontakt-${kontaktId}`;
-
-    const infoDiv = document.createElement('div');
-    infoDiv.className = 'kontakt-info';
-    infoDiv.innerHTML = `<strong>${name}</strong><div class="showEmailLi">${email}</div>`;
-
     const initialen = getInitialen(name);
-    const initialenKreis = createInitialenKreis(initialen);
-    li.appendChild(initialenKreis);
-    li.appendChild(infoDiv);
-    ul.appendChild(li);
-
     setItemLocalStorage(kontaktId, name, email, nummer, initialen, anfangsbuchstabe);
-
     kontaktId++;
-
     if (targetElement) {
         targetElement.remove();
     }
-
     versteckeLeereAbschnitte();
     showSomething();
 }
+
+
+
+
+
 
 
 
