@@ -78,8 +78,8 @@ body {
 
 .showContacts {
     display: flex;
-    align-items: center;
     gap: 54px;
+    flex-direction: column;
 }
 
 
@@ -542,29 +542,8 @@ li {
 }
 
 
-
-.slide-out-right {
-    animation: slideOut 0.5s forwards;
-}
-
-.slide-in-right {
-    animation: slideIn 0.5s forwards;
-}
-
-@keyframes slideOut {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-
-@keyframes slideIn {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
+.align-items-contacts-slide-in {
+    display: flex;
+    align-items: center;
+    gap: 54px;
 }

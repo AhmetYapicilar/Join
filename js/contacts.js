@@ -59,7 +59,6 @@ async function setItem(key, value) {
     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
 }
 
-
 async function getItem(key) {
     const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
     return fetch(URL).then(res => res.json()).then(res => {
@@ -82,7 +81,6 @@ async function setItemLocalStorage(kontaktId, name, email, nummer, initialen,anf
     await setItem('users', JSON.stringify(kontaktListe));
 }
 
-
 async function loadUsers(){
     try{
     kontaktListe = JSON.parse(await getItem('users'));
@@ -92,7 +90,6 @@ async function loadUsers(){
 
     showSomething();
 }
-
 
 // Zeigt die kontakte aus dem localStorage an
 function showSomething() {
@@ -137,53 +134,68 @@ function showSomething() {
     }
 }
 
-
 //slide in contacts richtig anzeigen lassen
-function showContactsSlideInRightContainer(i) {
+function showContactsSlideInRightContainer(index) {
+    const contacts = document.getElementById('showContactDetailsOnSlide');
+    const ziel = document.getElementById('zielbereich');
+    const slideInContacts = document.getElementById('showInnerHTML');
+
+    // Stellen Sie sicher, dass alle notwendigen Elemente vorhanden sind
+    if (!contacts || !ziel || !slideInContacts) {
+        console.error('Eines der benötigten Elemente fehlt im DOM.');
+        return;
+    }
+
+    // Reset der Stile und Inhalte
+    contacts.style.width = '0px'; // Setzt die Breite auf 0
+    contacts.style.opacity = '0'; // Unsichtbar machen
+    slideInContacts.innerHTML = '';
+    contacts.style.left = `2000px`; // Inhalte des Containers leeren
+
     setTimeout(() => {
-        const contacts = document.getElementById('showContactDetailsOnSlide');
-        const ziel = document.getElementById('zielbereich');
         const zielRect = ziel.getBoundingClientRect();
-        contacts.style.width = '500px'; 
+
+        // Konsolenlog zum Überprüfen des Zustands nach Timeout
+        console.log('Setze Stile und Inhalte...');
+
+        // Bereite das Element für die Animation vor
+        contacts.style.width = '500px';
         contacts.style.top = '190px';
-        contacts.style.left = zielRect.left + 'px';
-      }, 250); 
-    let List = kontaktListe;
-    let slideInContacts = document.getElementById(`showInnerHTML`);
-    slideInContacts.innerHTML = `
-    <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
-    
-    <div class="showContacts">
-        <img src="assets/img/pb-contacts.png" alt="">
-        <div class="showContactsNameEditDelete">
-            <h1>${List[i][`Name`]}</h1>
-            <div class="editDelteContacts">
-                <div class="editShowContacts cursorPointer">
-                    <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
-                    <p>Edit</p>
+        contacts.style.left = `${zielRect.left}px`;
+        contacts.style.opacity = '1';
+
+        let List = kontaktListe;
+        slideInContacts.innerHTML = `
+        <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
+            <div class="showContacts">
+            <div class="align-items-contacts-slide-in">    
+            <img src="assets/img/pb-contacts.png" alt="">
+                <div class="showContactsNameEditDelete">
+                    <h1>${List[index][`Name`]}</h1>
+                    <div class="editDelteContacts">
+                        <div class="editShowContacts cursorPointer">
+                            <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
+                            <p>Edit</p>
+                        </div>
+                        <div class="deleteShowContacts cursorPointer">
+                            <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
+                            <p>Delete</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="deleteShowContacts cursorPointer">
-                    <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
-                    <p>Delete</p>
+            </div>    
+                <p class="font-size-20">Contact Information</p>
+                <div class="emailPhone">
+                    <h4>Email</h4>
+                    <a href="https://gmail.com" class="lightblue">${List[index][`Email`]}</a>
+                    <h4>Phone</h4>
+                    <p class="font-size-15 cursorPointer">+${List[index][`Number`]}</p>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <p class="font-size-20">Contact Information</p>
-
-    <div class="emailPhone">
-        <h4>Email</h4>
-
-        <a href="https://gmail.com" class="lightblue">${List[i][`Email`]}</a>
-
-        <h4>Phone</h4>
-
-        <p class="font-size-15 cursorPointer">+${List[i][`Number`]}</p>
-    </div>
-    `
-    slideInContacts();
+        `;
+    }, 250);
 }
+
 
 
 //noch überarbeiten!!!
@@ -208,7 +220,6 @@ function neuenKontaktHinzufuegen() {
         alert('Bitte einen Namen eingeben!');
     }
 }
-
 
 //auch überarbeiten
 function addKontakt(name, email, nummer, targetElement = null) {
@@ -249,6 +260,7 @@ function addKontakt(name, email, nummer, targetElement = null) {
 }
 
 
+
 function getInitialen(name) {
     const namensteile = name.split(' ');
     if (namensteile.length > 1) {
@@ -258,7 +270,6 @@ function getInitialen(name) {
     }
 }
 
-
 function createInitialenKreis(initialen) {
     const kreis = document.createElement('span');
     kreis.className = 'initialen-kreis';
@@ -266,6 +277,7 @@ function createInitialenKreis(initialen) {
     kreis.style.backgroundColor = zufaelligeFarbe(); 
     return kreis;
 }
+
 
 
 function zufaelligeFarbe() {
@@ -286,7 +298,7 @@ function zufaelligeFarbe() {
 
 
 
-//gerade keinen nutzen
+//gerade keinen
 function bearbeiteKontakt(li) {
     const originalContent = li.innerHTML;
     const details = originalContent.split('<br>');
