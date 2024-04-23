@@ -5,6 +5,10 @@ button {
     font-size: 60px;
 }
 
+.fontSize20px {
+    font-size: 20px;
+}
+
 .flex-start {
     display: flex;
     justify-content: flex-start;
@@ -23,9 +27,6 @@ button {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
 }
 
 .descriptionTextArea {
@@ -35,25 +36,17 @@ button {
     align-items: flex-start;
     padding: 18px 16px;
     gap: 10px;
-    isolation: isolate;
     width: 440px;
     height: 120px;
     background: #FFFFFF;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
 }
 
 .assignContacts {
     cursor: pointer;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     gap: 8px;
     padding: 12px 16px;
     width: 440px;
@@ -62,8 +55,6 @@ button {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     flex: none;
-    order: 1;
-    flex-grow: 0;
 }
 
 .addTaskDividingBar {
@@ -79,10 +70,6 @@ button {
     cursor: pointer;
     color: #D1D1D1;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     padding: 12px 16px;
     gap: 10px;
     width: 440px;
@@ -91,9 +78,6 @@ button {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
 }
 
 .urgentButton {
@@ -110,8 +94,6 @@ button {
     border-radius: 10px;
     border: none;
     flex: none;
-    order: 0;
-    flex-grow: 1;
 }
 
 .urgentButtonSelected {
@@ -132,8 +114,6 @@ button {
     border-radius: 10px;
     border: none;
     flex: none;
-    order: 1;
-    flex-grow: 1;
 }
 
 .mediumButtonSelected {
@@ -154,8 +134,6 @@ button {
     border-radius: 10px;
     border: none;
     flex: none;
-    order: 2;
-    flex-grow: 1;
 }
 
 .lowButtonSelected {
@@ -163,21 +141,20 @@ button {
 }
 
 .categoryPicker {
-    cursor: pointer;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
     width: 440px;
     height: 48px;
-    background: #FFFFFF;
-    border: 1px solid #D1D1D1;
+    padding: 12px 16px;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-color: #FFFFFF;
+    background-image: url(../assets/img/arrow-drop-down.png);
+    background-position: 97%;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 0;
     border-radius: 10px;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+    border: 1px solid #d1d1d1;
+    position: relative;
 }
 
 .subtaskPicker {
@@ -194,9 +171,6 @@ button {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     flex: none;
-    order: 1;
-    align-self: stretch;
-    flex-grow: 0;
 }
 
 .fieldRequiredText {
@@ -236,8 +210,6 @@ button {
     border: 1px solid #2A3647;
     border-radius: 10px;
     flex: none;
-    order: 0;
-    flex-grow: 0;
     color: #2A3647;
     font-size: 20px;
     font-weight: 400;
@@ -255,8 +227,6 @@ button {
     background: #2A3647;
     border-radius: 10px;
     flex: none;
-    order: 1;
-    flex-grow: 0;
     color: #FFFFFF;
     font-size: 20px;
     font-weight: 700;

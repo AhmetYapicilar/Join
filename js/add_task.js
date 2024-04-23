@@ -2,6 +2,8 @@
 const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
+let subtasks = []; // Array zum Speichern der hinzugefügten Subtasks
+
 // Funktion zum Erstellen eines neuen Tasks und Speichern im Remote-Speicher
 function createTask() {
     // Informationen aus dem Formular sammeln
@@ -26,14 +28,6 @@ function createTask() {
     .catch(error => console.error('Error saving task:', error.message)); // Fehlerbehandlung
 }
 
-
-
-function setPriority() {
-
-}
-
-
-
 // Funktion zum Abrufen der ausgewählten Priorität
 function getPriority() {
     return (document.querySelector(".urgentButton").classList.contains("selected") && "Urgent") || // Priorität: Dringend
@@ -42,16 +36,33 @@ function getPriority() {
            "Medium"; // Standardpriorität, falls keine ausgewählt ist
 }
 
-// Hilfsfunktion zum Abrufen der Unteraufgaben
-function getSubtasks() {
-    let subtaskInputs = document.querySelectorAll(".subtaskPicker");
-    let subtasks = [];
-    subtaskInputs.forEach(input => {
-        if (input.value.trim() !== "") {
-            subtasks.push(input.value.trim());
-        }
+// Funktion zum Hinzufügen eines Subtasks
+function addSubtask() {
+    let subtaskInput = document.querySelector(".subtaskPicker");
+    let subtaskText = subtaskInput.value.trim();
+    if (subtaskText !== "") {
+        subtasks.push(subtaskText);
+        updateSubtaskList(); // Aktualisiere die Anzeige der Subtasks
+        subtaskInput.value = ""; // Leere das Eingabefeld
+    }
+}
+
+// Funktion zum Löschen eines Subtasks
+function removeSubtask(index) {
+    subtasks.splice(index, 1);
+    updateSubtaskList(); // Aktualisiere die Anzeige der Subtasks
+}
+
+// Funktion zum Aktualisieren der Anzeige der Subtasks
+function updateSubtaskList() {
+    let subtaskListContainer = document.getElementById("subtaskList");
+    subtaskListContainer.innerHTML = ""; // Leere die Anzeige, um neu zu rendern
+    subtasks.forEach((subtask, index) => {
+        let listItem = document.createElement("div");
+        listItem.innerHTML = `<span>&#8226; ${subtask}</span>
+                              <button onclick="removeSubtask(${index})">X</button>`;
+        subtaskListContainer.appendChild(listItem);
     });
-    return subtasks;
 }
 
 // Funktion zum Zurücksetzen des Formulars
@@ -60,6 +71,3 @@ function clearForm() {
     form.reset();
 }
 
-
-document.getElementById('taskDate').min = new Date().toISOString().split('T')[0];
-                                    
