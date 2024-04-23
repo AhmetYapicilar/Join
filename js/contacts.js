@@ -189,15 +189,15 @@ function editContacts(i) {
                     </div>
                     <div class="inputs-edit">
                       <div class="Name-edit">
-                      <input id="placeholderName" class="inputfieldAddContact-edit" type="text" placeholder="Name"/>
+                      <input required id="placeholderName" class="inputfieldAddContact-edit" type="text" placeholder="Name"/>
                         <img src="assets/img/person.png" class="inputfield-icon-edit" />
                       </div>
                       <div class="Name-edit">
-                        <input id="placeholderEmail" class="inputfieldAddContact-edit" type="text" placeholder="Email"/>
+                        <input required id="placeholderEmail" class="inputfieldAddContact-edit" type="text" placeholder="Email"/>
                         <img src="assets/img/mail.png" class="inputfield-icon-edit" />
                       </div>
                       <div class="Name-edit">
-                        <input id="placeholderNumber" class="inputfieldAddContact-edit" type="text" placeholder="Phone"/>
+                        <input required id="placeholderNumber" class="inputfieldAddContact-edit" type="text" placeholder="Phone"/>
                         <img src="assets/img/call.png" class="inputfield-icon-edit" />
                       </div>
                     </div>
@@ -348,13 +348,25 @@ function updateContactDisplay() {
 }
 
 
-//noch überarbeiten!!! es wird angezeigt, obwohl es nicht brauch beim addkontakt 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('kontaktForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        neuenKontaktHinzufuegen();
+// nochmal mit dem z index gucken wie das geht
+function initialisiereKontaktFormular() {
+    var nummer = document.getElementById('neuerKontaktNummer').value;
+    var email = document.getElementById('neuerKontaktEmail').value;
+    var name = document.getElementById('neuerKontaktName').value;
+
+    // Prüfen, ob alle Felder leer sind
+    if (!nummer && !email && !name) {
+        console.log("Die Eingabefelder dürfen nicht leer sein!");
+        return; 
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('kontaktForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            neuenKontaktHinzufuegen();
+        });
     });
-});
+}
 
 function neuenKontaktHinzufuegen() {
     const name = document.getElementById('neuerKontaktName').value.trim();

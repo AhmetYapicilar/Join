@@ -216,7 +216,7 @@ body {
     top: 18.5%;
     left: 105%;
     width: 500px !important; 
-    transition: width 5000s ease-in-out, opacity 500s ease-in-out, left 1s ease-in-out;
+    transition: width 15000s ease-in-out, opacity 500s ease-in-out, left 1s ease-in-out;
     z-index: 100; 
     object-fit: cover;
   }
@@ -353,6 +353,8 @@ body {
     border: 1px solid #ccc;
     font-size: 20px;
     font-weight: 400;
+    z-index: 200;
+    display: flex;
 }
 
 .cancelOrCreateContact {
