@@ -220,6 +220,43 @@ function showContactsSlideInRightContainer(index) {
     }, 350);
 }
 
+function deleteContacts(index) {
+    if (index >= 0 && index < kontaktListe.length) {
+        // Anfangsbuchstabe des gelöschten Kontakts speichern
+        let deletedContactLetter = kontaktListe[index]['Anfangsbuchstabe'];
+
+        // Kontakt löschen
+        kontaktListe.splice(index, 1);
+        updateContactDisplay(); 
+        let nextLetter = getNextLetter(deletedContactLetter);
+
+        if (nextLetter) {
+            let nextIndex = kontaktListe.findIndex(kontakt => kontakt['Anfangsbuchstabe'] === nextLetter);
+            if (nextIndex !== -1) {
+                setTimeout(() => {
+                    showContactsSlideInRightContainer(nextIndex);
+                }, 100);
+            }
+        }
+    } else {
+        console.error('Ungültiger Index'); 
+    }
+}
+
+function getNextLetter(currentLetter) {
+    let allLetters = kontaktListe.map(kontakt => kontakt['Anfangsbuchstabe']).filter((value, index, self) => self.indexOf(value) === index);
+    allLetters.sort();
+    let currentIndex = allLetters.indexOf(currentLetter);
+    let nextIndex = currentIndex + 1 < allLetters.length ? currentIndex + 1 : 0; // Wrap around, wenn nötig
+    return allLetters[nextIndex];
+}
+
+
+
+function updateContactDisplay() {
+    console.log('Kontaktliste aktualisiert:', kontaktListe);
+    showSomething(); 
+}
 
 
 //noch überarbeiten!!! es wird angezeigt, obwohl es nicht brauch beim addkontakt 
