@@ -226,6 +226,21 @@ function editContacts(i) {
 }
 
 
+async function deleteContactsCloseWindow(index) {
+    if (index >= 0 && index < kontaktListe.length) {
+        kontaktListe[index][`Name`] = ``;
+        kontaktListe[index][`Email`] = ``;
+        kontaktListe[index][`Number`] = ``;
+        await setItem('users', JSON.stringify(kontaktListe));
+    } else {
+        console.error('Ungültiger Index');
+    }
+
+    closeEditWindow();
+    updateContactDisplay();
+    document.getElementById(`showInnerHTML`).innerHTML = ``;
+}
+
 function closeEditWindow() {
     document.getElementById('modal-edit').classList.remove('active');
     document.getElementById('panel-edit').classList.remove('active');
@@ -356,9 +371,53 @@ function neuenKontaktHinzufuegen() {
     }
 }
 
+///edit
+function updateKontakt(index) {
+    const Name =  document.getElementById(`placeholderName`).value.trim();
+    const Email =  document.getElementById(`placeholderEmail`).value.trim();
+    const Nummer = document.getElementById(`placeholderNumber`).value.trim();
+
+    if (Name) {
+        addKontakt(Name, Email, Nummer);
+        document.getElementById('neuerKontaktName').value = '';
+        document.getElementById('neuerKontaktEmail').value = '';
+        document.getElementById('neuerKontaktNummer').value = '';
+    } else {
+        alert('Bitte einen Namen eingeben!');
+    }
+    closeEditWindow();
+    updateContacts(index);
+}
+
+async function updateContacts(index) {
+    if (index >= 0 && index < kontaktListe.length) {
+        kontaktListe[index][`Name`] = ``;
+        kontaktListe[index][`Email`] = ``;
+        kontaktListe[index][`Number`] = ``;
+        await setItem('users', JSON.stringify(kontaktListe));
+    } else {
+        console.error('Ungültiger Index');
+    }
+
+    updateContactDisplay();
+}
 
 
-//auch überarbeiten
+async function deleteContacts(index) {
+    if (index >= 0 && index < kontaktListe.length) {
+        kontaktListe[index][`Name`] = ``;
+        kontaktListe[index][`Email`] = ``;
+        kontaktListe[index][`Number`] = ``;
+        await setItem('users', JSON.stringify(kontaktListe));
+    } else {
+        console.error('Ungültiger Index');
+    }
+
+    updateContactDisplay();
+    document.getElementById(`showInnerHTML`).innerHTML = ``;
+}
+
+
 function addKontakt(name, email, nummer, targetElement = null) {
     const anfangsbuchstabe = name.charAt(0).toUpperCase();
     const initialen = getInitialen(name);
