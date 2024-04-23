@@ -106,7 +106,8 @@ function showSomething() {
     let List = kontaktListe;
     let telefonbook = document.getElementById('telefonliste');
     let gruppen = {};
-    
+
+    // Leere das Telefonbuch zu Beginn, um vorherige Einträge zu entfernen
     telefonbook.innerHTML = '';
 
     // Gruppieren der Kontakte nach Anfangsbuchstaben
@@ -115,14 +116,18 @@ function showSomething() {
             continue; 
         }
 
-        let anfangsbuchstabe = kontakt['Anfangsbuchstabe'];
+        let anfangsbuchstabe = kontakt['Anfangsbuchstabe'].toUpperCase(); // Konvertiere zu Großbuchstaben, um Konsistenz zu gewährleisten
         if (!gruppen[anfangsbuchstabe]) {
             gruppen[anfangsbuchstabe] = [];
         }
         gruppen[anfangsbuchstabe].push(kontakt);
     }
 
-    for (let buchstabe in gruppen) {
+    // Sortieren der Anfangsbuchstaben alphabetisch
+    let sortierteBuchstaben = Object.keys(gruppen).sort();
+
+    // Erstellen der gruppierten Anzeige in alphabetischer Reihenfolge
+    for (let buchstabe of sortierteBuchstaben) {
         let gruppenDiv = document.createElement('div');
         let buchstabeHeader = document.createElement('h2');
         buchstabeHeader.textContent = buchstabe;
@@ -150,6 +155,7 @@ function showSomething() {
         telefonbook.appendChild(gruppenDiv);
     }
 }
+
 
 
 //slide in contacts richtig anzeigen lassen
