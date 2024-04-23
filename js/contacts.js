@@ -96,6 +96,10 @@ async function setItemLocalStorage(kontaktId, name, email, nummer, initialen, an
 }
 
 
+
+
+
+
 async function loadUsers(){
     try{
     kontaktListe = JSON.parse(await getItem('users'));
@@ -199,7 +203,7 @@ function editContacts(i) {
                     </div>
                     <div class="cancelOrCreateContact-edit">
                       <button class="cancelButton-edit cursorPointer" onclick="deleteContactsCloseWindow(${i})">Delete</button>
-                      <button class="saveButton-edit cursorPointer">
+                      <button onclick="updateKontakt(${i})" class="saveButton-edit cursorPointer">
                         Save<img class="checkCreateAccountButton-edit" src="assets/img/check.png"/>
                       </button>
                     </div>
@@ -305,25 +309,12 @@ function showContactsSlideInRightContainer(index) {
 }
 
 function deleteContacts(index) {
+    document.getElementById(`showInnerHTML`).innerHTML = ``;
     if (index >= 0 && index < kontaktListe.length) {
-        // Anfangsbuchstabe des gelöschten Kontakts speichern
-        let deletedContactLetter = kontaktListe[index]['Anfangsbuchstabe'];
 
         // Kontakt löschen
         kontaktListe.splice(index, 1);
         updateContactDisplay(); 
-        let nextLetter = getNextLetter(deletedContactLetter);
-
-        if (nextLetter) {
-            let nextIndex = kontaktListe.findIndex(kontakt => kontakt['Anfangsbuchstabe'] === nextLetter);
-            if (nextIndex !== -1) {
-                setTimeout(() => {
-                    showContactsSlideInRightContainer(nextIndex);
-                }, 100);
-            }
-        }
-    } else {
-        console.error('Ungültiger Index'); 
     }
 }
 
@@ -338,7 +329,6 @@ function getNextLetter(currentLetter) {
 
 
 function updateContactDisplay() {
-    console.log('Kontaktliste aktualisiert:', kontaktListe);
     showSomething(); 
 }
 
