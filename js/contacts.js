@@ -106,43 +106,51 @@ function showSomething() {
     let List = kontaktListe;
     let telefonbook = document.getElementById('telefonliste');
     let gruppen = {};
-    for (let i = 0; i < List.length; i++) {
-        if (!List[i]['Anfangsbuchstabe'] || !List[i]['Initialen'] || !List[i]['Name'] || !List[i]['Email']) {
+    
+    telefonbook.innerHTML = '';
+
+    // Gruppieren der Kontakte nach Anfangsbuchstaben
+    for (let kontakt of List) {
+        if (!kontakt['Anfangsbuchstabe'] || !kontakt['Initialen'] || !kontakt['Name'] || !kontakt['Email']) {
             continue; 
         }
 
-        let anfangsbuchstabe = List[i]['Anfangsbuchstabe'];
+        let anfangsbuchstabe = kontakt['Anfangsbuchstabe'];
         if (!gruppen[anfangsbuchstabe]) {
             gruppen[anfangsbuchstabe] = [];
         }
-        gruppen[anfangsbuchstabe].push(List[i]);
+        gruppen[anfangsbuchstabe].push(kontakt);
     }
+
     for (let buchstabe in gruppen) {
-        telefonbook.innerHTML += `
-        <div>
-            <h2>${buchstabe}</h2>
-            <img class="display-flex" src="assets/img/Vector10.png">
-            <ul>`;
+        let gruppenDiv = document.createElement('div');
+        let buchstabeHeader = document.createElement('h2');
+        buchstabeHeader.textContent = buchstabe;
+        gruppenDiv.appendChild(buchstabeHeader);
+        
+        let buchstabeImg = document.createElement('img');
+        buchstabeImg.src = 'assets/img/Vector10.png';
+        buchstabeImg.className = 'display-flex';
+        gruppenDiv.appendChild(buchstabeImg);
 
+        let kontaktListeUl = document.createElement('ul');
         for (let kontakt of gruppen[buchstabe]) {
-            let initialen = kontakt['Initialen'];
-            let name = kontakt['Name'];
-            let email = kontakt['Email'];
-            let farbe = zufaelligeFarbe();
-
-            telefonbook.innerHTML += `
-                <li onclick="showContactsSlideInRightContainer(${kontaktListe.indexOf(kontakt)})">
-                    <span class="initialen-kreis" style="background-color: ${farbe};">${initialen}</span>
-                    <div class="kontakt-info">
-                        <strong>${name}</strong>
-                        <div class="showEmailLi">${email}</div>
-                    </div>
-                </li>`;
+            let kontaktLi = document.createElement('li');
+            kontaktLi.onclick = function() { showContactsSlideInRightContainer(kontaktListe.indexOf(kontakt)); };
+            kontaktLi.innerHTML = `
+                <span class="initialen-kreis" style="background-color: ${zufaelligeFarbe()};">${kontakt['Initialen']}</span>
+                <div class="kontakt-info">
+                    <strong>${kontakt['Name']}</strong>
+                    <div class="showEmailLi">${kontakt['Email']}</div>
+                </div>`;
+            kontaktListeUl.appendChild(kontaktLi);
         }
 
-        telefonbook.innerHTML += `</ul></div>`;
+        gruppenDiv.appendChild(kontaktListeUl);
+        telefonbook.appendChild(gruppenDiv);
     }
 }
+
 
 //slide in contacts richtig anzeigen lassen
 function showContactsSlideInRightContainer(index) {
