@@ -26,6 +26,14 @@ function createTask() {
     .catch(error => console.error('Error saving task:', error.message)); // Fehlerbehandlung
 }
 
+
+
+function setPriority() {
+
+}
+
+
+
 // Funktion zum Abrufen der ausgewählten Priorität
 function getPriority() {
     return (document.querySelector(".urgentButton").classList.contains("selected") && "Urgent") || // Priorität: Dringend
@@ -52,9 +60,6 @@ function clearForm() {
     form.reset();
 }
 
-// Event Listener zum Hinzufügen eines Event Handlers für das Formular
-document.getElementById("addTaskForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Verhindert das Standardverhalten des Formulars (das Neuladen der Seite)
-    createTask(); // Aufruf der Funktion zum Erstellen eines neuen Tasks
-});
 
+document.getElementById('taskDate').min = new Date().toISOString().split('T')[0];
+                                    

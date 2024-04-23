@@ -10,7 +10,7 @@
     <script src="js/contacts.js"></script>
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
 </head>
-<body onload="includeHTML()">
+<body onload="includeHTML(); init()">
 
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
@@ -24,74 +24,6 @@
                     <div id="telefonliste">
                         
                     </div>
-
-                    <div class="firstLetterFromContacts">
-                        <p>A</p>
-                    </div>
-                    <img class="vectorContacts" src="assets/img/Vector 10.png">
-                    <div class="contactChamberLeftContainer" onclick="slideInContacts()">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <div class="contactChamberLeftContainer" onclick="closeSlide()">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <div class="firstLetterFromContacts">
-                        <p>B</p>
-                    </div>
-                    <img class="vectorContacts" src="assets/img/Vector 10.png">
-
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contactChamberLeftContainer">
-                        <img src="assets/img/pb-contacts.png">
-                        <div class="nameAndEmailLeftContainer">
-                            <h4>Anton Mayer</h4>
-                            <p>antonm@gmail.com</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -104,41 +36,11 @@
             <div id="zielbereich"></div>
         </div>
 
-        <div id="showContactDetailsOnSlide">
-                <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
-    
-                    <div class="showContacts">
-                        <img src="assets/img/pb-contacts.png" alt="">
-                        <div class="showContactsNameEditDelete">
-                            <h1>Anton Mayer</h1>
-                            <div class="editDelteContacts">
-                                <div class="editShowContacts cursorPointer">
-                                    <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
-                                    <p>Edit</p>
-                                </div>
-                                <div class="deleteShowContacts cursorPointer">
-                                    <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
-                                    <p>Delete</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <p class="font-size-20">Contact Information</p>
-    
-                    <div class="emailPhone">
-                        <h4>Email</h4>
-    
-                        <a href="https://gmail.com" class="lightblue">antom@gmail.com</a>
-    
-                        <h4>Phone</h4>
-    
-                        <p class="font-size-15 cursorPointer">+49 1523 378 23 8</p>
-                    </div>
-        </div>   
-    
-        </div>  
 
+        <div id="showContactDetailsOnSlide">
+            <div id="showInnerHTML"></div>
+        </div>   
+        </div>  
 
         <div class="container" id="modal">
             <div class="panel" id="panel">
@@ -174,7 +76,7 @@
                                     </div>
 
                                         <div class="cancelOrCreateContact">
-                                            <button class="cancelButton">Cancel <img class="vectorCancelButton" src="assets/img/Vector.png"></button>
+                                            <button type="button" id="cancelAccountSubmit" class="cancelButton">Cancel <img class="vectorCancelButton" src="assets/img/Vector.png"></button>
                                             <button type="submit" id="createAccountSubmit" class="createAccountButton">Create Account <img class="checkCreateAccountButton" src="assets/img/check.png" alt=""></button>
                                         </div>
                                     </form>

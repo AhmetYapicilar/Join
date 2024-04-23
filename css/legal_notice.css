@@ -92,6 +92,10 @@ a {
     left: 2.5px;
 }
 
+.backArrow img:hover {
+    cursor: pointer;
+}
+
 .legalNoticeContent {
     display: flex;
     flex-direction: column;

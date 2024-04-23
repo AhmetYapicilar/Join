@@ -49,7 +49,7 @@ body {
 
 
 .addNewContact {
-    position: relative; /*sticky?*/
+    position: relative;
     width: 302px;
     height: 56px;
     top: 22.5px;
@@ -78,8 +78,8 @@ body {
 
 .showContacts {
     display: flex;
-    align-items: center;
     gap: 54px;
+    flex-direction: column;
 }
 
 
@@ -216,7 +216,7 @@ body {
     top: 18.5%;
     left: 105%;
     width: 500px !important; 
-    transition: all 1s ease; 
+    transition: width 5000s ease-in-out, opacity 500s ease-in-out, left 1s ease-in-out;
     z-index: 100; 
     object-fit: cover;
   }
@@ -242,8 +242,8 @@ body {
     align-items: center;
     visibility: hidden;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
-    backdrop-filter: blur(8px); /* Blur-Effekt für den Hintergrund */
+    background: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(8px);
     transition: opacity 0.5s, visibility 0.5s;
   }
   
@@ -252,7 +252,7 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transform: translateX(100%);
     transition: transform 0.5s;
-    right: -50%; /* Startposition außerhalb des Bildschirms */
+    right: -50%; 
     transition: right 0.5s ease-out;
   }
   
@@ -370,6 +370,10 @@ body {
     font-size: 20px;
 }
 
+.cancelButton:hover {
+    cursor: pointer;
+}
+
 .createAccountButton {
     width: 214px;
     height: 57px;
@@ -378,6 +382,10 @@ body {
     color: white;
     font-size: 21px;
     font-weight: 700;
+}
+
+.createAccountButton:hover {
+    cursor: pointer;
 }
 
 .vectorCancelButton {
@@ -451,6 +459,11 @@ body {
     padding: 20px;
     align-items: center;
     padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+.display-flex {
+    display: flex;
 }
 
 #telefonliste ul {
@@ -512,6 +525,22 @@ body {
     border: 2px solid white; 
 }
 
+.initialen-kreis-show-contacts {
+    width: 100px;
+    height: 100px;
+    line-height: 20px;
+    border-radius: 100%;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    margin-right: 10px;
+    font-size: 50px;
+    justify-content: center;
+    display: flex;
+    border: 4px solid white; 
+    align-items: center;
+}
+
 .kontakt-info {
     display: flex;
     flex-direction: column;
@@ -534,4 +563,11 @@ li {
 
 .inputfieldAddContact::placeholder {
     color: #D1D1D1;
+}
+
+
+.align-items-contacts-slide-in {
+    display: flex;
+    align-items: center;
+    gap: 54px;
 }
