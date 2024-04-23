@@ -117,7 +117,7 @@ function showSomething() {
 
     // Gruppieren der Kontakte nach Anfangsbuchstaben
     for (let kontakt of List) {
-        if (!kontakt['Anfangsbuchstabe'] || !kontakt['Initialen'] || !kontakt['Name'] || !kontakt['Email']) {
+        if (!kontakt['Anfangsbuchstabe'] || !kontakt['Initialen'] || !kontakt['Name'] || !kontakt['Email'] || !kontakt['Farbe']) {
             continue; 
         }
 
