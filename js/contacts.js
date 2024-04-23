@@ -79,17 +79,22 @@ async function getItem(key) {
 }
 
 
-async function setItemLocalStorage(kontaktId, name, email, nummer, initialen,anfangsbuchstabe) {
+async function setItemLocalStorage(kontaktId, name, email, nummer, initialen, anfangsbuchstabe) {
+    const farbe = zufaelligeFarbe();
+
     kontaktListe.push({
         id: kontaktId,
         Name: name,
         Email: email,
         Number: nummer,
         Initialen: initialen,
-        Anfangsbuchstabe: anfangsbuchstabe
+        Anfangsbuchstabe: anfangsbuchstabe,
+        Farbe: farbe 
     });
+
     await setItem('users', JSON.stringify(kontaktListe));
 }
+
 
 async function loadUsers(){
     try{
@@ -143,7 +148,7 @@ function showSomething() {
             let kontaktLi = document.createElement('li');
             kontaktLi.onclick = function() { showContactsSlideInRightContainer(kontaktListe.indexOf(kontakt)); };
             kontaktLi.innerHTML = `
-                <span class="initialen-kreis" style="background-color: ${zufaelligeFarbe()};">${kontakt['Initialen']}</span>
+                <span class="initialen-kreis" style="background-color: ${kontakt[`Farbe`]};">${kontakt['Initialen']}</span>
                 <div class="kontakt-info">
                     <strong>${kontakt['Name']}</strong>
                     <div class="showEmailLi">${kontakt['Email']}</div>
@@ -172,7 +177,7 @@ function editContacts(i) {
             </div>
             <div class="addContactInputFields-edit">
               <div class="imgAndInputfields-edit">
-              <span class="initialen-kreis-edit-contacts" style="background-color: ${farbe};">${List[i][`Initialen`]}</span>
+              <span class="initialen-kreis-edit-contacts" style="background-color: ${List[i][`Farbe`]};">${List[i][`Initialen`]}</span>
                 <div class="rightContainer-edit">
                   <div class="inPutfields-edit">
                     <div class="closeButton-edit">
@@ -272,7 +277,7 @@ function showContactsSlideInRightContainer(index) {
         <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
             <div class="showContacts">
             <div class="align-items-contacts-slide-in">    
-            <span class="initialen-kreis-show-contacts" style="background-color: ${farbe};">${List[index][`Initialen`]}</span>
+            <span class="initialen-kreis-show-contacts" style="background-color:${List[index][`Farbe`]};">${List[index][`Initialen`]}</span>
                 <div class="showContactsNameEditDelete">
                     <h1>${List[index][`Name`]}</h1>
                     <div class="editDelteContacts">
