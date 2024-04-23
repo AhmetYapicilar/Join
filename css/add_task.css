@@ -36,7 +36,6 @@ button {
     align-items: flex-start;
     padding: 18px 16px;
     gap: 10px;
-    isolation: isolate;
     width: 440px;
     height: 120px;
     background: #FFFFFF;
