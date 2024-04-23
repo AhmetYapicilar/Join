@@ -98,6 +98,7 @@ button {
 
 .urgentButtonSelected {
     background: #ff3d00;
+    color: #FFFFFF;
 }
 
 .mediumButton {
@@ -118,6 +119,7 @@ button {
 
 .mediumButtonSelected {
     background: #FFA800;
+    color: #FFFFFF;
 }
 
 .lowButton {
@@ -137,7 +139,8 @@ button {
 }
 
 .lowButtonSelected {
-    background: #7ae229
+    background: #7ae229;
+    color: #FFFFFF;
 }
 
 .categoryPicker {

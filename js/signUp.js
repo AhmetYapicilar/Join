@@ -30,8 +30,6 @@ async function getItem(key) {
 }
 
 
-<<<<<<< HEAD
-=======
 function setLocalStorage() {
     let email = JSON.stringify(document.getElementById('inputEmail').value);
     let password = JSON.stringify(document.getElementById('passwordInput').value);
@@ -43,7 +41,6 @@ function getLocalStorage() {
     savedEmail = JSON.parse(localStorage.getItem('email'));
     savedPassword = JSON.parse(localStorage.getItem('savedPassword'));
 }
->>>>>>> 24f606648c4c6c49174374b1b9dcccf462ce5054
 
 document.addEventListener('DOMContentLoaded', (event) => {
     setTimeout(() => {

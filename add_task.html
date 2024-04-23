@@ -62,9 +62,9 @@
                 <div class="prioPickerContainer">
                     <span>Prio</span>
                     <div class="prioPickerButtonsContainer">
-                        <button type="button" class="urgentButton">Urgent <img src="./assets/img/prioUp.png" alt=""></button>
-                        <button type="button" class="mediumButton">Medium <img src="./assets/img/prioEven.png" alt=""></button>
-                        <button type="button" class="lowButton">Low <img src="./assets/img/prioDown.png" alt=""></button>
+                        <button type="button" class="urgentButton" id="urgent" onclick="selectPriority('urgent')">Urgent <img src="./assets/img/prioUp.png"></button>
+                        <button type="button" class="mediumButton mediumButtonSelected" id="medium" onclick="selectPriority('medium')">Medium <img src="./assets/img/prioEven.png"></button>
+                        <button type="button" class="lowButton" id="low" onclick="selectPriority('low')">Low <img src="./assets/img/prioDown.png"></button>
                     </div>
                 </div>
                 <div class="categoryContainer">
