@@ -309,7 +309,6 @@ display: none;
 
 .tasks-board-big{
     width: 20%;
-    height: 70%;
     border-radius: 30px;
     padding: 48px 40px 48px 40px;
     gap: 24px;
@@ -504,7 +503,7 @@ background-color: #D1D1D1;
 
 @keyframes sliding {
     from {
-        transform: translateX(10000px);
+        transform: translateX(5000px);
     }
     to {
         transform: translateX(0px);

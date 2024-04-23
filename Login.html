@@ -10,9 +10,9 @@
     <script src="js/register.js"></script>
     <script src="js/logIn.js"></script>
 </head>
-<body onload="initLogIn()">
-<div class="centerAll">
 <body>
+<div class="centerAll">
+<body onload="initLogIn()">
     <img id="meinBild" src="assets/img/Capa 2.png">
 
     <div id="zielbereich"></div>
@@ -47,8 +47,8 @@
         </div>
         <div class="displayFLex rememberMe">
             <label class="custom-checkbox">
-                <input type="checkbox">
-                <span onclick="setLocalStorage()" class="checkmark" id="check"></span>
+                <input id="myCheck" type="checkbox" onclick="checkedFunction()">
+                <span class="checkmark" id="check"></span>
               </label>
               <p>Remember me</p>
         </div>

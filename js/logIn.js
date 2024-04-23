@@ -5,21 +5,24 @@ function toggleShowPassword() {
 }
 
 
-async function initLogIn(){
-    if(document.getElementById("check").checked){
-        fillLogInAuto();
-    } else{
-        await loadUsers();
-    }
+
+ async function initLogIn(){
+    await loadUsers();
 }
 
+function checkedFunction(){
+    let checkBox = document.getElementById("myCheck");
+    if (checkBox.checked == true){
+        saveUserToLocalStorage();
+    } 
+}
 
 async function logIn(){
     let email = document.getElementById('inputEmail').value;
     let password = document.getElementById('passwordInput').value;
     let user = users.find(u => u.email == email && u.password == password);
     if(user){
-        localStorage.setItem('user-name', JSON.stringify(user.name));
+        setLocalStorage('user-name', user.name);
         window.location.href = 'summary.html?user=' + user.name;
     } else {
         window.location.reload();
@@ -33,11 +36,60 @@ function guestLogIn(){
     window.location.href = 'summary.html?user=Guest' ;
 }
 
-function fillLogInAuto(){
-    getLocalStorage();
-     savedEmail = document.getElementById('inputEmail').value;
-     savedPassword = document.getElementById('passwordInput').value;
+let savedUsers = [];
+
+function checkLocalStorage(email) {
+    for (let i = 0; i < savedUsers.length; i++) {
+        const user = savedUsers[i];
+        if (user.emails.includes(email)) {
+            // Passwort für die gefundenen E-Mail zurückgeben
+            return user.passwords[user.emails.indexOf(email)];
+        }
+    }
+    // Falls die E-Mail nicht gefunden wurde, null zurückgeben
+    return null;
 }
+
+document.getElementById('inputEmail').addEventListener('input', function() {
+    const email = this.value;
+    const passwordInput = document.getElementById('passwordInput');
+    
+    // Passwort aus dem localStorage abrufen
+    const password = checkLocalStorage(email);
+    
+    // Wenn ein Passwort gefunden wurde, fülle das Passwortfeld aus
+    if (password !== null) {
+        passwordInput.value = password;
+    } else {
+        passwordInput.value = ''; // Passwortfeld leeren, falls keine Übereinstimmung gefunden wurde
+    }
+});
+
+function saveUserToLocalStorage(){
+    let email = document.getElementById('inputEmail').value;
+    let password = document.getElementById('passwordInput').value;
+    let newUser = {
+        "emails": [email],
+        "passwords": [password]
+    };
+    savedUsers.push(newUser);
+    setLocalStorage('savedUsers', savedUsers);
+}
+
+function setLocalStorage(key, value){
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+function getLocalStorage(key){
+    JSON.parse(localStorage.getItem(key));
+}
+
+/* function fillLogInAuto(){
+    checkbox = true;
+    getLocalStorage();
+    document.getElementById('inputEmail').value = savedEmail;
+    document.getElementById('passwordInput').value = savedPassword;
+} */
 
 document.addEventListener('DOMContentLoaded', (event) => {
     setTimeout(() => {
