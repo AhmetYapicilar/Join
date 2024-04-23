@@ -157,6 +157,85 @@ function showSomething() {
 }
 
 
+function editContacts(i) {
+   let editContact = document.getElementById(`editContactsOnclick`);
+   let List = kontaktListe;
+   let farbe = zufaelligeFarbe();
+
+   editContact.innerHTML = `
+   <div class="container" id="modal-edit">
+      <div class="panel" id="panel-edit">
+        <div class="centerAll-edit">
+          <div class="leftrightContainer-edit">
+            <div class="addContactImg-edit">
+              <img src="assets/img/editContact.png" />
+            </div>
+            <div class="addContactInputFields-edit">
+              <div class="imgAndInputfields-edit">
+              <span class="initialen-kreis-edit-contacts" style="background-color: ${farbe};">${List[i][`Initialen`]}</span>
+                <div class="rightContainer-edit">
+                  <div class="inPutfields-edit">
+                    <div class="closeButton-edit">
+                      <img class="cursorPointer" onclick="closeEditWindow()" src="assets/img/close.png" />
+                    </div>
+                    <div class="inputs-edit">
+                      <div class="Name-edit">
+                      <input id="placeholderName" class="inputfieldAddContact-edit" type="text" placeholder="Name"/>
+                        <img src="assets/img/person.png" class="inputfield-icon-edit" />
+                      </div>
+                      <div class="Name-edit">
+                        <input id="placeholderEmail" class="inputfieldAddContact-edit" type="text" placeholder="Email"/>
+                        <img src="assets/img/mail.png" class="inputfield-icon-edit" />
+                      </div>
+                      <div class="Name-edit">
+                        <input id="placeholderNumber" class="inputfieldAddContact-edit" type="text" placeholder="Phone"/>
+                        <img src="assets/img/call.png" class="inputfield-icon-edit" />
+                      </div>
+                    </div>
+                    <div class="cancelOrCreateContact-edit">
+                      <button class="cancelButton-edit cursorPointer" onclick="deleteContactsCloseWindow(${i})">Delete</button>
+                      <button class="saveButton-edit cursorPointer">
+                        Save<img class="checkCreateAccountButton-edit" src="assets/img/check.png"/>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`
+
+    document.getElementById(`placeholderName`).value = List[i][`Name`];
+    document.getElementById(`placeholderEmail`).value = List[i][`Email`];
+    document.getElementById(`placeholderNumber`).value = List[i][`Number`];
+    document.getElementById('modal-edit').classList.remove('notactive');
+    document.getElementById('panel-edit').classList.remove('notactive');
+    document.getElementById('modal-edit').classList.add('active');
+    document.getElementById('panel-edit').classList.add('active');
+}
+
+
+function closeEditWindow() {
+    document.getElementById('modal-edit').classList.remove('active');
+    document.getElementById('panel-edit').classList.remove('active');
+    document.getElementById('modal-edit').classList.add('notactive');
+    document.getElementById('panel-edit').classList.add('notactive');
+}
+
+function deleteContactsCloseWindow(i) {
+    document.getElementById('modal-edit').classList.remove('active');
+    document.getElementById('panel-edit').classList.remove('active');
+    document.getElementById('modal-edit').classList.add('notactive');
+    document.getElementById('panel-edit').classList.add('notactive');
+
+    deleteContacts(i);
+}
+
+
+
+
 
 //slide in contacts richtig anzeigen lassen
 function showContactsSlideInRightContainer(index) {

@@ -571,3 +571,187 @@ li {
     align-items: center;
     gap: 54px;
 }
+
+
+.centerAll-edit {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftrightContainer-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 592px;
+    width: 1212px;
+    border-radius: 10px;
+}
+
+.addContactImg-edit {
+    width: 38.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addContactImg-edit img {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding-right: 20px;
+}
+
+.addContactInputFields-edit {
+    width: 61.5%;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    background-color: white;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.inPutfields-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 52px;
+    width: 90%;
+}
+
+.imgAndInputfields-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    margin-top: -60px;
+}
+
+.profilepictureSize-edit {
+    width: 120px;
+    height: 120px;
+}
+
+.inputfieldAddContact-edit {
+    padding: 13px;
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.inputfieldAddContact::placeholder-edit {
+    color: #D1D1D1;
+}
+
+.cancelOrCreateContact-edit {
+    display: flex;
+    gap: 24px;
+}
+
+.cancelButton-edit {
+    width: 111px;
+    height: 56px;
+    border-radius: 10px;
+    background-color: white;
+    color: #2A3647;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.saveButton-edit {
+    width: 111px;
+    height: 58px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.createAccountButton-edit {
+    width: 214px;
+    height: 57px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.vectorCancelButton-edit {
+    width: 13px;
+    height: 13px;
+    margin-left: 5px;
+}
+
+.checkCreateAccountButton-edit {
+    width: 13px;
+    height: 13px;
+    margin-left: 8px;
+}
+
+.inputs-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    width: 90%;
+}
+
+.closeButton-edit {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+    padding-right: 25px;
+}
+
+.closeButton-edit img {
+    width: 13px;
+    height: 13px;
+    object-fit: cover;
+}
+
+.rightContainer-edit {
+    width: 80%;
+}
+
+.inputfield-icon-edit {
+    position: absolute;
+    right: -10px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    width: 18px; 
+}
+
+.Name-edit {
+    position: relative;
+    display: inline-block;
+}
+
+.cursorPointer :hover {
+    cursor: pointer;
+}
+
+.initialen-kreis-edit-contacts {
+    width: 100px;
+    height: 90px;
+    line-height: 20px;
+    border-radius: 100%;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    margin-right: 10px;
+    font-size: 40px;
+    justify-content: center;
+    display: flex;
+    border: 4px solid white; 
+    align-items: center;
+}
