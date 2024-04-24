@@ -30,22 +30,39 @@ async function getItem(key) {
 }
 
 
+<<<<<<< HEAD
+=======
+function setLocalStorage() {
+    let email = JSON.stringify(document.getElementById('inputEmail').value);
+    let password = JSON.stringify(document.getElementById('passwordInput').value);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+}
 
-document.addEventListener('DOMContentLoaded', (event) => {
+function getLocalStorage() {
+    savedEmail = JSON.parse(localStorage.getItem('email'));
+    savedPassword = JSON.parse(localStorage.getItem('savedPassword'));
+}
+>>>>>>> c3e1c39e7301a45d54c90c8db09903e27f743b3d
+
+document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         const bild = document.getElementById('meinBild');
         const ziel = document.getElementById('zielbereich');
         const inhalt = document.getElementById('inhalt');
-        const zielRect = ziel.getBoundingClientRect();
-        bild.style.width = '100px';
-        bild.style.top = zielRect.top + 'px';
-        bild.style.left = zielRect.left + 'px';
-
+        if (ziel) {
+            const zielRect = ziel.getBoundingClientRect();
+            bild.style.width = '100px'; 
+            bild.style.top = zielRect.top + 'px';
+            bild.style.left = zielRect.left + 'px';
+        }
         setTimeout(() => {
-            inhalt.style.opacity = 1;
-            inhalt.style.filter = 'blur(0px)';
-        }, 1000);
-    }, 1000);
+            if (inhalt) {
+                inhalt.style.opacity = 1; 
+                inhalt.style.filter = 'blur(0px)';
+            }
+        }, 1000); 
+    }, 1000); 
 });
 
 

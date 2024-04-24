@@ -79,17 +79,26 @@ async function getItem(key) {
 }
 
 
-async function setItemLocalStorage(kontaktId, name, email, nummer, initialen,anfangsbuchstabe) {
+async function setItemLocalStorage(kontaktId, name, email, nummer, initialen, anfangsbuchstabe) {
+    const farbe = zufaelligeFarbe();
+
     kontaktListe.push({
         id: kontaktId,
         Name: name,
         Email: email,
         Number: nummer,
         Initialen: initialen,
-        Anfangsbuchstabe: anfangsbuchstabe
+        Anfangsbuchstabe: anfangsbuchstabe,
+        Farbe: farbe 
     });
+
     await setItem('users', JSON.stringify(kontaktListe));
 }
+
+
+
+
+
 
 async function loadUsers(){
     try{
@@ -112,7 +121,7 @@ function showSomething() {
 
     // Gruppieren der Kontakte nach Anfangsbuchstaben
     for (let kontakt of List) {
-        if (!kontakt['Anfangsbuchstabe'] || !kontakt['Initialen'] || !kontakt['Name'] || !kontakt['Email']) {
+        if (!kontakt['Anfangsbuchstabe'] || !kontakt['Initialen'] || !kontakt['Name'] || !kontakt['Email'] || !kontakt['Farbe']) {
             continue; 
         }
 
@@ -143,7 +152,7 @@ function showSomething() {
             let kontaktLi = document.createElement('li');
             kontaktLi.onclick = function() { showContactsSlideInRightContainer(kontaktListe.indexOf(kontakt)); };
             kontaktLi.innerHTML = `
-                <span class="initialen-kreis" style="background-color: ${zufaelligeFarbe()};">${kontakt['Initialen']}</span>
+                <span class="initialen-kreis" style="background-color: ${kontakt[`Farbe`]};">${kontakt['Initialen']}</span>
                 <div class="kontakt-info">
                     <strong>${kontakt['Name']}</strong>
                     <div class="showEmailLi">${kontakt['Email']}</div>
@@ -155,6 +164,100 @@ function showSomething() {
         telefonbook.appendChild(gruppenDiv);
     }
 }
+
+
+function editContacts(i) {
+   let editContact = document.getElementById(`editContactsOnclick`);
+   let List = kontaktListe;
+   let farbe = zufaelligeFarbe();
+
+   editContact.innerHTML = `
+   <div class="container" id="modal-edit">
+      <div class="panel" id="panel-edit">
+        <div class="centerAll-edit">
+          <div class="leftrightContainer-edit">
+            <div class="addContactImg-edit">
+              <img src="assets/img/editContact.png" />
+            </div>
+            <div class="addContactInputFields-edit">
+              <div class="imgAndInputfields-edit">
+              <span class="initialen-kreis-edit-contacts" style="background-color: ${List[i][`Farbe`]};">${List[i][`Initialen`]}</span>
+                <div class="rightContainer-edit">
+                  <div class="inPutfields-edit">
+                    <div class="closeButton-edit">
+                      <img class="cursorPointer" onclick="closeEditWindow()" src="assets/img/close.png" />
+                    </div>
+                    <div class="inputs-edit">
+                      <div class="Name-edit">
+                      <input required id="placeholderName" class="inputfieldAddContact-edit" type="text" placeholder="Name"/>
+                        <img src="assets/img/person.png" class="inputfield-icon-edit" />
+                      </div>
+                      <div class="Name-edit">
+                        <input required id="placeholderEmail" class="inputfieldAddContact-edit" type="text" placeholder="Email"/>
+                        <img src="assets/img/mail.png" class="inputfield-icon-edit" />
+                      </div>
+                      <div class="Name-edit">
+                        <input required id="placeholderNumber" class="inputfieldAddContact-edit" type="text" placeholder="Phone"/>
+                        <img src="assets/img/call.png" class="inputfield-icon-edit" />
+                      </div>
+                    </div>
+                    <div class="cancelOrCreateContact-edit">
+                      <button class="cancelButton-edit cursorPointer" onclick="deleteContactsCloseWindow(${i})">Delete</button>
+                      <button onclick="updateKontakt(${i})" class="saveButton-edit cursorPointer">
+                        Save<img class="checkCreateAccountButton-edit" src="assets/img/check.png"/>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`
+
+    document.getElementById(`placeholderName`).value = List[i][`Name`];
+    document.getElementById(`placeholderEmail`).value = List[i][`Email`];
+    document.getElementById(`placeholderNumber`).value = List[i][`Number`];
+    document.getElementById('modal-edit').classList.remove('notactive');
+    document.getElementById('panel-edit').classList.remove('notactive');
+    document.getElementById('modal-edit').classList.add('active');
+    document.getElementById('panel-edit').classList.add('active');
+}
+
+
+async function deleteContactsCloseWindow(index) {
+    if (index >= 0 && index < kontaktListe.length) {
+        kontaktListe[index][`Name`] = ``;
+        kontaktListe[index][`Email`] = ``;
+        kontaktListe[index][`Number`] = ``;
+        await setItem('users', JSON.stringify(kontaktListe));
+    } else {
+        console.error('Ungültiger Index');
+    }
+
+    closeEditWindow();
+    updateContactDisplay();
+    document.getElementById(`showInnerHTML`).innerHTML = ``;
+}
+
+function closeEditWindow() {
+    document.getElementById('modal-edit').classList.remove('active');
+    document.getElementById('panel-edit').classList.remove('active');
+    document.getElementById('modal-edit').classList.add('notactive');
+    document.getElementById('panel-edit').classList.add('notactive');
+}
+
+function deleteContactsCloseWindow(i) {
+    document.getElementById('modal-edit').classList.remove('active');
+    document.getElementById('panel-edit').classList.remove('active');
+    document.getElementById('modal-edit').classList.add('notactive');
+    document.getElementById('panel-edit').classList.add('notactive');
+
+    deleteContacts(i);
+}
+
+
 
 
 
@@ -193,7 +296,7 @@ function showContactsSlideInRightContainer(index) {
         <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
             <div class="showContacts">
             <div class="align-items-contacts-slide-in">    
-            <span class="initialen-kreis-show-contacts" style="background-color: ${farbe};">${List[index][`Initialen`]}</span>
+            <span class="initialen-kreis-show-contacts" style="background-color:${List[index][`Farbe`]};">${List[index][`Initialen`]}</span>
                 <div class="showContactsNameEditDelete">
                     <h1>${List[index][`Name`]}</h1>
                     <div class="editDelteContacts">
@@ -221,25 +324,12 @@ function showContactsSlideInRightContainer(index) {
 }
 
 function deleteContacts(index) {
+    document.getElementById(`showInnerHTML`).innerHTML = ``;
     if (index >= 0 && index < kontaktListe.length) {
-        // Anfangsbuchstabe des gelöschten Kontakts speichern
-        let deletedContactLetter = kontaktListe[index]['Anfangsbuchstabe'];
 
         // Kontakt löschen
         kontaktListe.splice(index, 1);
         updateContactDisplay(); 
-        let nextLetter = getNextLetter(deletedContactLetter);
-
-        if (nextLetter) {
-            let nextIndex = kontaktListe.findIndex(kontakt => kontakt['Anfangsbuchstabe'] === nextLetter);
-            if (nextIndex !== -1) {
-                setTimeout(() => {
-                    showContactsSlideInRightContainer(nextIndex);
-                }, 100);
-            }
-        }
-    } else {
-        console.error('Ungültiger Index'); 
     }
 }
 
@@ -254,18 +344,29 @@ function getNextLetter(currentLetter) {
 
 
 function updateContactDisplay() {
-    console.log('Kontaktliste aktualisiert:', kontaktListe);
     showSomething(); 
 }
 
 
-//noch überarbeiten!!! es wird angezeigt, obwohl es nicht brauch beim addkontakt 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('kontaktForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        neuenKontaktHinzufuegen();
+// nochmal mit dem z index gucken wie das geht
+function initialisiereKontaktFormular() {
+    var nummer = document.getElementById('neuerKontaktNummer').value;
+    var email = document.getElementById('neuerKontaktEmail').value;
+    var name = document.getElementById('neuerKontaktName').value;
+
+    // Prüfen, ob alle Felder leer sind
+    if (!nummer && !email && !name) {
+        console.log("Die Eingabefelder dürfen nicht leer sein!");
+        return; 
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('kontaktForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            neuenKontaktHinzufuegen();
+        });
     });
-});
+}
 
 function neuenKontaktHinzufuegen() {
     const name = document.getElementById('neuerKontaktName').value.trim();
@@ -282,9 +383,53 @@ function neuenKontaktHinzufuegen() {
     }
 }
 
+///edit
+function updateKontakt(index) {
+    const Name =  document.getElementById(`placeholderName`).value.trim();
+    const Email =  document.getElementById(`placeholderEmail`).value.trim();
+    const Nummer = document.getElementById(`placeholderNumber`).value.trim();
+
+    if (Name) {
+        addKontakt(Name, Email, Nummer);
+        document.getElementById('neuerKontaktName').value = '';
+        document.getElementById('neuerKontaktEmail').value = '';
+        document.getElementById('neuerKontaktNummer').value = '';
+    } else {
+        alert('Bitte einen Namen eingeben!');
+    }
+    closeEditWindow();
+    updateContacts(index);
+}
+
+async function updateContacts(index) {
+    if (index >= 0 && index < kontaktListe.length) {
+        kontaktListe[index][`Name`] = ``;
+        kontaktListe[index][`Email`] = ``;
+        kontaktListe[index][`Number`] = ``;
+        await setItem('users', JSON.stringify(kontaktListe));
+    } else {
+        console.error('Ungültiger Index');
+    }
+
+    updateContactDisplay();
+}
 
 
-//auch überarbeiten
+async function deleteContacts(index) {
+    if (index >= 0 && index < kontaktListe.length) {
+        kontaktListe[index][`Name`] = ``;
+        kontaktListe[index][`Email`] = ``;
+        kontaktListe[index][`Number`] = ``;
+        await setItem('users', JSON.stringify(kontaktListe));
+    } else {
+        console.error('Ungültiger Index');
+    }
+
+    updateContactDisplay();
+    document.getElementById(`showInnerHTML`).innerHTML = ``;
+}
+
+
 function addKontakt(name, email, nummer, targetElement = null) {
     const anfangsbuchstabe = name.charAt(0).toUpperCase();
     const initialen = getInitialen(name);

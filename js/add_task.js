@@ -1,65 +1,115 @@
-// Konstanten für den Zugriff auf den Remote-Speicher definieren
-const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+let subtasks = [];
 
-// Funktion zum Erstellen eines neuen Tasks und Speichern im Remote-Speicher
 function createTask() {
-    // Informationen aus dem Formular sammeln
     let title = document.querySelector(".titleInputAddTask").value,
         description = document.querySelector(".descriptionTextArea").value,
         assignedTo = document.querySelector(".assignContacts").value,
         dueDate = document.querySelector(".dateInput").value,
-        priority = getPriority(), // Priorität ermitteln
+        priority = getPriority(),
         category = document.querySelector(".categoryPicker").value,
-        subtasks = getSubtasks(), // Unteraufgaben sammeln
-        task = {title, description, assignedTo, dueDate, priority, category, subtasks}; // Task-Objekt erstellen
+        subtasks = getSubtasks(),
+        task = { title, description, assignedTo, dueDate, priority, category, subtasks };
 
-    // Überprüfen, ob erforderliche Felder ausgefüllt sind
-    if (title.trim() === "" || dueDate.trim() === "" || category.trim() === "") {
-        return alert("Please fill in all required fields.");
-    }
-
-    // Daten an den Remote-Speicher senden
-    fetch(STORAGE_URL, {method: 'POST', headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${STORAGE_TOKEN}`}, body: JSON.stringify(task)})
-    .then(response => response.ok ? response.json() : Promise.reject('Failed to save task.')) // Erfolgreiche Antwort überprüfen
-    .then(data => (console.log('Task saved successfully:', data), clearForm())) // Erfolgreich gespeichert, Formular zurücksetzen
-    .catch(error => console.error('Error saving task:', error.message)); // Fehlerbehandlung
+    setItem(task, title);
 }
 
-
-
-function setPriority() {
-
-}
-
-
-
-// Funktion zum Abrufen der ausgewählten Priorität
-function getPriority() {
-    return (document.querySelector(".urgentButton").classList.contains("selected") && "Urgent") || // Priorität: Dringend
-           (document.querySelector(".mediumButton").classList.contains("selected") && "Medium") || // Priorität: Mittel
-           (document.querySelector(".lowButton").classList.contains("selected") && "Low") || // Priorität: Niedrig
-           "Medium"; // Standardpriorität, falls keine ausgewählt ist
-}
-
-// Hilfsfunktion zum Abrufen der Unteraufgaben
-function getSubtasks() {
-    let subtaskInputs = document.querySelectorAll(".subtaskPicker");
-    let subtasks = [];
-    subtaskInputs.forEach(input => {
-        if (input.value.trim() !== "") {
-            subtasks.push(input.value.trim());
+function resetButtons() {
+    document.querySelectorAll('.urgentButton, .mediumButton, .lowButton').forEach(button => {
+        button.classList.remove('urgentButtonSelected', 'mediumButtonSelected', 'lowButtonSelected');
+        const img = button.querySelector('img');
+        switch (button.id) {
+            case 'low':
+                img.src = './assets/img/prioDown.png';
+                break;
+            case 'medium':
+                img.src = './assets/img/prioEven.png';
+                break;
+            case 'urgent':
+                img.src = './assets/img/prioUp.png';
+                break;
+            default:
+                break;
         }
     });
-    return subtasks;
 }
 
-// Funktion zum Zurücksetzen des Formulars
+function selectPriority(priority) {
+    resetButtons();
+    const selectedButton = document.getElementById(priority);
+    const img = selectedButton.querySelector('img');
+    switch (priority) {
+        case 'low':
+            img.src = './assets/img/prioDownWhite.png';
+            break;
+        case 'medium':
+            img.src = './assets/img/prioEvenWhite.png';
+            break;
+        case 'urgent':
+            img.src = './assets/img/prioUpWhite.png';
+            break;
+        default:
+            break;
+    }
+    selectedButton.classList.add(`${priority}ButtonSelected`);
+}
+
+function getPriority() {
+    let priority;
+    if (document.getElementById('urgent').classList.contains('urgentButtonSelected')) {
+        priority = 'urgent';
+    } else if (document.getElementById('medium').classList.contains('mediumButtonSelected')) {
+        priority = 'medium';
+    } else if (document.getElementById('low').classList.contains('lowButtonSelected')) {
+        priority = 'low';
+    } else {
+        priority = 'medium';
+    }
+    return priority;
+}
+
+function selectMedium() {
+    resetButtons();
+    selectPriority('medium');
+}
+
+function onLoad() {
+    selectMedium();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onLoad);
+} else {
+    onLoad();
+}
+
+function addSubtask() {
+    let subtaskInput = document.querySelector(".subtaskPicker");
+    let subtaskText = subtaskInput.value.trim();
+    if (subtaskText !== "") {
+        subtasks.push(subtaskText);
+        updateSubtaskList();
+        subtaskInput.value = "";
+    }
+}
+
+function removeSubtask(index) {
+    subtasks.splice(index, 1);
+    updateSubtaskList();
+}
+
+function updateSubtaskList() {
+    let subtaskListContainer = document.getElementById("subtaskList");
+    subtaskListContainer.innerHTML = "";
+    subtasks.forEach((subtask, index) => {
+        let listItem = document.createElement("div");
+        listItem.innerHTML = `<span>&#8226; ${subtask}</span>
+                              <button onclick="removeSubtask(${index})">X</button>`;
+        subtaskListContainer.appendChild(listItem);
+    });
+}
+
 function clearForm() {
     let form = document.getElementById("addTaskForm");
     form.reset();
 }
 
-
-document.getElementById('taskDate').min = new Date().toISOString().split('T')[0];
-                                    

@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./include.js"></script>
+    <script src="./js/add_task.js"></script>
     <script src="./js/signUp.js"></script>
     <script src="./js/logIn.js"></script>
     <script src="./js/templates.js"></script>
-    <script src="./js/add_task.js"></script>
+
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
     <link rel="stylesheet" href="./css/add_task.css">
     <link rel="stylesheet" href="./css/add_task_container.css">
@@ -26,24 +27,24 @@
         </div>
 
         <form id="addTaskForm">
-            <div class="leftAddTaskContainer">
+            <div class="leftAddTaskContainer fontSize20px">
                 <div class="titleContainer">
                     <div class="flex-start">
                         <span>Title</span>
                         <p class="redText">*</p>
                     </div>
-                    <input class="titleInputAddTask" type="text" placeholder="Enter a title">
+                    <input required class="titleInputAddTask fontSize20px" type="text" placeholder="Enter a title">
                 </div>
 
                 <div class="descriptionContainer">
                     <span>Description</span>
-                    <textarea class="descriptionTextArea" name="" id="" cols="30" rows="10"
+                    <textarea class="descriptionTextArea fontSize20px" name="" id="" cols="30" rows="10"
                         placeholder="Enter a Description"></textarea>
                 </div>
 
                 <div class="assignContactsContainer">
                     <span>Assigned to</span>
-                    <select class="assignContacts" id="contacts" name="contacts">
+                    <select class="assignContacts fontSize20px" id="contacts" name="contacts">
                         <option value="">Select contacts to assign</option>
                     </select>
                 </div>
@@ -51,20 +52,23 @@
 
             <div class="addTaskDividingBar"></div>
 
-            <div class="rightAddTaskContainer">
+            <div class="rightAddTaskContainer fontSize20px">
                 <div class="taskDateContainer">
                     <div class="flex-start">
                         <span>Due Date</span>
                         <p class="redText">*</p>
                     </div>
-                    <input class="dateInput" type="date" id="date">
+                    <input required class="dateInput fontSize20px" type="date" id="date">
                 </div>
                 <div class="prioPickerContainer">
                     <span>Prio</span>
                     <div class="prioPickerButtonsContainer">
-                        <button type="button" class="urgentButton">Urgent <img src="./assets/img/prioUp.png" alt=""></button>
-                        <button type="button" class="mediumButton">Medium <img src="./assets/img/prioEven.png" alt=""></button>
-                        <button type="button" class="lowButton">Low <img src="./assets/img/prioDown.png" alt=""></button>
+                        <button type="button" class="urgentButton fontSize20px" id="urgent"
+                            onclick="selectPriority('urgent')">Urgent <img src="./assets/img/prioUp.png"></button>
+                        <button type="button" class="mediumButton fontSize20px mediumButtonSelected" id="medium"
+                            onclick="selectPriority('medium')">Medium <img src="./assets/img/prioEven.png"></button>
+                        <button type="button" class="lowButton fontSize20px" id="low"
+                            onclick="selectPriority('low')">Low <img src="./assets/img/prioDown.png"></button>
                     </div>
                 </div>
                 <div class="categoryContainer">
@@ -72,7 +76,7 @@
                         <span>Category</span>
                         <p class="redText">*</p>
                     </div>
-                    <select class="categoryPicker" id="category" name="category">
+                    <select required class="categoryPicker fontSize20px" id="category" name="category">
                         <option value="">Select task category</option>
                         <option value="To-Do">To-Do</option>
                         <option value="In Progress">In Progress</option>
@@ -82,7 +86,7 @@
                 </div>
                 <div class="subtaskContainer">
                     <span>Subtasks</span>
-                    <input class="subtaskPicker" type="text" placeholder="Add new Subtask">
+                    <input class="subtaskPicker fontSize20px" type="text" placeholder="Add new Subtask">
                 </div>
             </div>
             <div class="fieldRequiredText">
@@ -92,8 +96,10 @@
                 </div>
             </div>
             <div class="clearCreateButtonsContainer">
-                <button class="clearButton" onclick="clearForm()">Clear <img src="./assets/img/iconoir_cancel.png" alt=""></button>
-                <button class="createButton" onclick="createTask2()">Create Task <img src="./assets/img/check.png" alt=""></button>
+                <button class="clearButton" onclick="clearForm()">Clear <img src="./assets/img/iconoir_cancel.png"
+                        alt=""></button>
+                <button class="createButton" onclick="createTask()">Create Task <img src="./assets/img/check.png"
+                        alt=""></button>
             </div>
         </form>
 
