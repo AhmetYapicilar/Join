@@ -1,6 +1,7 @@
 let subtasks = [];
 
-function createTask() {
+
+async function createTask() {
     let title = document.querySelector(".titleInputAddTask").value,
         description = document.querySelector(".descriptionTextArea").value,
         assignedTo = document.querySelector(".assignContacts").value,
@@ -10,8 +11,9 @@ function createTask() {
         subtasks = getSubtasks(),
         task = { title, description, assignedTo, dueDate, priority, category, subtasks };
 
-    setItem(task, title);
+    await setItem('task', JSON.stringify(task));
 }
+
 
 function resetButtons() {
     document.querySelectorAll('.urgentButton, .mediumButton, .lowButton').forEach(button => {

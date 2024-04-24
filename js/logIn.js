@@ -8,20 +8,10 @@ function toggleShowPassword() {
 
  async function initLogIn(){
     await loadUsers();
-    document.getElementById('inputEmail').addEventListener('input', function() {
-        const email = this.value;
-        const passwordInput = document.getElementById('passwordInput');
-        
-        // Passwort aus dem localStorage abrufen
-        const password = checkLocalStorage(email);
-        
-        // Wenn ein Passwort gefunden wurde, fülle das Passwortfeld aus
-        if (password !== null) {
-            passwordInput.value = password;
-        } else {
-            passwordInput.value = ''; // Passwortfeld leeren, falls keine Übereinstimmung gefunden wurde
-        }
-    });
+    getLocalStorage();
+    let x = savedUsers.length - 1;
+    document.getElementById('inputEmail').value = savedUsers[x]['email'];
+    document.getElementById('passwordInput').value = savedUsers[x]['password'];
 }
 
 function checkedFunction(){
@@ -36,7 +26,7 @@ async function logIn(){
     let password = document.getElementById('passwordInput').value;
     let user = users.find(u => u.email == email && u.password == password);
     if(user){
-        setLocalStorage('user-name', user.name);
+        setUserNameToLocalStorage('user-name', user.name);
         window.location.href = 'summary.html?user=' + user.name;
     } else {
         window.location.reload();
@@ -50,23 +40,6 @@ function guestLogIn(){
     window.location.href = 'summary.html?user=Guest' ;
 }
 
-<<<<<<< HEAD
-=======
-let savedUsers = [];
-
-function checkLocalStorage(email) {
-    for (let i = 0; i < savedUsers.length; i++) {
-        const user = savedUsers[i];
-        if (user.emails.includes(email)) {
-            // Passwort für die gefundenen E-Mail zurückgeben
-            return user.passwords[user.emails.indexOf(email)];
-        }
-    }
-    // Falls die E-Mail nicht gefunden wurde, null zurückgeben
-    return null;
-}
-
->>>>>>> c3e1c39e7301a45d54c90c8db09903e27f743b3d
 function saveUserToLocalStorage(){
     savedUsers.push({
         email: inputEmail.value,
@@ -75,20 +48,19 @@ function saveUserToLocalStorage(){
     setLocalStorage('savedUsers', savedUsers);
 }
 
-function setLocalStorage(key, value){
-    localStorage.setItem(key, JSON.stringify(value));
+function setLocalStorage(){
+    let userAsText = JSON.stringify(savedUsers);
+    localStorage.setItem('savedUsers', userAsText);
 }
 
-function getLocalStorage(key){
-    JSON.parse(localStorage.getItem(key));
+function getLocalStorage(){
+    let textInArray = localStorage.getItem('savedUsers');
+    savedUsers = JSON.parse(textInArray);
 }
 
-/* function fillLogInAuto(){
-    checkbox = true;
-    getLocalStorage();
-    document.getElementById('inputEmail').value = savedEmail;
-    document.getElementById('passwordInput').value = savedPassword;
-} */
+function setUserNameToLocalStorage(key, value){
+    localStorage.setItem(key, (JSON.stringify(value)));
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
