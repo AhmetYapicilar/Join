@@ -26,15 +26,6 @@ function slideInContacts() {
     }, 500);
   });
 
-  document.getElementById('createAccountSubmit').addEventListener('click', function() {
-    document.getElementById('modal').classList.remove('active');
-    document.getElementById('modal').classList.add('notactive');
-    document.getElementById('panel').classList.add('notactive');
-    setTimeout(() => {
-      document.getElementById('panel').style.right = "-50%"; 
-    }, 500);
-  });
-
   document.getElementById('cancelAccountSubmit').addEventListener('click', function() {
     document.getElementById('modal').classList.remove('active');
     document.getElementById('modal').classList.add('notactive');
@@ -348,25 +339,29 @@ function updateContactDisplay() {
 }
 
 
-// nochmal mit dem z index gucken wie das geht
-function initialisiereKontaktFormular() {
-    var nummer = document.getElementById('neuerKontaktNummer').value;
-    var email = document.getElementById('neuerKontaktEmail').value;
-    var name = document.getElementById('neuerKontaktName').value;
 
-    // Prüfen, ob alle Felder leer sind
-    if (!nummer && !email && !name) {
-        console.log("Die Eingabefelder dürfen nicht leer sein!");
-        return; 
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('kontaktForm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('kontaktForm').addEventListener('submit', function(event) {
-            event.preventDefault(); 
+        var nummer = document.getElementById('neuerKontaktNummer').value;
+        var email = document.getElementById('neuerKontaktEmail').value;
+        var name = document.getElementById('neuerKontaktName').value;
+    
+        if (!nummer && !email && !name) {
+        } else {
             neuenKontaktHinzufuegen();
-        });
+            document.getElementById('modal').classList.remove('active');
+            document.getElementById('modal').classList.add('notactive');
+            document.getElementById('panel').classList.add('notactive');
+            setTimeout(() => {
+                document.getElementById('panel').style.right = "-50%"; 
+            }, 500);
+        }
     });
-}
+});
+
+
 
 function neuenKontaktHinzufuegen() {
     const name = document.getElementById('neuerKontaktName').value.trim();

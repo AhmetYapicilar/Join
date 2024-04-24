@@ -61,15 +61,15 @@
                                         <div class="inputs">
                                             <form id="kontaktForm">
                                             <div class="Name">
-                                                <input class="inputfieldAddContact" id="neuerKontaktName" type="text" placeholder="Name">
+                                                <input required class="inputfieldAddContact" id="neuerKontaktName" type="text" placeholder="Name">
                                                 <img src="assets/img/person.png" class="inputfield-icon">
                                             </div>
                                             <div class="Name">
-                                                <input class="inputfieldAddContact" id="neuerKontaktEmail" type="text" placeholder="Email">
+                                                <input required class="inputfieldAddContact" id="neuerKontaktEmail" type="email" placeholder="Email">
                                                 <img src="assets/img/mail.png" class="inputfield-icon">
                                             </div>
                                             <div class="Name">
-                                                <input class="inputfieldAddContact" id="neuerKontaktNummer" type="text" placeholder="Phone">
+                                                <input required class="inputfieldAddContact" id="neuerKontaktNummer" type="number" placeholder="Phone">
                                                 <img src="assets/img/call.png" class="inputfield-icon">
                                             </div>
                                         </div>
@@ -77,7 +77,7 @@
 
                                         <div class="cancelOrCreateContact">
                                             <button type="button" id="cancelAccountSubmit" class="cancelButton">Cancel <img class="vectorCancelButton" src="assets/img/Vector.png"></button>
-                                            <button type="submit" onclick="initialisiereKontaktFormular()" id="createAccountSubmit" class="createAccountButton">Create Account <img class="checkCreateAccountButton" src="assets/img/check.png" alt=""></button>
+                                            <button type="submit" id="createAccountSubmit" class="createAccountButton">Create Account <img class="checkCreateAccountButton" src="assets/img/check.png" alt=""></button>
                                         </div>
                                     </form>
                                     </div>
