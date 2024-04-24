@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
     <link rel="stylesheet" href="./fonts.css">
     <script src="./include.js"></script>
+    <script src="./js/signUp.js"></script>
     <script src="./js/logIn.js"></script>
     <script src="./js/templates.js"></script>
+    <script src="./js/add_task.js"></script>
     <script src="./js/board.js"></script>
 </head>
 
@@ -30,15 +32,14 @@
         </div>
     </div>
 <div class="board-distribution">
-    <div class="card-board">
+    <div id="toDo" class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">To do</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
-        <div id="toDo" class="tasks-board"></div>
     </div>
 
-    <div class="card-board">
+    <div id="inProgress" class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">In progress</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
@@ -63,7 +64,7 @@
         </div>
     </div>
 
-    <div class="card-board">
+    <div id="awaitFeedback" class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">Await feedback</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
@@ -96,7 +97,7 @@
         </div>
     </div>
 
-    <div class="card-board">
+    <div id="done" class="card-board">
             <span class="title-board align-center-board height-board">Done</span>
         <div class="tasks-board">
             <div class="technical-task-board">Technical Task</div>

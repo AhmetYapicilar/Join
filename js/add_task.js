@@ -1,4 +1,13 @@
 let subtasks = [];
+let tasks = [];
+
+async function loadTasks() {
+    let savedTasks = await getItem('task');
+    if (savedTasks) {
+        tasks = JSON.parse(savedTasks);
+    }
+}
+
 
 
 async function createTask() {
@@ -8,11 +17,13 @@ async function createTask() {
         dueDate = document.querySelector(".dateInput").value,
         priority = getPriority(),
         category = document.querySelector(".categoryPicker").value,
-        subtasks = getSubtasks(),
-        task = { title, description, assignedTo, dueDate, priority, category, subtasks };
+        task = { title, description, assignedTo, dueDate, priority, category};
 
-    await setItem('task', JSON.stringify(task));
+    await loadTasks();
+    tasks.push(task);
+    await setItem('task', JSON.stringify(tasks));
 }
+
 
 
 function resetButtons() {
