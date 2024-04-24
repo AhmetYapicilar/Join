@@ -35,8 +35,13 @@ async function logIn(){
 }
 
 function guestLogIn(){
+    savedUsers.push({
+        email: '',
+        password: ''
+        });
+    setLocalStorage('savedUsers', savedUsers);
     let guest = 'Guest';
-    localStorage.setItem('user-name', JSON.stringify(guest));
+    setUserNameToLocalStorage('user-name', JSON.stringify(guest));
     window.location.href = 'summary.html?user=Guest' ;
 }
 

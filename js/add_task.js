@@ -1,8 +1,7 @@
-let subtasks = [];
 let tasks = [];
 
-const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+const STORAGE_TOKEN1 = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
+const STORAGE_URL1 = 'https://remote-storage.developerakademie.org/item';
 
 async function loadTasks() {
     try{
@@ -14,12 +13,12 @@ async function loadTasks() {
 
 
 async function setItem(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN };
-    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
+    const payload = { key, value, token: STORAGE_TOKEN1 };
+    return fetch(STORAGE_URL1, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
 }
 
 async function getItem(key) {
-    const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+    const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN1}`;
     return fetch(URL).then(res => res.json()).then(res => {
         if (res.data) {
             return res.data.value;
