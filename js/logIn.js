@@ -1,10 +1,10 @@
+let savedUsers = [];
+
 function toggleShowPassword() {
     const passwordInput = document.getElementById('passwordInput');
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
     passwordInput.setAttribute('type', type);
 }
-
-
 
  async function initLogIn(){
     await loadUsers();
@@ -36,43 +36,11 @@ function guestLogIn(){
     window.location.href = 'summary.html?user=Guest' ;
 }
 
-let savedUsers = [];
-
-function checkLocalStorage(email) {
-    for (let i = 0; i < savedUsers.length; i++) {
-        const user = savedUsers[i];
-        if (user.emails.includes(email)) {
-            // Passwort für die gefundenen E-Mail zurückgeben
-            return user.passwords[user.emails.indexOf(email)];
-        }
-    }
-    // Falls die E-Mail nicht gefunden wurde, null zurückgeben
-    return null;
-}
-
-document.getElementById('inputEmail').addEventListener('input', function() {
-    const email = this.value;
-    const passwordInput = document.getElementById('passwordInput');
-    
-    // Passwort aus dem localStorage abrufen
-    const password = checkLocalStorage(email);
-    
-    // Wenn ein Passwort gefunden wurde, fülle das Passwortfeld aus
-    if (password !== null) {
-        passwordInput.value = password;
-    } else {
-        passwordInput.value = ''; // Passwortfeld leeren, falls keine Übereinstimmung gefunden wurde
-    }
-});
-
 function saveUserToLocalStorage(){
-    let email = document.getElementById('inputEmail').value;
-    let password = document.getElementById('passwordInput').value;
-    let newUser = {
-        "emails": [email],
-        "passwords": [password]
-    };
-    savedUsers.push(newUser);
+    savedUsers.push({
+        email: inputEmail.value,
+        password: passwordInput.value,
+        });
     setLocalStorage('savedUsers', savedUsers);
 }
 
