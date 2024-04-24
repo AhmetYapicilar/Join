@@ -108,7 +108,7 @@ function showSomething() {
     let telefonbook = document.getElementById('telefonliste');
     let gruppen = {};
 
-    // Leere das Telefonbuch zu Beginn, um vorherige Einträge zu entfernen
+    
     telefonbook.innerHTML = '';
 
     // Gruppieren der Kontakte nach Anfangsbuchstaben
@@ -212,9 +212,9 @@ function editContacts(i) {
   
     document.getElementById('editContactForm').addEventListener('submit', function(event) {
       if (event.target.checkValidity()) {
-        event.preventDefault(); // Verhindert die Standard-Formularsendung
+        event.preventDefault(); 
         updateKontakt(i);
-        deleteContacts(i); // Ruft Ihre Funktion auf, wenn das Formular valide ist
+        deleteContacts(i);
       } else {
         event.preventDefault();
         alert('Bitte füllen Sie alle erforderlichen Felder aus.');
@@ -513,7 +513,7 @@ function zufaelligeFarbe() {
 
 
 
-//gerade keinen
+//gerade keinen nutzen ig
 function bearbeiteKontakt(li) {
     const originalContent = li.innerHTML;
     const details = originalContent.split('<br>');
@@ -546,7 +546,7 @@ function aktualisiereKontakt(alterName, li) {
     }
 }
 
-
+//////////////////
 
 
 
