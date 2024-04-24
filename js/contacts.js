@@ -284,7 +284,7 @@ function showContactsSlideInRightContainer(index) {
     setTimeout(() => {
         const zielRect = ziel.getBoundingClientRect();
 
-        contacts.style.width = '500px';
+        contacts.style.width = '';
         contacts.style.top = '190px';
         contacts.style.left = `${zielRect.left}px`;
         contacts.style.opacity = '1';
@@ -297,7 +297,7 @@ function showContactsSlideInRightContainer(index) {
             <div class="align-items-contacts-slide-in">    
             <span class="initialen-kreis-show-contacts" style="background-color:${List[index][`Farbe`]};">${List[index][`Initialen`]}</span>
                 <div class="showContactsNameEditDelete">
-                    <h1>${List[index][`Name`]}</h1>
+                    <h1 style="font-size: 47px;">${List[index][`Name`]}</h1>
                     <div class="editDelteContacts">
                         <div onclick="editContacts(${index})" class="editShowContacts cursorPointer">
                             <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">

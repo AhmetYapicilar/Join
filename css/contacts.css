@@ -221,7 +221,6 @@ body {
     position: fixed;
     top: 18.5%;
     left: 105%;
-    width: 500px !important; 
     transition: width 15000s ease-in-out, opacity 500s ease-in-out, left 1s ease-in-out;
     z-index: 100; 
     object-fit: cover;
@@ -762,4 +761,10 @@ li {
     display: flex;
     border: 4px solid white; 
     align-items: center;
+}
+
+.contactAddedSuccesfully {
+    left: 200px;
+    position: relative;
+    top: 28px;
 }
