@@ -182,11 +182,11 @@ function editContacts(i) {
                       <div class="inputs-edit">
                         <div class="Name-edit">
                           <input required id="placeholderName" class="inputfieldAddContact-edit" type="text" placeholder="Name"/>
-                          <img src="assets/img/person.png" class="inputfield-icon-edit" />
+                          <img src="assets/img/person.png" class="inputfield-icon-edit width22" />
                         </div>
                         <div class="Name-edit">
                           <input required id="placeholderEmail" class="inputfieldAddContact-edit" type="email" placeholder="Email"/>
-                          <img src="assets/img/mail.png" class="inputfield-icon-edit" />
+                          <img src="assets/img/mail.png" class="inputfield-icon-edit width22" />
                         </div>
                         <div class="Name-edit">
                           <input required id="placeholderNumber" class="inputfieldAddContact-edit" type="number" placeholder="Phone"/>

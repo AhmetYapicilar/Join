@@ -213,7 +213,9 @@ body {
     gap: 32px;
 }
 
-
+.width22 {
+    width: 22px !important;
+}
 
 #showContactDetailsOnSlide {
     position: fixed;
