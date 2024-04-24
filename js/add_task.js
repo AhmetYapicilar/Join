@@ -1,6 +1,9 @@
 let subtasks = [];
 let tasks = [];
 
+const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
+const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+
 async function loadTasks() {
     try{
         tasks = JSON.parse(await getItem('task'));

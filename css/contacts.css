@@ -37,15 +37,34 @@ body {
 }
 
 
-.contacts-BetterWaT {
+.betterWaT, .contactAddedSuccesfully {
     position: relative;
     width: 569px;
     height: 73px;
+    display: flex;
+    opacity: 0;  /* Startet unsichtbar */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.betterWaT {
     top: 110px;
     left: 55px;
-    gap: 30px;
-    opacity: 0px;
 }
+
+.contactAddedSuccesfully {
+    top: 28px;
+    left: 200px;
+    display: none; /* Initial versteckt */
+}
+
+.show {
+    opacity: 1; /* Volle Sichtbarkeit */
+}
+
+
+
+
+
 
 
 .addNewContact {
@@ -763,8 +782,3 @@ li {
     align-items: center;
 }
 
-.contactAddedSuccesfully {
-    left: 200px;
-    position: relative;
-    top: 28px;
-}

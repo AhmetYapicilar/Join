@@ -358,8 +358,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('panel').style.right = "-50%"; 
             }, 500);
         }
+
+        toggleContactAdded();
     });
 });
+
+function toggleContactAdded() {
+    const contactAdded = document.getElementById('contactAddedSuccesfullyId');
+    const betterWaT = document.getElementById('BetterWaTId');
+
+    betterWaT.classList.remove('show');
+    setTimeout(() => {
+        betterWaT.style.display = 'none';
+        contactAdded.style.display = 'flex';
+        setTimeout(() => contactAdded.classList.add('show'), 10); 
+        
+        setTimeout(() => {
+            contactAdded.classList.remove('show');
+            setTimeout(() => {
+                contactAdded.style.display = 'none';
+                betterWaT.style.display = 'flex';
+                setTimeout(() => betterWaT.classList.add('show'), 10);
+            }, 500); 
+        }, 2000);
+    }, 500);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+});
+
+
+
 
 
 
