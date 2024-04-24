@@ -2,25 +2,24 @@ let subtasks = [];
 let tasks = [];
 
 async function loadTasks() {
-    let savedTasks = await getItem('task');
-    if (savedTasks) {
-        tasks = JSON.parse(savedTasks);
-    }
+    try{
+        tasks = JSON.parse(await getItem('task'));
+        } catch(e){
+            console.error('Loading error:', e);
+        }
 }
 
 
 
 async function createTask() {
-    let title = document.querySelector(".titleInputAddTask").value,
-        description = document.querySelector(".descriptionTextArea").value,
-        assignedTo = document.querySelector(".assignContacts").value,
-        dueDate = document.querySelector(".dateInput").value,
-        priority = getPriority(),
-        category = document.querySelector(".categoryPicker").value,
-        task = { title, description, assignedTo, dueDate, priority, category};
-
-    await loadTasks();
-    tasks.push(task);
+    tasks.push({
+        title : document.querySelector(".titleInputAddTask").value,
+        description : document.querySelector(".descriptionTextArea").value,
+        assignedTo : document.querySelector(".assignContacts").value,
+        dueDate : document.querySelector(".dateInput").value,
+        priority : getPriority(),
+        category : document.querySelector(".categoryPicker").value
+    });
     await setItem('task', JSON.stringify(tasks));
 }
 
