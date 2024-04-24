@@ -29,6 +29,7 @@ async function getItem(key) {
 
 
 async function createTask() {
+    debugger;
     tasks.push({
         title : document.querySelector(".titleInputAddTask").value,
         description : document.querySelector(".descriptionTextArea").value,

@@ -52,7 +52,7 @@ body {
 }
 
 .contactAddedSuccesfully {
-    top: 28px;
+    top: 110px;
     left: 200px;
     display: none; /* Initial versteckt */
 }
