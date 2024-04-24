@@ -8,6 +8,20 @@ function toggleShowPassword() {
 
  async function initLogIn(){
     await loadUsers();
+    document.getElementById('inputEmail').addEventListener('input', function() {
+        const email = this.value;
+        const passwordInput = document.getElementById('passwordInput');
+        
+        // Passwort aus dem localStorage abrufen
+        const password = checkLocalStorage(email);
+        
+        // Wenn ein Passwort gefunden wurde, fülle das Passwortfeld aus
+        if (password !== null) {
+            passwordInput.value = password;
+        } else {
+            passwordInput.value = ''; // Passwortfeld leeren, falls keine Übereinstimmung gefunden wurde
+        }
+    });
 }
 
 function checkedFunction(){
@@ -50,21 +64,6 @@ function checkLocalStorage(email) {
     return null;
 }
 
-document.getElementById('inputEmail').addEventListener('input', function() {
-    const email = this.value;
-    const passwordInput = document.getElementById('passwordInput');
-    
-    // Passwort aus dem localStorage abrufen
-    const password = checkLocalStorage(email);
-    
-    // Wenn ein Passwort gefunden wurde, fülle das Passwortfeld aus
-    if (password !== null) {
-        passwordInput.value = password;
-    } else {
-        passwordInput.value = ''; // Passwortfeld leeren, falls keine Übereinstimmung gefunden wurde
-    }
-});
-
 function saveUserToLocalStorage(){
     let email = document.getElementById('inputEmail').value;
     let password = document.getElementById('passwordInput').value;
@@ -91,20 +90,22 @@ function getLocalStorage(key){
     document.getElementById('passwordInput').value = savedPassword;
 } */
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
-      const bild = document.getElementById('meinBild');
-      const ziel = document.getElementById('zielbereich');
-      const inhalt = document.getElementById('inhalt');
-      const zielRect = ziel.getBoundingClientRect();
-      bild.style.width = '100px'; 
-      bild.style.top = zielRect.top + 'px';
-      bild.style.left = zielRect.left + 'px';
-  
-      setTimeout(() => {
-        inhalt.style.opacity = 1; 
-        inhalt.style.filter = 'blur(0px)'; 
-      }, 1000); 
+        const bild = document.getElementById('meinBild');
+        const ziel = document.getElementById('zielbereich');
+        const inhalt = document.getElementById('inhalt');
+        if (ziel) {
+            const zielRect = ziel.getBoundingClientRect();
+            bild.style.width = '100px'; 
+            bild.style.top = zielRect.top + 'px';
+            bild.style.left = zielRect.left + 'px';
+        }
+        setTimeout(() => {
+            if (inhalt) {
+                inhalt.style.opacity = 1; 
+                inhalt.style.filter = 'blur(0px)';
+            }
+        }, 1000); 
     }, 1000); 
-  });
-
+});
