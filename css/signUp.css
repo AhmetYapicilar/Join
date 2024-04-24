@@ -59,6 +59,12 @@ body {
   }
   
 
+  .notAJoinUserButton a {
+    color: white; /* Setzt die Textfarbe auf Weiß */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+}
+
+
   .custom-checkbox .checkmark {
     display: inline-block;
     top: 3px;
