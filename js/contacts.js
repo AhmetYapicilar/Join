@@ -212,7 +212,8 @@ function editContacts(i) {
     document.getElementById('editContactForm').addEventListener('submit', function(event) {
       if (event.target.checkValidity()) {
         event.preventDefault(); // Verhindert die Standard-Formularsendung
-        updateKontakt(i); // Ruft Ihre Funktion auf, wenn das Formular valide ist
+        updateKontakt(i);
+        deleteContacts(i); // Ruft Ihre Funktion auf, wenn das Formular valide ist
       } else {
         event.preventDefault();
         alert('Bitte füllen Sie alle erforderlichen Felder aus.');
@@ -321,13 +322,7 @@ function showContactsSlideInRightContainer(index) {
     }, 350);
 }
 
-function deleteContacts(index) {
-    document.getElementById(`showInnerHTML`).innerHTML = ``;
-    if (index >= 0 && index < kontaktListe.length) {
-        kontaktListe.splice(index, 1);
-        updateContactDisplay(); 
-    }
-}
+
 
 function getNextLetter(currentLetter) {
     let allLetters = kontaktListe.map(kontakt => kontakt['Anfangsbuchstabe']).filter((value, index, self) => self.indexOf(value) === index);
