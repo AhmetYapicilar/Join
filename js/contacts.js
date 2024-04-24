@@ -358,8 +358,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('panel').style.right = "-50%"; 
             }, 500);
         }
-
+        let letzterIndex = kontaktListe.length - 1;
         toggleContactAdded();
+        showContactsSlideInRightContainer(letzterIndex);
     });
 });
 
