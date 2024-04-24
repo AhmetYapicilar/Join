@@ -13,6 +13,21 @@ async function loadTasks() {
 }
 
 
+async function setItem(key, value) {
+    const payload = { key, value, token: STORAGE_TOKEN };
+    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
+}
+
+async function getItem(key) {
+    const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+    return fetch(URL).then(res => res.json()).then(res => {
+        if (res.data) {
+            return res.data.value;
+        } throw `Could not find data with key "${key}".`;
+    });
+}
+
+
 
 async function createTask() {
     tasks.push({
