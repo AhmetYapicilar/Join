@@ -37,6 +37,7 @@ function slideInContacts() {
 
 });  
 
+//unnötige function löschen /////////  functions auf englisch machen
 
 let kontaktListe = [];
 let kontaktId = 0;
