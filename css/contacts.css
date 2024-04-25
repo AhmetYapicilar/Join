@@ -239,8 +239,8 @@ body {
 #showContactDetailsOnSlide {
     position: fixed;
     top: 18.5%;
-    left: 120%; /* Startposition außerhalb des Bildschirms */
-    transition: width 2s ease-in-out, opacity 1s ease-in-out, left 0.5s ease-in-out; /* Angepasste und einheitliche Transition-Zeiten */
+    left: 120%;
+    transition: width 2s ease-out, opacity 1s ease-in-out, left 0.5s ease-in-out;
     z-index: 100;
     object-fit: cover;
 }
