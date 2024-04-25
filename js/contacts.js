@@ -437,7 +437,8 @@ async function updateContacts(index) {
     } else {
         console.error('Ungültiger Index');
     }
-
+    let letzterIndex = kontaktListe.length - 1;
+    showContactsSlideInRightContainer(letzterIndex);
     updateContactDisplay();
 }
 
@@ -508,68 +509,6 @@ function zufaelligeFarbe() {
 }
 
 
-
-
-
-
-
-//gerade keinen nutzen ig
-function bearbeiteKontakt(li) {
-    const originalContent = li.innerHTML;
-    const details = originalContent.split('<br>');
-    const name = details[0].replace('<strong>', '').replace('</strong>', '').trim();
-    const email = details[1].replace('Email: ', '').trim();
-    const nummer = details[2].replace('Telefon: ', '').trim();
-
-    li.innerHTML = `<input type='text' value='${name}' id='editName'>
-                    <input type='email' value='${email}' id='editEmail'>
-                    <input type='tel' value='${nummer}' id='editNummer'>
-                    <button onclick='aktualisiereKontakt("${name}", ${li})'>Bestätigen</button>`;
-}
-
-function aktualisiereKontakt(alterName, li) {
-    const name = document.getElementById('editName').value.trim();
-    const email = document.getElementById('editEmail').value.trim();
-    const nummer = document.getElementById('editNummer').value.trim();
-
-    if (name) {
-        const neuerAnfangsbuchstabe = name.charAt(0).toUpperCase();
-        if (neuerAnfangsbuchstabe !== alterName.charAt(0).toUpperCase()) {
-            li.remove();
-            addKontakt(name, email, nummer);
-        } else {
-            li.innerHTML = `<strong>${name}</strong><br>Email: ${email}<br>Telefon: ${nummer}`;
-        }
-    } else {
-        li.remove();
-        versteckeLeereAbschnitte();
-    }
-}
-
-//////////////////
-
-
-
-
-
-
-function einfuegenInRichtigerReihenfolge(buchstabenDiv, buchstabe) {
-    const telefonliste = document.getElementById('telefonliste');
-    let eingefuegt = false;
-
-    Array.from(telefonliste.children).forEach(div => {
-        const currentLetter = div.id;
-        if (buchstabe < currentLetter && !eingefuegt) {
-            telefonliste.insertBefore(buchstabenDiv, div);
-            eingefuegt = true;
-        }
-    });
-
-    if (!eingefuegt) {
-        telefonliste.appendChild(buchstabenDiv);
-    }
-}
-
 function versteckeLeereAbschnitte() {
     const abschnitte = document.querySelectorAll('#telefonliste > div');
     abschnitte.forEach(abschnitt => {
@@ -581,10 +520,4 @@ function versteckeLeereAbschnitte() {
     });
 }
   
-
-
-function zeigeKontaktDetails(id) {
-    const kontakt = kontaktListe.find(k => k.id === id);
-    alert(`Name: ${kontakt.name}, Email: ${kontakt.email}, Telefon: ${kontakt.nummer}`);
-}
   
