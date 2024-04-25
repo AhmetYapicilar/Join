@@ -784,3 +784,16 @@ li {
     align-items: center;
 }
 
+
+
+
+
+@media (min-height: 1305px) {
+    .main {
+        height: 92.6vh;
+    }
+
+    .showAllContacts {
+        height: 93%;
+    }
+}
