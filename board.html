@@ -20,6 +20,8 @@
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
 
+   
+
 <section class="section-board">
     <div class="space-between-board">
         <h1>Board</h1>
@@ -33,89 +35,35 @@
         </div>
     </div>
 <div class="board-distribution">
-    <div id="To-Do" class="card-board">
+    <div class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">To do</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
+        <div id="To-Do" class="fields"></div>
     </div>
 
-    <div id="In Progress" class="card-board">
+    <div class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">In progress</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
-        <div onclick="openTask()" class="tasks-board">
-            <div class="user-story-board">User Story</div>
-            <div class="name-of-task-board"><span>Kochwelt Page & Recipe Recommender</span><p>Build start page with recipe recommendation...</p></div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="progressbar-background">
-                    <div class="progressbar-board" role="progressbar"></div>
-                </div>
-                <span class="sub-tasks">1/2 Subtasks</span>
-            </div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="flex-board">
-                    <div class="circle-board background-color-orange margin-left-9px colorWhite">AM</div>
-                    <div class="circle-board background-color-green margin-left-9px colorWhite">EM</div>
-                    <div class="circle-board background-color-darkblue margin-left-9px colorWhite">MB</div>
-                </div>
-                <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
-            </div>
+        <div id="In Progress" class="fields">
         </div>
     </div>
 
-    <div id="Await feedback" class="card-board">
+    <div class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">Await feedback</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
-        <div class="tasks-board">
-            <div class="technical-task-board">Technical Task</div>
-            <div class="name-of-task-board"><span>HTML Base Template Creation</span><p>Create reusable HTML base templates...</p></div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="flex-board">
-                    <div class="circle-board background-color-pink margin-left-9px colorWhite">DE</div>
-                    <div class="circle-board background-color-violet margin-left-9px colorWhite">BZ</div>
-                    <div class="circle-board background-color-violet2 margin-left-9px colorWhite">AS</div>
-                </div>
-                <img class="priority-icon-board" src="./assets/img/arrow-down-icon.png">
-            </div>
-        </div>
-            
-
-        <div class="tasks-board">
-            <div class="user-story-board">User Story</div>
-            <div class="name-of-task-board"><span>Daily Kochwelt Recipe</span><p>Implement daily recipe amd portion calculator</p></div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="flex-board">
-                    <div class="circle-board background-color-yellow margin-left-9px colorWhite">EF</div>
-                    <div class="circle-board background-color-violet2 margin-left-9px colorWhite">AS</div>
-                    <div class="circle-board background-color-red margin-left-9px colorWhite">TW</div>
-                </div>
-                <img class="priority-icon-board" src="./assets/img/equal-sign-icon.png">
-            </div>
+        <div id="Await feedback" class="fields">
         </div>
     </div>
 
-    <div id="Done" class="card-board">
+    <div class="card-board">
             <span class="title-board align-center-board height-board">Done</span>
-        <div class="tasks-board">
-            <div class="technical-task-board">Technical Task</div>
-            <div class="name-of-task-board"><span>CSS Architecture Planning</span><p>Define CSS naming conventions and structure...</p></div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="progressbar-background">
-                    <div class="progressbar-board" style="width: 100%;" role="progressbar"></div>
-                </div>
-                <span class="sub-tasks">2/2 Subtasks</span>
-            </div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="flex-board">
-                    <div class="circle-board background-color-lightblue margin-left-9px colorWhite">SM</div>
-                    <div class="circle-board background-color-violet margin-left-9px colorWhite">BZ</div>
-                </div>
-                <img class="priority-icon-board" src="./assets/img/arrow-up-icon.png">
-            </div>
+        <div id="Done" class="fields">
         </div>
     </div>
 </div>

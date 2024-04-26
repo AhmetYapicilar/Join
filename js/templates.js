@@ -24,3 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function openBoard(){
         window.location.href = 'board.html?user=' + user;
     }
+
+    function showMenuBar(){
+        document.getElementById('help-menu-bar').classList.toggle('d-none');
+    }

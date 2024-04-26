@@ -7,15 +7,13 @@ function initBoard(){
     document.getElementById('section-board-overlay').classList.remove('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'auto';
     checkEmptyTasks();
-    showNewTask();
+    for (let x = 0; x < ids.length; x++) {
+        let contentBefore = document.getElementById(`${ids[x]}`);
+        contentBefore.innerHTML = '';
+    }
+    showTasks();
 }
 
-
-function openTask(){
-    document.getElementById('section-board-overlay').classList.add('section-board-overlay');
-    document.getElementById('task').classList.add('animation');
-    document.getElementById('body-board').style.overflow = 'hidden';
-}
 
 function checkEmptyTasks() {
     ids.forEach(id => {
@@ -43,28 +41,27 @@ document.addEventListener('DOMContentLoaded', () => {
     checkEmptyTasks();
 });
 
-async function showNewTask(){
+async function showTasks(){
     await loadTasks();
     for (let i = 0; i < tasks.length; i++) {
+        if(document.getElementById(`task${i}`)){
+            document.getElementById(`task${i}`).classList.add('d-none');
+        }
         const TASK = tasks[i];
+        let category = TASK["category"]; 
+        if (!category) {
+            continue; // Springe zur nächsten Iteration der Schleife, wenn keine Kategorie vorhanden ist
+        }
+        let matchingId = await findId(category);
+        let content = document.getElementById(matchingId);
         let title = TASK["title"];
         let description = TASK["description"];
         let dueDate = TASK["dueDate"];
-        let category = TASK["category"];
         let priority = TASK["priority"];
 
-        let priorityIcon = await proofPriority(priority); 
-        let matchingId = findId(category);
-
-        if(matchingId){
-            let categoryToDo = document.getElementById(matchingId);
-            let noTasksDiv = categoryToDo.querySelector('.no-tasks-board');
-            if (noTasksDiv) {
-                categoryToDo.removeChild(noTasksDiv);
-            }
-            let newChildElement = document.createElement('div');
-            newChildElement.classList.add('tasks-board');
-            newChildElement.innerHTML = `
+        let priorityIcon = await proofPriority(priority);
+            content.innerHTML += `
+            <div class="tasks-board" onclick=showTaskInBig(${i})>
             <div class="user-story-board">User Story</div>
             <div class="name-of-task-board"><span>${title}</span><p>${description}</p></div>
             <div class="space-between-board width-100percent margin-top-16">
@@ -80,23 +77,26 @@ async function showNewTask(){
                     <div class="circle-board background-color-darkblue margin-left-9px colorWhite">MB</div>
                 </div>
                 <img class="priority-icon-board" src="${priorityIcon}">
-            </div>`;
-            categoryToDo.appendChild(newChildElement);
-            newChildElement.addEventListener('click', function() {
-                showTaskInBig(title, description, priority, priorityIcon, dueDate, i);
-                console.log('Das neu erstellte Element wurde geklickt!');
-            });
+            </div></div>`;
+        };
         }
         
-    }
-}
 
-async function showTaskInBig(title, description, priority, priorityIcon, dueDate, i){
+
+async function showTaskInBig(i){
+    await loadTasks();
     document.getElementById('section-board-overlay').classList.add('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'hidden';
     let content = document.getElementById('section-board-overlay');
+    const TASK = tasks[i];
+        let category = TASK["category"]; 
+        let title = TASK["title"];
+        let description = TASK["description"];
+        let dueDate = TASK["dueDate"];
+        let priority = TASK["priority"];
+        let priorityIcon = await proofPriority(priority);
     content.innerHTML = `
-    <div id="i" class="tasks-board-big">
+    <div id='task${i}' class="tasks-board-big">
     <div class="user-story-board">User Story</div>
     <div class="name-of-task-board"><span class="name-of-task-board-big">${title}</span><p class="name-of-task-board-big-p">${description}</p></div>
     <div class="due-date-priority margin-top-16">
@@ -145,15 +145,9 @@ async function showTaskInBig(title, description, priority, priorityIcon, dueDate
         </div>
     </div>
     <div class="last-line margin-top-16">
-        <a href="#" class="flex-board link">
-            <img src="./assets/img/delete.svg">
-            Delete 
-        </a>
+    <img src="./assets/img/delete (1).png" onmouseover="this.src='./assets/img/deleteHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/delete (1).png';">
         <div class="vertical-line-board"></div>
-        <a href="#" class="flex-board link">
-            <img src="./assets/img/edit.svg">
-            Edit
-        </a>
+        <img src="./assets/img/edit (1).png" onmouseover="this.src='./assets/img/editHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/edit (1).png';">
     </div>`;
     document.getElementById('i').classList.add('animation');
 }
@@ -168,7 +162,7 @@ async function proofPriority(priority){
     }
 }
 
-function findId(category){
+async function findId(category){
     for (let i = 0; i < ids.length; i++) {
         const ID = ids[i];
         if(category === ID){

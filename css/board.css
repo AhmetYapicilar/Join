@@ -99,7 +99,7 @@ gap: 26px;
 }
 
 
-.card-board{
+.fields{
 display: flex;
 flex-direction: column;
 height: auto;
@@ -151,6 +151,7 @@ width: auto;
     display: flex;
     align-items: center;
 }
+
 
 .user-story-board{
 background-color: #0038FF;
@@ -487,9 +488,6 @@ color: rgb(41,171,226);
 font-weight: bold;
 }
 
-.link img{
-fill: rgb(41,171,226);
-}
 
 .vertical-line-board{
 width: 1px;

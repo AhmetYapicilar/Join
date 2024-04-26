@@ -53,6 +53,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .circle span{
@@ -114,6 +115,10 @@ header{
     text-decoration: none;
 }
 
+.sidebar_nav:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 .sidebar_nav img{
     width: 30px;
     height: 30px;
@@ -145,4 +150,45 @@ header{
 .data_nav a {
     text-decoration: none;
     color: #A8A8A8;
+}
+
+.help-click{
+    padding: 10px;
+    width: 150px;
+    height: 158px;
+    background-color: #2A3647;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 96px;
+    right: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.help-link{
+    font-weight: 400;
+    font-size: 16px;
+    color: #CDCDCD;
+    text-decoration: none;
+    width: 80%;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 8px 16px 8px 16px;
+}
+
+.help-link:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.d-none{
+    display: none;
 }
