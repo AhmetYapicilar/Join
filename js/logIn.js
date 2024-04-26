@@ -35,13 +35,9 @@ async function logIn(){
 }
 
 function guestLogIn(){
-    savedUsers.push({
-        email: '',
-        password: ''
-        });
-    setLocalStorage('savedUsers', savedUsers);
-    let guest = 'Guest';
-    setUserNameToLocalStorage('user-name', JSON.stringify(guest));
+    document.getElementById('inputEmail').value = '';
+    document.getElementById('passwordInput').value = '';
+    setUserNameToLocalStorage('user-name', 'Guest');
     window.location.href = 'summary.html?user=Guest' ;
 }
 
