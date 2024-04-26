@@ -33,7 +33,8 @@
                         <span>Title</span>
                         <p class="redText">*</p>
                     </div>
-                    <input required class="titleInputAddTask fontSize20px" id="titleInput" type="text" placeholder="Enter a title">
+                    <input required class="titleInputAddTask fontSize20px" id="titleInput" type="text"
+                        placeholder="Enter a title">
                 </div>
 
                 <div class="descriptionContainer">
@@ -77,17 +78,30 @@
                         <p class="redText">*</p>
                     </div>
                     <select required class="categoryPicker fontSize20px" id="category" name="category">
-                        <option value="">Select task category</option>
-                        <option value="To-Do">To-Do</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Await feedback">Await feedback</option>
-                        <option value="Done">Done</option>
+                        <option value="1" disabled selected hidden>Select task category</option>
+                        <option value="User Story">User Story</option>
+                        <option value="Technical Task">Technical Task</option>
                     </select>
                 </div>
-                <div class="subtaskContainer">
-                    <span>Subtasks</span>
-                    <input class="subtaskPicker fontSize20px" id="subtasks" type="text" placeholder="Add new Subtask">
+
+                <div class="input-container">
+                    <div class="">
+                        <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off"
+                            placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)"
+                            size="10" />
+                        <img src="./assets/img/add-subtask.png"
+                            onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask"
+                            class="add-subtasks-btn" />
+                        <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn d-none">
+                            <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
+                                onclick="submitSubtask('subtask-input')" />
+                            <span class="vertical-line-sub"></span>
+                            <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
+                        </div>
+                    </div>
+                    <ul id="subtask-container"></ul>
                 </div>
+
             </div>
             <div class="fieldRequiredText">
                 <div class="flex-start">

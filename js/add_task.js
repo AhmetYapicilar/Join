@@ -1,4 +1,6 @@
 let tasks = [];
+let subtasks = [];
+
 
 async function loadTasks() {
     try {
@@ -142,34 +144,126 @@ if (document.readyState === 'loading') {
     onLoad();
 }
 
-function addSubtask() {
-    let subtaskInput = document.querySelector(".subtaskPicker");
-    let subtaskText = subtaskInput.value.trim();
-    if (subtaskText !== "") {
-        subtasks.push(subtaskText);
-        updateSubtaskList();
-        subtaskInput.value = "";
-    }
-}
-
-function removeSubtask(index) {
-    subtasks.splice(index, 1);
-    updateSubtaskList();
-}
-
-function updateSubtaskList() {
-    let subtaskListContainer = document.getElementById("subtaskList");
-    subtaskListContainer.innerHTML = "";
-    subtasks.forEach((subtask, index) => {
-        let listItem = document.createElement("div");
-        listItem.innerHTML = `<span>&#8226; ${subtask}</span>
-                              <button onclick="removeSubtask(${index})">X</button>`;
-        subtaskListContainer.appendChild(listItem);
-    });
-}
-
 function clearForm() {
     let form = document.getElementById("addTaskForm");
     form.reset();
     selectMedium();
+    clearSubtasks();
+}
+
+function clearSubtasks() {
+    let subtasksContainer = document.getElementById("subtask-container");
+    subtasksContainer.innerHTML = ``
+    subtasks = [];
+}
+
+function activateInput() {
+	let addSubtask = document.getElementById("add-subtask");
+	let subtasksInputActions = document.getElementById("subtask-input-actions");
+
+	addSubtask.classList.add("d-none");
+	subtasksInputActions.classList.remove("d-none");
+}
+
+function checkSubmit(event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		submitSubtask();
+	}
+}
+
+function submitSubtask() {
+    if (subtasks.length >= 6) {
+        alert('Maximale Anzahl von Subtasks erreicht. Neue Subtasks können nicht hinzugefügt werden.');
+        return;
+    }
+    let subtaskContent = document.querySelector("#subtask-input").value;
+    if (subtaskContent == "") {
+        deactivateInput();
+    } else {
+        let newSubtask = {
+            subtaskName: subtaskContent,
+            done: false,
+        };
+        subtasks.push(newSubtask);
+        document.querySelector("#subtask-input").value = "";
+        renderSubtasks();
+        deactivateInput();
+    }
+}
+
+function deactivateInput() {
+	let addSubtask = document.querySelector("#add-subtask");
+	let subtasksInputActions = document.querySelector("#subtask-input-actions");
+
+	addSubtask.classList.remove("d-none");
+	subtasksInputActions.classList.add("d-none");
+	document.querySelector("#subtask-input").value = "";
+}
+
+function setFocus() {
+	document.getElementById("subtask-input").focus();
+}
+
+function deleteSubtask(i) {
+	subtasks.splice(i, 1);
+	renderSubtasks();
+}
+
+function editSubtask(i) {
+	let subtaskContent = document.querySelector(`#subtask-element${i}`);
+	let editContainer = document.getElementById("edit-subtask-container");
+	let subtaskEditInput = document.querySelector(`#edit-subtask-${i}`);
+	subtaskContent.classList.add("d-none");
+	editContainer.classList.remove("d-none");
+	document.getElementById(`edit-subtask-${i}`).focus();
+	subtaskEditInput.value = subtasks[i].subtaskName;
+}
+function checkEditSubmit(i, event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		submitChange(i);
+	}
+}
+
+function submitChange(i) {
+	let newSubtaskContent = document.querySelector(`#edit-subtask-${i}`).value;
+	subtasks[i].subtaskName = newSubtaskContent;
+	renderSubtasks();
+}
+
+function renderSubtasks() {
+	let subtaskList = document.querySelector("#subtask-container");
+	subtaskList.innerHTML = "";
+	for (let i = 0; i < subtasks.length; i++) {
+		const element = subtasks[i].subtaskName;
+		subtaskList.innerHTML += /*html*/ `
+            <li
+				id="todo-id-${i}"
+				class="todo-subtask d-flex"
+				ondblclick="editSubtask(${i})">
+                <div class="d-flex align-c todo-subtask-container" id="subtask-element${i}">
+                    <p>${element}</p>
+                    <div class="subtask-imgs d-flex align-c">
+					    <img
+						    src="./assets/img/edit.png"
+						    class="subtask-actions"
+                            onclick="event.stopPropagation(); editSubtask(${i})"/>
+					    <span class="vertical-line-sub"></span>
+					    <img src="./assets/img/delete.png" onclick="deleteSubtask(${i})" class="subtask-actions" />
+				    </div>
+                </div>
+                <div class="d-flex align-c todo-subtask-container set-edit d-none" id="edit-subtask-container">
+                    <input type="text" id="edit-subtask-${i}" class="subtask-edit" onkeydown="checkEditSubmit(${i}, event)">
+                    <div class="subtask-imgs d-flex align-c">
+					    <img
+						    src="./assets/img/check-blue.png"
+						    class="subtask-actions" onclick="submitChange(${i})"/>
+					    <span class="vertical-line-sub"></span>
+					    <img src="./assets/img/delete.png" onclick="deleteSubtask(${i})" class="subtask-actions" />
+				    </div>
+                </div>
+			</li>
+        `;
+	}
 }
