@@ -1,47 +1,77 @@
 let tasks = [];
 
-const STORAGE_TOKEN1 = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
-const STORAGE_URL1 = 'https://remote-storage.developerakademie.org/item';
-
 async function loadTasks() {
-    try{
-        tasks = JSON.parse(await getItem('task'));
-        } catch(e){
-            console.error('Loading error:', e);
+    try {
+        const storedTasks = await getItem('task');
+
+        if (storedTasks) {
+            tasks = JSON.parse(storedTasks);
         }
+    } catch (error) {
+        console.error('Loading error:', error);
+    }
 }
 
-
 async function setItem(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN1 };
-    return fetch(STORAGE_URL1, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
+    const payload = { key, value, token: STORAGE_TOKEN };
+    try {
+        const response = await fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) });
+        if (!response.ok) {
+            throw new Error('Failed to save data.');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error saving data:', error);
+    }
 }
 
 async function getItem(key) {
-    const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN1}`;
-    return fetch(URL).then(res => res.json()).then(res => {
-        if (res.data) {
-            return res.data.value;
-        } throw `Could not find data with key "${key}".`;
-    });
+    const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+    try {
+        const response = await fetch(URL);
+        if (!response.ok) {
+            throw new Error('Failed to fetch data.');
+        }
+        const data = await response.json();
+        if (data && data.data) {
+            return data.data.value;
+        } else {
+            throw new Error(`Could not find data with key "${key}".`);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('addTaskForm');
 
+    form.addEventListener('submit', function (event) {
+        if (form.checkValidity()) {
+            createTask();
+        } else {
+            console.log('Das Formular ist ungültig. Bitte überprüfe deine Eingaben.');
+        }
+    });
+});
 
 async function createTask() {
-    debugger;
-    tasks.push({
-        title : document.querySelector(".titleInputAddTask").value,
-        description : document.querySelector(".descriptionTextArea").value,
-        assignedTo : document.querySelector(".assignContacts").value,
-        dueDate : document.querySelector(".dateInput").value,
-        priority : getPriority(),
-        category : document.querySelector(".categoryPicker").value
-    });
-    await setItem('task', JSON.stringify(tasks));
+    try {
+        tasks.push({
+            title: document.querySelector(".titleInputAddTask").value,
+            description: document.querySelector(".descriptionTextArea").value,
+            assignedTo: document.querySelector(".assignContacts").value,
+            dueDate: document.querySelector(".dateInput").value,
+            priority: getPriority(),
+            category: document.querySelector(".categoryPicker").value
+        });
+        await setItem('task', JSON.stringify(tasks));
+        console.log('Task successfully created.');
+        clearForm();
+    } catch (error) {
+        console.error('Error creating task:', error);
+    }
 }
-
-
 
 function resetButtons() {
     document.querySelectorAll('.urgentButton, .mediumButton, .lowButton').forEach(button => {
@@ -141,5 +171,5 @@ function updateSubtaskList() {
 function clearForm() {
     let form = document.getElementById("addTaskForm");
     form.reset();
+    selectMedium();
 }
-
