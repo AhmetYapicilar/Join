@@ -65,7 +65,8 @@ async function createTask() {
             assignedTo: document.querySelector(".assignContacts").value,
             dueDate: document.querySelector(".dateInput").value,
             priority: getPriority(),
-            category: document.querySelector(".categoryPicker").value
+            category: document.querySelector(".categoryPicker").value,
+            category2: 'To-Do'
         });
         await setItem('task', JSON.stringify(tasks));
         console.log('Task successfully created.');

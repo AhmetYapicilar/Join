@@ -40,7 +40,7 @@
             <span class="title-board">To do</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
-        <div id="To-Do" class="fields"></div>
+        <div id="To-Do" class="fields" ondragleave="removeHighlight('To-Do')" ondrop="moveTo('To-Do')" ondragover="allowDrop(event); highlight('To-Do')"></div>
     </div>
 
     <div class="card-board">
@@ -48,7 +48,7 @@
             <span class="title-board">In progress</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
-        <div id="In Progress" class="fields">
+        <div id="In-Progress" class="fields" ondragleave="removeHighlight('In-Progress')"  ondrop="moveTo('In-Progress')" ondragover="allowDrop(event); highlight('In-Progress')">
         </div>
     </div>
 
@@ -57,13 +57,13 @@
             <span class="title-board">Await feedback</span>
             <img class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
-        <div id="Await feedback" class="fields">
+        <div id="Await-Feedback" class="fields" ondragleave="removeHighlight('Await-Feedback')"  ondrop="moveTo('Await-Feedback')" ondragover="allowDrop(event); highlight('Await-Feedback')">
         </div>
     </div>
 
     <div class="card-board">
             <span class="title-board align-center-board height-board">Done</span>
-        <div id="Done" class="fields">
+        <div id="Done" class="fields" ondragleave="removeHighlight('Done')"  ondrop="moveTo('Done')" ondragover="allowDrop(event); highlight('Done')">
         </div>
     </div>
 </div>

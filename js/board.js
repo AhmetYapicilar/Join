@@ -1,91 +1,96 @@
-let ids = ['To-Do', 'In Progress', 'Await feedback', 'Done'];
+let ids = ['To-Do', 'In-Progress', 'Await-Feedback', 'Done'];
 let priorities = ['low', 'medium', 'urgent'];
-let priopics = ["../assets/img/arrow-down-icon.png", "../assets/img/equal-sign-icon.png", "../assets/img/arrow-up-icon.png"];
+let priopics = ["./assets/img/arrow-down-icon.png", "./assets/img/equal-sign-icon.png", "./assets/img/arrow-up-icon.png"];
 let taskCounts = {
     'To-Do': 0,
-    'In Progress': 0,
-    'Await feedback': 0,
+    'In-Progress': 0,
+    'Await-Feedback': 0,
     'Done': 0
 };
+let draggedTask;
 
-function initBoard(){
+async function initBoard(){
     document.getElementById('section-board-overlay').classList.remove('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'auto';
-    checkEmptyTasks();
     for (let x = 0; x < ids.length; x++) {
         let contentBefore = document.getElementById(`${ids[x]}`);
+        contentBefore.classList.remove('drag-area-highlight');
         contentBefore.innerHTML = '';
     }
-    showTasks();
+    await showTasks();
+    checkEmptyTasks();
 }
 
 
 function checkEmptyTasks() {
-    ids.forEach(id => {
-        let element = document.getElementById(id);
-        if (element) {
-            if (element.children.length === 1){
-                // Das Element hat nur ein Unterelement
-            let newChildElement = document.createElement('div');
-            
-            // Füge eine Klasse zum neuen Element hinzu
-            newChildElement.classList.add('no-tasks-board');
-
-            // Füge Textinhalt zum neuen Element hinzu
-            newChildElement.textContent = 'No tasks available';
-
-            // Füge das neue Unterelement dem Element hinzu
-            element.appendChild(newChildElement);
-            }
+    for(let i=0; i<ids.length; i++){
+        const ID = ids[i];
+        let content = document.getElementById(ID);
+        if(content.innerHTML === ''){
+            content.innerHTML = `<div class="no-tasks-board">No tasks available</div>`;
         }
-    });
+    }
 }
-
-// Funktion aufrufen, um zu prüfen, ob Tasks vorhanden sind
-document.addEventListener('DOMContentLoaded', () => {
-    checkEmptyTasks();
-});
 
 async function showTasks(){
     await loadTasks();
     for (let i = 0; i < tasks.length; i++) {
-        if(document.getElementById(`task${i}`)){
-            document.getElementById(`task${i}`).classList.add('d-none');
+        if(document.getElementById(`bigtask${i}`)){
+            document.getElementById(`bigtask${i}`).classList.add('d-none');
         }
+            let {TASK, category2, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
+            if(!category2){
+                category2 = 'To-Do';
+            }
+            let content = document.getElementById(category2);
+            content.innerHTML += generateShowTasksHTML(i, title, description, priorityIcon);
+            userStoryOrTechnicalTask(TASK, i)
+            await countTasks(category2);
+        };
+        }
+
+async function initVariablesForShowTasks(i){
         const TASK = tasks[i];
-        let category = TASK["category"]; 
-        if (!category) {
-            continue; // Springe zur nächsten Iteration der Schleife, wenn keine Kategorie vorhanden ist
-        }
-        let matchingId = await findId(category);
-        let content = document.getElementById(matchingId);
+        let category2 = TASK["category2"]
         let title = TASK["title"];
         let description = TASK["description"];
         let dueDate = TASK["dueDate"];
         let priority = TASK["priority"];
-
         let priorityIcon = await proofPriority(priority);
-            content.innerHTML += `
-            <div class="tasks-board" onclick=showTaskInBig(${i})>
-            <div class="user-story-board">User Story</div>
-            <div class="name-of-task-board"><span>${title}</span><p>${description}</p></div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="progressbar-background">
-                    <div class="progressbar-board" role="progressbar"></div>
-                </div>
-                <span class="sub-tasks">1/2 Subtasks</span>
-            </div>
-            <div class="space-between-board width-100percent margin-top-16">
-                <div class="flex-board">
-                    <div class="circle-board background-color-orange margin-left-9px colorWhite">AM</div>
-                    <div class="circle-board background-color-green margin-left-9px colorWhite">EM</div>
-                    <div class="circle-board background-color-darkblue margin-left-9px colorWhite">MB</div>
-                </div>
-                <img class="priority-icon-board" src="${priorityIcon}">
-            </div></div>`;
-            countTasks(category);
-        };
+        return {TASK, category2, title, description, dueDate, priority, priorityIcon};
+}
+
+function generateShowTasksHTML(i, title, description, priorityIcon){
+    return `
+    <div id='task${i}' draggable="true" class="tasks-board" onclick=showTaskInBig(${i}) ondragstart="startDragging(${i})">
+    <div id="user-technical-board${i}"></div>
+    <div class="name-of-task-board"><span>${title}</span><p>${description}</p></div>
+    <div class="space-between-board width-100percent margin-top-16">
+        <div class="progressbar-background">
+            <div class="progressbar-board" role="progressbar"></div>
+        </div>
+        <span class="sub-tasks">1/2 Subtasks</span>
+    </div>
+    <div class="space-between-board width-100percent margin-top-16">
+        <div class="flex-board">
+            <div class="circle-board background-color-orange margin-left-9px colorWhite">AM</div>
+            <div class="circle-board background-color-green margin-left-9px colorWhite">EM</div>
+            <div class="circle-board background-color-darkblue margin-left-9px colorWhite">MB</div>
+        </div>
+        <img class="priority-icon-board" src="${priorityIcon}">
+    </div></div>`;
+}
+
+function userStoryOrTechnicalTask(TASK, i){
+    if(TASK['category'] === 'User Story'){
+        document.getElementById(`user-technical-board${i}`).classList.add('user-story-board');
+        document.getElementById(`user-technical-board${i}`).innerHTML = 'User Story';
+    }
+    else{
+        document.getElementById(`user-technical-board${i}`).innerHTML = 'Technical Task';
+        document.getElementById(`user-technical-board${i}`).classList.add('technical-task-board');
         }
+}
 
 async function countTasks(category){
     taskCounts[category]++;
@@ -99,16 +104,14 @@ async function showTaskInBig(i){
     document.getElementById('section-board-overlay').classList.add('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'hidden';
     let content = document.getElementById('section-board-overlay');
-    const TASK = tasks[i];
-        let category = TASK["category"]; 
-        let title = TASK["title"];
-        let description = TASK["description"];
-        let dueDate = TASK["dueDate"];
-        let priority = TASK["priority"];
-        let priorityIcon = await proofPriority(priority);
-    content.innerHTML = `
-    <div id='task${i}' class="tasks-board-big">
-    <div class="user-story-board">User Story</div>
+    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
+    content.innerHTML = generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon);
+    document.getElementById(`bigtask${i}`).classList.add('animation');
+}
+
+function generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon){
+    return `
+    <div id='bigtask${i}' class="tasks-board-big">
     <div class="name-of-task-board"><span class="name-of-task-board-big">${title}</span><p class="name-of-task-board-big-p">${description}</p></div>
     <div class="due-date-priority margin-top-16">
         <span>Due date:</span>
@@ -160,7 +163,6 @@ async function showTaskInBig(i){
         <div class="vertical-line-board"></div>
         <img src="./assets/img/edit (1).png" onmouseover="this.src='./assets/img/editHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/edit (1).png';">
     </div>`;
-    document.getElementById('i').classList.add('animation');
 }
 
 async function proofPriority(priority){
@@ -180,4 +182,26 @@ async function findId(category){
             return ID;
         }
     }
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function startDragging(id){
+    draggedTask = id;
+}
+
+async function moveTo(category){
+    tasks[draggedTask]['category2'] = category;
+    await setItem('task', JSON.stringify(tasks));
+    initBoard();
+}
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
 }

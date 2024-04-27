@@ -8,19 +8,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 async function initSummary(){
     await loadTasks();
+    await loadCountTasks();
     await showSummaryTasks();
+}
+
+async function loadCountTasks(){
+    taskCounts = JSON.parse(await getItem('taskCount'));
 }
 
 let dates = [];
 
 async function showSummaryTasks(){
-    taskCounts = JSON.parse(await getItem('taskCount'));
     document.getElementById('to-do-content').innerHTML = `${taskCounts['To-Do']}`;
     document.getElementById('done-content').innerHTML = `${taskCounts['Done']}`;
-    let x = taskCounts['To-Do'] + taskCounts['Await feedback'] + taskCounts['In Progress'];
+    let x = taskCounts['To-Do'] + taskCounts['Await-Feedback'] + taskCounts['In-Progress'];
     document.getElementById('tasks-in-board-content').innerHTML = x;
-    document.getElementById('tasks-in-progress-content').innerHTML = `${taskCounts['In Progress']}`;
-    document.getElementById('awaiting-feedback-content').innerHTML = `${taskCounts['Await feedback']}`;
+    document.getElementById('tasks-in-progress-content').innerHTML = `${taskCounts['In-Progress']}`;
+    document.getElementById('awaiting-feedback-content').innerHTML = `${taskCounts['Await-Feedback']}`;
     let urgentTasks = 0;
 
     await loadTasks();
