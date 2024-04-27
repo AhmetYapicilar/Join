@@ -117,6 +117,7 @@ header{
 
 .sidebar_nav:hover{
     background-color: rgba(0, 0, 0, 0.1);
+    width: 50%;
 }
 
 .sidebar_nav img{

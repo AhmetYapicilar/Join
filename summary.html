@@ -8,11 +8,14 @@
     <link rel="stylesheet" href="./fonts.css">
     <link rel="stylesheet" href="./assets/templates/css/templatesStyle.css">
     <link rel="stylesheet" href="./css/summary.css">
+    <script src="./js/signUp.js"></script>
     <script src="./js/logIn.js"></script>
     <script src="./js/templates.js"></script>
+    <script src="./js/add_task.js"></script>
+    <script src="./js/board.js"></script>
     <script src="./js/summary.js"></script>
   </head>
-  <body onload="includeHTML();">
+  <body onload="includeHTML(); showSummaryTasks()">
 
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
@@ -27,46 +30,47 @@
     <div class="main-container">
       <div class="left-content">
         <div class="first-line">
-          <div class="To-do">
+          <div id="summary-to-do" class="To-do">
             <img src="./assets/img/pencil-icon.png" />
             <div class="column-summary align-items-center-summary">
-              <div>1</div>
+              <div id="to-do-content"></div>
               <span>To-do</span>
             </div>
           </div>
           <div class="To-do">
             <img src="./assets/img/check-icon.png" />
             <div class="column-summary align-items-center-summary">
-              <div>1</div>
+              <div id="done-content"></div>
               <span>Done</span>
             </div>
           </div>
         </div>
+
         <div class="second-line">
             <div class="urgency">
                 <img src="./assets/img/arrowUp-icon.png">
                 <div class="column-summary align-items-center-summary">
-                    <div>1</div>
+                    <div id="urgent-tasks-content"></div>
                     <span>Urgent</span>
                 </div>
             </div>
             <div class="grey-vertical-line"></div>
             <div class="column-summary gap-13">
-                <span class="date">October 16, 2022</span>
+                <span class="date" id="earliest-date-content"></span>
                 <span class="deadline">Upcoming Deadline</span>
             </div>
         </div>
         <div class="third-line">
             <div class="tasks column-summary center-summary">
-                <div>5</div>
+                <div id="tasks-in-board-content"></div>
                 <span>Tasks in<br> Board</span>
             </div>
             <div class="tasks column-summary center-summary">
-                <div>2</div>
+                <div id="tasks-in-progress-content"></div>
                 <span>Tasks in<br> Progress</span>
             </div>
             <div class="tasks column-summary center-summary">
-                <div>2</div>
+                <div id="awaiting-feedback-content"></div>
                 <span>Awaiting<br> Feedback</span>
             </div>
         </div>

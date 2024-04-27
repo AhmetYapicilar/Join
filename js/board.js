@@ -1,7 +1,12 @@
 let ids = ['To-Do', 'In Progress', 'Await feedback', 'Done'];
 let priorities = ['low', 'medium', 'urgent'];
 let priopics = ["../assets/img/arrow-down-icon.png", "../assets/img/equal-sign-icon.png", "../assets/img/arrow-up-icon.png"];
-
+let taskCounts = {
+    'To-Do': 0,
+    'In Progress': 0,
+    'Await feedback': 0,
+    'Done': 0
+};
 
 function initBoard(){
     document.getElementById('section-board-overlay').classList.remove('section-board-overlay');
@@ -78,8 +83,14 @@ async function showTasks(){
                 </div>
                 <img class="priority-icon-board" src="${priorityIcon}">
             </div></div>`;
+            countTasks(category);
         };
         }
+
+async function countTasks(category){
+    taskCounts[category]++;
+    await setItem('taskCount', JSON.stringify(taskCounts));
+}
         
 
 
