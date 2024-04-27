@@ -134,7 +134,7 @@ function createLetterGroup(letter, contacts) {
     
     let buchstabeImg = document.createElement('img');
     buchstabeImg.src = 'assets/img/Vector10.png';
-    buchstabeImg.className = 'display-flex';
+    buchstabeImg.className = 'display-flex centerVectorPhoneBook';
     gruppenDiv.appendChild(buchstabeImg);
 
     let kontaktListeUl = createContactsList(contacts);
@@ -295,7 +295,7 @@ function deleteContactsCloseWindow(i) {
 //addNewContact Feld anzeigen lassen mit eventListener
 //7
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('openButton').addEventListener('click', function() {
+    document.getElementById('addNewContactToPhoneList').addEventListener('click', function() {
       document.getElementById('modal').classList.remove('notactive');
       document.getElementById('panel').classList.remove('notactive');
       document.getElementById('modal').classList.add('active');
