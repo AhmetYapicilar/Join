@@ -71,6 +71,7 @@ async function createTask() {
         await setItem('task', JSON.stringify(tasks));
         console.log('Task successfully created.');
         clearForm();
+        openBoard();
     } catch (error) {
         console.error('Error creating task:', error);
     }

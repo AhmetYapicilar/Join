@@ -154,6 +154,36 @@ cursor: pointer;
     align-items: center;
 }
 
+.user-story-board-big{
+    background-color: #0038FF;
+border-radius: 8px;
+padding: 4px 24px 4px 24px;
+gap: 10px;
+color: white;
+width: 160px;
+height: 36px;
+font-weight: 400;
+font-size: 23px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.technical-task-board-big{
+    background: #1FD7C1;
+    border-radius: 8px;
+    padding: 4px 24px 4px 24px;
+    gap: 10px;
+    color: white;
+    width: 160px;
+    height: 36px;
+    font-weight: 400;
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .user-story-board{
 background-color: #0038FF;
@@ -309,6 +339,7 @@ display: none;
     justify-content: center;
     align-items: center;
 }
+
 
 .tasks-board-big{
     width: 20%;
@@ -513,3 +544,4 @@ background-color: #D1D1D1;
 .drag-area-highlight{
     background-color: rgba(0, 0, 0, 0.2);
 }
+

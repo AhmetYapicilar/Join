@@ -9,6 +9,8 @@ let taskCounts = {
 };
 let draggedTask;
 
+  
+
 async function initBoard(){
     document.getElementById('section-board-overlay').classList.remove('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'auto';
@@ -17,6 +19,7 @@ async function initBoard(){
         contentBefore.classList.remove('drag-area-highlight');
         contentBefore.innerHTML = '';
     }
+    await loadTasks();
     await showTasks();
     checkEmptyTasks();
 }
@@ -33,7 +36,6 @@ function checkEmptyTasks() {
 }
 
 async function showTasks(){
-    await loadTasks();
     for (let i = 0; i < tasks.length; i++) {
         if(document.getElementById(`bigtask${i}`)){
             document.getElementById(`bigtask${i}`).classList.add('d-none');
@@ -42,10 +44,10 @@ async function showTasks(){
             if(!category2){
                 category2 = 'To-Do';
             }
+            await countTasks(category2);
             let content = document.getElementById(category2);
             content.innerHTML += generateShowTasksHTML(i, title, description, priorityIcon);
-            userStoryOrTechnicalTask(TASK, i)
-            await countTasks(category2);
+            userStoryOrTechnicalTask(TASK, i);
         };
         }
 
@@ -85,17 +87,65 @@ function userStoryOrTechnicalTask(TASK, i){
     if(TASK['category'] === 'User Story'){
         document.getElementById(`user-technical-board${i}`).classList.add('user-story-board');
         document.getElementById(`user-technical-board${i}`).innerHTML = 'User Story';
-    }
-    else{
+    } else 
         document.getElementById(`user-technical-board${i}`).innerHTML = 'Technical Task';
         document.getElementById(`user-technical-board${i}`).classList.add('technical-task-board');
-        }
+ }
+
+
+function userStoryOrTechnicalTaskBig(TASK, i){
+    if(TASK['category'] === 'User Story'){
+        document.getElementById(`user-technical-big${i}`).classList.add('user-story-board-big');
+        document.getElementById(`user-technical-big${i}`).innerHTML = 'User Story';
+} else{
+document.getElementById(`user-technical-big${i}`).innerHTML = 'Technical Task';
+document.getElementById(`user-technical-big${i}`).classList.add('technical-task-board-big');
+}
 }
 
 async function countTasks(category){
     taskCounts[category]++;
     await setItem('taskCount', JSON.stringify(taskCounts));
 }
+
+
+
+
+async function searchTask(){
+    await loadTasks();
+    let search = document.getElementById('search-input').value;
+  search = search.toLowerCase();
+  if (search === '') { 
+    initBoard();
+   } else{
+     await showSearchedTasks(search);
+      checkEmptyTasks();
+}}
+
+async function showSearchedTasks(search){
+    let foundedTasks = [];
+    for(let i=0; i<ids.length; i++){
+        document.getElementById(`${ids[i]}`).innerHTML = '';
+        for(let x=0; x<tasks.length; x++){
+            const TASK = tasks[x];
+            let tasktitle = TASK['title'];
+            if(TASK['category2'] === ids[i] && tasktitle.toLowerCase().includes(search)){
+                foundedTasks.push(TASK);
+            }
+        }
+        }
+        for(let j=0; j<foundedTasks.length; j++){
+            let foundedTask = foundedTasks[j];
+            let {TASK, category2, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(tasks.indexOf(foundedTask));
+            let content = document.getElementById(category2);
+            content.innerHTML += generateShowTasksHTML(tasks.indexOf(foundedTask), title, description, priorityIcon);
+            userStoryOrTechnicalTask(TASK, tasks.indexOf(foundedTask));
+        }
+    
+}
+
+
+
         
 
 
@@ -106,13 +156,18 @@ async function showTaskInBig(i){
     let content = document.getElementById('section-board-overlay');
     let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
     content.innerHTML = generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon);
+    userStoryOrTechnicalTaskBig(TASK, i);
     document.getElementById(`bigtask${i}`).classList.add('animation');
 }
 
 function generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon){
     return `
     <div id='bigtask${i}' class="tasks-board-big">
-    <div class="name-of-task-board"><span class="name-of-task-board-big">${title}</span><p class="name-of-task-board-big-p">${description}</p></div>
+    <div class="space-between-board">
+        <div id="user-technical-big${i}"></div>
+        <img src="./assets/img/close.png">
+    </div>
+    <div class="name-of-task-board"><span id="user-technical-big{i}" class="name-of-task-board-big">${title}</span><p class="name-of-task-board-big-p">${description}</p></div>
     <div class="due-date-priority margin-top-16">
         <span>Due date:</span>
         <p>${dueDate}</p>
