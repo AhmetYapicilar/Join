@@ -349,6 +349,8 @@ display: none;
     background-color: white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     z-index: 90;
+    transform: translateX(5000px);
+    transition: all 400ms ease-in-out;
 }
 
 .name-of-task-board-big{
@@ -529,19 +531,14 @@ background-color: #D1D1D1;
 }
 
 .animation{
-    animation: sliding ease-in 400ms;
-}
-
-@keyframes sliding {
-    from {
-        transform: translateX(5000px);
-    }
-    to {
-        transform: translateX(0px);
-    }
+    transform: translateX(0);
 }
 
 .drag-area-highlight{
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.close-icon{
+    cursor: pointer;
 }
 

@@ -87,9 +87,10 @@ function userStoryOrTechnicalTask(TASK, i){
     if(TASK['category'] === 'User Story'){
         document.getElementById(`user-technical-board${i}`).classList.add('user-story-board');
         document.getElementById(`user-technical-board${i}`).innerHTML = 'User Story';
-    } else 
-        document.getElementById(`user-technical-board${i}`).innerHTML = 'Technical Task';
+    } else {
         document.getElementById(`user-technical-board${i}`).classList.add('technical-task-board');
+        document.getElementById(`user-technical-board${i}`).innerHTML = 'Technical Task';
+    }
  }
 
 
@@ -144,20 +145,17 @@ async function showSearchedTasks(search){
     
 }
 
-
-
-        
-
-
 async function showTaskInBig(i){
     await loadTasks();
+    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
     document.getElementById('section-board-overlay').classList.add('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'hidden';
     let content = document.getElementById('section-board-overlay');
-    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
     content.innerHTML = generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon);
     userStoryOrTechnicalTaskBig(TASK, i);
+    setTimeout(() => {
     document.getElementById(`bigtask${i}`).classList.add('animation');
+    }, 100);
 }
 
 function generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon){
@@ -165,7 +163,7 @@ function generateBigTaskHTML(i, title, description, dueDate, priority, priorityI
     <div id='bigtask${i}' class="tasks-board-big">
     <div class="space-between-board">
         <div id="user-technical-big${i}"></div>
-        <img src="./assets/img/close.png">
+        <img class="close-icon" onclick="closeTaskInBig(${i})" src="./assets/img/close.png">
     </div>
     <div class="name-of-task-board"><span id="user-technical-big{i}" class="name-of-task-board-big">${title}</span><p class="name-of-task-board-big-p">${description}</p></div>
     <div class="due-date-priority margin-top-16">
@@ -218,6 +216,15 @@ function generateBigTaskHTML(i, title, description, dueDate, priority, priorityI
         <div class="vertical-line-board"></div>
         <img src="./assets/img/edit (1).png" onmouseover="this.src='./assets/img/editHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/edit (1).png';">
     </div>`;
+}
+
+async function closeTaskInBig(i){
+    document.getElementById(`bigtask${i}`).classList.remove('animation');
+    document.getElementById('body-board').style.overflow = 'auto';
+    setTimeout(() => {
+        document.getElementById('section-board-overlay').classList.remove('section-board-overlay'); // Verstecke das Element nach der Animation
+        initBoard();
+    }, 400);
 }
 
 async function proofPriority(priority){
