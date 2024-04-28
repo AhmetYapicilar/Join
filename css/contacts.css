@@ -807,6 +807,13 @@ li {
     position: relative;
 }
 
+.addContactMobileImg {
+    position: fixed;
+    bottom: 10%;
+    right: 7%;
+    display: none;
+}
+
 
 
 @media (min-height: 1305px) {
@@ -821,5 +828,112 @@ li {
 
 
 @media (max-width: 1320px) {
+    .phoneListAndButton {
+        position: relative;
+        /*width: 56%;*/
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 99.3vh;
+    }
+
+    header {
+        display: flex;
+        z-index: 2 !important;
+        width: 100%;
+        left: 0px !important;
+        height: 80px !important;
+    }
+
+    .headline {
+        display: none;
+    }
+
+    .JoinLogoHeaderImg {
+        display: flex !important;
+        margin-left: 5%;
+    }
+
+    .fixed-width-104 {
+        margin-right: 5% !important;
+    }
+
+    .help-icon {
+        display: none;
+    }
+
+    .rightContainer {
+        display: none;
+    }
+
+    .showContacts {
+        display: none;
+    }
+
+    .leftContainer {
+        padding: 0px;
+    }
+
+    .main {
+        display: flex;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    .addContactMobileImg {
+        display: flex;
+        position: fixed;
+        bottom: 10%;
+        right: 15%;
+    }
+}
+
+/*Umschlagspunkt*/
+
+@media (max-width: 1320px) {
+    .leftContainer {
+        width: 100%;
+    }
+
+    .phoneListAndButton {
+        width: 100%;
+    }
     
+    .showAllContacts {
+        width: 80%;
+        top: 5%;
+    }
+
+    .addNewContact {
+        display: none;
+    }
+}
+
+/*600px*/
+
+@media (max-width: 600px) {
+    .showAllContacts {
+        width: 100%;
+        height: 90%;
+    }
+
+    .addContactMobileImg {
+        position: fixed;
+        bottom: 10%;
+        right: 7%;
+    }
+
+    .circle {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .fixed-width-104 {
+        margin-right: 0% !important;
+    }
 }
