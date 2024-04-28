@@ -101,7 +101,7 @@ body {
 }
 
 
-.editDelteContacts {
+.editDeleteContacts {
     display: flex;
     gap: 18px;
 }
@@ -149,6 +149,10 @@ body {
 
 .lightblue {
     color: #007CEE;
+}
+
+.decorationNone {
+    text-decoration: none;
 }
 
 .a:hover {
@@ -246,7 +250,7 @@ body {
 
 
   
-  #zielbereich {
+  #targetArea {
     position: relative;
     width: 500px;
     height: 522px;
@@ -440,6 +444,8 @@ body {
     justify-content: end;
     padding: 10px;
     padding-right: 25px;
+    padding-left: 0px;
+    padding-right: 55px;
 }
 
 .closeImgAdd:hover {
@@ -478,10 +484,10 @@ body {
 
 .showEmailLi {
     color: #007CEE;
-    font-size: 13px;;
+    font-size: 13px;
 }
 
-#telefonliste h2 {
+#phonebook h2 {
     display: flex;
     padding: 20px;
     align-items: center;
@@ -493,13 +499,13 @@ body {
     display: flex;
 }
 
-#telefonliste ul {
+#phonebook ul {
     list-style-type: none;
     padding-left: 0;
     margin: 0px;
 }
 
-#telefonliste li {
+#phonebook li {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -529,15 +535,15 @@ body {
     cursor: pointer;
 }
 
-#kontaktForm {
+#contactForm {
     display: flex;
     flex-direction: column;
     width: 90%;
-    gap: 15px;
+    gap: 25px;
     justify-content: center;
 }
 
-.initialen-kreis {
+.initials-circle{
     width: 20px;
     height: 20px;
     line-height: 20px;
@@ -552,7 +558,7 @@ body {
     border: 2px solid white; 
 }
 
-.initialen-kreis-show-contacts {
+.initials-circle-show-contacts {
     width: 100px;
     height: 100px;
     line-height: 20px;
@@ -568,7 +574,7 @@ body {
     align-items: center;
 }
 
-.kontakt-info {
+.contact-info{
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -579,6 +585,12 @@ li:hover{
     color: white;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.contactClicked {
+    background-color: #2A3647 !important;
+    color: white !important;
+    border-radius: 10px !important;
 }
 
 li {
@@ -737,7 +749,7 @@ li {
     display: flex;
     justify-content: end;
     padding: 10px;
-    padding-right: 25px;
+    padding-right: 15px;
 }
 
 .closeButton-edit img {
@@ -767,7 +779,7 @@ li {
     cursor: pointer;
 }
 
-.initialen-kreis-edit-contacts {
+.initials-circle-edit-contacts {
     width: 100px;
     height: 90px;
     line-height: 20px;
@@ -808,6 +820,6 @@ li {
 }
 
 
-@media (max-width: 600px) {
-
+@media (max-width: 1320px) {
+    
 }
