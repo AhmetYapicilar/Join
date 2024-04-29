@@ -12,6 +12,7 @@ let draggedTask;
   
 
 async function initBoard(){
+    document.getElementById('overlay-add-task-board').classList.remove('overlay-add-task-board');
     document.getElementById('section-board-overlay').classList.remove('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'auto';
     for (let x = 0; x < ids.length; x++) {
@@ -397,23 +398,23 @@ function removeHighlight(id) {
 }
 
 async function addTaskOnBoard(){
-    document.getElementById('section-board-overlay').classList.add('section-board-overlay');
+    document.getElementById('overlay-add-task-board').classList.add('overlay-add-task-board');
     document.getElementById('body-board').style.overflow = 'hidden';
-    let content = document.getElementById('section-board-overlay');
+    let content = document.getElementById('overlay-add-task-board');
     content.innerHTML = addTaskOnBoardHTML();
 }
 
 function addTaskOnBoardHTML(){
     return `
     <div class="addTaskContentContainerBoard">
-    <div class="headlineAddTaskContainer">
+    <div class="headlineAddTaskContainerBoard">
         <h1 class="headlineAddTask">Add Task</h1>
     </div>
 
     <form id="addTaskForm" onsubmit="return false">
         <div class="leftAddTaskContainer fontSize20px">
             <div class="titleContainer">
-                <div class="flex-start">
+                <div class="flex-start-board">
                     <span>Title</span>
                     <p class="redText">*</p>
                 </div>
@@ -429,7 +430,7 @@ function addTaskOnBoardHTML(){
 
             <div class="assignContactsContainer">
                 <span>Assigned to</span>
-                <select class="assignContacts fontSize20px" id="contacts" name="contacts">
+                <select class="assignContacts-select fontSize20px" id="contacts" name="contacts">
                     <option value="">Select contacts to assign</option>
                 </select>
             </div>
@@ -439,7 +440,7 @@ function addTaskOnBoardHTML(){
 
         <div class="rightAddTaskContainer fontSize20px">
             <div class="taskDateContainer">
-                <div class="flex-start">
+                <div class="flex-start-board">
                     <span>Due Date</span>
                     <p class="redText">*</p>
                 </div>
@@ -457,7 +458,7 @@ function addTaskOnBoardHTML(){
                 </div>
             </div>
             <div class="categoryContainer">
-                <div class="flex-start">
+                <div class="flex-start-board">
                     <span>Category</span>
                     <p class="redText">*</p>
                 </div>
@@ -469,26 +470,21 @@ function addTaskOnBoardHTML(){
             </div>
 
             <div class="input-container">
-                <div class="">
-                    <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off"
-                        placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)"
-                        size="10" />
-                    <img src="./assets/img/add-subtask.png"
-                        onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask"
-                        class="add-subtasks-btn" />
-                    <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn d-none">
-                        <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
-                            onclick="submitSubtask('subtask-input')" />
-                        <span class="vertical-line-sub"></span>
-                        <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
-                    </div>
-                </div>
-                <ul id="subtask-container"></ul>
+            <div class="">
+            <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off" placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)" size="10">
+            <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask" class="add-subtasks-btn">
+            <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn">
+                <img src="./assets/img/check-blue.png" class="subtask-actions submit-input" onclick="submitSubtask('subtask-input')">
+                <span class="vertical-line-sub"></span>
+                <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()">
+            </div>
+        </div>
+                <ul class="subtask-container-board"></ul>
             </div>
 
         </div>
         <div class="fieldRequiredText">
-            <div class="flex-start">
+            <div class="flex-start-board">
                 <p class="redText">*</p>
                 <span>This field is required</span>
             </div>
