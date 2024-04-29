@@ -581,8 +581,7 @@ body {
 }
 
 li:hover{
-    background-color: #2A3647;
-    color: white;
+    background-color: #F2F2F2;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -814,6 +813,25 @@ li {
     display: none;
 }
 
+.addContactMobileImg:hover {
+    cursor: pointer;
+}
+
+.exitAddContactMobile {
+    display: none;
+}
+
+.exitAddContactMobile:hover {
+    cursor: pointer;
+}
+
+.showClickedLi {
+    background-color: #2A3647 !important;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 
 
 @media (min-height: 1305px) {
@@ -891,6 +909,7 @@ li {
         bottom: 10%;
         right: 15%;
     }
+
 }
 
 /*Umschlagspunkt*/
@@ -914,7 +933,7 @@ li {
     }
 }
 
-/*600px*/
+/*Mobile*/
 
 @media (max-width: 600px) {
     .showAllContacts {
@@ -935,5 +954,163 @@ li {
 
     .fixed-width-104 {
         margin-right: 0% !important;
+    }
+
+    .leftrightContainer {
+        flex-direction: column;
+        height: 800px;
+        width: 434px;
+    }
+
+    .centerAll {
+        margin-top: 44%;
+    }
+
+    .addContactImg img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 30px;
+    }
+
+    .addContactImg {
+        height: 50%;
+        width: 100%;
+    }
+
+    .addContactInputFields {
+        padding-left: 0px;
+        width: 100%;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 30px;
+    }
+
+    .imgAndInputfields {
+        margin-top: -87px;
+        flex-direction: column;
+        gap: 0px;
+        width: 600px;
+    }
+
+    .cancelButton {
+        display: none;
+    }
+
+    .inPutfields {
+        gap: 0px;
+        width: 94%;
+        padding-left: 18px;
+    }
+
+    .right-Container {
+        width: 73%;
+        margin-top: 20%;
+    }
+
+    .cancelOrCreateContact {
+        display: flex;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    #contactForm {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .inputfieldAddContact {
+        width: 105%;
+        padding: 8px;
+    }
+
+    .closeButton {
+        display: none;
+    }
+
+    .inputfield-icon {
+        right: -25px;
+    }
+
+    .panel {
+        width: 33.5% !important;
+    }
+
+    .profilepictureSize {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 44%;
+    }
+
+    .createAccountButton {
+        width: 202px;
+        height: 51px;
+    }
+
+    .exitAddContactMobile {
+        display: flex;
+        position: relative;
+        height: 32px;
+        width: 32px;
+        z-index: 1;
+        top: 7%;
+        left: 42%;
+    }
+}
+
+@media (max-width: 450px) {
+    .leftrightContainer {
+        flex-direction: column;
+        height: 800px;
+        width: 404px;
+    }
+
+    .centerAll {
+        margin-top: 35%;
+    }
+
+    .mobileAdjustments {
+        width: 96%;
+        padding-left: 5px;
+    }
+
+    .profilepictureSize {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 41%;
+    }
+
+    .right-Container {
+        width: 70%;
+        margin-top: 20%;
+    }
+}
+
+@media (max-width: 450px) {
+    .leftrightContainer {
+        flex-direction: column;
+        height: 730px;
+        width: 374px;
+    }
+
+    .centerAll {
+        margin-top: 35%;
+    }
+
+    .mobileAdjustments {
+        width: 88%;
+        padding-left: 20px;
+    }
+
+    .profilepictureSize {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 41%;
     }
 }

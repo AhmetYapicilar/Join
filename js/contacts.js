@@ -2,6 +2,7 @@ let contactList = [];
 let contactId = 0;
 let lastColor = null;
 let globalContactIndex = 0;
+let lastIndex = null;
 
 const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
@@ -130,7 +131,7 @@ function createContactsList(contacts) {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let contactLi = document.createElement('li');
-        contactLi.id = `contact${globalContactIndex++}`;
+        contactLi.id = `${contactList.indexOf(contact)}`;
         contactLi.onclick = function() { showContactsSlideInRightContainer(contactList.indexOf(contact)); };
         contactLi.innerHTML = `
             <span class="initials-circle" style="background-color: ${contact['Color']};">${contact['Initials']}</span>
@@ -266,7 +267,9 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('panel').classList.remove('notactive');
       document.getElementById('modal').classList.add('active');
       document.getElementById('panel').classList.add('active');
+      document.getElementById(`addContactImgChange`).src = `assets/img/Frame 194.png`;
     });
+
 
 //addNewContact Feld schließen lassen mit eventListener
 document.getElementById('closeButton').addEventListener('click', function() {
@@ -298,9 +301,25 @@ const slideInContacts = document.getElementById('showInnerHTML');
 if (!contacts || !target || !slideInContacts) {
     return;
 }
+lastLiGetsNewClass(index);
 prepareAnimation(contacts);
 slideInContacts.innerHTML = '';
 triggerSlideInAnimation(target, contacts, slideInContacts, index);
+}
+
+//angeklickte LI kriegt neue Css class und altem Li wird diese entfernt
+function lastLiGetsNewClass(index) {
+    if (lastIndex !== null) {
+        const lastItem = document.getElementById(`${lastIndex}`);
+        if (lastItem) {
+            lastItem.classList.remove('showClickedLi');
+        }
+    }
+    const currentItem = document.getElementById(`${index}`);
+    if (currentItem) {
+        currentItem.classList.add('showClickedLi');
+    }
+    lastIndex = index;
 }
 
 //auf anfangswert setzen
@@ -511,4 +530,25 @@ async function deleteContacts(index) {
 }
 
   
+//Mobile Javascript
+
+function showMobileAddContact() {
+    document.getElementById('modal').classList.remove('notactive');
+    document.getElementById('panel').classList.remove('notactive');
+    document.getElementById('modal').classList.add('active');
+    document.getElementById('panel').classList.add('active');
+
+    document.getElementById(`addContactImgChange`).src = `assets/img/MobileAddContact.png`;
+}
+
+function closeAddContactMobile() {
+    document.getElementById('modal').classList.remove('active');
+    document.getElementById('modal').classList.add('notactive');
+    document.getElementById('panel').classList.add('notactive');
+    setTimeout(() => {
+        document.getElementById('panel').style.right = "-50%"; 
+    }, 500);
+
+    document.getElementById(`addContactImgChange`).src = `assets/img/assets/img/Frame 194.png`;
+}
   
