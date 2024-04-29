@@ -548,7 +548,5 @@ function closeAddContactMobile() {
     setTimeout(() => {
         document.getElementById('panel').style.right = "-50%"; 
     }, 500);
-
-    document.getElementById(`addContactImgChange`).src = `assets/img/assets/img/Frame 194.png`;
 }
   
