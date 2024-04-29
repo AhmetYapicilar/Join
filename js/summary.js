@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     })
 
 async function initSummary(){
-    await loadTasks();
     await loadCountTasks();
     await showSummaryTasks();
 }
@@ -30,7 +29,7 @@ async function showSummaryTasks(){
     await loadTasks();
     for (let i = 0; i < tasks.length; i++) {
         const TASK = tasks[i];
-        if(TASK['priority'] === 'urgent'){
+        if(TASK['priority'].toLowerCase() === 'urgent'){
             urgentTasks++;
             dates.push(TASK['dueDate']);
         }

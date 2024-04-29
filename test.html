@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/board.css">
+</head>
+<style>
+    .task-edit{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 48px 40px 48px 40px;
+        z-index: 90;
+        background-color: white;
+    }
+
+    .column-edit{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .column-edit span{
+        color: #2A3647;
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    .edit-input{
+        box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 21px;
+    gap: 10px;
+    width: 300px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+    }
+
+    .urgentButton-edit{
+      color: black !important;
+      background-color: white !important;
+      font-weight: 400 !important;
+      font-size: 16px !important;
+      width: 33% !important;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+      border: none !important;
+      padding: 0 0 0 0 !important;
+    }
+
+    .mediumButton-edit{
+        color: white !important;
+      background-color: #FFA800 !important;
+      font-weight: 400 !important;
+      font-size: 16px !important;
+      width: 33% !important;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+      border: none !important;
+      padding: 0 0 0 0 !important;
+    }
+
+    .lowButton-edit{
+        color: black !important;
+      background-color: white !important;
+      font-weight: 400 !important;
+      font-size: 16px !important;
+      width: 33% !important;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+      border: none !important;
+      padding: 0 0 0 0 !important;
+    }
+
+    .assignContacts{
+        box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 10px;
+    width: 300px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+    background-image: url(../assets/img/arrow-drop-down.png);
+    background-position: 97%;
+    background-repeat: no-repeat;
+    -webkit-appearance: none !important;
+    }
+
+    .subtask-input{
+        box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 21px;
+    gap: 10px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+    padding-right: 110px;
+    }
+
+    .add-subtasks-btn-edit{
+        position: absolute;
+    right: 12px;
+    top: 12px;
+}
+
+.relative{
+    position: relative;
+}
+
+.flex-board-edit{
+    display: flex;
+    align-items: center;
+    width: 300px;
+}
+    
+</style>
+<body>
+    <div class="task-edit">
+        <div class="column-edit">
+            <span>Title</span>
+            <input class="edit-input" type="text">
+        </div>
+        <div class="column-edit margin-top-16">
+            <span>Description</span>
+            <input class="edit-input" type="text">
+        </div>
+        <div class="column-edit margin-top-16">
+            <span>Due date</span>
+            <input class="edit-input" type="date">
+        </div>
+        <div class="column-edit margin-top-16">
+            <div class="flex-board-edit flex-board gap-16">
+                <button class="urgentButton-edit">Urgent<img src="./assets/img/prioUp.png"></button>
+                <button class="mediumButton-edit">Medium<img src="./assets/img/prioEvenWhite.png"></button>
+                <button class="lowButton-edit">Low<img src="./assets/img/prioDown.png"></button>
+            </div>
+        </div> 
+        <div class="column-edit margin-top-16">
+            <span>Assigned to</span>
+            <select class="assignContacts">
+                <option value="">Select contacts to assign</option>
+            </select>
+            <div class="flex-board">
+                <div class="circle-board background-color-darkblue">AM</div>
+                <div class="circle-board background-color-green">EM</div>
+                <div class="circle-board background-color-violet">MB</div>
+            </div>
+        </div>
+        <div class="column-edit margin-top-16">
+            <span>Subtasks</span>
+            <div class="relative">
+                <input type="text" class="subtask-input" placeholder="Add new subtask">
+                <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask-edit" class="add-subtasks-btn-edit">
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>

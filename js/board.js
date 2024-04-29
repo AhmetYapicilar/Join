@@ -15,6 +15,8 @@ async function initBoard(){
     document.getElementById('section-board-overlay').classList.remove('section-board-overlay');
     document.getElementById('body-board').style.overflow = 'auto';
     for (let x = 0; x < ids.length; x++) {
+        let category = ids[x];
+        taskCounts[category] = 0;
         let contentBefore = document.getElementById(`${ids[x]}`);
         contentBefore.classList.remove('drag-area-highlight');
         contentBefore.innerHTML = '';
@@ -212,10 +214,135 @@ function generateBigTaskHTML(i, title, description, dueDate, priority, priorityI
         </div>
     </div>
     <div class="last-line margin-top-16">
-    <img src="./assets/img/delete (1).png" onmouseover="this.src='./assets/img/deleteHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/delete (1).png';">
+    <img onclick="deleteTask(${i})" src="./assets/img/delete (1).png" onmouseover="this.src='./assets/img/deleteHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/delete (1).png';">
         <div class="vertical-line-board"></div>
-        <img src="./assets/img/edit (1).png" onmouseover="this.src='./assets/img/editHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/edit (1).png';">
+        <img onclick="editTask(${i})" src="./assets/img/edit (1).png" onmouseover="this.src='./assets/img/editHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/edit (1).png';">
     </div>`;
+}
+
+async function deleteTask(i){
+    tasks.splice(i, 1);
+    await setItem('task', tasks);
+    initBoard();
+}
+
+async function editTask(i){
+    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
+    priority = priority.toLowerCase(); 
+    let content = document.getElementById('section-board-overlay');
+    content.innerHTML = '';
+    content.innerHTML = editTaskHTML(i);
+    document.getElementById(`title-id${i}`).value = title;
+    document.getElementById(`description-id${i}`).value = description;
+    document.getElementById(`duedate-id${i}`).value = dueDate;
+    proofPrio(priority, i);
+
+}
+
+async function proofPrio(priority, i){
+    priority = priority.toLowerCase();
+    removeAllClassesFromButton(i);
+    if(priority === 'low'){
+        document.getElementById(`lowButton-id${i}`).classList.add('bg-low');
+        document.getElementById(`low-img-id${i}`).src = './assets/img/prioDownWhite.png';
+    } else if(priority === 'medium'){
+        document.getElementById(`mediumButton-id${i}`).classList.add('bg-medium');
+        document.getElementById(`medium-img-id${i}`).src = './assets/img/prioEvenWhite.png';
+    } else {
+        document.getElementById(`urgentButton-id${i}`).classList.add('bg-urgent');
+        document.getElementById(`urgent-img-id${i}`).src = './assets/img/prioUpWhite.png';
+    }
+}
+
+function removeAllClassesFromButton(i){
+    document.getElementById(`lowButton-id${i}`).classList.remove('bg-low');
+    document.getElementById(`low-img-id${i}`).src = './assets/img/prioDown.png';
+    document.getElementById(`mediumButton-id${i}`).classList.remove('bg-medium');
+    document.getElementById(`medium-img-id${i}`).src = './assets/img/prioEven.png';
+    document.getElementById(`urgentButton-id${i}`).classList.remove('bg-urgent');
+    document.getElementById(`urgent-img-id${i}`).src = './assets/img/prioUp.png';
+}
+
+function editTaskHTML(i){
+    return `
+    <div class="task-edit">
+    <div class="column-edit">
+        <span>Title</span>
+        <input id="title-id${i}" class="edit-input" type="text">
+    </div>
+    <div class="column-edit margin-top-16">
+        <span>Description</span>
+        <input id="description-id${i}" class="edit-input" type="text">
+    </div>
+    <div class="column-edit margin-top-16">
+        <span>Due date</span>
+        <input id="duedate-id${i}" class="edit-input" type="date">
+    </div>
+    <div class="column-edit margin-top-16">
+        <div class="flex-board-edit flex-board gap-16">
+            <button onclick="newPrioToUrgent(${i})" id="urgentButton-id${i}" class="urgentButton-edit">Urgent<img id="urgent-img-id${i}" src="./assets/img/prioUp.png"></button>
+            <button onclick="newPrioToMedium(${i})" id="mediumButton-id${i}" class="mediumButton-edit">Medium<img id="medium-img-id${i}" src="./assets/img/prioEven.png"></button>
+            <button onclick="newPrioToLow(${i})" id="lowButton-id${i}" class="lowButton-edit">Low<img id="low-img-id${i}" src="./assets/img/prioDown.png"></button>
+        </div>
+    </div> 
+    <div class="column-edit margin-top-16">
+        <span>Assigned to</span>
+        <select class="assignContacts">
+            <option value="">Select contacts to assign</option>
+        </select>
+        <div class="flex-board">
+            <div class="circle-board background-color-darkblue">AM</div>
+            <div class="circle-board background-color-green">EM</div>
+            <div class="circle-board background-color-violet">MB</div>
+        </div>
+    </div>
+    <div class="column-edit margin-top-16">
+        <span>Subtasks</span>
+        <div class="relative">
+            <input type="text" class="subtask-input" placeholder="Add new subtask">
+            <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask-edit" class="add-subtasks-btn-edit">
+        </div>
+    </div>
+    <button onclick="saveChangedTask(${i})" class="ok-button">Ok <img src="./assets/img/check.png" alt=""></button>
+</div>`;
+}
+
+async function saveChangedTask(i){
+    const TASK = tasks[i];
+    let title = document.getElementById(`title-id${i}`).value;
+    let description = document.getElementById(`description-id${i}`).value;
+    let dueDate = document.getElementById(`duedate-id${i}`).value;
+    let priority = TASK['priority'];
+    let priorityIcon = proofPriority(priority);
+    tasks[i]['title'] = title;
+    tasks[i]['description'] = description;
+    tasks[i]['dueDate'] = dueDate;
+    await setItem('task', JSON.stringify(tasks));
+    showTaskInBig(i);
+}
+
+async function newPrioToUrgent(i){
+    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
+    priority = 'Urgent';
+    tasks[i]['priority'] = 'urgent';
+    proofPrio(priority, i);
+    await setItem('task', JSON.stringify(tasks));
+}
+
+async function newPrioToMedium(i){
+    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
+    priority = 'Medium';
+    tasks[i]['priority'] = 'medium';
+    proofPrio(priority, i);
+    await setItem('task', JSON.stringify(tasks));
+}
+
+async function newPrioToLow(i){
+    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
+    priority = 'Low';
+    tasks[i]['priority'] = 'low';
+    proofPrio(priority, i);
+    await setItem('task', JSON.stringify(tasks));
 }
 
 async function closeTaskInBig(i){
@@ -229,6 +356,7 @@ async function closeTaskInBig(i){
 
 async function proofPriority(priority){
     for (let i = 0; i < priorities.length; i++) {
+        priority = priority.toLowerCase();
         const PRIO = priorities[i];
         if(priority === PRIO){
             let pic = priopics[i];
@@ -266,4 +394,113 @@ function highlight(id) {
 
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
+}
+
+async function addTaskOnBoard(){
+    document.getElementById('section-board-overlay').classList.add('section-board-overlay');
+    document.getElementById('body-board').style.overflow = 'hidden';
+    let content = document.getElementById('section-board-overlay');
+    content.innerHTML = addTaskOnBoardHTML();
+}
+
+function addTaskOnBoardHTML(){
+    return `
+    <div class="addTaskContentContainerBoard">
+    <div class="headlineAddTaskContainer">
+        <h1 class="headlineAddTask">Add Task</h1>
+    </div>
+
+    <form id="addTaskForm" onsubmit="return false">
+        <div class="leftAddTaskContainer fontSize20px">
+            <div class="titleContainer">
+                <div class="flex-start">
+                    <span>Title</span>
+                    <p class="redText">*</p>
+                </div>
+                <input required class="titleInputAddTask fontSize20px" id="titleInput" type="text"
+                    placeholder="Enter a title">
+            </div>
+
+            <div class="descriptionContainer">
+                <span>Description</span>
+                <textarea class="descriptionTextArea fontSize20px" name="" id="description" cols="30" rows="10"
+                    placeholder="Enter a Description"></textarea>
+            </div>
+
+            <div class="assignContactsContainer">
+                <span>Assigned to</span>
+                <select class="assignContacts fontSize20px" id="contacts" name="contacts">
+                    <option value="">Select contacts to assign</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="addTaskDividingBar"></div>
+
+        <div class="rightAddTaskContainer fontSize20px">
+            <div class="taskDateContainer">
+                <div class="flex-start">
+                    <span>Due Date</span>
+                    <p class="redText">*</p>
+                </div>
+                <input required class="dateInput fontSize20px" id="dateInputPicker" type="date" id="date">
+            </div>
+            <div class="prioPickerContainer">
+                <span>Prio</span>
+                <div class="prioPickerButtonsContainer">
+                    <button type="button" class="urgentButton fontSize20px" id="urgent"
+                        onclick="selectPriority('urgent')">Urgent <img src="./assets/img/prioUp.png"></button>
+                    <button type="button" class="mediumButton fontSize20px mediumButtonSelected" id="medium"
+                        onclick="selectPriority('medium')">Medium <img src="./assets/img/prioEven.png"></button>
+                    <button type="button" class="lowButton fontSize20px" id="low"
+                        onclick="selectPriority('low')">Low <img src="./assets/img/prioDown.png"></button>
+                </div>
+            </div>
+            <div class="categoryContainer">
+                <div class="flex-start">
+                    <span>Category</span>
+                    <p class="redText">*</p>
+                </div>
+                <select required class="categoryPicker fontSize20px" id="category" name="category">
+                    <option value="1" disabled selected hidden>Select task category</option>
+                    <option value="User Story">User Story</option>
+                    <option value="Technical Task">Technical Task</option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <div class="">
+                    <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off"
+                        placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)"
+                        size="10" />
+                    <img src="./assets/img/add-subtask.png"
+                        onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask"
+                        class="add-subtasks-btn" />
+                    <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn d-none">
+                        <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
+                            onclick="submitSubtask('subtask-input')" />
+                        <span class="vertical-line-sub"></span>
+                        <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
+                    </div>
+                </div>
+                <ul id="subtask-container"></ul>
+            </div>
+
+        </div>
+        <div class="fieldRequiredText">
+            <div class="flex-start">
+                <p class="redText">*</p>
+                <span>This field is required</span>
+            </div>
+        </div>
+        <div class="clearCreateButtonsContainer">
+            <button type="button" class="clearButton" onclick="clearForm()">Clear <img
+                    src="./assets/img/iconoir_cancel.png" alt=""></button>
+            <button type="submit" class="createButton" id="createTaskButton">Create Task <img
+                    src="./assets/img/check.png" alt=""></button>
+
+        </div>
+    </form>
+
+</div>`;
 }

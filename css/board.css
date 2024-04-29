@@ -542,3 +542,325 @@ background-color: #D1D1D1;
     cursor: pointer;
 }
 
+
+.task-edit{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 56px 48px 56px 48px;
+    z-index: 90;
+    background-color: white;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.column-edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.column-edit span{
+    color: #2A3647;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.edit-input{
+    box-sizing: border-box;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 12px 21px;
+gap: 10px;
+width: 300px;
+height: 48px;
+background: #FFFFFF;
+border: 1px solid #D1D1D1;
+border-radius: 10px;
+flex: none;
+font-size: 16px;
+}
+
+.urgentButton-edit{
+  color: black !important;
+  background-color: white !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  width: 33% !important;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border: none !important;
+  padding: 0 0 0 0 !important;
+}
+
+.mediumButton-edit{
+    color: black !important;
+  background-color: white !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  width: 33% !important;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border: none !important;
+  padding: 0 0 0 0 !important;
+}
+
+.lowButton-edit{
+    color: black !important;
+  background-color: white !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  width: 33% !important;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border: none !important;
+  padding: 0 0 0 0 !important;
+}
+
+.assignContacts{
+    box-sizing: border-box;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 12px 16px;
+gap: 10px;
+width: 300px;
+height: 48px;
+background: #FFFFFF;
+border: 1px solid #D1D1D1;
+border-radius: 10px;
+flex: none;
+background-image: url(../assets/img/arrow-drop-down.png);
+background-position: 97%;
+background-repeat: no-repeat;
+-webkit-appearance: none !important;
+}
+
+.subtask-input{
+    box-sizing: border-box;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 12px 21px;
+gap: 10px;
+height: 48px;
+background: #FFFFFF;
+border: 1px solid #D1D1D1;
+border-radius: 10px;
+flex: none;
+padding-right: 110px;
+}
+
+.add-subtasks-btn-edit{
+    position: absolute;
+right: 12px;
+top: 12px;
+}
+
+.relative{
+position: relative;
+}
+
+.flex-board-edit{
+display: flex;
+align-items: center;
+width: 300px;
+}
+
+.bg-low{
+    background-color: rgb(122,226,41) !important;
+    color: white !important;
+}
+
+.bg-medium{
+    background-color: rgb(255,168,0) !important;
+    color: white !important;
+}
+
+.bg-urgent{
+    background-color: rgb(255,61,0) !important;
+    color: white !important;
+}
+
+.ok-button{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    gap: 4px;
+    width: 70px;
+    height: 40px;
+    background: #2A3647;
+    border-radius: 10px;
+    flex: none;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    border-width: 0px;
+}
+
+.ok-button:hover{
+    background-color: rgb(13,153,255);
+}
+
+/* addTask-Container */
+
+.addTaskContentContainer {
+    display: flex;
+    height: 100vh;
+    width: auto;
+    background: #F6F7F8;
+}
+
+.headlineAddTaskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 1px;
+    position: absolute;
+    width: 278px;
+    height: 73px;
+    left: 328px;
+    top: 206px;
+}
+
+.leftAddTaskContainer {
+    position: absolute;
+    width: 440px;
+    height: 376px;
+    left: 328px;
+    top: 327px;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 96px;
+    left: 0px;
+    top: 0px;
+}
+
+.descriptionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 168px;
+    left: 0px;
+    top: 112px;
+}
+
+.assignContactsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 80px;
+    left: 0px;
+    top: 296px;
+}
+
+.rightAddTaskContainer {
+    position: absolute;
+    width: 440px;
+    height: 416px;
+    left: 864.25px;
+    top: 327px;
+}
+
+.taskDateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 96px;
+    left: 0px;
+    top: 0px;
+}
+
+.prioPickerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 88px;
+    left: 0px;
+    top: 120px;
+}
+
+.prioPickerButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    width: 440px;
+    height: 56px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.categoryContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 80px;
+    left: 0px;
+    top: 232px;
+}
+
+.subtaskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    position: absolute;
+    width: 440px;
+    height: 80px;
+    left: 0px;
+    top: 336px;
+}
+
+.clearCreateButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    position: absolute;
+    width: 309px;
+    height: 56px;
+    left: 995.25px;
+    top: 889px;
+}

@@ -1,6 +1,9 @@
 let tasks = [];
 let subtasks = [];
 
+async function initi(){
+    users = JSON.parse(await getItem('users'));
+}
 
 async function loadTasks() {
     try {
