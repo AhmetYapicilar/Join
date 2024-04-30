@@ -1,4 +1,5 @@
 let users = [];
+let lastColor = null;
 
 async function init(){
     loadUsers();

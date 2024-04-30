@@ -54,6 +54,7 @@ async function setItemLocalStorage(contactId, name, email, number, initials, ini
     await setItem('users', JSON.stringify(contactList));
 }
 
+//Eine zufällige Farbe für den Hintergund im Kreis generieren lassen
 function randomColor() {
     const colors = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', '#ADD8E6', '#FF6347', '#FFC0CB', '#00FF00', '#00BFFF', '#9370DB', '#FF69B4', '#FFA07A', '#BA55D3', '#7FFFD4']; 
     if (colors.length === 1) return colors[0]; 
