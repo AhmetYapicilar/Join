@@ -16,10 +16,14 @@ async function loadUsers(){
 }
 
 async function register(){
+    let input = document.getElementById(`name1`).value;
+    let initials = input.match(/\b\w/g) || [];
+    let result = initials.join('');
     registerBTN.disabled = true;
     const color = randomColor();
     users.push({
         name: name1.value,
+        initials: result,
         email: email.value,
         password: passwordInput.value,
         Color: color
