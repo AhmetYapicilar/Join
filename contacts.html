@@ -18,7 +18,7 @@
     <div w3-include-html="./assets/templates/side_menu.html"></div>
 
     <div class="main">
-        <div class="leftContainer">
+        <div id="leftContainerContacts" class="leftContainer">
             <div class="phoneListAndButton">
                 <button class="addNewContact" id="addNewContactToPhoneList">Add new contact <img class="personAdd" src="assets/img/person_add.png" alt=""></button>
                 <div class="showAllContacts">
@@ -34,14 +34,16 @@
 
         
 
-        <div class="rightContainer">
+        <div id="rightContainerContacts" class="rightContainer">
             <img class="betterWaT show" id="BetterWaTId" src="assets/img/contacts-BetterWaT.png" alt="">  
-
+            <img class="betterWatMobile" src="assets/img/betterWaTMobile.png">
+            <img onclick="showContactListMobile()" class="arrowLeftShowContact" src="assets/img/arrow-left-line.png">
             <div id="contactAddedSuccesfullyId" class="contactAddedSuccesfully">
                 <img src="assets/img/addedContadctSuccesfully.png">
             </div>
             
             <div id="targetArea"></div>
+            <img onclick="showEditDeleteMobileOnSlide()" class="menuOptionsContact" src="assets/img/MenuContactOptions.png">
         </div>
 
 

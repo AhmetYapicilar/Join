@@ -549,4 +549,9 @@ function closeAddContactMobile() {
         document.getElementById('panel').style.right = "-50%"; 
     }, 500);
 }
+
+function showContactListMobile() {
+    document.getElementById(`rightContainerContacts`).classList.add(`dontDisplayOnMobile`)
+    document.getElementById(`leftContainerContacts`).classList.add(`displayOnMobile`)
+}
   

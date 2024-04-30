@@ -832,6 +832,44 @@ li {
     cursor: pointer;
 }
 
+.betterWatMobile {
+    position: relative;
+    width: 213px;
+    height: 104px;
+    display: flex;
+    top: 128px;
+    display: none;
+}
+
+.arrowLeftShowContact {
+    width: 32px;
+    height: 32px;
+    top: 128px;
+    right: 30px;
+    position: fixed;
+    display: none;
+}
+
+.arrowLeftShowContact:hover {
+    cursor: pointer;
+}
+
+.menuOptionsContact {
+    display: none;
+}
+
+.menuOptionsContact:hover {
+    cursor: pointer;
+}
+
+.displayOnMobile {
+    display: flex;
+}
+
+.dontDisplayOnMobile {
+    display: none;
+}
+
 
 
 @media (min-height: 1305px) {
@@ -870,7 +908,7 @@ li {
 
     .JoinLogoHeaderImg {
         display: flex !important;
-        margin-left: 5%;
+        margin-left: 40px;
     }
 
     .fixed-width-104 {
@@ -930,6 +968,29 @@ li {
 
     .addNewContact {
         display: none;
+    }
+
+    .betterWaT {
+        display: none;
+    }
+
+    .betterWatMobile {
+        display: flex;
+        left: 40px;
+    }
+
+    .arrowLeftShowContact {
+        width: 32px;
+        height: 32px;
+        margin-right: 5%;
+        display: flex;
+    }
+
+    .menuOptionsContact {
+        display: flex;
+        position: fixed;
+        bottom: 10%;
+        right: 7%;
     }
 }
 
@@ -1060,6 +1121,42 @@ li {
         top: 7%;
         left: 42%;
     }
+
+    .betterWatMobile {
+        display: flex;
+        left: 20px;
+    }
+
+    .arrowLeftShowContact {
+        width: 32px;
+        height: 32px;
+        margin-left: 96%;
+        display: flex;
+        margin-right: 0%;
+    }
+
+    .JoinLogoHeaderImg {
+        margin-left: 20px !important;
+    }
+
+    .menuOptionsContact {
+        display: flex;
+        position: fixed;
+        bottom: 10%;
+        right: 7%;
+    }
+
+    #phonebook {
+        padding: 24px;
+    }
+
+    #phonebook h2 {
+        padding-bottom: 24px;
+    }
+
+    .initials-circle {
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -1088,6 +1185,12 @@ li {
     .right-Container {
         width: 70%;
         margin-top: 20%;
+    }
+
+    .arrowLeftShowContact {
+        width: 32px;
+        height: 32px;
+        margin-left: 92%;
     }
 }
 
