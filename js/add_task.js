@@ -1,9 +1,82 @@
 let tasks = [];
 let subtasks = [];
 
-async function initi(){
-    users = JSON.parse(await getItem('users'));
+
+
+
+
+let users = [];
+let selectedContacts = [];
+
+function toggleDropdown() {
+    const dropdownContent = document.querySelector('.dropdownContent');
+    dropdownContent.classList.toggle('show');
 }
+
+async function loadAndRenderNames() {
+    try {
+        users = JSON.parse(await getItem('users'));
+        const dropdownContent = document.querySelector('.dropdownContent');
+        dropdownContent.innerHTML = '';
+        users.forEach(user => {
+            if (user.name || user.Name) {
+                const name = user.name || user.Name;
+                dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}</span>`;
+            }
+        });
+    } catch (error) {
+        console.error('Error loading and rendering names:', error);
+    }
+}
+
+function searchContacts() {
+    const searchInput = document.querySelector('.searchInput');
+    const filter = searchInput.value.toUpperCase();
+    const dropdownContent = document.querySelector('.dropdownContent');
+    
+    dropdownContent.innerHTML = '';
+
+    users.forEach(user => {
+        const name = user.name || user.Name;
+        if (name.toUpperCase().startsWith(filter)) {
+            const span = document.createElement('span');
+            span.textContent = name;
+            span.onclick = function() {
+                selectContact(name);
+            };
+            dropdownContent.appendChild(span);
+        }
+    });
+
+    dropdownContent.classList.add('show');
+}
+
+function selectContact(name) {
+    const selectedContactIndex = selectedContacts.indexOf(name);
+    if (selectedContactIndex === -1) {
+        selectedContacts.push(name);
+    } else {
+        selectedContacts.splice(selectedContactIndex, 1);
+    }
+    renderSelectedContacts();
+}
+
+function renderSelectedContacts() {
+    const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
+    selectedContactsContainer.innerHTML = '';
+    selectedContacts.forEach(contact => {
+        const initials = contact.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16); // Zufällige Farbe
+        selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${randomColor};">${initials}</div>`;
+    });
+}
+
+
+
+
+
+
+
 
 async function loadTasks() {
     try {
@@ -165,18 +238,18 @@ function clearSubtasks() {
 }
 
 function activateInput() {
-	let addSubtask = document.getElementById("add-subtask");
-	let subtasksInputActions = document.getElementById("subtask-input-actions");
+    let addSubtask = document.getElementById("add-subtask");
+    let subtasksInputActions = document.getElementById("subtask-input-actions");
 
-	addSubtask.classList.add("d-none");
-	subtasksInputActions.classList.remove("d-none");
+    addSubtask.classList.add("d-none");
+    subtasksInputActions.classList.remove("d-none");
 }
 
 function checkSubmit(event) {
-	if (event.key === "Enter") {
-		event.preventDefault();
-		submitSubtask();
-	}
+    if (event.key === "Enter") {
+        event.preventDefault();
+        submitSubtask();
+    }
 }
 
 function submitSubtask() {
@@ -200,51 +273,51 @@ function submitSubtask() {
 }
 
 function deactivateInput() {
-	let addSubtask = document.querySelector("#add-subtask");
-	let subtasksInputActions = document.querySelector("#subtask-input-actions");
+    let addSubtask = document.querySelector("#add-subtask");
+    let subtasksInputActions = document.querySelector("#subtask-input-actions");
 
-	addSubtask.classList.remove("d-none");
-	subtasksInputActions.classList.add("d-none");
-	document.querySelector("#subtask-input").value = "";
+    addSubtask.classList.remove("d-none");
+    subtasksInputActions.classList.add("d-none");
+    document.querySelector("#subtask-input").value = "";
 }
 
 function setFocus() {
-	document.getElementById("subtask-input").focus();
+    document.getElementById("subtask-input").focus();
 }
 
 function deleteSubtask(i) {
-	subtasks.splice(i, 1);
-	renderSubtasks();
+    subtasks.splice(i, 1);
+    renderSubtasks();
 }
 
 function editSubtask(i) {
-	let subtaskContent = document.querySelector(`#subtask-element${i}`);
-	let editContainer = document.getElementById("edit-subtask-container");
-	let subtaskEditInput = document.querySelector(`#edit-subtask-${i}`);
-	subtaskContent.classList.add("d-none");
-	editContainer.classList.remove("d-none");
-	document.getElementById(`edit-subtask-${i}`).focus();
-	subtaskEditInput.value = subtasks[i].subtaskName;
+    let subtaskContent = document.querySelector(`#subtask-element${i}`);
+    let editContainer = document.getElementById("edit-subtask-container");
+    let subtaskEditInput = document.querySelector(`#edit-subtask-${i}`);
+    subtaskContent.classList.add("d-none");
+    editContainer.classList.remove("d-none");
+    document.getElementById(`edit-subtask-${i}`).focus();
+    subtaskEditInput.value = subtasks[i].subtaskName;
 }
 function checkEditSubmit(i, event) {
-	if (event.key === "Enter") {
-		event.preventDefault();
-		submitChange(i);
-	}
+    if (event.key === "Enter") {
+        event.preventDefault();
+        submitChange(i);
+    }
 }
 
 function submitChange(i) {
-	let newSubtaskContent = document.querySelector(`#edit-subtask-${i}`).value;
-	subtasks[i].subtaskName = newSubtaskContent;
-	renderSubtasks();
+    let newSubtaskContent = document.querySelector(`#edit-subtask-${i}`).value;
+    subtasks[i].subtaskName = newSubtaskContent;
+    renderSubtasks();
 }
 
 function renderSubtasks() {
-	let subtaskList = document.querySelector("#subtask-container");
-	subtaskList.innerHTML = "";
-	for (let i = 0; i < subtasks.length; i++) {
-		const element = subtasks[i].subtaskName;
-		subtaskList.innerHTML += /*html*/ `
+    let subtaskList = document.querySelector("#subtask-container");
+    subtaskList.innerHTML = "";
+    for (let i = 0; i < subtasks.length; i++) {
+        const element = subtasks[i].subtaskName;
+        subtaskList.innerHTML += /*html*/ `
             <li
 				id="todo-id-${i}"
 				class="todo-subtask d-flex"
@@ -272,5 +345,5 @@ function renderSubtasks() {
                 </div>
 			</li>
         `;
-	}
+    }
 }
