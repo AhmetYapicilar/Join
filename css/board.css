@@ -103,7 +103,7 @@ gap: 26px;
 display: flex;
 flex-direction: column;
 height: 100%;
-min-width: 100px;
+width: 200px;
 gap: 16px;
 }
 
@@ -735,11 +735,15 @@ width: 300px;
     background: #F6F7F8;
     z-index: 99;
     position: relative;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .headlineAddTaskContainerBoard {
     font-size: 30px;
     margin-bottom: 10px;
+    position: absolute;
+    width: 90%;
 }
 
 .leftAddTaskContainer {
@@ -898,6 +902,7 @@ width: 300px;
     border-radius: 10px;
     border: none;
     flex: none;
+    cursor: pointer;
 }
 
 .urgentButtonSelected {
@@ -919,6 +924,7 @@ width: 300px;
     border-radius: 10px;
     border: none;
     flex: none;
+    cursor: pointer;
 }
 
 .mediumButtonSelected {
@@ -940,6 +946,7 @@ width: 300px;
     border-radius: 10px;
     border: none;
     flex: none;
+    cursor: pointer;
 }
 
 .lowButtonSelected {
@@ -1062,10 +1069,11 @@ width: 300px;
     padding: 0px;
     gap: 16px;
     position: absolute;
+    bottom: 20px;
+    right: 20px;
     width: 309px;
     height: 56px;
-    left: 995.25px;
-    top: 889px;
+    
 }
 
 .fieldRequiredText {
@@ -1098,6 +1106,7 @@ width: 300px;
     color: #2A3647;
     font-size: 20px;
     font-weight: 400;
+    cursor: pointer;
 }
 
 .createButton {
@@ -1115,4 +1124,9 @@ width: 300px;
     color: #FFFFFF;
     font-size: 20px;
     font-weight: 700;
+    cursor: pointer;
+}
+
+.close-task{
+    cursor: pointer;
 }

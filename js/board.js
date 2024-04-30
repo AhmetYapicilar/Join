@@ -60,6 +60,9 @@ async function initVariablesForShowTasks(i){
         let title = TASK["title"];
         let description = TASK["description"];
         let dueDate = TASK["dueDate"];
+        if(!TASK['priority']){
+            TASK['priority']='medium';
+        }
         let priority = TASK["priority"];
         let priorityIcon = await proofPriority(priority);
         return {TASK, category2, title, description, dueDate, priority, priorityIcon};
@@ -397,34 +400,68 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
-async function addTaskOnBoard(){
+let newTaskNumber=0;
+let newAddedPrio=[];
+let newTaskCategory;
+
+async function addTaskOnBoard(selectedCategory){
+    newTaskCategory = selectedCategory;
     document.getElementById('overlay-add-task-board').classList.add('overlay-add-task-board');
     document.getElementById('body-board').style.overflow = 'hidden';
     let content = document.getElementById('overlay-add-task-board');
-    content.innerHTML = addTaskOnBoardHTML();
+    content.innerHTML = addTaskOnBoardHTML(newTaskNumber);
 }
 
-function addTaskOnBoardHTML(){
+async function createNewTask(){
+    let newTitle = document.getElementById(`newTaskTitle${newTaskNumber}`).value;
+    let newDescription = document.getElementById(`newTaskDescription${newTaskNumber}`).value;
+    let newDueDate = document.getElementById(`newTaskDate${newTaskNumber}`).value;
+    let newCategory = document.querySelector(".categoryPicker").value;
+    let newCategory2 = newTaskCategory;
+    let newPriority = newAddedPrio[0];
+    tasks.push({
+        title: newTitle,
+        description: newDescription,
+        dueDate: newDueDate,
+        category: newCategory,
+        category2: newCategory2,
+        priority: newPriority
+    });
+    newTaskNumber++;
+    await setItem('task', JSON.stringify(tasks));
+}
+
+async function newTaskWithPrio(prio){
+    newAddedPrio.splice(0, newAddedPrio.length);
+    newAddedPrio.push(prio);
+}
+
+async function closeAddTask(){
+    
+}
+
+function addTaskOnBoardHTML(newTaskNumber){
     return `
-    <div class="addTaskContentContainerBoard">
-    <div class="headlineAddTaskContainerBoard">
+    <div id="newTask${newTaskNumber}" class="addTaskContentContainerBoard">
+    <div class="headlineAddTaskContainerBoard space-between-board">
         <h1 class="headlineAddTask">Add Task</h1>
+        <img onclick="closeAddTask()" src="./assets/img/close.png" class="close-task">
     </div>
 
-    <form id="addTaskForm" onsubmit="return false">
+    <form id="addTaskForm" onsubmit="createNewTask(); return false">
         <div class="leftAddTaskContainer fontSize20px">
             <div class="titleContainer">
                 <div class="flex-start-board">
                     <span>Title</span>
                     <p class="redText">*</p>
                 </div>
-                <input required class="titleInputAddTask fontSize20px" id="titleInput" type="text"
+                <input required class="titleInputAddTask fontSize20px" id="newTaskTitle${newTaskNumber}" type="text"
                     placeholder="Enter a title">
             </div>
 
             <div class="descriptionContainer">
                 <span>Description</span>
-                <textarea class="descriptionTextArea fontSize20px" name="" id="description" cols="30" rows="10"
+                <textarea class="descriptionTextArea fontSize20px" name="" id="newTaskDescription${newTaskNumber}" cols="30" rows="10"
                     placeholder="Enter a Description"></textarea>
             </div>
 
@@ -444,17 +481,17 @@ function addTaskOnBoardHTML(){
                     <span>Due Date</span>
                     <p class="redText">*</p>
                 </div>
-                <input required class="dateInput fontSize20px" id="dateInputPicker" type="date" id="date">
+                <input required class="dateInput fontSize20px" id="newTaskDate${newTaskNumber}" type="date" id="date">
             </div>
             <div class="prioPickerContainer">
                 <span>Prio</span>
                 <div class="prioPickerButtonsContainer">
                     <button type="button" class="urgentButton fontSize20px" id="urgent"
-                        onclick="selectPriority('urgent')">Urgent <img src="./assets/img/prioUp.png"></button>
+                        onclick="selectPriority('urgent'); newTaskWithPrio('urgent')">Urgent <img src="./assets/img/prioUp.png"></button>
                     <button type="button" class="mediumButton fontSize20px mediumButtonSelected" id="medium"
-                        onclick="selectPriority('medium')">Medium <img src="./assets/img/prioEven.png"></button>
+                        onclick="selectPriority('medium'); newTaskWithPrio('medium')">Medium <img src="./assets/img/prioEven.png"></button>
                     <button type="button" class="lowButton fontSize20px" id="low"
-                        onclick="selectPriority('low')">Low <img src="./assets/img/prioDown.png"></button>
+                        onclick="selectPriority('low'); newTaskWithPrio('low')">Low <img src="./assets/img/prioDown.png"></button>
                 </div>
             </div>
             <div class="categoryContainer">

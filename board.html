@@ -29,14 +29,14 @@
                 <img class="inputfield-icon-search" src="./assets/img/search-icon.png">
                 <img class="inputfield-icon-vertical-line" src="./assets/img/vertical-line-board.png">
             </div>
-            <button onclick="addTaskOnBoard()">Add Task <img src="./assets/img/button-plus-board.png"></button>
+            <button onclick="addTaskOnBoard('To-Do')">Add Task <img src="./assets/img/button-plus-board.png"></button>
         </div>
     </div>
 <div class="board-distribution">
     <div class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">To do</span>
-            <img class="plus-border-board" src="./assets/img/plus-button-board.png">
+            <img onclick="addTaskOnBoard('To-Do')" class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
         <div id="To-Do" class="fields" ondragleave="removeHighlight('To-Do')" ondrop="moveTo('To-Do')" ondragover="allowDrop(event); highlight('To-Do')"></div>
     </div>
@@ -44,7 +44,7 @@
     <div class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">In progress</span>
-            <img class="plus-border-board" src="./assets/img/plus-button-board.png">
+            <img onclick="addTaskOnBoard('In-Progress')" class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
         <div id="In-Progress" class="fields" ondragleave="removeHighlight('In-Progress')"  ondrop="moveTo('In-Progress')" ondragover="allowDrop(event); highlight('In-Progress')">
         </div>
@@ -53,7 +53,7 @@
     <div class="card-board">
         <div class="space-between-board height-board">
             <span class="title-board">Await feedback</span>
-            <img class="plus-border-board" src="./assets/img/plus-button-board.png">
+            <img onclick="addTaskOnBoard('Await-Feedback')" class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
         <div id="Await-Feedback" class="fields" ondragleave="removeHighlight('Await-Feedback')"  ondrop="moveTo('Await-Feedback')" ondragover="allowDrop(event); highlight('Await-Feedback')">
         </div>

@@ -80,6 +80,8 @@ async function createTask() {
     }
 }
 
+
+
 function resetButtons() {
     document.querySelectorAll('.urgentButton, .mediumButton, .lowButton').forEach(button => {
         button.classList.remove('urgentButtonSelected', 'mediumButtonSelected', 'lowButtonSelected');
