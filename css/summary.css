@@ -61,6 +61,35 @@ body{
     align-items: center;
     justify-content: center;
     box-shadow: 0, 0, 4px, 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.circle-summary{
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 8px;
+    background-color: #2A3647;
+}
+
+.To-do:hover{
+    background-color: #2A3647;
+}
+
+.To-do:hover .circle-summary {
+    background-color: white;
+}
+
+.To-do:hover .circle-summary img {
+    filter: brightness(0.2);
 }
 
 .column-summary{
@@ -84,6 +113,14 @@ body{
     color: #2A3647;
 }
 
+.To-do:hover .column-summary div {
+    color: white;
+}
+
+.To-do:hover .column-summary span {
+    color: white;
+}
+
 .second-line{
     width: 560px;
     height: 168px;
@@ -96,6 +133,17 @@ body{
     display: flex;
     align-items: center;
     position: relative;
+}
+
+.second-line:hover{
+    background-color: #2A3647;
+    cursor: pointer;
+}
+
+.second-line:hover .column-summary,
+.second-line:hover .column-summary span,
+.second-line:hover .date  {
+    color: white !important; /* Ändere die Schriftfarbe auf Weiß */
 }
 
 .urgency{
@@ -148,6 +196,16 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+.tasks:hover{
+    background-color: #2A3647;
+}
+
+.tasks:hover div,
+.tasks:hover span{
+    color: white !important;
 }
 
 .center-summary{

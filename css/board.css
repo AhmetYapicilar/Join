@@ -737,6 +737,12 @@ width: 300px;
     position: relative;
     border-radius: 20px;
     padding: 20px;
+    transform: translateX(5000px);
+    transition: all ease-in-out 800ms;
+}
+
+.showAddTask{
+    transform: translateX(0);
 }
 
 .headlineAddTaskContainerBoard {

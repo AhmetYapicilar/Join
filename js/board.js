@@ -410,6 +410,9 @@ async function addTaskOnBoard(selectedCategory){
     document.getElementById('body-board').style.overflow = 'hidden';
     let content = document.getElementById('overlay-add-task-board');
     content.innerHTML = addTaskOnBoardHTML(newTaskNumber);
+    setTimeout(() => {
+        document.getElementById(`newTask${newTaskNumber}`).classList.add('showAddTask');
+        }, 100);
 }
 
 async function createNewTask(){
@@ -436,16 +439,21 @@ async function newTaskWithPrio(prio){
     newAddedPrio.push(prio);
 }
 
-async function closeAddTask(){
-    
+async function closeAddTask(newTaskNumber){
+    document.getElementById(`newTask${newTaskNumber}`).classList.remove('showAddTask');
+    document.getElementById('body-board').style.overflow = 'auto';
+    setTimeout(() => {
+        document.getElementById('overlay-add-task-board').classList.remove('overlay-add-task-board'); // Verstecke das Element nach der Animation
+    }, 400);
 }
+
 
 function addTaskOnBoardHTML(newTaskNumber){
     return `
     <div id="newTask${newTaskNumber}" class="addTaskContentContainerBoard">
     <div class="headlineAddTaskContainerBoard space-between-board">
         <h1 class="headlineAddTask">Add Task</h1>
-        <img onclick="closeAddTask()" src="./assets/img/close.png" class="close-task">
+        <img onclick="closeAddTask(${newTaskNumber})" src="./assets/img/close.png" class="close-task">
     </div>
 
     <form id="addTaskForm" onsubmit="createNewTask(); return false">

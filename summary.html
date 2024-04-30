@@ -30,15 +30,19 @@
     <div class="main-container">
       <div class="left-content">
         <div class="first-line">
-          <div id="summary-to-do" class="To-do">
-            <img src="./assets/img/pencil-icon.png" />
+          <div onclick="openBoard()" id="summary-to-do" class="To-do">
+            <div class="circle-summary">
+              <img src="./assets/img/pencil.png">
+            </div>
             <div class="column-summary align-items-center-summary">
               <div id="to-do-content"></div>
               <span>To-do</span>
             </div>
           </div>
-          <div class="To-do">
-            <img src="./assets/img/check-icon.png" />
+          <div class="To-do" onclick="openBoard()">
+            <div class="circle-summary">
+              <img src="./assets/img/checksumm.png">
+            </div>
             <div class="column-summary align-items-center-summary">
               <div id="done-content"></div>
               <span>Done</span>
@@ -46,7 +50,7 @@
           </div>
         </div>
 
-        <div class="second-line">
+        <div class="second-line" onclick="openBoard()">
             <div class="urgency">
                 <img src="./assets/img/arrowUp-icon.png">
                 <div class="column-summary align-items-center-summary">
@@ -61,15 +65,15 @@
             </div>
         </div>
         <div class="third-line">
-            <div class="tasks column-summary center-summary">
+            <div class="tasks column-summary center-summary" onclick="openBoard()">
                 <div id="tasks-in-board-content"></div>
                 <span>Tasks in<br> Board</span>
             </div>
-            <div class="tasks column-summary center-summary">
+            <div class="tasks column-summary center-summary" onclick="openBoard()">
                 <div id="tasks-in-progress-content"></div>
                 <span>Tasks in<br> Progress</span>
             </div>
-            <div class="tasks column-summary center-summary">
+            <div class="tasks column-summary center-summary" onclick="openBoard()">
                 <div id="awaiting-feedback-content"></div>
                 <span>Awaiting<br> Feedback</span>
             </div>
