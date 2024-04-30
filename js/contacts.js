@@ -532,6 +532,8 @@ async function deleteContacts(index) {
   
 //Mobile Javascript
 
+
+//Zeigt addContact in Mobile Version an
 function showMobileAddContact() {
     document.getElementById('modal').classList.remove('notactive');
     document.getElementById('panel').classList.remove('notactive');
@@ -541,6 +543,8 @@ function showMobileAddContact() {
     document.getElementById(`addContactImgChange`).src = `assets/img/MobileAddContact.png`;
 }
 
+
+//schließt addContact in Mobile version
 function closeAddContactMobile() {
     document.getElementById('modal').classList.remove('active');
     document.getElementById('modal').classList.add('notactive');
@@ -550,6 +554,8 @@ function closeAddContactMobile() {
     }, 500);
 }
 
+
+//Zeigt Kontaktliste wieder an, nachdem man auf Kontaktdetails gegangen ist
 function showContactListMobile() {
     document.getElementById(`rightContainerContacts`).classList.add(`dontDisplayOnMobile`)
     document.getElementById(`leftContainerContacts`).classList.add(`displayOnMobile`)
