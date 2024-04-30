@@ -41,6 +41,7 @@ async function getItem(key) {
 //Dateien von addKontakt im backend speichern lassen mit bestimmten keys, function ausführen die eine zufällige
 //Farbe generiert und abspeichert
 async function setItemLocalStorage(contactId, name, email, number, initials, initialLetter) {
+    const color = randomColor();
     contactList.push({
         id: contactId,
         Name: name,
@@ -53,7 +54,17 @@ async function setItemLocalStorage(contactId, name, email, number, initials, ini
     await setItem('users', JSON.stringify(contactList));
 }
 
+function randomColor() {
+    const colors = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', '#ADD8E6', '#FF6347', '#FFC0CB', '#00FF00', '#00BFFF', '#9370DB', '#FF69B4', '#FFA07A', '#BA55D3', '#7FFFD4']; 
+    if (colors.length === 1) return colors[0]; 
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * colors.length);
+    } while (colors[randomIndex] === lastColor); 
 
+    lastColor = colors[randomIndex];
+    return colors[randomIndex];
+}
 
 //Ruft die Funktion zum gruppieren der Kontakte auf, zeigt Telefonbuch an
 function showContactlist() {

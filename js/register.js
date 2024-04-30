@@ -16,11 +16,12 @@ async function loadUsers(){
 
 async function register(){
     registerBTN.disabled = true;
+    const color = randomColor();
     users.push({
         name: name1.value,
         email: email.value,
         password: passwordInput.value,
-        color: randomColor()
+        Color: color
     });
     await setItem('users', JSON.stringify(users));
     resetForm();
