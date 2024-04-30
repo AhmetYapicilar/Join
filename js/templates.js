@@ -1,13 +1,14 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    setTimeout(() => {
-       let currentUserJSON = JSON.parse(localStorage.getItem('user-name'));
-       let currentUser = JSON.stringify(currentUserJSON);
-        let initials = currentUser.match(/\b\w/g) || [];
-        let result = initials.join('');
-        document.getElementById('initials').innerHTML = result;}, 1000)
-    })
+let user = JSON.parse(localStorage.getItem('user-name'));
 
-    let user = JSON.parse(localStorage.getItem('user-name'));
+    function showInitials(){
+        let name = JSON.stringify(user);
+        let initials = name.match(/\b\w/g) || [];
+        let result = initials.join('');
+        setTimeout(() => {
+            document.getElementById('initials').innerHTML = result;
+            }, 1000)}
+    
+    
 
     function openAddTask(){
         window.location.href = 'add_task.html?user=' + user;

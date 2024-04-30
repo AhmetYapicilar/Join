@@ -16,7 +16,8 @@
     <link rel="shortcut icon" href="assets/img/joinFavIcon.png" type="image/x-icon">
 </head>
 
-<body id="body-board" onload="includeHTML(); initBoard()">
+
+<body id="body-board" onload="includeHTML(); initBoard(); showInitials()">
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
 
@@ -73,6 +74,13 @@
 
 <section id="overlay-add-task-board" class="overlay-add-task-board">
 </section>
+
+<div id="middle-of-the-page" class="middle-of-the-page">
+    <div id="added-to-board" class="added-to-board d-none">
+        <span>Task added to board</span>
+        <img src="./assets/img/addedToBoard.png">
+    </div>
+</div>
     
 </body>
 </html>

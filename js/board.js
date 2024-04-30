@@ -1,75 +1,109 @@
-let ids = ['To-Do', 'In-Progress', 'Await-Feedback', 'Done'];
-let priorities = ['low', 'medium', 'urgent'];
-let priopics = ["./assets/img/arrow-down-icon.png", "./assets/img/equal-sign-icon.png", "./assets/img/arrow-up-icon.png"];
+let ids = ["To-Do", "In-Progress", "Await-Feedback", "Done"];
+let priorities = ["low", "medium", "urgent"];
+let priopics = [
+  "./assets/img/arrow-down-icon.png",
+  "./assets/img/equal-sign-icon.png",
+  "./assets/img/arrow-up-icon.png",
+];
 let taskCounts = {
-    'To-Do': 0,
-    'In-Progress': 0,
-    'Await-Feedback': 0,
-    'Done': 0
+  "To-Do": 0,
+  "In-Progress": 0,
+  "Await-Feedback": 0,
+  Done: 0,
 };
 let draggedTask;
 
-  
-
-async function initBoard(){
-    document.getElementById('overlay-add-task-board').classList.remove('overlay-add-task-board');
-    document.getElementById('section-board-overlay').classList.remove('section-board-overlay');
-    document.getElementById('body-board').style.overflow = 'auto';
-    for (let x = 0; x < ids.length; x++) {
-        let category = ids[x];
-        taskCounts[category] = 0;
-        let contentBefore = document.getElementById(`${ids[x]}`);
-        contentBefore.classList.remove('drag-area-highlight');
-        contentBefore.innerHTML = '';
-    }
-    await loadTasks();
-    await showTasks();
-    checkEmptyTasks();
+async function initBoard() {
+  removeAllClassesWhenInit();
+  for (let x = 0; x < ids.length; x++) {
+    let category = ids[x];
+    taskCounts[category] = 0;
+    let contentBefore = document.getElementById(`${ids[x]}`);
+    contentBefore.classList.remove("drag-area-highlight");
+    contentBefore.innerHTML = "";
+  }
+  await loadTasks();
+  await showTasks();
+  checkEmptyTasks();
 }
 
+function removeAllClassesWhenInit() {
+  document
+    .getElementById("middle-of-the-page")
+    .classList.remove("middle-of-the-page");
+  document.getElementById("added-to-board").classList.add("d-none");
+  document
+    .getElementById("overlay-add-task-board")
+    .classList.remove("overlay-add-task-board");
+  document
+    .getElementById("section-board-overlay")
+    .classList.remove("section-board-overlay");
+  document.getElementById("body-board").style.overflow = "auto";
+}
 
 function checkEmptyTasks() {
-    for(let i=0; i<ids.length; i++){
-        const ID = ids[i];
-        let content = document.getElementById(ID);
-        if(content.innerHTML === ''){
-            content.innerHTML = `<div class="no-tasks-board">No tasks available</div>`;
-        }
+  for (let i = 0; i < ids.length; i++) {
+    const ID = ids[i];
+    let content = document.getElementById(ID);
+    if (content.innerHTML === "") {
+      content.innerHTML = `<div class="no-tasks-board">No tasks available</div>`;
     }
+  }
 }
 
-async function showTasks(){
-    for (let i = 0; i < tasks.length; i++) {
-        if(document.getElementById(`bigtask${i}`)){
-            document.getElementById(`bigtask${i}`).classList.add('d-none');
-        }
-            let {TASK, category2, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
-            if(!category2){
-                category2 = 'To-Do';
-            }
-            await countTasks(category2);
-            let content = document.getElementById(category2);
-            content.innerHTML += generateShowTasksHTML(i, title, description, priorityIcon);
-            userStoryOrTechnicalTask(TASK, i);
-        };
-        }
-
-async function initVariablesForShowTasks(i){
-        const TASK = tasks[i];
-        let category2 = TASK["category2"]
-        let title = TASK["title"];
-        let description = TASK["description"];
-        let dueDate = TASK["dueDate"];
-        if(!TASK['priority']){
-            TASK['priority']='medium';
-        }
-        let priority = TASK["priority"];
-        let priorityIcon = await proofPriority(priority);
-        return {TASK, category2, title, description, dueDate, priority, priorityIcon};
+async function showTasks() {
+  for (let i = 0; i < tasks.length; i++) {
+    if (document.getElementById(`bigtask${i}`)) {
+      document.getElementById(`bigtask${i}`).classList.add("d-none");
+    }
+    let {
+      TASK,
+      category2,
+      title,
+      description,
+      dueDate,
+      priority,
+      priorityIcon,
+    } = await initVariablesForShowTasks(i);
+    if (!category2) {
+      category2 = "To-Do";
+    }
+    await countTasks(category2);
+    let content = document.getElementById(category2);
+    content.innerHTML += generateShowTasksHTML(
+      i,
+      title,
+      description,
+      priorityIcon
+    );
+    userStoryOrTechnicalTask(TASK, i);
+  }
 }
 
-function generateShowTasksHTML(i, title, description, priorityIcon){
-    return `
+async function initVariablesForShowTasks(i) {
+  const TASK = tasks[i];
+  let category2 = TASK["category2"];
+  let title = TASK["title"];
+  let description = TASK["description"];
+  let dueDate = TASK["dueDate"];
+  if (!TASK["priority"]) {
+    TASK["priority"] = "medium";
+  }
+  let priority = TASK["priority"];
+  let priorityIcon = await proofPriority(priority);
+  return {
+    TASK,
+    category2,
+    title,
+    description,
+    dueDate,
+    priority,
+    priorityIcon,
+  };
+}
+
+function generateShowTasksHTML(i, title, description, priorityIcon) {
+  return `
     <div id='task${i}' draggable="true" class="tasks-board" onclick=showTaskInBig(${i}) ondragstart="startDragging(${i})">
     <div id="user-technical-board${i}"></div>
     <div class="name-of-task-board"><span>${title}</span><p>${description}</p></div>
@@ -89,83 +123,129 @@ function generateShowTasksHTML(i, title, description, priorityIcon){
     </div></div>`;
 }
 
-function userStoryOrTechnicalTask(TASK, i){
-    if(TASK['category'] === 'User Story'){
-        document.getElementById(`user-technical-board${i}`).classList.add('user-story-board');
-        document.getElementById(`user-technical-board${i}`).innerHTML = 'User Story';
-    } else {
-        document.getElementById(`user-technical-board${i}`).classList.add('technical-task-board');
-        document.getElementById(`user-technical-board${i}`).innerHTML = 'Technical Task';
-    }
- }
-
-
-function userStoryOrTechnicalTaskBig(TASK, i){
-    if(TASK['category'] === 'User Story'){
-        document.getElementById(`user-technical-big${i}`).classList.add('user-story-board-big');
-        document.getElementById(`user-technical-big${i}`).innerHTML = 'User Story';
-} else{
-document.getElementById(`user-technical-big${i}`).innerHTML = 'Technical Task';
-document.getElementById(`user-technical-big${i}`).classList.add('technical-task-board-big');
-}
+function userStoryOrTechnicalTask(TASK, i) {
+  if (TASK["category"] === "User Story") {
+    document
+      .getElementById(`user-technical-board${i}`)
+      .classList.add("user-story-board");
+    document.getElementById(`user-technical-board${i}`).innerHTML =
+      "User Story";
+  } else {
+    document
+      .getElementById(`user-technical-board${i}`)
+      .classList.add("technical-task-board");
+    document.getElementById(`user-technical-board${i}`).innerHTML =
+      "Technical Task";
+  }
 }
 
-async function countTasks(category){
-    taskCounts[category]++;
-    await setItem('taskCount', JSON.stringify(taskCounts));
+function userStoryOrTechnicalTaskBig(TASK, i) {
+  if (TASK["category"] === "User Story") {
+    document
+      .getElementById(`user-technical-big${i}`)
+      .classList.add("user-story-board-big");
+    document.getElementById(`user-technical-big${i}`).innerHTML = "User Story";
+  } else {
+    document.getElementById(`user-technical-big${i}`).innerHTML =
+      "Technical Task";
+    document
+      .getElementById(`user-technical-big${i}`)
+      .classList.add("technical-task-board-big");
+  }
 }
 
+async function countTasks(category) {
+  taskCounts[category]++;
+  await setItem("taskCount", JSON.stringify(taskCounts));
+}
 
-
-
-async function searchTask(){
-    await loadTasks();
-    let search = document.getElementById('search-input').value;
+async function searchTask() {
+  await loadTasks();
+  let search = document.getElementById("search-input").value;
   search = search.toLowerCase();
-  if (search === '') { 
+  if (search === "") {
     initBoard();
-   } else{
-     await showSearchedTasks(search);
-      checkEmptyTasks();
-}}
-
-async function showSearchedTasks(search){
-    let foundedTasks = [];
-    for(let i=0; i<ids.length; i++){
-        document.getElementById(`${ids[i]}`).innerHTML = '';
-        for(let x=0; x<tasks.length; x++){
-            const TASK = tasks[x];
-            let tasktitle = TASK['title'];
-            if(TASK['category2'] === ids[i] && tasktitle.toLowerCase().includes(search)){
-                foundedTasks.push(TASK);
-            }
-        }
-        }
-        for(let j=0; j<foundedTasks.length; j++){
-            let foundedTask = foundedTasks[j];
-            let {TASK, category2, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(tasks.indexOf(foundedTask));
-            let content = document.getElementById(category2);
-            content.innerHTML += generateShowTasksHTML(tasks.indexOf(foundedTask), title, description, priorityIcon);
-            userStoryOrTechnicalTask(TASK, tasks.indexOf(foundedTask));
-        }
-    
+  } else {
+    await showSearchedTasks(search);
+    checkEmptyTasks();
+  }
 }
 
-async function showTaskInBig(i){
-    await loadTasks();
-    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
-    document.getElementById('section-board-overlay').classList.add('section-board-overlay');
-    document.getElementById('body-board').style.overflow = 'hidden';
-    let content = document.getElementById('section-board-overlay');
-    content.innerHTML = generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon);
-    userStoryOrTechnicalTaskBig(TASK, i);
-    setTimeout(() => {
-    document.getElementById(`bigtask${i}`).classList.add('animation');
-    }, 100);
+let foundedTasks = [];
+
+async function showSearchedTasks(search) {
+  foundedTasks = [];
+  for (let i = 0; i < ids.length; i++) {
+    document.getElementById(`${ids[i]}`).innerHTML = "";
+    for (let x = 0; x < tasks.length; x++) {
+      const TASK = tasks[x];
+      let tasktitle = TASK["title"];
+      if (
+        TASK["category2"] === ids[i] &&
+        tasktitle.toLowerCase().includes(search)
+      ) {
+        foundedTasks.push(TASK);
+      }
+    }
+  }
+  await showFoundedTasks();
 }
 
-function generateBigTaskHTML(i, title, description, dueDate, priority, priorityIcon){
-    return `
+async function showFoundedTasks() {
+  for (let j = 0; j < foundedTasks.length; j++) {
+    let foundedTask = foundedTasks[j];
+    let {
+      TASK,
+      category2,
+      title,
+      description,
+      dueDate,
+      priority,
+      priorityIcon,
+    } = await initVariablesForShowTasks(tasks.indexOf(foundedTask));
+    let content = document.getElementById(category2);
+    content.innerHTML += generateShowTasksHTML(
+      tasks.indexOf(foundedTask),
+      title,
+      description,
+      priorityIcon
+    );
+    userStoryOrTechnicalTask(TASK, tasks.indexOf(foundedTask));
+  }
+}
+
+async function showTaskInBig(i) {
+  await loadTasks();
+  let { TASK, title, description, dueDate, priority, priorityIcon } =
+    await initVariablesForShowTasks(i);
+  document
+    .getElementById("section-board-overlay")
+    .classList.add("section-board-overlay");
+  document.getElementById("body-board").style.overflow = "hidden";
+  let content = document.getElementById("section-board-overlay");
+  content.innerHTML = generateBigTaskHTML(
+    i,
+    title,
+    description,
+    dueDate,
+    priority,
+    priorityIcon
+  );
+  userStoryOrTechnicalTaskBig(TASK, i);
+  setTimeout(() => {
+    document.getElementById(`bigtask${i}`).classList.add("animation");
+  }, 100);
+}
+
+function generateBigTaskHTML(
+  i,
+  title,
+  description,
+  dueDate,
+  priority,
+  priorityIcon
+) {
+  return `
     <div id='bigtask${i}' class="tasks-board-big">
     <div class="space-between-board">
         <div id="user-technical-big${i}"></div>
@@ -224,51 +304,55 @@ function generateBigTaskHTML(i, title, description, dueDate, priority, priorityI
     </div>`;
 }
 
-async function deleteTask(i){
-    tasks.splice(i, 1);
-    await setItem('task', tasks);
-    initBoard();
+async function deleteTask(i) {
+  tasks.splice(i, 1);
+  await setItem("task", tasks);
+  initBoard();
 }
 
-async function editTask(i){
-    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
-    priority = priority.toLowerCase(); 
-    let content = document.getElementById('section-board-overlay');
-    content.innerHTML = '';
-    content.innerHTML = editTaskHTML(i);
-    document.getElementById(`title-id${i}`).value = title;
-    document.getElementById(`description-id${i}`).value = description;
-    document.getElementById(`duedate-id${i}`).value = dueDate;
-    proofPrio(priority, i);
-
+async function editTask(i) {
+  let { TASK, title, description, dueDate, priority, priorityIcon } =
+    await initVariablesForShowTasks(i);
+  priority = priority.toLowerCase();
+  let content = document.getElementById("section-board-overlay");
+  content.innerHTML = "";
+  content.innerHTML = editTaskHTML(i);
+  document.getElementById(`title-id${i}`).value = title;
+  document.getElementById(`description-id${i}`).value = description;
+  document.getElementById(`duedate-id${i}`).value = dueDate;
+  proofPrio(priority, i);
 }
 
-async function proofPrio(priority, i){
-    priority = priority.toLowerCase();
-    removeAllClassesFromButton(i);
-    if(priority === 'low'){
-        document.getElementById(`lowButton-id${i}`).classList.add('bg-low');
-        document.getElementById(`low-img-id${i}`).src = './assets/img/prioDownWhite.png';
-    } else if(priority === 'medium'){
-        document.getElementById(`mediumButton-id${i}`).classList.add('bg-medium');
-        document.getElementById(`medium-img-id${i}`).src = './assets/img/prioEvenWhite.png';
-    } else {
-        document.getElementById(`urgentButton-id${i}`).classList.add('bg-urgent');
-        document.getElementById(`urgent-img-id${i}`).src = './assets/img/prioUpWhite.png';
-    }
+async function proofPrio(priority, i) {
+  priority = priority.toLowerCase();
+  removeAllClassesFromButton(i);
+  if (priority === "low") {
+    document.getElementById(`lowButton-id${i}`).classList.add("bg-low");
+    document.getElementById(`low-img-id${i}`).src =
+      "./assets/img/prioDownWhite.png";
+  } else if (priority === "medium") {
+    document.getElementById(`mediumButton-id${i}`).classList.add("bg-medium");
+    document.getElementById(`medium-img-id${i}`).src =
+      "./assets/img/prioEvenWhite.png";
+  } else {
+    document.getElementById(`urgentButton-id${i}`).classList.add("bg-urgent");
+    document.getElementById(`urgent-img-id${i}`).src =
+      "./assets/img/prioUpWhite.png";
+  }
 }
 
-function removeAllClassesFromButton(i){
-    document.getElementById(`lowButton-id${i}`).classList.remove('bg-low');
-    document.getElementById(`low-img-id${i}`).src = './assets/img/prioDown.png';
-    document.getElementById(`mediumButton-id${i}`).classList.remove('bg-medium');
-    document.getElementById(`medium-img-id${i}`).src = './assets/img/prioEven.png';
-    document.getElementById(`urgentButton-id${i}`).classList.remove('bg-urgent');
-    document.getElementById(`urgent-img-id${i}`).src = './assets/img/prioUp.png';
+function removeAllClassesFromButton(i) {
+  document.getElementById(`lowButton-id${i}`).classList.remove("bg-low");
+  document.getElementById(`low-img-id${i}`).src = "./assets/img/prioDown.png";
+  document.getElementById(`mediumButton-id${i}`).classList.remove("bg-medium");
+  document.getElementById(`medium-img-id${i}`).src =
+    "./assets/img/prioEven.png";
+  document.getElementById(`urgentButton-id${i}`).classList.remove("bg-urgent");
+  document.getElementById(`urgent-img-id${i}`).src = "./assets/img/prioUp.png";
 }
 
-function editTaskHTML(i){
-    return `
+function editTaskHTML(i) {
+  return `
     <div class="task-edit">
     <div class="column-edit">
         <span>Title</span>
@@ -311,145 +395,190 @@ function editTaskHTML(i){
 </div>`;
 }
 
-async function saveChangedTask(i){
-    const TASK = tasks[i];
-    let title = document.getElementById(`title-id${i}`).value;
-    let description = document.getElementById(`description-id${i}`).value;
-    let dueDate = document.getElementById(`duedate-id${i}`).value;
-    let priority = TASK['priority'];
-    let priorityIcon = proofPriority(priority);
-    tasks[i]['title'] = title;
-    tasks[i]['description'] = description;
-    tasks[i]['dueDate'] = dueDate;
-    await setItem('task', JSON.stringify(tasks));
-    showTaskInBig(i);
+async function saveChangedTask(i) {
+  const TASK = tasks[i];
+  let title = document.getElementById(`title-id${i}`).value;
+  let description = document.getElementById(`description-id${i}`).value;
+  let dueDate = document.getElementById(`duedate-id${i}`).value;
+  let priority = TASK["priority"];
+  let priorityIcon = proofPriority(priority);
+  tasks[i]["title"] = title;
+  tasks[i]["description"] = description;
+  tasks[i]["dueDate"] = dueDate;
+  await setItem("task", JSON.stringify(tasks));
+  showTaskInBig(i);
 }
 
-async function newPrioToUrgent(i){
-    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
-    priority = 'Urgent';
-    tasks[i]['priority'] = 'urgent';
-    proofPrio(priority, i);
-    await setItem('task', JSON.stringify(tasks));
+async function newPrioToUrgent(i) {
+  let { TASK, title, description, dueDate, priority, priorityIcon } =
+    await initVariablesForShowTasks(i);
+  priority = "Urgent";
+  tasks[i]["priority"] = "urgent";
+  proofPrio(priority, i);
+  await setItem("task", JSON.stringify(tasks));
 }
 
-async function newPrioToMedium(i){
-    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
-    priority = 'Medium';
-    tasks[i]['priority'] = 'medium';
-    proofPrio(priority, i);
-    await setItem('task', JSON.stringify(tasks));
+async function newPrioToMedium(i) {
+  let { TASK, title, description, dueDate, priority, priorityIcon } =
+    await initVariablesForShowTasks(i);
+  priority = "Medium";
+  tasks[i]["priority"] = "medium";
+  proofPrio(priority, i);
+  await setItem("task", JSON.stringify(tasks));
 }
 
-async function newPrioToLow(i){
-    let {TASK, title, description, dueDate, priority, priorityIcon} = await initVariablesForShowTasks(i);
-    priority = 'Low';
-    tasks[i]['priority'] = 'low';
-    proofPrio(priority, i);
-    await setItem('task', JSON.stringify(tasks));
+async function newPrioToLow(i) {
+  let { TASK, title, description, dueDate, priority, priorityIcon } =
+    await initVariablesForShowTasks(i);
+  priority = "Low";
+  tasks[i]["priority"] = "low";
+  proofPrio(priority, i);
+  await setItem("task", JSON.stringify(tasks));
 }
 
-async function closeTaskInBig(i){
-    document.getElementById(`bigtask${i}`).classList.remove('animation');
-    document.getElementById('body-board').style.overflow = 'auto';
-    setTimeout(() => {
-        document.getElementById('section-board-overlay').classList.remove('section-board-overlay'); // Verstecke das Element nach der Animation
-        initBoard();
-    }, 400);
+async function closeTaskInBig(i) {
+  document.getElementById(`bigtask${i}`).classList.remove("animation");
+  document.getElementById("body-board").style.overflow = "auto";
+  setTimeout(() => {
+    document
+      .getElementById("section-board-overlay")
+      .classList.remove("section-board-overlay"); // Verstecke das Element nach der Animation
+    initBoard();
+  }, 400);
 }
 
-async function proofPriority(priority){
-    for (let i = 0; i < priorities.length; i++) {
-        priority = priority.toLowerCase();
-        const PRIO = priorities[i];
-        if(priority === PRIO){
-            let pic = priopics[i];
-            return pic;
-        } 
+async function proofPriority(priority) {
+  for (let i = 0; i < priorities.length; i++) {
+    priority = priority.toLowerCase();
+    const PRIO = priorities[i];
+    if (priority === PRIO) {
+      let pic = priopics[i];
+      return pic;
     }
+  }
 }
 
-async function findId(category){
-    for (let i = 0; i < ids.length; i++) {
-        const ID = ids[i];
-        if(category === ID){
-            return ID;
-        }
+async function findId(category) {
+  for (let i = 0; i < ids.length; i++) {
+    const ID = ids[i];
+    if (category === ID) {
+      return ID;
     }
+  }
 }
 
 function allowDrop(ev) {
-    ev.preventDefault();
+  ev.preventDefault();
 }
 
-function startDragging(id){
-    draggedTask = id;
+function startDragging(id) {
+  draggedTask = id;
 }
 
-async function moveTo(category){
-    tasks[draggedTask]['category2'] = category;
-    await setItem('task', JSON.stringify(tasks));
-    initBoard();
+async function moveTo(category) {
+  tasks[draggedTask]["category2"] = category;
+  await setItem("task", JSON.stringify(tasks));
+  initBoard();
 }
 
 function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
+  document.getElementById(id).classList.add("drag-area-highlight");
 }
 
 function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
+  document.getElementById(id).classList.remove("drag-area-highlight");
 }
 
-let newTaskNumber=0;
-let newAddedPrio=[];
+let newTaskNumber = 0;
+let newAddedPrio = [];
 let newTaskCategory;
 
-async function addTaskOnBoard(selectedCategory){
-    newTaskCategory = selectedCategory;
-    document.getElementById('overlay-add-task-board').classList.add('overlay-add-task-board');
-    document.getElementById('body-board').style.overflow = 'hidden';
-    let content = document.getElementById('overlay-add-task-board');
-    content.innerHTML = addTaskOnBoardHTML(newTaskNumber);
-    setTimeout(() => {
-        document.getElementById(`newTask${newTaskNumber}`).classList.add('showAddTask');
-        }, 100);
+async function addTaskOnBoard(selectedCategory) {
+  newTaskCategory = selectedCategory;
+  document
+    .getElementById("overlay-add-task-board")
+    .classList.add("overlay-add-task-board");
+  document.getElementById("body-board").style.overflow = "hidden";
+  let content = document.getElementById("overlay-add-task-board");
+  content.innerHTML = addTaskOnBoardHTML(newTaskNumber);
+  setTimeout(() => {
+    document
+      .getElementById(`newTask${newTaskNumber}`)
+      .classList.add("showAddTask");
+  }, 100);
 }
 
-async function createNewTask(){
-    let newTitle = document.getElementById(`newTaskTitle${newTaskNumber}`).value;
-    let newDescription = document.getElementById(`newTaskDescription${newTaskNumber}`).value;
-    let newDueDate = document.getElementById(`newTaskDate${newTaskNumber}`).value;
-    let newCategory = document.querySelector(".categoryPicker").value;
-    let newCategory2 = newTaskCategory;
-    let newPriority = newAddedPrio[0];
-    tasks.push({
-        title: newTitle,
-        description: newDescription,
-        dueDate: newDueDate,
-        category: newCategory,
-        category2: newCategory2,
-        priority: newPriority
-    });
+async function initVariablesForNewTask() {
+  let newTitle = document.getElementById(`newTaskTitle${newTaskNumber}`).value;
+  let newDescription = document.getElementById(
+    `newTaskDescription${newTaskNumber}`
+  ).value;
+  let newDueDate = document.getElementById(`newTaskDate${newTaskNumber}`).value;
+  let newCategory = document.querySelector(".categoryPicker").value;
+  let newCategory2 = newTaskCategory;
+  let newPriority = newAddedPrio[0];
+  return {
+    newTitle,
+    newDescription,
+    newDueDate,
+    newCategory,
+    newCategory2,
+    newPriority,
+  };
+}
+
+async function createNewTask() {
+  let {
+    newTitle,
+    newDescription,
+    newDueDate,
+    newCategory,
+    newCategory2,
+    newPriority,
+  } = await initVariablesForNewTask();
+  tasks.push({
+    title: newTitle,
+    description: newDescription,
+    dueDate: newDueDate,
+    category: newCategory,
+    category2: newCategory2,
+    priority: newPriority,
+  });
+  await setItem("task", JSON.stringify(tasks));
+  showTaskIsAdded();
+}
+
+function showTaskIsAdded() {
+  document
+    .getElementById("middle-of-the-page")
+    .classList.add("middle-of-the-page");
+  document.getElementById("added-to-board").classList.remove("d-none");
+  setTimeout(() => {
+    document.getElementById(`newTask${newTaskNumber}`).classList.add("d-none");
+    initBoard();
     newTaskNumber++;
-    await setItem('task', JSON.stringify(tasks));
+  }, 2000);
 }
 
-async function newTaskWithPrio(prio){
-    newAddedPrio.splice(0, newAddedPrio.length);
-    newAddedPrio.push(prio);
+async function newTaskWithPrio(prio) {
+  newAddedPrio.splice(0, newAddedPrio.length);
+  newAddedPrio.push(prio);
 }
 
-async function closeAddTask(newTaskNumber){
-    document.getElementById(`newTask${newTaskNumber}`).classList.remove('showAddTask');
-    document.getElementById('body-board').style.overflow = 'auto';
-    setTimeout(() => {
-        document.getElementById('overlay-add-task-board').classList.remove('overlay-add-task-board'); // Verstecke das Element nach der Animation
-    }, 400);
+async function closeAddTask(newTaskNumber) {
+  document
+    .getElementById(`newTask${newTaskNumber}`)
+    .classList.remove("showAddTask");
+  document.getElementById("body-board").style.overflow = "auto";
+  setTimeout(() => {
+    document
+      .getElementById("overlay-add-task-board")
+      .classList.remove("overlay-add-task-board"); // Verstecke das Element nach der Animation
+  }, 400);
 }
 
-
-function addTaskOnBoardHTML(newTaskNumber){
-    return `
+function addTaskOnBoardHTML(newTaskNumber) {
+  return `
     <div id="newTask${newTaskNumber}" class="addTaskContentContainerBoard">
     <div class="headlineAddTaskContainerBoard space-between-board">
         <h1 class="headlineAddTask">Add Task</h1>

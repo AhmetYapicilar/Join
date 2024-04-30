@@ -277,21 +277,6 @@ button {
     font-weight: 700;
 }
 
-
-
-.input-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 8px;
-    width: 440px;
-    height: 80px;
-    left: 0px;
-    top: 336px;
-}
-
 .subtask-input {
     box-sizing: border-box;
     display: flex;
@@ -336,12 +321,6 @@ button {
     position: relative;
     width: 400px;
     border-radius: 10px;
-}
-
-.todo-subtask-container {
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
 }
 
 .subtask-imgs {
@@ -390,8 +369,83 @@ li p {
 	background-color: #eeeeee;
 }
 
-#subtask-container {
-    padding-inline-start: 0px;
-    min-height: 135px;
-    overflow: auto;
+
+
+/* Dropdown-Menü */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.searchInput {
+    padding-left: 18px;
+    width: 440px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.contactsInputField {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 440px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+}
+
+.dropdownIcon {
+    position: absolute;
+    width: 24px;
+    cursor: pointer;
+    /* background-color: #597296; */
+    right: 8px;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 170px;
+    overflow-y: auto;
+    width: 438px;
+}
+
+.dropdownContent span {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdownContent span:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+/* Ausgewählte Kontakte */
+.selectedContactsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.selectedContact {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
 }

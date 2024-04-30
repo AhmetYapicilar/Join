@@ -1136,3 +1136,25 @@ width: 300px;
 .close-task{
     cursor: pointer;
 }
+
+.middle-of-the-page{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.added-to-board{
+    width: 326px;
+height: 74px;
+border-radius: 20px;
+display: flex;
+justify-content: space-around;
+align-items: center;
+z-index: 999;
+background-color: #2A3647;
+color: #FFFFFF;
+}
