@@ -298,14 +298,36 @@ const contacts = document.getElementById('showContactDetailsOnSlide');
 const target = document.getElementById('targetArea');
 const slideInContacts = document.getElementById('showInnerHTML');
 
-if (!contacts || !target || !slideInContacts) {
-    return;
+if (window.innerWidth < 1320) {
+    console.log("Die Fensterbreite ist unter 1320px.");
+
+    if (!contacts || !target || !slideInContacts) {
+        // Falls eine der Variablen leer ist, wird die Funktion beendet
+        return;
+    }
+
+    // Code für den Fall, dass die Breite unter 1320px ist und alle Variablen gesetzt sind
+    document.getElementById(`leftContainerContacts`).classList.add(`dontDisplayOnMobile`);
+    document.getElementById("rightContainerContacts").style.display = "flex";
+    lastLiGetsNewClass(index);
+    target.innerHTML = '';
+    target.innerHTML = generateContactDetailsHTML(contactList[index], index);
+    document.getElementById(`showContactMobile`).style.display = "flex";
+} else {
+
+    if (!contacts || !target || !slideInContacts) {
+        // Falls eine der Variablen leer ist, wird die Funktion beendet
+        return;
+    }
+
+    // Code für den Fall, dass die Breite ab 1320px ist und alle Variablen gesetzt sind
+    lastLiGetsNewClass(index);
+    prepareAnimation(contacts);
+    slideInContacts.innerHTML = '';
+    triggerSlideInAnimation(target, contacts, slideInContacts, index);
 }
-lastLiGetsNewClass(index);
-prepareAnimation(contacts);
-slideInContacts.innerHTML = '';
-triggerSlideInAnimation(target, contacts, slideInContacts, index);
 }
+
 
 //angeklickte LI kriegt neue Css class und altem Li wird diese entfernt
 function lastLiGetsNewClass(index) {
@@ -355,12 +377,12 @@ function generateContactDetailsHTML(contact, index) {
 const { Color, Initials, Name, Email, Number } = contact;
 return `
     <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
-        <div class="showContacts">
+        <div id="showContactMobile" class="showContacts">
             <div class="align-items-contacts-slide-in">    
                 <span class="initials-circle-show-contacts" style="background-color:${Color};">${Initials}</span>
                 <div class="showContactsNameEditDelete">
                     <h1 style="font-size: 47px;">${Name}</h1>
-                    <div class="editDeleteContacts">
+                    <div id="editDeleteContactsMobile" class="editDeleteContacts">
                         <div onclick="editContacts(${index})" class="editShowContacts cursorPointer">
                             <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
                             <p>Edit</p>
@@ -557,7 +579,38 @@ function closeAddContactMobile() {
 
 //Zeigt Kontaktliste wieder an, nachdem man auf Kontaktdetails gegangen ist
 function showContactListMobile() {
-    document.getElementById(`rightContainerContacts`).classList.add(`dontDisplayOnMobile`)
     document.getElementById(`leftContainerContacts`).classList.add(`displayOnMobile`)
+    document.getElementById(`leftContainerContacts`).classList.remove(`dontDisplayOnMobile`)
+    document.getElementById("rightContainerContacts").style.display = "none";
+    document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
+    document.getElementById(`editDeleteContactsMobile`).style.display = "none";
 }
+
+window.addEventListener("resize", displayLeftAndRightContainer);
   
+
+function displayLeftAndRightContainer() {
+    if (window.innerWidth >= 1320) {
+        document.getElementById("rightContainerContacts").style.display = "flex";
+        document.getElementById(`leftContainerContacts`).classList.add(`displayOnMobile`)
+        document.getElementById(`leftContainerContacts`).classList.remove(`dontDisplayOnMobile`)
+        window.location.reload();
+    } else {
+        document.getElementById("rightContainerContacts").style.display = "none";
+    }
+}
+
+
+function showEditDeleteMobileOnSlide() {
+    document.getElementById(`editDeleteContactsMobile`).style.display = "flex";
+    document.getElementById(`menuOptionsContactMobile`).style.display = "none";
+}
+
+
+document.addEventListener('click', function(event) {
+    // Überprüfen Sie, ob der Klick nicht auf ein spezielles Element zielt
+    if (event.target === document.body || event.target.nodeName === 'HTML') {
+        document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
+        document.getElementById(`editDeleteContactsMobile`).style.display = "none";n
+    }
+});

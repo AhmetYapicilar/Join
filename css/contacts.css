@@ -902,6 +902,7 @@ li {
 
 
 
+
 @media (min-height: 1305px) {
     .main {
         height: 92.6vh;
@@ -1186,6 +1187,46 @@ li {
 
     .initials-circle {
         font-size: 12px;
+    }
+
+    .showContactsDetails {
+        top: 40px;
+    }
+
+    #targetArea {
+        left: 20px;
+    }
+
+    h1 {
+        font-size: 35px !important;
+    }
+
+    .initials-circle-show-contacts {
+        height: 65px;
+        width: 65px;
+        font-size: 30px;
+    }
+
+    .align-items-contacts-slide-in {
+        gap: 20px;
+    }
+
+    .showContacts {
+        gap: 30px;
+    }
+
+    .editDeleteContacts {
+        display: flex;
+        position: fixed;
+        bottom: 10%;
+        right: 7%;
+        flex-direction: column;
+        background-color: white;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 15px;
+        display: none;
     }
 }
 
