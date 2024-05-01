@@ -961,6 +961,11 @@ li {
         margin-right: 5% !important;
     }
 
+    .circle {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
     .help-icon {
         display: none;
     }
@@ -1393,7 +1398,7 @@ li {
     }
 
     .centerAll {
-        margin-top: 35%;
+        margin-top: 50%;
     }
 
     .mobileAdjustments {
@@ -1425,10 +1430,6 @@ li {
         flex-direction: column;
         height: 730px;
         width: 374px;
-    }
-
-    .centerAll {
-        margin-top: 35%;
     }
 
     .mobileAdjustments {
