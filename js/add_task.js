@@ -21,7 +21,7 @@ async function loadAndRenderNames() {
         users.forEach(user => {
             if (user.name || user.Name) {
                 const name = user.name || user.Name;
-                dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}</span>`;
+                dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
             }
         });
     } catch (error) {
@@ -59,6 +59,20 @@ function selectContact(name) {
         selectedContacts.splice(selectedContactIndex, 1);
     }
     renderSelectedContacts();
+    selectContactStyleChanger(name); // Aufruf der Funktion zum Hinzufügen/Entfernen von CSS-Klassen
+}
+
+function selectContactStyleChanger(name) {
+    const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
+    selectedDropdownContent.forEach(span => {
+        if (span.textContent === name) {
+            span.classList.toggle('selectedDropdownContent'); // Füge oder entferne die CSS-Klasse für den ausgewählten Kontakt hinzu/entferne sie
+            const img = span.querySelector('img');
+            if (img) {
+                img.src = span.classList.contains('selectedDropdownContent') ? './assets/img/checkbox-check-white.png' : './assets/img/Checkbox.png';
+            }
+        }
+    });
 }
 
 function renderSelectedContacts() {
