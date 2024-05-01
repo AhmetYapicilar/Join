@@ -596,7 +596,8 @@ function displayLeftAndRightContainer() {
     if (window.innerWidth >= 1320) {
         document.getElementById("rightContainerContacts").style.display = "flex";
         document.getElementById("leftContainerContacts").style.display = "flex";
-        document.getElementById(`leftContainerContacts`).classList.remove(`dontDisplayOnMobile`)
+        document.getElementById(`leftContainerContacts`).classList.remove(`dontDisplayOnMobile`);
+        document.getElementById("nav").classList.remove(`column`)
         window.location.reload();
     } else {
         document.getElementById("rightContainerContacts").style.display = "none";

@@ -93,6 +93,12 @@ header{
     align-items: center;
 }
 
+.center-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sidebar_logo{
     width: 100.03px;
     height: 121.97px;

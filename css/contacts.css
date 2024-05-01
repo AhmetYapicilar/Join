@@ -940,6 +940,59 @@ li {
         height: 99.3vh;
     }
 
+    .data {
+        display: none !important;
+    }
+
+    .dontShowJoinLogoOnMobile {
+        display: none;
+    }
+
+    .sidebar {
+        z-index: 4;
+    }
+
+    .sidebar {
+        background-color: #2a3647;
+        width: 100% !important;
+        position: fixed;
+        bottom: 0 !important;
+        height: 80px !important;
+        top: 92% !important
+    }
+
+    .menu {
+        width: 100% !important;
+        height: 100% !important;
+        gap: 0px !important;
+    }
+
+    .sidebar_nav span {
+        display: flex;
+        width: auto !important;
+    }
+
+    .center-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .column {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+
+    .center {
+        display: none;
+    }
+
+
+    .data_nav {
+        display: none;
+    }
+
     header {
         display: flex;
         z-index: 2 !important;
