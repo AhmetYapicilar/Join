@@ -29,11 +29,13 @@ function toggleDropdown() {
     }
 }
 
-document.querySelector('.dropdownIcon').addEventListener('click', function(event) {
-    event.preventDefault();
-    toggleDropdown();
-});
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownIcon = document.querySelector('.dropdownIcon');
 
+    dropdownIcon.addEventListener('click', function(event) {
+        event.preventDefault();
+    });
+});
 
 
 
