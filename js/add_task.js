@@ -43,17 +43,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function loadAndRenderNames() {
     try {
-        users = JSON.parse(await getItem('users'));
+        const users = JSON.parse(await getItem('users'));
         const dropdownContent = document.querySelector('.dropdownContent');
         dropdownContent.innerHTML = '';
+        const nameSet = new Set();
         users.forEach(user => {
             if (user.name || user.Name) {
                 const name = user.name || user.Name;
-                dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+                if (!nameSet.has(name)) {
+                    nameSet.add(name);
+                    dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+                }
             }
         });
     } catch (error) {
-        console.error('Error loading and rendering names:', error);
+        console.error('Fehler beim Laden und Rendern von Namen:', error);
     }
 }
 
@@ -186,11 +190,12 @@ async function createTask() {
         tasks.push({
             title: document.querySelector(".titleInputAddTask").value,
             description: document.querySelector(".descriptionTextArea").value,
-            assignedTo: document.querySelector(".assignContacts").value,
+            assignedTo: selectedContacts,
             dueDate: document.querySelector(".dateInput").value,
             priority: getPriority(),
             category: document.querySelector(".categoryPicker").value,
-            category2: 'To-Do'
+            category2: 'To-Do',
+            subTasks: subtasks
         });
         await setItem('task', JSON.stringify(tasks));
         console.log('Task successfully created.');
