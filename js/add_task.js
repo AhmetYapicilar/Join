@@ -59,19 +59,20 @@ function searchContacts() {
     const searchInput = document.querySelector('.searchInput');
     const filter = searchInput.value.toUpperCase();
     const dropdownContent = document.querySelector('.dropdownContent');
-    
     dropdownContent.innerHTML = '';
+
 
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         const name = user.name || user.Name;
         if (name && name.toUpperCase().startsWith(filter)) {
-            dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+            dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+            selectContactStyleChanger(filter);
         }
     }
     dropdownContent.classList.add('show');
-}
 
+}
 
 
 function selectContact(name) {
@@ -81,22 +82,30 @@ function selectContact(name) {
     } else {
         selectedContacts.splice(selectedContactIndex, 1);
     }
-    renderSelectedContacts();
+    name = name.toUpperCase();
     selectContactStyleChanger(name);
+    renderSelectedContacts();
 }
 
-function selectContactStyleChanger(name) {
+function selectContactStyleChanger(filter) {
+    for(let x = 0; x<selectedContacts.length; x++){
+        const CONTACT = selectedContacts[x];
+        if(CONTACT.toUpperCase().startsWith(filter)){
+            let trueContact = CONTACT;
+        
+        
     const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
     selectedDropdownContent.forEach(span => {
-        if (span.textContent === name) {
-            span.classList.toggle('selectedDropdownContent');
+        if (span.textContent === trueContact) {
+            span.classList.add('selectedDropdownContent');
             const img = span.querySelector('img');
             if (img) {
                 img.src = span.classList.contains('selectedDropdownContent') ? './assets/img/checkbox-check-white.png' : './assets/img/Checkbox.png';
             }
+        
         }
     });
-}
+}}}
 
 function renderSelectedContacts() {
     const selectedContactsContainer = document.querySelector('.selectedContactsContainer');

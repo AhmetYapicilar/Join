@@ -647,7 +647,7 @@ function addTaskOnBoardHTML(newTaskNumber) {
             <div class="">
             <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off" placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)" size="10">
             <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask" class="add-subtasks-btn">
-            <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn">
+            <div id="subtask-input-actions" class="flex-board add-subtasks-btn">
                 <img src="./assets/img/check-blue.png" class="subtask-actions submit-input" onclick="submitSubtask('subtask-input')">
                 <span class="vertical-line-sub"></span>
                 <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()">
