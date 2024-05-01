@@ -584,6 +584,7 @@ function showContactListMobile() {
     document.getElementById("rightContainerContacts").style.display = "none";
     document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
     document.getElementById(`editDeleteContactsMobile`).style.display = "none";
+    document.getElementById(`overlayOnMobile`).style.display = "none";
 }
 
 window.addEventListener("resize", displayLeftAndRightContainer);
@@ -605,8 +606,15 @@ function displayLeftAndRightContainer() {
 function showEditDeleteMobileOnSlide() {
     document.getElementById(`editDeleteContactsMobile`).style.display = "flex";
     document.getElementById(`menuOptionsContactMobile`).style.display = "none";
+
+    document.getElementById(`overlayOnMobile`).style.display = "flex"
 }
 
+function closeDeleteAndEdit() {
+    document.getElementById(`overlayOnMobile`).style.display = "none"
+    document.getElementById(`editDeleteContactsMobile`).style.display = "none";
+    document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
+}
 
 document.addEventListener('click', function(event) {
     // Überprüfen Sie, ob der Klick nicht auf ein spezielles Element zielt

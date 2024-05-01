@@ -884,6 +884,7 @@ li {
     right: 30px;
     position: fixed;
     display: none;
+    z-index: 2;
 }
 
 .arrowLeftShowContact:hover {
@@ -906,7 +907,15 @@ li {
     display: none;
 }
 
-
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Die Überlagerung hat einen niedrigen Z-Index */
+    display: none; /* Zunächst verborgen */
+}
 
 
 @media (min-height: 1305px) {
@@ -1028,6 +1037,139 @@ li {
         position: fixed;
         bottom: 10%;
         right: 7%;
+    }
+
+    .editDeleteContacts {
+        display: flex;
+        position: fixed;
+        bottom: 10%;
+        right: 7%;
+        flex-direction: column;
+        background-color: white;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 15px;
+        display: none;
+        z-index: 2;
+    }
+
+    #targetArea {
+        left: 40px;
+        top: 60px;
+        width: 620px;
+    }
+
+    .align-items-contacts-slide-in {
+        gap: 26px;
+    }
+
+
+/*addContact*/
+
+    .leftrightContainer {
+        flex-direction: column;
+        height: 850px;
+        width: 550px;
+    }
+
+    .centerAll {
+        margin-top: 18%;
+    }
+
+    .addContactImg img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 30px;
+    }
+
+    .addContactImg {
+        height: 50%;
+        width: 100%;
+    }
+
+    .addContactInputFields {
+        padding-left: 0px;
+        width: 100%;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 30px;
+    }
+
+    .imgAndInputfields {
+        margin-top: -87px;
+        flex-direction: column;
+        gap: 0px;
+        width: 600px;
+    }
+
+    .cancelButton {
+        display: none;
+    }
+
+    .inPutfields {
+        gap: 0px;
+        width: 94%;
+        padding-left: 23px;
+    }
+
+    .right-Container {
+        width: 96%;
+        margin-top: 20%;
+    }
+
+    .cancelOrCreateContact {
+        display: flex;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    #contactForm {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .inputfieldAddContact {
+        width: 105%;
+        padding: 8px;
+    }
+
+    .closeButton {
+        display: none;
+    }
+
+    .inputfield-icon {
+        right: -25px;
+    }
+
+    .panel {
+        width: 33.5% !important;
+    }
+
+    .profilepictureSize {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 46%;
+    }
+
+    .createAccountButton {
+        width: 202px;
+        height: 51px;
+    }
+
+    .exitAddContactMobile {
+        display: flex;
+        position: relative;
+        height: 32px;
+        width: 32px;
+        z-index: 1;
+        top: 7%;
+        left: 42%;
     }
 }
 
@@ -1201,6 +1343,7 @@ li {
 
     #targetArea {
         left: 20px;
+        top: 145px;
     }
 
     h1 {
@@ -1233,6 +1376,7 @@ li {
         border-bottom-left-radius: 15px;
         border-top-right-radius: 15px;
         display: none;
+        z-index: 2;
     }
 }
 
