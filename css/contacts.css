@@ -1064,6 +1064,10 @@ li {
         gap: 26px;
     }
 
+    #phonebook {
+        padding: 40px;
+    }
+
 
 /*addContact*/
 
@@ -1344,6 +1348,7 @@ li {
     #targetArea {
         left: 20px;
         top: 145px;
+        width: 412px;
     }
 
     h1 {
@@ -1436,5 +1441,41 @@ li {
         height: 120px;
         position: absolute;
         top: 41%;
+    }
+
+    #targetArea {
+        left: 20px;
+        top: 145px;
+        width: 370px;
+    }
+
+    h1 {
+        font-size: 27px !important;
+    }
+
+    .initials-circle-show-contacts {
+        margin-right: 0px;
+    }
+
+    .align-items-contacts-slide-in {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 370px) {
+    #targetArea {
+        left: 20px;
+        top: 145px;
+        width: 340px;
+    }
+
+    .initials-circle-show-contacts {
+        height: 60px;
+        width: 60px;
+        font-size: 27px;
+    }
+
+    h1 {
+        font-size: 25px !important;
     }
 }
