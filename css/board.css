@@ -1,30 +1,30 @@
-body{
+body {
     font-family: "Inter", sans-serif;
     overflow-x: hidden;
     max-width: 1400px;
     margin: 0 auto;
 }
 
-.section-board{
+.section-board {
     margin-left: 328px;
     margin-right: 64px;
     margin-top: 206px;
 }
 
 
-.space-between-board{
+.space-between-board {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.space-between-board h1{
+.space-between-board h1 {
     font-weight: 700;
     font-size: 61px;
     color: black;
 }
 
-.flex-board{
+.flex-board {
     display: flex;
     align-items: center;
 }
@@ -36,18 +36,18 @@ body{
 
 .inputfield-icon-search {
     position: absolute;
-    right: 5px; 
+    right: 5px;
     top: 25px;
-    transform: translateY(-50%); 
-    width: 22px; 
+    transform: translateY(-50%);
+    width: 22px;
 }
 
 .inputfield-icon-vertical-line {
     position: absolute;
-    right: 55px; 
+    right: 55px;
     top: 25px;
-    transform: translateY(-50%); 
-    width: 2px; 
+    transform: translateY(-50%);
+    width: 2px;
 }
 
 .inputFindTask {
@@ -62,62 +62,63 @@ body{
 }
 
 
-.flex-board button{
-width: 160px;
-height: 48px;
-border: 1px solid #2A3647;
-border-radius: 10px;
-padding: 8px 16px 8px 16px;
-gap: 4px;
-background-color: #2A3647;
-display: flex;
-justify-content: center;
-align-items: center;
-color: white;
-font-weight: 700;
-font-size: 21px;
-cursor: pointer;
+.flex-board button {
+    width: 160px;
+    height: 48px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    padding: 8px 16px 8px 16px;
+    gap: 4px;
+    background-color: #2A3647;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    font-size: 21px;
+    cursor: pointer;
 }
 
 
 
-.gap-32{
-gap: 32px;
+.gap-32 {
+    gap: 32px;
 }
 
-.column-board{
-display: flex;
-flex-direction: column;
+.column-board {
+    display: flex;
+    flex-direction: column;
 }
 
-.board-distribution{
-margin-top: 32px;
-display: flex;
-width: auto;
-height: auto;
-gap: 26px;
+.board-distribution {
+    margin-top: 32px;
+    display: flex;
+    width: auto;
+    height: auto;
+    gap: 26px;
 }
 
 
-.fields{
-display: flex;
-flex-direction: column;
-height: 100%;
-width: 200px;
-gap: 16px;
+.fields {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 200px;
+    gap: 16px;
 }
 
-.title-board{
-font-weight: 700;
-font-size: 20px;
-color: #42526E;
+.title-board {
+    font-weight: 700;
+    font-size: 20px;
+    color: #42526E;
 }
 
-.plus-border-board{
-cursor: pointer;
-object-fit: cover;
+.plus-border-board {
+    cursor: pointer;
+    object-fit: cover;
 }
 
+<<<<<<< HEAD
 .no-tasks-board{
 border: 1px solid #A8A8A8;
 border-radius: 10px;
@@ -150,30 +151,60 @@ cursor: pointer;
 }
 
 .height-board{
+=======
+.no-tasks-board {
+    border: 1px solid #A8A8A8;
+    border-radius: 10px;
+    gap: 10px;
+    background-color: #E7E7E7;
+    color: #A8A8A8;
+    box-shadow: rgba(0, 0, 0, 0.16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+>>>>>>> cb2acb1c20ffa16887a10cfb14e77fc7225e1998
     height: 48px;
 }
 
-.align-center-board{
+.tasks-board {
+    background-color: white;
+    border-radius: 24px;
+    padding: 16px;
+    gap: 10px;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    cursor: pointer;
+}
+
+.height-board {
+    height: 48px;
+}
+
+.align-center-board {
     display: flex;
     align-items: center;
 }
 
-.user-story-board-big{
+.user-story-board-big {
     background-color: #0038FF;
-border-radius: 8px;
-padding: 4px 24px 4px 24px;
-gap: 10px;
-color: white;
-width: 160px;
-height: 36px;
-font-weight: 400;
-font-size: 23px;
-display: flex;
-justify-content: center;
-align-items: center;
+    border-radius: 8px;
+    padding: 4px 24px 4px 24px;
+    gap: 10px;
+    color: white;
+    width: 160px;
+    height: 36px;
+    font-weight: 400;
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.technical-task-board-big{
+.technical-task-board-big {
     background: #1FD7C1;
     border-radius: 8px;
     padding: 4px 24px 4px 24px;
@@ -189,22 +220,22 @@ align-items: center;
 }
 
 
-.user-story-board{
-background-color: #0038FF;
-border-radius: 8px;
-padding: 4px 16px 4px 16px;
-gap: 10px;
-color: white;
-width: 113px;
-height: 27px;
-font-weight: 400;
-font-size: 16px;
-display: flex;
-justify-content: center;
-align-items: center;
+.user-story-board {
+    background-color: #0038FF;
+    border-radius: 8px;
+    padding: 4px 16px 4px 16px;
+    gap: 10px;
+    color: white;
+    width: 113px;
+    height: 27px;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.technical-task-board{
+.technical-task-board {
     background: #1FD7C1;
     border-radius: 8px;
     padding: 4px 16px 4px 16px;
@@ -219,61 +250,61 @@ align-items: center;
     align-items: center;
 }
 
-.name-of-task-board{
-width: auto;
-height: auto;
-gap: 8px;
-display: flex;
-flex-direction: column;
-margin-top: 16px;
+.name-of-task-board {
+    width: auto;
+    height: auto;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
 }
 
-.name-of-task-board span{
-font-weight: 700;
-font-size: 16px;
-color: #2A3647;
+.name-of-task-board span {
+    font-weight: 700;
+    font-size: 16px;
+    color: #2A3647;
 }
 
-.name-of-task-board p{
-font-weight: 400;
-font-size: 16px;
-color: #A8A8A8;
+.name-of-task-board p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #A8A8A8;
 }
 
-.progressbar-background{
-width: 50%;
-height: 8px;
-background-color: #F4F4F4;
+.progressbar-background {
+    width: 50%;
+    height: 8px;
+    background-color: #F4F4F4;
 }
 
-.progressbar-board{
-background-color: #4589FF;
-width: 50%;
-height: 8px;
+.progressbar-board {
+    background-color: #4589FF;
+    width: 50%;
+    height: 8px;
 }
 
-.sub-tasks{
-font-weight: 400;
-font-size: 12px;
-color: black;
+.sub-tasks {
+    font-weight: 400;
+    font-size: 12px;
+    color: black;
 }
 
-.width-100percent{
-width: 100%;
+.width-100percent {
+    width: 100%;
 }
 
-.margin-top-16{
-margin-top: 16px;
+.margin-top-16 {
+    margin-top: 16px;
 }
 
-.circle-board{
-width: 32px;
-height: 32px;
-border-radius: 32px;
-display: flex;
-justify-content: center;
-align-items: center;
-border: solid 1px white;
+.circle-board {
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px white;
 }
 
 .margin-left-9px {
@@ -284,54 +315,55 @@ border: solid 1px white;
     color: white;
 }
 
-.background-color-orange{
-    background-color: #FF7A00;;
+.background-color-orange {
+    background-color: #FF7A00;
+    ;
 }
 
-.background-color-pink{
+.background-color-pink {
     background-color: #FC71FF;
 }
 
-.background-color-violet{
+.background-color-violet {
     background-color: #6E52FF;
 }
 
-.background-color-violet2{
+.background-color-violet2 {
     background-color: #9327FF;
 }
 
-.background-color-yellow{
+.background-color-yellow {
     background-color: #FFBB2B;
 }
 
-.background-color-red{
+.background-color-red {
     background-color: #FF4646;
 }
 
-.background-color-green{
+.background-color-green {
     background-color: #1FD7C1;
 }
 
-.background-color-darkblue{
+.background-color-darkblue {
     background-color: #462F8A;
 }
 
-.background-color-lightblue{
+.background-color-lightblue {
     background-color: #00BEE8;
 }
 
-.priority-icon-board{
-width: 23px;
-height: 10px;
+.priority-icon-board {
+    width: 23px;
+    height: 10px;
 }
 
-.d-none{
-display: none;
+.d-none {
+    display: none;
 }
 
 /* Anzeige in Groß */
 
-.section-board-overlay{
+.section-board-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -345,7 +377,7 @@ display: none;
 }
 
 
-.tasks-board-big{
+.tasks-board-big {
     width: 20%;
     border-radius: 30px;
     padding: 48px 40px 48px 40px;
@@ -357,38 +389,38 @@ display: none;
     transition: all 400ms ease-in-out;
 }
 
-.name-of-task-board-big{
+.name-of-task-board-big {
     font-weight: 700 !important;
     font-size: 32px !important;
     color: black !important;
 }
 
-.name-of-task-board-big-p{
+.name-of-task-board-big-p {
     font-weight: 400 !important;
     font-size: 16px !important;
     color: black !important;
 }
 
-.due-date-priority{
+.due-date-priority {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 25px;
 }
 
-.due-date-priority span{
+.due-date-priority span {
     font-weight: 400;
     font-size: 16px;
     color: #2A3647;
 }
 
-.due-date-priority p{
+.due-date-priority p {
     font-weight: 400;
     font-size: 16px;
     color: black;
 }
 
-.priority-div{
+.priority-div {
     padding: 4px 18px 4px 18px;
     gap: 10px;
     display: flex;
@@ -396,20 +428,20 @@ display: none;
     align-items: center;
 }
 
-.assigned-to{
+.assigned-to {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
 }
 
-.assigned-to span{
+.assigned-to span {
     font-weight: 400;
     font-size: 16px;
     color: #2A3647;
 }
 
-.assigned-to-contacts{
+.assigned-to-contacts {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -417,7 +449,7 @@ display: none;
     padding-left: 4px;
 }
 
-.circle-board-big{
+.circle-board-big {
     width: 32px;
     height: 32px;
     border-radius: 32px;
@@ -432,31 +464,31 @@ display: none;
     margin-right: 8px;
 }
 
-.contact-name{
+.contact-name {
     font-family: 'Open Sans';
     font-weight: 400 !important;
     font-size: 16px !important;
     color: black !important;
 }
 
-.checkbox{
+.checkbox {
     border-radius: 3px;
     border: 2px solid #2A3647;
     width: 16px;
     height: 16px;
 }
 
-.checkbox-p{
+.checkbox-p {
     font-weight: 400;
     font-size: 16px;
     color: black;
 }
 
-.gap-16{
+.gap-16 {
     gap: 16px;
 }
 
-.padding-left-4{
+.padding-left-4 {
     padding-left: 4px;
 }
 
@@ -464,90 +496,98 @@ display: none;
     width: 16px;
     height: 16px;
     position: relative;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-font-size: 16px; /* Beispiel für die Schriftgröße */
-color: black; /* Beispiel für die Textfarbe */
-font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    /* Beispiel für die Schriftgröße */
+    color: black;
+    /* Beispiel für die Textfarbe */
+    font-weight: 400;
 }
 
 .checkbox-container input[type="checkbox"] {
-display: none;
+    display: none;
 }
 
 .checkbox-container .checkmark {
-width: 12px;
-height: 11.5px;
-border: 2px solid #2A3647; /* Beispiel für die Rahmenfarbe */
-border-radius: 3px;
-background-color: #fff; /* Weißer Hintergrund */
-overflow: visible;
+    width: 12px;
+    height: 11.5px;
+    border: 2px solid #2A3647;
+    /* Beispiel für die Rahmenfarbe */
+    border-radius: 3px;
+    background-color: #fff;
+    /* Weißer Hintergrund */
+    overflow: visible;
 }
 
-.checkbox-container input[type="checkbox"]:checked + .checkmark {
-background-color: #fff; /* Weißer Hintergrund */
-border-color: #000; /* Beispiel für die Rahmenfarbe */
+.checkbox-container input[type="checkbox"]:checked+.checkmark {
+    background-color: #fff;
+    /* Weißer Hintergrund */
+    border-color: #000;
+    /* Beispiel für die Rahmenfarbe */
 }
 
 .checkbox-container .checkmark::after {
-content: "";
-display: none;
-position: absolute;
-left: 6px;
-top: -4px;
-width: 5px;
-height: 15px;
-border: solid #000; /* Beispiel für die Farbe des Häkchens */
-border-width: 0 2px 2px 0;
-transform: rotate(45deg); /* Drehen um 45 Grad */
+    content: "";
+    display: none;
+    position: absolute;
+    left: 6px;
+    top: -4px;
+    width: 5px;
+    height: 15px;
+    border: solid #000;
+    /* Beispiel für die Farbe des Häkchens */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    /* Drehen um 45 Grad */
 }
 
-.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
-display: block;
+.checkbox-container input[type="checkbox"]:checked+.checkmark::after {
+    display: block;
 }
 
-.last-line{
-gap: 8px;
-display: flex;
-justify-content: flex-end;
-align-items: center;
+.last-line {
+    gap: 8px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.link{
-text-decoration: none;
-color: #2A3647;
-font-size: 16px;
-font-weight: 400;
+.link {
+    text-decoration: none;
+    color: #2A3647;
+    font-size: 16px;
+    font-weight: 400;
 }
 
-.link:hover{
-color: rgb(41,171,226);
-font-weight: bold;
+.link:hover {
+    color: rgb(41, 171, 226);
+    font-weight: bold;
 }
 
 
-.vertical-line-board{
-width: 1px;
-height: 24px;
-background-color: #D1D1D1;
+.vertical-line-board {
+    width: 1px;
+    height: 24px;
+    background-color: #D1D1D1;
 }
 
-.animation{
+.animation {
     transform: translateX(0);
 }
 
-.drag-area-highlight{
+.drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.close-icon{
+.close-icon {
     cursor: pointer;
 }
 
 
-.task-edit{
+.task-edit {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -559,125 +599,142 @@ background-color: #D1D1D1;
     overflow-y: auto;
 }
 
-.column-edit{
+.column-edit {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 4px;
 }
 
-.column-edit span{
+.column-edit span {
     color: #2A3647;
     font-weight: 400;
     font-size: 16px;
 }
 
-.edit-input{
+.edit-input {
     box-sizing: border-box;
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 12px 21px;
-gap: 10px;
-width: 300px;
-height: 48px;
-background: #FFFFFF;
-border: 1px solid #D1D1D1;
-border-radius: 10px;
-flex: none;
-font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 21px;
+    gap: 10px;
+    width: 300px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+    font-size: 16px;
 }
 
-.urgentButton-edit{
-  color: black !important;
-  background-color: white !important;
-  font-weight: 400 !important;
-  font-size: 16px !important;
-  width: 33% !important;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border: none !important;
-  padding: 0 0 0 0 !important;
-}
-
-.mediumButton-edit{
+.urgentButton-edit {
     color: black !important;
-  background-color: white !important;
-  font-weight: 400 !important;
-  font-size: 16px !important;
-  width: 33% !important;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border: none !important;
-  padding: 0 0 0 0 !important;
+    background-color: white !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    width: 33% !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border: none !important;
+    padding: 0 0 0 0 !important;
 }
 
-.lowButton-edit{
+.mediumButton-edit {
     color: black !important;
-  background-color: white !important;
-  font-weight: 400 !important;
-  font-size: 16px !important;
-  width: 33% !important;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border: none !important;
-  padding: 0 0 0 0 !important;
+    background-color: white !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    width: 33% !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border: none !important;
+    padding: 0 0 0 0 !important;
 }
 
-.assignContacts{
+.lowButton-edit {
+    color: black !important;
+    background-color: white !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    width: 33% !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border: none !important;
+    padding: 0 0 0 0 !important;
+}
+
+.assignContacts {
     box-sizing: border-box;
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 12px 16px;
-gap: 10px;
-width: 300px;
-height: 48px;
-background: #FFFFFF;
-border: 1px solid #D1D1D1;
-border-radius: 10px;
-flex: none;
-background-image: url(../assets/img/arrow-drop-down.png);
-background-position: 97%;
-background-repeat: no-repeat;
--webkit-appearance: none !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 10px;
+    width: 300px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+    background-image: url(../assets/img/arrow-drop-down.png);
+    background-position: 97%;
+    background-repeat: no-repeat;
+    -webkit-appearance: none !important;
 }
 
+<<<<<<< HEAD
 
+=======
+.subtask-input {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 21px;
+    gap: 10px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+    padding-right: 110px;
+}
+>>>>>>> cb2acb1c20ffa16887a10cfb14e77fc7225e1998
 
-.position-relative-board{
+.position-relative-board {
     position: relative;
 }
 
-.add-subtasks-btn-edit{
+.add-subtasks-btn-edit {
     position: absolute;
-right: 12px;
-top: 12px;
+    right: 12px;
+    top: 12px;
 }
 
-.relative{
-position: relative;
+.relative {
+    position: relative;
 }
 
-.flex-board-edit{
-display: flex;
-align-items: center;
-width: 300px;
+.flex-board-edit {
+    display: flex;
+    align-items: center;
+    width: 300px;
 }
 
-.bg-low{
-    background-color: rgb(122,226,41) !important;
+.bg-low {
+    background-color: rgb(122, 226, 41) !important;
     color: white !important;
 }
 
-.bg-medium{
-    background-color: rgb(255,168,0) !important;
+.bg-medium {
+    background-color: rgb(255, 168, 0) !important;
     color: white !important;
 }
 
-.bg-urgent{
-    background-color: rgb(255,61,0) !important;
+.bg-urgent {
+    background-color: rgb(255, 61, 0) !important;
     color: white !important;
 }
 
-.ok-button{
+.ok-button {
     position: absolute;
     right: 10px;
     bottom: 10px;
@@ -699,13 +756,13 @@ width: 300px;
     border-width: 0px;
 }
 
-.ok-button:hover{
-    background-color: rgb(13,153,255);
+.ok-button:hover {
+    background-color: rgb(13, 153, 255);
 }
 
 /* addTask-Container */
 
-.overlay-add-task-board{
+.overlay-add-task-board {
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 20;
     position: fixed;
@@ -732,7 +789,7 @@ width: 300px;
     transition: all ease-in-out 800ms;
 }
 
-.showAddTask{
+.showAddTask {
     transform: translateX(0);
 }
 
@@ -760,7 +817,7 @@ width: 300px;
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    
+
 }
 
 .flex-start-board {
@@ -829,7 +886,7 @@ width: 300px;
     top: 296px;
 }
 
-.assignContacts-select{
+.assignContacts-select {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -1086,7 +1143,7 @@ width: 440px;
     right: 20px;
     width: 309px;
     height: 56px;
-    
+
 }
 
 .fieldRequiredText {
@@ -1140,11 +1197,11 @@ width: 440px;
     cursor: pointer;
 }
 
-.close-task{
+.close-task {
     cursor: pointer;
 }
 
-.middle-of-the-page{
+.middle-of-the-page {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -1154,14 +1211,15 @@ width: 440px;
     justify-content: center;
     align-items: center;
 }
-.added-to-board{
+
+.added-to-board {
     width: 326px;
-height: 74px;
-border-radius: 20px;
-display: flex;
-justify-content: space-around;
-align-items: center;
-z-index: 999;
-background-color: #2A3647;
-color: #FFFFFF;
+    height: 74px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999;
+    background-color: #2A3647;
+    color: #FFFFFF;
 }

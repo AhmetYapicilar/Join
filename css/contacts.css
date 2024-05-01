@@ -61,17 +61,19 @@ body {
 .rightContainer {
     display: flex;
     width: 100%;
-    background-color: rgb(246,247,248);
+    background-color: rgb(246, 247, 248);
     flex-direction: column;
 }
 
 
-.betterWaT, .contactAddedSuccesfully {
+.betterWaT,
+.contactAddedSuccesfully {
     position: relative;
     width: 569px;
     height: 73px;
     display: flex;
-    opacity: 0;  /* Startet unsichtbar */
+    opacity: 0;
+    /* Startet unsichtbar */
     transition: opacity 0.5s ease-in-out;
 }
 
@@ -83,11 +85,13 @@ body {
 .contactAddedSuccesfully {
     top: 110px;
     left: 200px;
-    display: none; /* Initial versteckt */
+    display: none;
+    /* Initial versteckt */
 }
 
 .show {
-    opacity: 1; /* Volle Sichtbarkeit */
+    opacity: 1;
+    /* Volle Sichtbarkeit */
 }
 
 
@@ -216,7 +220,7 @@ body {
     padding: 20px;
     align-items: center;
     padding-left: 30px;
-}   
+}
 
 .firstLetterFromContacts p {
     font-size: 20px;
@@ -242,7 +246,7 @@ body {
     cursor: pointer;
 }
 
-.contactChamberLeftContainer img  {
+.contactChamberLeftContainer img {
     height: 42px;
     width: 42px;
 }
@@ -279,8 +283,8 @@ body {
 }
 
 
-  
-  #targetArea {
+
+#targetArea {
     position: relative;
     width: 500px;
     height: 522px;
@@ -291,7 +295,7 @@ body {
 
 .container {
     position: fixed;
-    display: none; 
+    display: none;
     z-index: 101;
     top: 0;
     left: 0;
@@ -301,47 +305,49 @@ body {
     align-items: center;
     visibility: hidden;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);
     transition: opacity 0.5s, visibility 0.5s;
-  }
-  
-  .panel {
+}
+
+.panel {
     width: 34%;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transform: translateX(100%);
     transition: transform 0.5s;
-    right: -50%; 
+    right: -50%;
     transition: right 0.5s ease-out;
-  }
-  
-  /* CSS-Klassen zur Steuerung der Anzeige */
-  .container.active, .panel.active {
+}
+
+/* CSS-Klassen zur Steuerung der Anzeige */
+.container.active,
+.panel.active {
     display: block;
     visibility: visible;
     opacity: 1;
-  }
+}
 
-  .container.notactive, .panel.notactive {
+.container.notactive,
+.panel.notactive {
     display: none;
     visibility: hidden;
     opacity: 0;
-  }
+}
 
 
-  .panel.active {
+.panel.active {
     width: 34%;
-  }
-  
-  .close-button {
+}
+
+.close-button {
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
-  }
+}
 
 
-  .centerAll {
+.centerAll {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -494,10 +500,10 @@ body {
 
 .inputfield-icon {
     position: absolute;
-    right: -10px; 
+    right: -10px;
     top: 50%;
-    transform: translateY(-50%); 
-    width: 18px; 
+    transform: translateY(-50%);
+    width: 18px;
 }
 
 .Name {
@@ -573,7 +579,7 @@ body {
     justify-content: center;
 }
 
-.initials-circle{
+.initials-circle {
     width: 20px;
     height: 20px;
     line-height: 20px;
@@ -585,7 +591,7 @@ body {
     font-size: 16px;
     justify-content: center;
     display: flex;
-    border: 2px solid white; 
+    border: 2px solid white;
 }
 
 .initials-circle-show-contacts {
@@ -600,17 +606,17 @@ body {
     font-size: 50px;
     justify-content: center;
     display: flex;
-    border: 4px solid white; 
+    border: 4px solid white;
     align-items: center;
 }
 
-.contact-info{
+.contact-info {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-li:hover{
+li:hover {
     background-color: #F2F2F2;
     border-radius: 10px;
     cursor: pointer;
@@ -793,10 +799,10 @@ li {
 
 .inputfield-icon-edit {
     position: absolute;
-    right: -10px; 
+    right: -10px;
     top: 50%;
-    transform: translateY(-50%); 
-    width: 18px; 
+    transform: translateY(-50%);
+    width: 18px;
 }
 
 .Name-edit {
@@ -820,7 +826,7 @@ li {
     font-size: 40px;
     justify-content: center;
     display: flex;
-    border: 4px solid white; 
+    border: 4px solid white;
     align-items: center;
 }
 
@@ -878,6 +884,7 @@ li {
     right: 30px;
     position: fixed;
     display: none;
+    z-index: 2;
 }
 
 .arrowLeftShowContact:hover {
@@ -900,7 +907,15 @@ li {
     display: none;
 }
 
-
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Die Überlagerung hat einen niedrigen Z-Index */
+    display: none; /* Zunächst verborgen */
+}
 
 
 @media (min-height: 1305px) {
@@ -925,6 +940,59 @@ li {
         height: 99.3vh;
     }
 
+    .data {
+        display: none !important;
+    }
+
+    .dontShowJoinLogoOnMobile {
+        display: none;
+    }
+
+    .sidebar {
+        z-index: 4;
+    }
+
+    .sidebar {
+        background-color: #2a3647;
+        width: 100% !important;
+        position: fixed;
+        bottom: 0 !important;
+        height: 80px !important;
+        top: 92% !important
+    }
+
+    .menu {
+        width: 100% !important;
+        height: 100% !important;
+        gap: 0px !important;
+    }
+
+    .sidebar_nav span {
+        display: flex;
+        width: auto !important;
+    }
+
+    .center-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .column {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+
+    .center {
+        display: none;
+    }
+
+
+    .data_nav {
+        display: none;
+    }
+
     header {
         display: flex;
         z-index: 2 !important;
@@ -944,6 +1012,11 @@ li {
 
     .fixed-width-104 {
         margin-right: 5% !important;
+    }
+
+    .circle {
+        width: 40px !important;
+        height: 40px !important;
     }
 
     .help-icon {
@@ -991,7 +1064,7 @@ li {
     .phoneListAndButton {
         width: 100%;
     }
-    
+
     .showAllContacts {
         width: 80%;
         top: 5%;
@@ -1022,6 +1095,143 @@ li {
         position: fixed;
         bottom: 10%;
         right: 7%;
+    }
+
+    .editDeleteContacts {
+        display: flex;
+        position: fixed;
+        bottom: 10%;
+        right: 7%;
+        flex-direction: column;
+        background-color: white;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 15px;
+        display: none;
+        z-index: 2;
+    }
+
+    #targetArea {
+        left: 40px;
+        top: 60px;
+        width: 620px;
+    }
+
+    .align-items-contacts-slide-in {
+        gap: 26px;
+    }
+
+    #phonebook {
+        padding: 40px;
+    }
+
+
+/*addContact*/
+
+    .leftrightContainer {
+        flex-direction: column;
+        height: 850px;
+        width: 550px;
+    }
+
+    .centerAll {
+        margin-top: 18%;
+    }
+
+    .addContactImg img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 30px;
+    }
+
+    .addContactImg {
+        height: 50%;
+        width: 100%;
+    }
+
+    .addContactInputFields {
+        padding-left: 0px;
+        width: 100%;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 30px;
+    }
+
+    .imgAndInputfields {
+        margin-top: -87px;
+        flex-direction: column;
+        gap: 0px;
+        width: 600px;
+    }
+
+    .cancelButton {
+        display: none;
+    }
+
+    .inPutfields {
+        gap: 0px;
+        width: 94%;
+        padding-left: 23px;
+    }
+
+    .right-Container {
+        width: 96%;
+        margin-top: 20%;
+    }
+
+    .cancelOrCreateContact {
+        display: flex;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    #contactForm {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .inputfieldAddContact {
+        width: 105%;
+        padding: 8px;
+    }
+
+    .closeButton {
+        display: none;
+    }
+
+    .inputfield-icon {
+        right: -25px;
+    }
+
+    .panel {
+        width: 33.5% !important;
+    }
+
+    .profilepictureSize {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 46%;
+    }
+
+    .createAccountButton {
+        width: 202px;
+        height: 51px;
+    }
+
+    .exitAddContactMobile {
+        display: flex;
+        position: relative;
+        height: 32px;
+        width: 32px;
+        z-index: 1;
+        top: 7%;
+        left: 42%;
     }
 }
 
@@ -1195,6 +1405,8 @@ li {
 
     #targetArea {
         left: 20px;
+        top: 145px;
+        width: 412px;
     }
 
     h1 {
@@ -1227,6 +1439,7 @@ li {
         border-bottom-left-radius: 15px;
         border-top-right-radius: 15px;
         display: none;
+        z-index: 2;
     }
 }
 
@@ -1238,7 +1451,7 @@ li {
     }
 
     .centerAll {
-        margin-top: 35%;
+        margin-top: 50%;
     }
 
     .mobileAdjustments {
@@ -1272,10 +1485,6 @@ li {
         width: 374px;
     }
 
-    .centerAll {
-        margin-top: 35%;
-    }
-
     .mobileAdjustments {
         width: 88%;
         padding-left: 20px;
@@ -1286,5 +1495,41 @@ li {
         height: 120px;
         position: absolute;
         top: 41%;
+    }
+
+    #targetArea {
+        left: 20px;
+        top: 145px;
+        width: 370px;
+    }
+
+    h1 {
+        font-size: 27px !important;
+    }
+
+    .initials-circle-show-contacts {
+        margin-right: 0px;
+    }
+
+    .align-items-contacts-slide-in {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 370px) {
+    #targetArea {
+        left: 20px;
+        top: 145px;
+        width: 340px;
+    }
+
+    .initials-circle-show-contacts {
+        height: 60px;
+        width: 60px;
+        font-size: 27px;
+    }
+
+    h1 {
+        font-size: 25px !important;
     }
 }

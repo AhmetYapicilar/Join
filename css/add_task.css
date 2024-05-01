@@ -30,18 +30,32 @@
     background-color: #29ABE2;
 }
 
-
-
-button {
-    cursor: pointer;
-}
-
 .headlineAddTask {
     font-size: 60px;
 }
 
 .fontSize20px {
     font-size: 20px;
+}
+
+li p {
+    margin-left: 16px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-c {
+    align-items: center;
+}
+
+.d-none {
+    display: none;
+}
+
+.show {
+    display: block;
 }
 
 .flex-start {
@@ -121,69 +135,6 @@ button {
     flex: none;
 }
 
-.urgentButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 10px;
-    gap: 8px;
-    width: 136px;
-    height: 56px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    border: none;
-    flex: none;
-}
-
-.urgentButtonSelected {
-    background: #ff3d00;
-    color: #FFFFFF;
-}
-
-.mediumButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 10px;
-    gap: 8px;
-    width: 136px;
-    height: 56px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    border: none;
-    flex: none;
-}
-
-.mediumButtonSelected {
-    background: #FFA800;
-    color: #FFFFFF;
-}
-
-.lowButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 10px;
-    gap: 8px;
-    width: 136px;
-    height: 56px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    border: none;
-    flex: none;
-}
-
-.lowButtonSelected {
-    background: #7ae229;
-    color: #FFFFFF;
-}
-
 .categoryPicker {
     width: 440px;
     height: 48px;
@@ -241,42 +192,6 @@ button {
     font-size: 16px;
 }
 
-.clearButton {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    gap: 4px;
-    width: 110px;
-    height: 56px;
-    background: #F6F7F8;
-    border: 1px solid #2A3647;
-    border-radius: 10px;
-    flex: none;
-    color: #2A3647;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.createButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    gap: 4px;
-    width: 183px;
-    height: 56px;
-    background: #2A3647;
-    border-radius: 10px;
-    flex: none;
-    color: #FFFFFF;
-    font-size: 20px;
-    font-weight: 700;
-}
-
 .subtask-input {
     box-sizing: border-box;
     display: flex;
@@ -293,12 +208,6 @@ button {
     padding-right: 110px;
 }
 
-.add-subtasks-btn {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-}
-
 .subtask-actions {
     cursor: pointer;
 }
@@ -309,11 +218,13 @@ button {
     background-color: #a8a8a8;
     margin: 0 6px;
 }
+
 .todo-subtask::before {
     content: '•';
     position: absolute;
     top: calc(50% - 11px);
-} 
+}
+
 .todo-subtask {
     align-items: center;
     padding: 6px 20px;
@@ -346,32 +257,13 @@ button {
 }
 
 .todo-subtask:hover .subtask-imgs {
-	visibility: visible;
-}
-
-li p {
-	margin-left: 16px;
-}
-
-.d-flex {
-    display: flex;
-}
-
-.align-c {
-    align-items: center;
-}
-
-.d-none {
-    display: none;
+    visibility: visible;
 }
 
 .todo-subtask:hover {
-	background-color: #eeeeee;
+    background-color: #eeeeee;
 }
 
-
-
-/* Dropdown-Menü */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -402,7 +294,6 @@ li p {
     position: absolute;
     width: 24px;
     cursor: pointer;
-    /* background-color: #597296; */
     right: 8px;
 }
 
@@ -410,7 +301,7 @@ li p {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     max-height: 170px;
     overflow-y: auto;
@@ -420,7 +311,7 @@ li p {
 .selectedDropdownContent {
     background-color: #2A3647;
     color: #FFFFFF;
-    
+
 }
 
 .dropdownContent span {
@@ -435,11 +326,6 @@ li p {
     background-color: #29ABE2;
 }
 
-.show {
-    display: block;
-}
-
-/* Ausgewählte Kontakte */
 .selectedContactsContainer {
     display: flex;
     flex-wrap: wrap;
