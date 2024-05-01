@@ -617,11 +617,3 @@ function closeDeleteAndEdit() {
     document.getElementById(`editDeleteContactsMobile`).style.display = "none";
     document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
 }
-
-document.addEventListener('click', function(event) {
-    // Überprüfen Sie, ob der Klick nicht auf ein spezielles Element zielt
-    if (event.target === document.body || event.target.nodeName === 'HTML') {
-        document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
-        document.getElementById(`editDeleteContactsMobile`).style.display = "none";n
-    }
-});
