@@ -307,7 +307,7 @@ if (window.innerWidth < 1320) {
     }
 
     // Code für den Fall, dass die Breite unter 1320px ist und alle Variablen gesetzt sind
-    document.getElementById(`leftContainerContacts`).classList.add(`dontDisplayOnMobile`);
+    document.getElementById("leftContainerContacts").style.display = "none";
     document.getElementById("rightContainerContacts").style.display = "flex";
     lastLiGetsNewClass(index);
     target.innerHTML = '';
@@ -579,7 +579,7 @@ function closeAddContactMobile() {
 
 //Zeigt Kontaktliste wieder an, nachdem man auf Kontaktdetails gegangen ist
 function showContactListMobile() {
-    document.getElementById(`leftContainerContacts`).classList.add(`displayOnMobile`)
+    document.getElementById("leftContainerContacts").style.display = "flex";
     document.getElementById(`leftContainerContacts`).classList.remove(`dontDisplayOnMobile`)
     document.getElementById("rightContainerContacts").style.display = "none";
     document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
@@ -592,11 +592,12 @@ window.addEventListener("resize", displayLeftAndRightContainer);
 function displayLeftAndRightContainer() {
     if (window.innerWidth >= 1320) {
         document.getElementById("rightContainerContacts").style.display = "flex";
-        document.getElementById(`leftContainerContacts`).classList.add(`displayOnMobile`)
+        document.getElementById("leftContainerContacts").style.display = "flex";
         document.getElementById(`leftContainerContacts`).classList.remove(`dontDisplayOnMobile`)
         window.location.reload();
     } else {
         document.getElementById("rightContainerContacts").style.display = "none";
+        document.getElementById("leftContainerContacts").style.display = "flex";
     }
 }
 
