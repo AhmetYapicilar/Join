@@ -41,6 +41,18 @@ function removeAllClassesWhenInit() {
   document.getElementById("body-board").style.overflow = "auto";
 }
 
+async function loadTasks() {
+  try {
+      const storedTasks = await getItem('task');
+
+      if (storedTasks) {
+          tasks = JSON.parse(storedTasks);
+      }
+  } catch (error) {
+      console.error('Loading error:', error);
+  }
+}
+
 function checkEmptyTasks() {
   for (let i = 0; i < ids.length; i++) {
     const ID = ids[i];
@@ -182,7 +194,7 @@ async function showSearchedTasks(search) {
       let tasktitle = TASK["title"];
       if (
         TASK["category2"] === ids[i] &&
-        tasktitle.toLowerCase().includes(search)
+        tasktitle.toLowerCase().startsWith(search)
       ) {
         foundedTasks.push(TASK);
       }
@@ -575,6 +587,74 @@ async function closeAddTask(newTaskNumber) {
       .getElementById("overlay-add-task-board")
       .classList.remove("overlay-add-task-board"); // Verstecke das Element nach der Animation
   }, 400);
+}
+
+function selectPriority(priority) {
+  resetButtons();
+  const selectedButton = document.getElementById(priority);
+  const img = selectedButton.querySelector('img');
+  switch (priority) {
+      case 'low':
+          img.src = './assets/img/prioDownWhite.png';
+          break;
+      case 'medium':
+          img.src = './assets/img/prioEvenWhite.png';
+          break;
+      case 'urgent':
+          img.src = './assets/img/prioUpWhite.png';
+          break;
+      default:
+          break;
+  }
+  selectedButton.classList.add(`${priority}ButtonSelected`);
+}
+
+function activateInput() {
+  let addSubtask = document.getElementById("add-subtask");
+  let subtasksInputActions = document.getElementById("subtask-input-actions");
+
+  addSubtask.classList.add("d-none");
+  subtasksInputActions.classList.remove("d-none");
+}
+
+function checkSubmit(event) {
+  if (event.key === "Enter") {
+      event.preventDefault();
+      submitSubtask();
+  }
+}
+
+function deactivateInput() {
+  let addSubtask = document.querySelector("#add-subtask");
+  let subtasksInputActions = document.querySelector("#subtask-input-actions");
+
+  addSubtask.classList.remove("d-none");
+  subtasksInputActions.classList.add("d-none");
+  document.querySelector("#subtask-input").value = "";
+}
+
+function setFocus() {
+  document.getElementById("subtask-input").focus();
+}
+
+function submitSubtask() {
+  if (subtasks.length >= 6) {
+      alert('Maximale Anzahl von Subtasks erreicht. Neue Subtasks können nicht hinzugefügt werden.');
+      return;
+  }
+  let subtaskContent = document.querySelector("#subtask-input").value;
+  if (subtaskContent == "") {
+      deactivateInput();
+  } else {
+      let newSubtask = {
+          subtaskName: subtaskContent,
+          done: false,
+      };
+      subtasks.push(newSubtask);
+      document.querySelector("#subtask-input").value = "";
+      renderSubtasks();
+      deactivateInput();
+  }
 }
 
 function addTaskOnBoardHTML(newTaskNumber) {
