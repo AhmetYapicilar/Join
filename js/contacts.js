@@ -587,9 +587,11 @@ function showContactListMobile() {
     document.getElementById(`overlayOnMobile`).style.display = "none";
 }
 
+
+//EventListener, der darauf achtet wenn sich die winwo width ändert
 window.addEventListener("resize", displayLeftAndRightContainer);
   
-
+//Wenn die window width größer als 1320px ist, werden die Container angezeigt, sonst nur der linke Container
 function displayLeftAndRightContainer() {
     if (window.innerWidth >= 1320) {
         document.getElementById("rightContainerContacts").style.display = "flex";
@@ -602,14 +604,14 @@ function displayLeftAndRightContainer() {
     }
 }
 
-
+//Zeigt die button edit und delete an
 function showEditDeleteMobileOnSlide() {
     document.getElementById(`editDeleteContactsMobile`).style.display = "flex";
     document.getElementById(`menuOptionsContactMobile`).style.display = "none";
-
     document.getElementById(`overlayOnMobile`).style.display = "flex"
 }
 
+//schließt das overlay, indem man drücken kann um den edit und delete button wieder zu verstecken
 function closeDeleteAndEdit() {
     document.getElementById(`overlayOnMobile`).style.display = "none"
     document.getElementById(`editDeleteContactsMobile`).style.display = "none";
