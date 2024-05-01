@@ -1,17 +1,43 @@
 let tasks = [];
 let subtasks = [];
-
-
-
-
-
 let users = [];
 let selectedContacts = [];
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function(event) {
+        const dropdownContent = document.querySelector('.dropdownContent');
+        const dropdownIcon = document.querySelector('.dropdownIcon');
+        const clickedElement = event.target;
+
+        const isDropdownContentClicked = dropdownContent && dropdownContent.contains(clickedElement);
+        const isDropdownIconClicked = dropdownIcon && dropdownIcon.contains(clickedElement);
+
+        if (!isDropdownContentClicked && !isDropdownIconClicked && dropdownContent) {
+            dropdownContent.classList.remove('show');
+        }
+    });
+});
+
 function toggleDropdown() {
     const dropdownContent = document.querySelector('.dropdownContent');
-    dropdownContent.classList.toggle('show');
+    const isOpen = dropdownContent.classList.contains('show');
+
+    if (!isOpen) {
+        dropdownContent.classList.add('show');
+    } else {
+        dropdownContent.classList.remove('show');
+    }
 }
+
+document.querySelector('.dropdownIcon').addEventListener('click', function(event) {
+    event.preventDefault();
+    toggleDropdown();
+});
+
+
+
+
+
 
 async function loadAndRenderNames() {
     try {
@@ -36,20 +62,17 @@ function searchContacts() {
     
     dropdownContent.innerHTML = '';
 
-    users.forEach(user => {
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
         const name = user.name || user.Name;
-        if (name.toUpperCase().startsWith(filter)) {
-            const span = document.createElement('span');
-            span.textContent = name;
-            span.onclick = function() {
-                selectContact(name);
-            };
-            dropdownContent.appendChild(span);
+        if (name && name.toUpperCase().startsWith(filter)) {
+            dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
         }
-    });
-
+    }
     dropdownContent.classList.add('show');
 }
+
+
 
 function selectContact(name) {
     const selectedContactIndex = selectedContacts.indexOf(name);
@@ -59,14 +82,14 @@ function selectContact(name) {
         selectedContacts.splice(selectedContactIndex, 1);
     }
     renderSelectedContacts();
-    selectContactStyleChanger(name); // Aufruf der Funktion zum Hinzufügen/Entfernen von CSS-Klassen
+    selectContactStyleChanger(name);
 }
 
 function selectContactStyleChanger(name) {
     const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
     selectedDropdownContent.forEach(span => {
         if (span.textContent === name) {
-            span.classList.toggle('selectedDropdownContent'); // Füge oder entferne die CSS-Klasse für den ausgewählten Kontakt hinzu/entferne sie
+            span.classList.toggle('selectedDropdownContent');
             const img = span.querySelector('img');
             if (img) {
                 img.src = span.classList.contains('selectedDropdownContent') ? './assets/img/checkbox-check-white.png' : './assets/img/Checkbox.png';
@@ -78,12 +101,21 @@ function selectContactStyleChanger(name) {
 function renderSelectedContacts() {
     const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
     selectedContactsContainer.innerHTML = '';
-    selectedContacts.forEach(contact => {
+    const maxContactsToShow = 5; 
+    const remainingCount = selectedContacts.length - maxContactsToShow;
+
+    for (let i = 0; i < Math.min(selectedContacts.length, maxContactsToShow); i++) {
+        const contact = selectedContacts[i];
         const initials = contact.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
-        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16); // Zufällige Farbe
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16); 
         selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${randomColor};">${initials}</div>`;
-    });
+    }
+    
+    if (remainingCount > 0) {
+        selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: #aaa;">+${remainingCount}</div>`;
+    }
 }
+
 
 
 
