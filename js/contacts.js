@@ -255,7 +255,7 @@ function closeEditWindow() {
     document.getElementById('panel-edit').classList.remove('active');
     document.getElementById('modal-edit').classList.add('notactive');
     document.getElementById('panel-edit').classList.add('notactive');
-    document.getElementById(`editContactImgMobile`).src = `assets/img/assets/img/editContact.png`;
+    document.getElementById(`editContactImgMobile`).src = `assets/img/editContact.png`;
 }
 
 //Edit Feld schließen und deleteContacts ausführen
@@ -570,6 +570,13 @@ function showMobileAddContact() {
     document.getElementById('panel').classList.add('active');
 
     document.getElementById(`addContactImgChange`).src = `assets/img/MobileAddContact.png`;
+
+    let addContactContainer = document.getElementById("letAddContactSlideIn");
+
+    setTimeout(() => {
+        addContactContainer.classList.remove("show-slide-out-bottom");
+        addContactContainer.classList.add("show-slide-in-bottom"); 
+    }, 500);
 }
 
 
@@ -613,14 +620,21 @@ function displayLeftAndRightContainer() {
 
 //Zeigt die button edit und delete an
 function showEditDeleteMobileOnSlide() {
-    document.getElementById(`editDeleteContactsMobile`).style.display = "flex";
     document.getElementById(`menuOptionsContactMobile`).style.display = "none";
+    document.getElementById(`editDeleteContactsMobile`).style.display = "flex";
     document.getElementById(`overlayOnMobile`).style.display = "flex"
+    let editDeleteEdit = document.getElementById("editDeleteContactsMobile");
+    editDeleteEdit.classList.remove("show-slide-out");
+    editDeleteEdit.classList.add("show-slide-in");
 }
 
 //schließt das overlay, indem man drücken kann um den edit und delete button wieder zu verstecken
 function closeDeleteAndEdit() {
+    setTimeout(() => {
+        document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
+    }, 500);
     document.getElementById(`overlayOnMobile`).style.display = "none"
-    document.getElementById(`editDeleteContactsMobile`).style.display = "none";
-    document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
+    let editDeleteEdit = document.getElementById("editDeleteContactsMobile");
+    editDeleteEdit.classList.remove("show-slide-in");
+    editDeleteEdit.classList.add("show-slide-out");
 }

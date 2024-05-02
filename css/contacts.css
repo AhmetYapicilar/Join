@@ -922,6 +922,69 @@ li {
 }
 
 
+
+/* Definiert die Schiebebewegung von rechts nach innen */
+@keyframes slideInFromRight {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 7%;
+    }
+}
+
+.show-slide-in {
+    position: absolute;
+    bottom: 10%;
+    animation: slideInFromRight 0.5s ease-out forwards;
+}
+
+/* Definiert die Schiebebewegung von rechts nach außen */
+@keyframes slideOutToRight {
+    from {
+        right: 7%;
+    }
+    to {
+        right: -100%;
+    }
+}
+
+.show-slide-out {
+    animation: slideOutToRight 2s ease-out forwards;
+}
+
+
+@keyframes slideInFromBottom {
+    from {
+        bottom: -100%;
+    }
+    to {
+        bottom: 10%;
+    }
+}
+
+.show-slide-in-bottom {
+    position: absolute;
+    animation: slideInFromBottom 0.5s ease-out forwards;
+}
+
+/* Definiert die Schiebebewegung von oben nach unten */
+@keyframes slideOutToBottom {
+    from {
+        bottom: 10%;
+    }
+    to {
+        bottom: -100%;
+    }
+}
+
+.show-slide-out-bottom {
+    animation: slideOutToBottom 0.5s ease-out forwards;
+}
+
+
+
+
 @media (min-height: 1305px) {
     .main {
         height: 92.6vh;
@@ -1667,13 +1730,18 @@ li {
 
     .saveButton-edit {
         height: 51px;
-        width: 99px;
+        width: 105px;
     }
 
     .showAllContacts {
         width: 100%;
         height: 83%;
         top: 1%;
+    }
+
+    .createAccountButton {
+        width: 220px;
+        height: 51px;
     }
 
     .inPutfields-edit {
@@ -1689,7 +1757,11 @@ li {
     }
 
     .centerAll {
-        margin-top: 35%;
+        margin-top: 0%;
+    }
+
+    .centerAll-edit {
+        margin-top: 0%;
     }
 
     .column {
