@@ -1071,8 +1071,8 @@ li {
 
     .showAllContacts {
         width: 80%;
-        top: 4%;
-        height: 78%;
+        top: 1%;
+        height: 83%;
     }
 
     .addNewContact {
@@ -1238,6 +1238,137 @@ li {
         top: 7%;
         left: 42%;
     }
+
+
+    /*edit*/
+
+    .leftrightContainer-edit {
+        flex-direction: column;
+        height: 900px;
+        width: 550px;
+    }
+
+    .centerAll-edit {
+        margin-top: 15%;
+        height: 800px;
+    }
+
+    .addContactImg img-edit {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 30px;
+    }
+
+    .addContactImg-edit {
+        height: 50%;
+        width: 100%;
+    }
+
+    .addContactImg-edit img {
+        padding: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 30px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .initials-circle-edit-contacts {
+        position: absolute;
+        top: 46%;
+        margin-right: 0px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .rightContainer-edit {
+        width: 100%;
+        margin-top: 140px;
+    }
+
+    .addContactInputFields-edit {
+        padding-left: 0px;
+        width: 100%;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 30px;
+    }
+
+    .imgAndInputfields-edit {
+        margin-top: -87px;
+        flex-direction: column;
+        gap: 0px;
+        width: 554px;
+    }
+
+    .inPutfields-edit {
+        gap: 0px;
+        width: 94%;
+        padding-left: 23px;
+    }
+
+    .inputs-edit {
+        gap: 20px;
+    }
+
+    .right-Container-edit {
+        width: 96%;
+        margin-top: 20%;
+    }
+
+    .cancelOrCreateContact-edit {
+        display: flex;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    #contactForm-edit {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .inputfieldAddContact-edit {
+        width: 105%;
+        padding: 8px;
+    }
+
+    .closeButton-edit {
+        display: none;
+    }
+
+    .inputfield-icon-edit {
+        right: -25px;
+    }
+
+    .panel {
+        width: 33.5% !important;
+    }
+
+    .profilepictureSize-edit {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 46%;
+    }
+
+    .createAccountButton-edit {
+        width: 202px;
+        height: 51px;
+    }
+
+    .exitAddContactMobile-edit {
+        display: flex;
+        position: relative;
+        height: 32px;
+        width: 32px;
+        z-index: 1;
+        top: 7%;
+        left: 42%;
+    }
 }
 
 /*Mobile*/
@@ -1257,10 +1388,37 @@ li {
 
 
 @media (max-width: 600px) {
+
+    .leftrightContainer-edit {
+        flex-direction: column;
+        height: 872px;
+        width: 440px;
+    }
+
+    .initials-circle-edit-contacts {
+        top: 40%;
+    }
+
+    .rightContainer-edit {
+        width: 100%;
+        margin-top: 75px;
+    }
+
     .showAllContacts {
         width: 100%;
         height: 83%;
         top: 1%;
+    }
+
+    .inPutfields-edit {
+        gap: 0px;
+        width: 94%;
+        padding-left: 16px;
+    }
+
+    .rightContainer-edit {
+        width: 80%;
+        margin-top: 75px;
     }
 
     .addContactMobileImg {
@@ -1475,6 +1633,40 @@ li {
 }
 
 @media (max-width: 450px) {
+
+
+    .leftrightContainer-edit {
+        flex-direction: column;
+        height: 750px;
+        width: 350px;
+    }
+
+    .initials-circle-edit-contacts {
+        position: absolute;
+        top: 39%;
+        margin-right: 0px;
+        width: 80px;
+        height: 80px;
+        font-size: 33px;
+    }
+
+    .rightContainer-edit {
+        width: 64%;
+        margin-top: 105px;
+    }
+
+    .showAllContacts {
+        width: 100%;
+        height: 83%;
+        top: 1%;
+    }
+
+    .inPutfields-edit {
+        gap: 0px;
+        width: 94%;
+        padding-left: 11px;
+    }
+
     .leftrightContainer {
         flex-direction: column;
         height: 800px;

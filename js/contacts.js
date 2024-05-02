@@ -171,6 +171,9 @@ function showEditContactBox(contact) {
     document.getElementById('panel-edit').classList.remove('notactive');
     document.getElementById('modal-edit').classList.add('active');
     document.getElementById('panel-edit').classList.add('active');
+    if (window.innerWidth < 1320) {
+    document.getElementById(`editContactImgMobile`).src = `assets/img/editContactMobile.png`;
+    }
 }
 
 //Generiert das geöffnete Edit Contact Feld
@@ -181,8 +184,9 @@ function generateEditContactForm(contact, index) {
         <div class="panel" id="panel-edit">
           <div class="centerAll-edit">
             <div class="leftrightContainer-edit">
+            <img class="exitAddContactMobile" onclick="closeEditWindow()" src="assets/img/CloseWhite.png">
               <div class="addContactImg-edit">
-                <img src="assets/img/editContact.png" />
+                <img id="editContactImgMobile" src="assets/img/editContact.png" />
               </div>
               <div class="addContactInputFields-edit">
                 <div class="imgAndInputfields-edit">
