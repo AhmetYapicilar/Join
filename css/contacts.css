@@ -959,19 +959,22 @@ li {
         bottom: -100%;
     }
     to {
-        bottom: 10%;
+        bottom: 15%;
     }
 }
 
 .show-slide-in-bottom {
     position: absolute;
     animation: slideInFromBottom 0.5s ease-out forwards;
+    z-index: 100;
+    left: 5%;
+    overflow: hidden !important;
 }
 
 /* Definiert die Schiebebewegung von oben nach unten */
 @keyframes slideOutToBottom {
     from {
-        bottom: 10%;
+        bottom: 15%;
     }
     to {
         bottom: -100%;
@@ -979,7 +982,11 @@ li {
 }
 
 .show-slide-out-bottom {
+    position: absolute;
     animation: slideOutToBottom 0.5s ease-out forwards;
+    z-index: 100;
+    left: 5%;
+    overflow: hidden !important;
 }
 
 

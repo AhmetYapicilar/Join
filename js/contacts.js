@@ -564,29 +564,22 @@ async function deleteContacts(index) {
 
 //Zeigt addContact in Mobile Version an
 function showMobileAddContact() {
-    document.getElementById('modal').classList.remove('notactive');
-    document.getElementById('panel').classList.remove('notactive');
-    document.getElementById('modal').classList.add('active');
-    document.getElementById('panel').classList.add('active');
-
     document.getElementById(`addContactImgChange`).src = `assets/img/MobileAddContact.png`;
+    document.getElementById(`letAddContactSlideIn`).style.display = "flex";
 
     let addContactContainer = document.getElementById("letAddContactSlideIn");
-
-    setTimeout(() => {
         addContactContainer.classList.remove("show-slide-out-bottom");
         addContactContainer.classList.add("show-slide-in-bottom"); 
-    }, 500);
-}
+} 
 
 
 //schließt addContact in Mobile version
 function closeAddContactMobile() {
-    document.getElementById('modal').classList.remove('active');
-    document.getElementById('modal').classList.add('notactive');
-    document.getElementById('panel').classList.add('notactive');
+    let addContactContainer = document.getElementById("letAddContactSlideIn");
+        addContactContainer.classList.remove("show-slide-in-bottom");
+        addContactContainer.classList.add("show-slide-out-bottom");
     setTimeout(() => {
-        document.getElementById('panel').style.right = "-50%"; 
+        document.getElementById(`letAddContactSlideIn`).style.display = "none";
     }, 500);
 }
 
@@ -615,6 +608,7 @@ function displayLeftAndRightContainer() {
     } else {
         document.getElementById("rightContainerContacts").style.display = "none";
         document.getElementById("leftContainerContacts").style.display = "flex";
+        document.getElementById(`letAddContactSlideIn`).style.display = "none";
     }
 }
 
