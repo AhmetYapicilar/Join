@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownIcon = document.querySelector('.dropdownIcon');
+
+    dropdownIcon.addEventListener('click', function(event) {
+        event.preventDefault();
+    });
+});
+
 function toggleDropdown() {
     const dropdownContent = document.querySelector('.dropdownContent');
     const isOpen = dropdownContent.classList.contains('show');
@@ -28,15 +36,6 @@ function toggleDropdown() {
         dropdownContent.classList.remove('show');
     }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    const dropdownIcon = document.querySelector('.dropdownIcon');
-
-    dropdownIcon.addEventListener('click', function(event) {
-        event.preventDefault();
-    });
-});
-
 
 
 
@@ -67,7 +66,6 @@ function searchContacts() {
     const dropdownContent = document.querySelector('.dropdownContent');
     dropdownContent.innerHTML = '';
 
-
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         const name = user.name || user.Name;
@@ -77,7 +75,6 @@ function searchContacts() {
         }
     }
     dropdownContent.classList.add('show');
-
 }
 
 
@@ -99,7 +96,6 @@ function selectContactStyleChanger(filter) {
         if(CONTACT.toUpperCase().startsWith(filter)){
             let trueContact = CONTACT;
         
-        
     const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
     selectedDropdownContent.forEach(span => {
         if (span.textContent === trueContact) {
@@ -108,7 +104,6 @@ function selectContactStyleChanger(filter) {
             if (img) {
                 img.src = span.classList.contains('selectedDropdownContent') ? './assets/img/checkbox-check-white.png' : './assets/img/Checkbox.png';
             }
-        
         }
     });
 }}}

@@ -54,10 +54,6 @@ li p {
     display: none;
 }
 
-.show {
-    display: block;
-}
-
 .flex-start {
     display: flex;
     justify-content: flex-start;
@@ -306,6 +302,10 @@ li p {
     max-height: 170px;
     overflow-y: auto;
     width: 438px;
+}
+
+.show {
+    display: block;
 }
 
 .selectedDropdownContent {
