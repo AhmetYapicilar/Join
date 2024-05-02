@@ -42,7 +42,7 @@ function toggleDropdown() {
 
 async function loadAndRenderNames() {
     try {
-        users = JSON.parse(await getItem('users'));
+        const loadedUsers = JSON.parse(await getItem('users'));
         const dropdownContent = document.querySelector('.dropdownContent');
         dropdownContent.innerHTML = '';
         const nameSet = new Set();
@@ -92,8 +92,7 @@ function selectContact(name) {
     selectContactStyleChanger(name);
     } else {
         name = name.toUpperCase();
-        selectContactStyleChangerIfNameIsNot(name);
-        selectedContacts.splice(selectedContactIndex, 1);
+        selectContactStyleChanger(name);
     }
     renderSelectedContacts();
 }
@@ -107,16 +106,16 @@ function selectContactStyleChanger() {
         const isSelected = selectedContacts.includes(contactName);
         
         if (isSelected) {
-            span.classList.add('selectedDropdownContent');
+            if (img) {
+                img.src = './assets/img/checkbox-check-white.png';
+            }
+        } else {
+            span.classList.remove('selectedDropdownContent');
             const img = span.querySelector('img');
-                img.src = './assets/img/checkbox-check-white.png'; 
-        } 
-    });
-}
-
-
-
-
+            if (img) {
+                img.src = './assets/img/Checkbox.png';
+            }
+        }})}
 
 function renderSelectedContacts() {
     const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
