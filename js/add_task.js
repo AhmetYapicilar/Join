@@ -3,8 +3,8 @@ let subtasks = [];
 let users = [];
 let selectedContacts = [];
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener('click', function(event) {
+document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('click', function (event) {
         const dropdownContent = document.querySelector('.dropdownContent');
         const dropdownIcon = document.querySelector('.dropdownIcon');
         const clickedElement = event.target;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function () {
     const dropdownIcon = document.querySelector('.dropdownIcon');
 
-    dropdownIcon.addEventListener('click', function(event) {
+    dropdownIcon.addEventListener('click', function (event) {
         event.preventDefault();
     });
 });
@@ -78,7 +78,7 @@ function searchContacts() {
         }
     }
     dropdownContent.classList.add('show');
-    
+
     selectContactStyleChanger(); // Nach dem Rendern der Dropdown-Inhalte die Stile aktualisieren
 }
 
@@ -122,16 +122,16 @@ function selectContactStyleChanger() {
 function renderSelectedContacts() {
     const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
     selectedContactsContainer.innerHTML = '';
-    const maxContactsToShow = 5; 
+    const maxContactsToShow = 5;
     const remainingCount = selectedContacts.length - maxContactsToShow;
 
     for (let i = 0; i < Math.min(selectedContacts.length, maxContactsToShow); i++) {
         const contact = selectedContacts[i];
         const initials = contact.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
-        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16); 
+        const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
         selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${randomColor};">${initials}</div>`;
     }
-    
+
     if (remainingCount > 0) {
         selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: #aaa;">+${remainingCount}</div>`;
     }
