@@ -1244,7 +1244,7 @@ li {
 
     .leftrightContainer-edit {
         flex-direction: column;
-        height: 900px;
+        height: 850px;
         width: 550px;
     }
 
@@ -1391,12 +1391,12 @@ li {
 
     .leftrightContainer-edit {
         flex-direction: column;
-        height: 872px;
-        width: 440px;
+        height: 800px;
+        width: 434px;
     }
 
     .initials-circle-edit-contacts {
-        top: 40%;
+        top: 44%;
     }
 
     .rightContainer-edit {
@@ -1418,7 +1418,7 @@ li {
 
     .rightContainer-edit {
         width: 80%;
-        margin-top: 75px;
+        margin-top: 125px;
     }
 
     .addContactMobileImg {
@@ -1634,16 +1634,21 @@ li {
 
 @media (max-width: 450px) {
 
+    .cancelOrCreateContact-edit {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+    }
 
     .leftrightContainer-edit {
         flex-direction: column;
-        height: 750px;
-        width: 350px;
+        height: 730px;
+        width: 374px;
     }
 
     .initials-circle-edit-contacts {
         position: absolute;
-        top: 39%;
+        top: 43%;
         margin-right: 0px;
         width: 80px;
         height: 80px;
@@ -1652,7 +1657,17 @@ li {
 
     .rightContainer-edit {
         width: 64%;
-        margin-top: 105px;
+        margin-top: 115px;
+    }
+
+    .cancelButton-edit {
+        height: 51px;
+        width: 82px;
+    }
+
+    .saveButton-edit {
+        height: 51px;
+        width: 99px;
     }
 
     .showAllContacts {
