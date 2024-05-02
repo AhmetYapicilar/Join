@@ -917,6 +917,10 @@ li {
     display: none; /* Zunächst verborgen */
 }
 
+#phonebook {
+    padding: 20px;
+}
+
 
 @media (min-height: 1305px) {
     .main {
@@ -1237,6 +1241,20 @@ li {
 
 /*Mobile*/
 
+
+@media (max-width: 730px) {
+    .column {
+        gap: 2% !important;
+        left: 0px;
+        position: absolute;
+    }
+
+    .sidebar_nav {
+        padding: 0px !important;
+    }
+}
+
+
 @media (max-width: 600px) {
     .showAllContacts {
         width: 100%;
@@ -1266,6 +1284,12 @@ li {
 
     .centerAll {
         margin-top: 44%;
+    }
+
+    .column {
+        gap: 8% !important;
+        left: 0px;
+        position: absolute;
     }
 
     .addContactImg img {
@@ -1441,6 +1465,11 @@ li {
         display: none;
         z-index: 2;
     }
+
+    .sidebar_nav {
+        width: 100px !important;
+        padding: 0px !important;
+    }
 }
 
 @media (max-width: 450px) {
@@ -1451,7 +1480,13 @@ li {
     }
 
     .centerAll {
-        margin-top: 50%;
+        margin-top: 35%;
+    }
+
+    .column {
+        gap: 4% !important;
+        left: 0px;
+        position: absolute;
     }
 
     .mobileAdjustments {
