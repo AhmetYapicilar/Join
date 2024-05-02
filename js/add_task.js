@@ -42,19 +42,23 @@ function toggleDropdown() {
 
 async function loadAndRenderNames() {
     try {
-        const users = JSON.parse(await getItem('users'));
+        const loadedUsers = JSON.parse(await getItem('users'));
         const dropdownContent = document.querySelector('.dropdownContent');
         dropdownContent.innerHTML = '';
         const nameSet = new Set();
-        users.forEach(user => {
+        const filteredUsers = [];
+
+        loadedUsers.forEach(user => {
             if (user.name || user.Name) {
                 const name = user.name || user.Name;
                 if (!nameSet.has(name)) {
                     nameSet.add(name);
                     dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+                    filteredUsers.push(user);
                 }
             }
         });
+        users.push(...filteredUsers);
     } catch (error) {
         console.error('Fehler beim Laden und Rendern von Namen:', error);
     }
@@ -62,7 +66,7 @@ async function loadAndRenderNames() {
 
 function searchContacts() {
     const searchInput = document.querySelector('.searchInput');
-    const filter = searchInput.value.toUpperCase();
+    const filter = searchInput.value.trim().toUpperCase(); // Trim, um Leerzeichen am Anfang und am Ende zu entfernen
     const dropdownContent = document.querySelector('.dropdownContent');
     dropdownContent.innerHTML = '';
 
@@ -71,11 +75,13 @@ function searchContacts() {
         const name = user.name || user.Name;
         if (name && name.toUpperCase().startsWith(filter)) {
             dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
-            selectContactStyleChanger(filter);
         }
     }
     dropdownContent.classList.add('show');
+    
+    selectContactStyleChanger(); // Nach dem Rendern der Dropdown-Inhalte die Stile aktualisieren
 }
+
 
 
 function selectContact(name) {
@@ -90,23 +96,28 @@ function selectContact(name) {
     renderSelectedContacts();
 }
 
-function selectContactStyleChanger(filter) {
-    for(let x = 0; x<selectedContacts.length; x++){
-        const CONTACT = selectedContacts[x];
-        if(CONTACT.toUpperCase().startsWith(filter)){
-            let trueContact = CONTACT;
-        
+function selectContactStyleChanger() {
     const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
+
     selectedDropdownContent.forEach(span => {
-        if (span.textContent === trueContact) {
+        const contactName = span.textContent.trim(); // Trim, um Leerzeichen am Anfang und am Ende zu entfernen
+        const isSelected = selectedContacts.includes(contactName);
+        
+        if (isSelected) {
             span.classList.add('selectedDropdownContent');
             const img = span.querySelector('img');
             if (img) {
-                img.src = span.classList.contains('selectedDropdownContent') ? './assets/img/checkbox-check-white.png' : './assets/img/Checkbox.png';
+                img.src = './assets/img/checkbox-check-white.png';
+            }
+        } else {
+            span.classList.remove('selectedDropdownContent');
+            const img = span.querySelector('img');
+            if (img) {
+                img.src = './assets/img/Checkbox.png';
             }
         }
     });
-}}}
+}
 
 function renderSelectedContacts() {
     const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
