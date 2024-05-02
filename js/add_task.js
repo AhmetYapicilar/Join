@@ -96,6 +96,7 @@ function selectContact(name) {
     renderSelectedContacts();
 }
 
+
 function selectContactStyleChanger() {
     const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
 
