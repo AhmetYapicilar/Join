@@ -37,36 +37,35 @@ function toggleDropdown() {
     }
 }
 
-
-
-
 async function loadAndRenderNames() {
     try {
         const loadedUsers = JSON.parse(await getItem('users'));
-        const dropdownContent = document.querySelector('.dropdownContent');
-        dropdownContent.innerHTML = '';
-        const nameSet = new Set();
-        const filteredUsers = [];
-
-        loadedUsers.forEach(user => {
-            if (user.name || user.Name) {
-                const name = user.name || user.Name;
-                if (!nameSet.has(name)) {
-                    nameSet.add(name);
-                    dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
-                    filteredUsers.push(user);
-                }
-            }
-        });
-        users.push(...filteredUsers);
+        renderNames(loadedUsers);
     } catch (error) {
         console.error('Fehler beim Laden und Rendern von Namen:', error);
     }
 }
 
+function renderNames(loadedUsers) {
+    const dropdownContent = document.querySelector('.dropdownContent');
+    dropdownContent.innerHTML = '';
+    const nameSet = new Set();
+    const filteredUsers = [];
+
+    loadedUsers.forEach(user => {
+        const name = user.name || user.Name;
+        if (name && !nameSet.has(name)) {
+            nameSet.add(name);
+            dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+            filteredUsers.push(user);
+        }
+    });
+    users.push(...filteredUsers);
+}
+
 function searchContacts() {
     const searchInput = document.querySelector('.searchInput');
-    const filter = searchInput.value.trim().toUpperCase(); // Trim, um Leerzeichen am Anfang und am Ende zu entfernen
+    const filter = searchInput.value.trim().toUpperCase();
     const dropdownContent = document.querySelector('.dropdownContent');
     dropdownContent.innerHTML = '';
 
@@ -78,11 +77,8 @@ function searchContacts() {
         }
     }
     dropdownContent.classList.add('show');
-
-    selectContactStyleChanger(); // Nach dem Rendern der Dropdown-Inhalte die Stile aktualisieren
+    selectContactStyleChanger();
 }
-
-
 
 function selectContact(name) {
     const selectedContactIndex = selectedContacts.indexOf(name);
@@ -98,11 +94,9 @@ function selectContact(name) {
 
 function selectContactStyleChanger() {
     const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
-
     selectedDropdownContent.forEach(span => {
-        const contactName = span.textContent.trim(); // Trim, um Leerzeichen am Anfang und am Ende zu entfernen
+        const contactName = span.textContent.trim();
         const isSelected = selectedContacts.includes(contactName);
-
         if (isSelected) {
             span.classList.add('selectedDropdownContent');
             const img = span.querySelector('img');
@@ -136,14 +130,6 @@ function renderSelectedContacts() {
         selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: #aaa;">+${remainingCount}</div>`;
     }
 }
-
-
-
-
-
-
-
-
 
 async function loadTasks() {
     try {
@@ -214,14 +200,11 @@ async function createTask() {
         });
         await setItem('task', JSON.stringify(tasks));
         console.log('Task successfully created.');
-        clearForm();
         openBoard();
     } catch (error) {
-        console.error('Error creating task:', error);
+        console.log('Error creating task.');
     }
 }
-
-
 
 function resetButtons() {
     document.querySelectorAll('.urgentButton, .mediumButton, .lowButton').forEach(button => {
@@ -296,13 +279,19 @@ function clearForm() {
     let form = document.getElementById("addTaskForm");
     form.reset();
     selectMedium();
-    clearSubtasks();
+    clearArrays();
+    loadAndRenderNames();
 }
 
-function clearSubtasks() {
+function clearArrays() {
+    let contactsInput = document.getElementById("searchInput");
     let subtasksContainer = document.getElementById("subtask-container");
-    subtasksContainer.innerHTML = ``
+    let selectedContactsContainer = document.getElementById("selectedContactsContainer");
+    contactsInput = "";
+    subtasksContainer.innerHTML = ``;
+    selectedContactsContainer.innerHTML = ``;
     subtasks = [];
+    selectedContacts = [];
 }
 
 function activateInput() {
@@ -367,6 +356,7 @@ function editSubtask(i) {
     document.getElementById(`edit-subtask-${i}`).focus();
     subtaskEditInput.value = subtasks[i].subtaskName;
 }
+
 function checkEditSubmit(i, event) {
     if (event.key === "Enter") {
         event.preventDefault();
@@ -385,33 +375,6 @@ function renderSubtasks() {
     subtaskList.innerHTML = "";
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i].subtaskName;
-        subtaskList.innerHTML += /*html*/ `
-            <li
-				id="todo-id-${i}"
-				class="todo-subtask d-flex"
-				ondblclick="editSubtask(${i})">
-                <div class="d-flex align-c todo-subtask-container" id="subtask-element${i}">
-                    <p>${element}</p>
-                    <div class="subtask-imgs d-flex align-c">
-					    <img
-						    src="./assets/img/edit.png"
-						    class="subtask-actions"
-                            onclick="event.stopPropagation(); editSubtask(${i})"/>
-					    <span class="vertical-line-sub"></span>
-					    <img src="./assets/img/delete.png" onclick="deleteSubtask(${i})" class="subtask-actions" />
-				    </div>
-                </div>
-                <div class="d-flex align-c todo-subtask-container set-edit d-none" id="edit-subtask-container">
-                    <input type="text" id="edit-subtask-${i}" class="subtask-edit" onkeydown="checkEditSubmit(${i}, event)">
-                    <div class="subtask-imgs d-flex align-c">
-					    <img
-						    src="./assets/img/check-blue.png"
-						    class="subtask-actions" onclick="submitChange(${i})"/>
-					    <span class="vertical-line-sub"></span>
-					    <img src="./assets/img/delete.png" onclick="deleteSubtask(${i})" class="subtask-actions" />
-				    </div>
-                </div>
-			</li>
-        `;
+        subtaskList.innerHTML += subtaskHtml(element, i);
     }
 }

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./include.js"></script>
+    <script src="./js/html_templates.js"></script>
     <script src="./js/signUp.js"></script>
     <script src="./js/logIn.js"></script>
     <script src="./js/templates.js"></script>
@@ -49,11 +50,12 @@
                     <span>Assigned to</span>
                     <div class="dropdown">
                         <div class="contactsInputField">
-                            <input type="text" class="searchInput fontSize20px" placeholder="Search contacts" onkeyup="searchContacts()">
+                            <input type="text" id="searchInput" class="searchInput fontSize20px"
+                                placeholder="Search contacts" onkeyup="searchContacts()">
                             <img src="./assets/img/arrow-drop-down.png" class="dropdownIcon" onclick="toggleDropdown()">
                         </div>
                         <div class="dropdownContent"></div>
-                        <div class="selectedContactsContainer"></div>
+                        <div id="selectedContactsContainer" class="selectedContactsContainer"></div>
                     </div>
                 </div>
 
