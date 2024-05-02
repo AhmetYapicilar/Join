@@ -172,7 +172,9 @@ function showEditContactBox(contact) {
     document.getElementById('modal-edit').classList.add('active');
     document.getElementById('panel-edit').classList.add('active');
     if (window.innerWidth < 1320) {
-    document.getElementById(`editContactImgMobile`).src = `assets/img/editContactMobile.png`;
+        document.getElementById(`editContactImgMobile`).src = `assets/img/editContactMobile.png`;
+    } else {
+        document.getElementById(`editContactImgMobile`).src = `assets/img/editContact.png`;
     }
 }
 
@@ -253,6 +255,7 @@ function closeEditWindow() {
     document.getElementById('panel-edit').classList.remove('active');
     document.getElementById('modal-edit').classList.add('notactive');
     document.getElementById('panel-edit').classList.add('notactive');
+    document.getElementById(`editContactImgMobile`).src = `assets/img/assets/img/editContact.png`;
 }
 
 //Edit Feld schließen und deleteContacts ausführen
