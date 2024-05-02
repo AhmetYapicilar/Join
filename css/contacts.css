@@ -1071,7 +1071,8 @@ li {
 
     .showAllContacts {
         width: 80%;
-        top: 1%;
+        top: 4%;
+        height: 78%;
     }
 
     .addNewContact {
@@ -1259,6 +1260,7 @@ li {
     .showAllContacts {
         width: 100%;
         height: 83%;
+        top: 1%;
     }
 
     .addContactMobileImg {
