@@ -164,17 +164,26 @@ function editContacts(i) {
 
 //Inhalt der inputbox ändern zum Array wert
 function showEditContactBox(contact) {
+    let addContactContainer = document.getElementById("letEditContactSlideIn");
+    if (window.innerWidth < 1320) {
+    addContactContainer.classList.remove("show-slide-out-bottom");
+    addContactContainer.classList.add("show-slide-in-bottom"); 
+} else {
+    addContactContainer.classList.remove("show-slide-out-Desktop");
+    addContactContainer.classList.add("show-slide-in-Desktop"); 
+}
     document.getElementById(`placeholderName`).value = contact[`Name`];
     document.getElementById(`placeholderEmail`).value = contact[`Email`];
     document.getElementById(`placeholderNumber`).value = contact[`Number`];
-    document.getElementById('modal-edit').classList.remove('notactive');
-    document.getElementById('panel-edit').classList.remove('notactive');
-    document.getElementById('modal-edit').classList.add('active');
-    document.getElementById('panel-edit').classList.add('active');
+
     if (window.innerWidth < 1320) {
         document.getElementById(`editContactImgMobile`).src = `assets/img/editContactMobile.png`;
+        document.getElementById(`overlayOnMobileEditContacts`).style.display = "flex";
     } else {
         document.getElementById(`editContactImgMobile`).src = `assets/img/editContact.png`;
+        setTimeout(() => {
+            document.getElementById(`overlayOnMobileEditContacts`).style.display = "flex";
+        }, 200);
     }
 }
 
@@ -182,9 +191,7 @@ function showEditContactBox(contact) {
 function generateEditContactForm(contact, index) {
     return `
     <form id="editContactForm">
-      <div class="container" id="modal-edit">
-        <div class="panel" id="panel-edit">
-          <div class="centerAll-edit">
+        <div id="letEditContactSlideIn" class="centerAll-edit">
             <div class="leftrightContainer-edit">
             <img class="exitAddContactMobile" onclick="closeEditWindow()" src="assets/img/CloseWhite.png">
               <div class="addContactImg-edit">
@@ -224,8 +231,6 @@ function generateEditContactForm(contact, index) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
     </form>`;
 }
 
@@ -251,11 +256,23 @@ function updateContactDisplay() {
 
 //Edit Feld schließen
 function closeEditWindow() {
-    document.getElementById('modal-edit').classList.remove('active');
-    document.getElementById('panel-edit').classList.remove('active');
-    document.getElementById('modal-edit').classList.add('notactive');
-    document.getElementById('panel-edit').classList.add('notactive');
-    document.getElementById(`editContactImgMobile`).src = `assets/img/editContact.png`;
+    let addContactContainer = document.getElementById("letEditContactSlideIn");
+    if (window.innerWidth < 1320) {
+        addContactContainer.classList.remove("show-slide-in-bottom");
+        addContactContainer.classList.add("show-slide-out-bottom");
+        document.getElementById(`overlayOnMobileEditContacts`).style.display = "none";
+        setTimeout(() => {
+        document.getElementById(`letEditContactSlideIn`).style.display = "none";
+    }, 500);
+    } else {
+        document.getElementById(`editContactImgMobile`).src = `assets/img/editContact.png`;
+        addContactContainer.classList.remove("show-slide-in-Desktop");
+        addContactContainer.classList.add("show-slide-out-Desktop");
+        document.getElementById(`overlayOnMobileEditContacts`).style.display = "none";
+        setTimeout(() => {
+            document.getElementById(`letEditContactSlideIn`).style.display = "none";
+    }, 500);
+    }
 }
 
 //Edit Feld schließen und deleteContacts ausführen
@@ -270,22 +287,22 @@ function deleteContactsCloseWindow(i) {
 //addNewContact Feld anzeigen lassen mit eventListener
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addNewContactToPhoneList').addEventListener('click', function() {
-      document.getElementById('modal').classList.remove('notactive');
-      document.getElementById('panel').classList.remove('notactive');
-      document.getElementById('modal').classList.add('active');
-      document.getElementById('panel').classList.add('active');
+        document.getElementById(`letAddContactSlideIn`).classList.remove(`show-slide-out-Desktop`);
+        document.getElementById(`letAddContactSlideIn`).classList.add(`show-slide-in-Desktop`);
+        setTimeout(() => {
+            document.getElementById(`overlayOnMobileEditContacts`).style.display = "flex";
+        }, 200);
+        document.getElementById(`letAddContactSlideIn`).style.display = "flex";
       document.getElementById(`addContactImgChange`).src = `assets/img/Frame 194.png`;
     });
 
 
 //addNewContact Feld schließen lassen mit eventListener
 document.getElementById('closeButton').addEventListener('click', function() {
-    document.getElementById('modal').classList.remove('active');
-    document.getElementById('modal').classList.add('notactive');
-    document.getElementById('panel').classList.add('notactive');
-    setTimeout(() => {
-        document.getElementById('panel').style.right = "-50%"; 
-    }, 500);
+    let addContactContainer = document.getElementById("letAddContactSlideIn");
+    addContactContainer.classList.remove("show-slide-in-Desktop");
+    addContactContainer.classList.add("show-slide-out-Desktop");
+    document.getElementById(`overlayOnMobileEditContacts`).style.display = "none";
 });
 
 //addNewContact Feld anzeigen lassen mit eventListener
@@ -566,6 +583,7 @@ async function deleteContacts(index) {
 function showMobileAddContact() {
     document.getElementById(`addContactImgChange`).src = `assets/img/MobileAddContact.png`;
     document.getElementById(`letAddContactSlideIn`).style.display = "flex";
+    document.getElementById(`overlayOnMobileAddContacts`).style.display = "flex";
 
     let addContactContainer = document.getElementById("letAddContactSlideIn");
         addContactContainer.classList.remove("show-slide-out-bottom");
@@ -575,6 +593,7 @@ function showMobileAddContact() {
 
 //schließt addContact in Mobile version
 function closeAddContactMobile() {
+    document.getElementById(`overlayOnMobileAddContacts`).style.display = "none";
     let addContactContainer = document.getElementById("letAddContactSlideIn");
         addContactContainer.classList.remove("show-slide-in-bottom");
         addContactContainer.classList.add("show-slide-out-bottom");
@@ -609,6 +628,7 @@ function displayLeftAndRightContainer() {
         document.getElementById("rightContainerContacts").style.display = "none";
         document.getElementById("leftContainerContacts").style.display = "flex";
         document.getElementById(`letAddContactSlideIn`).style.display = "none";
+        document.getElementById(`overlayOnMobileAddContacts`).style.display = "none";
     }
 }
 

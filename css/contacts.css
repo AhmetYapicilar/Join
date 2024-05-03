@@ -348,10 +348,11 @@ body {
 
 
 .centerAll {
+    height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 25%;
 }
 
 .leftrightContainer {
@@ -481,7 +482,7 @@ body {
     padding: 10px;
     padding-right: 25px;
     padding-left: 0px;
-    padding-right: 55px;
+    padding-right: 70px;
 }
 
 .closeImgAdd:hover {
@@ -674,7 +675,6 @@ li {
 .addContactImg-edit img {
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-    padding-right: 20px;
 }
 
 .addContactInputFields-edit {
@@ -784,7 +784,7 @@ li {
     display: flex;
     justify-content: end;
     padding: 10px;
-    padding-right: 15px;
+    padding-right: 30px;
 }
 
 .closeButton-edit img {
@@ -917,10 +917,35 @@ li {
     display: none; /* Zunächst verborgen */
 }
 
+.overlayAddContact {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10; /* Die Überlagerung hat einen niedrigen Z-Index */
+    display: none; /* Zunächst verborgen */
+}
+
+.overlayEditContact {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10; /* Die Überlagerung hat einen niedrigen Z-Index */
+    display: none; /* Zunächst verborgen */
+}
+
 #phonebook {
     padding: 20px;
 }
 
+.displayNone {
+    display: none;
+}
 
 
 /* Definiert die Schiebebewegung von rechts nach innen */
@@ -959,7 +984,7 @@ li {
         bottom: -100%;
     }
     to {
-        bottom: 15%;
+        bottom: 0%;
     }
 }
 
@@ -967,14 +992,13 @@ li {
     position: absolute;
     animation: slideInFromBottom 0.5s ease-out forwards;
     z-index: 100;
-    left: 5%;
     overflow: hidden !important;
 }
 
 /* Definiert die Schiebebewegung von oben nach unten */
 @keyframes slideOutToBottom {
     from {
-        bottom: 15%;
+        bottom: 0%;
     }
     to {
         bottom: -100%;
@@ -985,8 +1009,45 @@ li {
     position: absolute;
     animation: slideOutToBottom 0.5s ease-out forwards;
     z-index: 100;
-    left: 5%;
     overflow: hidden !important;
+}
+
+
+
+/*slideInEditContactDesktop*/
+
+
+@keyframes slideInFromRightDesktop {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 0%;
+    }
+}
+
+.show-slide-in-Desktop {
+    position: absolute;
+    bottom: 0%;
+    z-index: 110;
+    animation: slideInFromRightDesktop 0.5s ease-out forwards;
+}
+
+/* Definiert die Schiebebewegung von rechts nach außen */
+@keyframes slideOutToRightDesktop {
+    from {
+        right: 0%;
+    }
+    to {
+        right: -100%;
+    }
+}
+
+.show-slide-out-Desktop {
+    animation: slideOutToRightDesktop 0.5s ease-out forwards;
+    position: absolute;
+    z-index: 110;
+    bottom: 0px;
 }
 
 
@@ -1012,6 +1073,14 @@ li {
         display: flex;
         flex-direction: column;
         height: 99.3vh;
+    }
+
+    .centerAll {
+        width: 100%;
+    }
+
+    #letAddContactSlideIn {
+        display: none;
     }
 
     .data {
@@ -1069,7 +1138,7 @@ li {
 
     header {
         display: flex;
-        z-index: 2 !important;
+        z-index: 12 !important;
         width: 100%;
         left: 0px !important;
         height: 80px !important;
@@ -1320,7 +1389,6 @@ li {
 
     .centerAll-edit {
         margin-top: 15%;
-        height: 800px;
     }
 
     .addContactImg img-edit {
