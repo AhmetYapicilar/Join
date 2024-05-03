@@ -12,6 +12,7 @@ let taskCounts = {
   Done: 0,
 };
 let draggedTask;
+let users = [];
 
 async function initBoard() {
   removeAllClassesWhenInit();
@@ -22,8 +23,10 @@ async function initBoard() {
     contentBefore.classList.remove("drag-area-highlight");
     contentBefore.innerHTML = "";
   }
+  await loadUsers();
   await loadTasks();
   await showTasks();
+  await calculateProgressBar();
   checkEmptyTasks();
 }
 
@@ -53,6 +56,10 @@ async function loadTasks() {
   }
 }
 
+async function loadUsers(){
+  users = JSON.parse(await getItem('users'));
+}
+
 function checkEmptyTasks() {
   for (let i = 0; i < ids.length; i++) {
     const ID = ids[i];
@@ -76,7 +83,11 @@ async function showTasks() {
       dueDate,
       priority,
       priorityIcon,
+      allSubtasks,
+      assignedTo,
+      bgColor
     } = await initVariablesForShowTasks(i);
+    let initials = await initialOfAssignTo(assignedTo);
     if (!category2) {
       category2 = "To-Do";
     }
@@ -86,10 +97,26 @@ async function showTasks() {
       i,
       title,
       description,
-      priorityIcon
+      priorityIcon,
+      allSubtasks,
+      initials,
+      bgColor
     );
     userStoryOrTechnicalTask(TASK, i);
   }
+  activateCheckboxIfClickedBefore
+}
+
+async function initialOfAssignTo(assignedTo){
+  let initials = [];
+  for(let i=0; i<assignedTo.length; i++){
+    let contact = assignedTo[i];
+    let name = JSON.stringify(contact);
+    let initial = name.match(/\b\w/g) || [];
+    let result = initial.join('');
+    initials.push(result);
+  }
+  return initials;
 }
 
 async function initVariablesForShowTasks(i) {
@@ -98,11 +125,14 @@ async function initVariablesForShowTasks(i) {
   let title = TASK["title"];
   let description = TASK["description"];
   let dueDate = TASK["dueDate"];
+  
   if (!TASK["priority"]) {
     TASK["priority"] = "medium";
   }
   let priority = TASK["priority"];
   let priorityIcon = await proofPriority(priority);
+  let {assignedTo, bgColor} = await initVariableAssignedTo(TASK);
+  let allSubtasks = await initVariableSubTask(TASK);
   return {
     TASK,
     category2,
@@ -111,25 +141,69 @@ async function initVariablesForShowTasks(i) {
     dueDate,
     priority,
     priorityIcon,
+    allSubtasks,
+    assignedTo,
+    bgColor
   };
 }
 
-function generateShowTasksHTML(i, title, description, priorityIcon) {
+async function initVariableAssignedTo(TASK){
+  let bgColor = [];
+  let assignedTo = [];
+  let contacts = TASK['assignedTo'];
+  if(contacts){
+    for(let j=0; j<contacts.length; j++){
+      let newContact = contacts[j];
+      assignedTo.push(newContact);
+      bgColor.push(await initVariableBgColor(newContact));
+    }} else{
+      assignedTo = ['Guest'];
+      bgColor = ['#FF7A00']
+    }
+    return {assignedTo, bgColor};
+}
+
+async function initVariableBgColor(newContact){
+      let user = users.find(u => u.name || u.Name == newContact);
+      if(user.color){
+      let bgColor = user.color;
+      }else {
+        bgColor = '#FF7A00';
+      }
+    return bgColor;
+}
+
+async function initVariableSubTask(TASK){
+  let allSubtasks = [];
+  let subtasks = TASK["subTasks"];
+  if(subtasks){
+  for(let x=0; x<subtasks.length; x++){
+    let newSubtask = subtasks[x]["subtaskName"];
+    allSubtasks.push(newSubtask);
+  }} else{
+    allSubtasks = '';
+  }
+  return allSubtasks;
+}
+
+function generateShowTasksHTML(i, title, description, priorityIcon, allSubtasks, initials, bgColor) {
+  let circlesHTML = '';
+    for(let j = 0; j < initials.length; j++) {
+        circlesHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
+    }
   return `
     <div id='task${i}' draggable="true" class="tasks-board" onclick=showTaskInBig(${i}) ondragstart="startDragging(${i})">
     <div id="user-technical-board${i}"></div>
     <div class="name-of-task-board"><span>${title}</span><p>${description}</p></div>
     <div class="space-between-board width-100percent margin-top-16">
         <div class="progressbar-background">
-            <div class="progressbar-board" role="progressbar"></div>
+            <div id="progressbar${i}" class="progressbar-board" role="progressbar"></div>
         </div>
-        <span class="sub-tasks">1/2 Subtasks</span>
+        <span class="sub-tasks"><b id="completedSubTasks${i}"></b>/<b>${allSubtasks.length}</b> Subtasks</span>
     </div>
     <div class="space-between-board width-100percent margin-top-16">
         <div class="flex-board">
-            <div class="circle-board background-color-orange margin-left-9px colorWhite">AM</div>
-            <div class="circle-board background-color-green margin-left-9px colorWhite">EM</div>
-            <div class="circle-board background-color-darkblue margin-left-9px colorWhite">MB</div>
+            ${circlesHTML}
         </div>
         <img class="priority-icon-board" src="${priorityIcon}">
     </div></div>`;
@@ -208,19 +282,25 @@ async function showFoundedTasks() {
     let foundedTask = foundedTasks[j];
     let {
       TASK,
-      category2,
-      title,
-      description,
-      dueDate,
-      priority,
-      priorityIcon,
+    category2,
+    title,
+    description,
+    dueDate,
+    priority,
+    priorityIcon,
+    allSubtasks,
+    assignedTo,
+    bgColor
     } = await initVariablesForShowTasks(tasks.indexOf(foundedTask));
     let content = document.getElementById(category2);
     content.innerHTML += generateShowTasksHTML(
       tasks.indexOf(foundedTask),
       title,
       description,
-      priorityIcon
+      priorityIcon,
+      allSubtasks,
+      initials,
+      bgColor
     );
     userStoryOrTechnicalTask(TASK, tasks.indexOf(foundedTask));
   }
@@ -228,7 +308,7 @@ async function showFoundedTasks() {
 
 async function showTaskInBig(i) {
   await loadTasks();
-  let { TASK, title, description, dueDate, priority, priorityIcon } =
+  let { TASK, title, description, dueDate, priority, priorityIcon, allSubtasks } =
     await initVariablesForShowTasks(i);
   document
     .getElementById("section-board-overlay")
@@ -241,11 +321,13 @@ async function showTaskInBig(i) {
     description,
     dueDate,
     priority,
-    priorityIcon
+    priorityIcon,
+    allSubtasks
   );
   userStoryOrTechnicalTaskBig(TASK, i);
   setTimeout(() => {
     document.getElementById(`bigtask${i}`).classList.add("animation");
+    activateCheckboxIfClickedBefore(i, allSubtasks);
   }, 100);
 }
 
@@ -255,8 +337,20 @@ function generateBigTaskHTML(
   description,
   dueDate,
   priority,
-  priorityIcon
-) {
+  priorityIcon,
+  allSubtasks
+) { 
+  let subtaskHTML = '';
+    for(let j = 0; j < allSubtasks.length; j++) {
+      const checkboxId = `subtaskCheckbox${i}-${j}`;
+        subtaskHTML += `<div class="flex-board gap-16 padding-left-4">
+        <label class="checkbox-container">
+        <input onclick="checkBOXClick('${checkboxId}', ${i}, ${j})" type="checkbox" id="${checkboxId}">
+            <span class="checkmark"></span>
+        </label>
+        <p class="checkbox-p">${allSubtasks[j]}</p>
+        </div>`;
+    }
   return `
     <div id='bigtask${i}' class="tasks-board-big">
     <div class="space-between-board">
@@ -294,20 +388,7 @@ function generateBigTaskHTML(
     </div>
     <div class="assigned-to margin-top-16">
         <span>Subtasks</span>
-        <div class="flex-board gap-16 padding-left-4">
-            <label class="checkbox-container">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-            <p class="checkbox-p">Implement Recipe Recommendation</p>
-            </div>
-        <div class="flex-board gap-16 padding-left-4">
-        <label class="checkbox-container">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-        </label>
-        <p class="checkbox-p">Start Page Layout</p>
-        </div>
+        ${subtaskHTML}
     </div>
     <div class="last-line margin-top-16">
     <img onclick="deleteTask(${i})" src="./assets/img/delete (1).png" onmouseover="this.src='./assets/img/deleteHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/delete (1).png';">
@@ -315,6 +396,62 @@ function generateBigTaskHTML(
         <img onclick="editTask(${i})" src="./assets/img/edit (1).png" onmouseover="this.src='./assets/img/editHover.png'; this.style.cursor='pointer';" onmouseout="this.src='./assets/img/edit (1).png';">
     </div>`;
 }
+
+let subTaskCheckBox = [];
+
+function activateCheckboxIfClickedBefore(i, allSubtasks){
+  subTaskCheckBox = JSON.parse(localStorage.getItem('subTaskCheckBox')) || [];
+  for (let j = 0; j < allSubtasks.length; j++) {
+    let checkboxId = `subtaskCheckbox${i}-${j}`;
+    if(subTaskCheckBox.includes(checkboxId)){
+      document.getElementById(checkboxId).checked = true;
+      tasks[i]['subTasks'][j]['done']=true;
+    }
+    else{
+      tasks[i]['subTasks'][j]['done']=false;
+    }
+  }
+}
+
+async function calculateProgressBar(){
+  subTaskCheckBox = JSON.parse(localStorage.getItem('subTaskCheckBox')) || [];
+  for (let i = 0; i < tasks.length; i++) {
+    const SUBTASKS = tasks[i]['subTasks'];
+    if(!SUBTASKS){
+    document.getElementById(`progressbar${i}`).style.width = '0px';
+    document.getElementById(`completedSubTasks${i}`).innerHTML = 0;
+      continue;
+    }
+    let completedSubtasks = 0;
+    for (let j = 0; j < SUBTASKS.length; j++) {
+      let checkboxId = `subtaskCheckbox${i}-${j}`;
+      if(subTaskCheckBox.includes(checkboxId)){
+        tasks[i]['subTasks'][j]['done']=true;
+        completedSubtasks++;
+      }
+      else{
+        tasks[i]['subTasks'][j]['done']=false;
+      }
+    }
+    let progressPercentage = (completedSubtasks / SUBTASKS.length) * 100;
+    document.getElementById(`progressbar${i}`).style.width = `${progressPercentage}%`;
+    document.getElementById(`completedSubTasks${i}`).innerHTML = completedSubtasks;
+  }
+}
+
+function checkBOXClick(checkboxId, i, j) {
+  subTaskCheckBox = JSON.parse(localStorage.getItem('subTaskCheckBox')) || [];
+  const index = subTaskCheckBox.indexOf(checkboxId);
+  if (index !== -1) {
+      subTaskCheckBox.splice(index, 1);
+      tasks[i]['subTasks'][j]['done']=false;
+  } else {
+      subTaskCheckBox.push(checkboxId);
+      tasks[i]['subTasks'][j]['done']=true;
+  }
+  localStorage.setItem('subTaskCheckBox', JSON.stringify(subTaskCheckBox));
+}
+
 
 async function deleteTask(i) {
   tasks.splice(i, 1);
