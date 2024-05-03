@@ -1075,6 +1075,23 @@ li {
         height: 99.3vh;
     }
 
+
+    .contactAddedSuccesfully {
+        position: fixed;
+        bottom: 10% !important;
+        top: 80% !important;
+    }
+
+    .betterWaT {
+        position: fixed;
+        bottom: 10% !important;
+        top: 80% !important;
+    }
+
+    .betterWaT {
+        display: none !important;
+    }
+
     .centerAll {
         width: 100%;
     }
@@ -1531,10 +1548,11 @@ li {
         flex-direction: column;
         height: 800px;
         width: 434px;
+        margin-top: 2%;
     }
 
     .initials-circle-edit-contacts {
-        top: 44%;
+        top: 45%;
     }
 
     .rightContainer-edit {
@@ -1578,6 +1596,7 @@ li {
         flex-direction: column;
         height: 800px;
         width: 434px;
+        margin-top: 2%;
     }
 
     .centerAll {
@@ -1667,7 +1686,7 @@ li {
         width: 120px;
         height: 120px;
         position: absolute;
-        top: 44%;
+        top: 46%;
     }
 
     .createAccountButton {

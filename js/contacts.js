@@ -440,6 +440,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     toggleContactAdded();
     showContactsSlideInRightContainer(lastIndex);
     addContactWindowClose();
+    document.getElementById(`overlayOnMobileAddContacts`).style.display = "none"
 });
 });
 
@@ -571,9 +572,18 @@ async function deleteContacts(index) {
         console.error('Invalid Index');
     }
     updateContactDisplay();
+    if (window.innerWidth < 1320) {
+        showContactListMobile();
+        }
     document.getElementById('showInnerHTML').innerHTML = '';
 }
 
+
+function showContactListMobile() {
+        document.getElementById(`rightContainerContacts`).style.display = "none";
+        document.getElementById(`leftContainerContacts`).style.display = "flex";
+        document.getElementById(`overlayOnMobileAddContacts`).style.display = "none"
+}
   
 //Mobile Javascript
 
