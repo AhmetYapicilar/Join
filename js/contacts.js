@@ -277,10 +277,7 @@ function closeEditWindow() {
 
 //Edit Feld schließen und deleteContacts ausführen
 function deleteContactsCloseWindow(i) {
-    document.getElementById('modal-edit').classList.remove('active');
-    document.getElementById('panel-edit').classList.remove('active');
-    document.getElementById('modal-edit').classList.add('notactive');
-    document.getElementById('panel-edit').classList.add('notactive');
+    closeEditWindow();
     deleteContacts(i);
 }
 
@@ -307,12 +304,11 @@ document.getElementById('closeButton').addEventListener('click', function() {
 
 //addNewContact Feld anzeigen lassen mit eventListener
 document.getElementById('cancelAccountSubmit').addEventListener('click', function() {
-    document.getElementById('modal').classList.remove('active');
-    document.getElementById('modal').classList.add('notactive');
-    document.getElementById('panel').classList.add('notactive');
-    setTimeout(() => {
-        document.getElementById('panel').style.right = "-50%"; 
-    }, 500);
+    let addContactContainer = document.getElementById("letAddContactSlideIn");
+    addContactContainer.classList.remove("show-slide-in-Desktop");
+    addContactContainer.classList.add("show-slide-out-Desktop");
+    document.getElementById(`overlayOnMobileEditContacts`).style.display = "none";
+
 });
 });
 
@@ -439,18 +435,21 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     if (!number && !email && !name) {
     } else {
         addNewContact();
-        document.getElementById('modal').classList.remove('active');
-        document.getElementById('modal').classList.add('notactive');
-        document.getElementById('panel').classList.add('notactive');
-        setTimeout(() => {
-            document.getElementById('panel').style.right = "-50%"; 
-        }, 500);
     }
     let lastIndex = contactList.length - 1;
     toggleContactAdded();
     showContactsSlideInRightContainer(lastIndex);
+    addContactWindowClose();
 });
 });
+
+
+function addContactWindowClose() {
+    let addContactContainer = document.getElementById("letAddContactSlideIn");
+    addContactContainer.classList.remove("show-slide-in-Desktop");
+    addContactContainer.classList.add("show-slide-out-Desktop");
+    document.getElementById(`overlayOnMobileEditContacts`).style.display = "none";
+}
 
 //Werte des inputs lesen und weitergeben an addKontakt
 function addNewContact() {
