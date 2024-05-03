@@ -1,0 +1,17 @@
+@media (max-width: 1350px) {
+    .addTaskDividingBar {
+        display: none;
+    }
+
+    .addTaskContentContainer {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .rightAddTaskContainer {
+        position: static;
+        left: auto;
+        top: auto;
+    }
+}

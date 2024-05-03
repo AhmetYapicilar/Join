@@ -38,6 +38,10 @@
     font-size: 20px;
 }
 
+.ma-bo-8 {
+    margin-bottom: 8px;
+}
+
 li p {
     margin-left: 16px;
 }
@@ -109,11 +113,8 @@ li p {
 }
 
 .addTaskDividingBar {
-    position: absolute;
     width: 0px;
     height: 424px;
-    left: 816.25px;
-    top: 327px;
     border: 1px solid #D1D1D1;
 }
 
@@ -146,7 +147,6 @@ li p {
     border-radius: 0;
     border-radius: 10px;
     border: 1px solid #d1d1d1;
-    position: relative;
 }
 
 .subtaskPicker {
@@ -166,11 +166,9 @@ li p {
 }
 
 .fieldRequiredText {
-    position: absolute;
+    margin-top: 110px;
     width: 170px;
     height: 27px;
-    left: 328px;
-    top: 926px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;

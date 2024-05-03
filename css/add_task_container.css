@@ -2,13 +2,17 @@
 body {
     margin: 0;
     font-family: "Inter", sans-serif;
+    background-color: #f6f7f8;
 }
 
 .addTaskContentContainer {
-    display: flex;
-    height: 100vh;
-    width: auto;
-    background: #F6F7F8;
+    position: absolute;
+    top: 96px;
+    bottom: 0;
+    right: 0;
+    left: 232px;
+    margin: 110px 0 0 96px;
+    max-width: 978px;
 }
 
 .headlineAddTaskContainer {
@@ -17,19 +21,20 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 1px;
-    position: absolute;
     width: 278px;
     height: 73px;
-    left: 328px;
-    top: 206px;
+}
+
+.addTaskFormContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    margin-top: 32px;
 }
 
 .leftAddTaskContainer {
-    position: absolute;
     width: 440px;
     height: 376px;
-    left: 328px;
-    top: 327px;
     font-size: 20px;
 }
 
@@ -39,11 +44,8 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    position: absolute;
     width: 440px;
     height: 96px;
-    left: 0px;
-    top: 0px;
 }
 
 .descriptionContainer {
@@ -52,11 +54,8 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    position: absolute;
     width: 440px;
     height: 168px;
-    left: 0px;
-    top: 112px;
 }
 
 .assignContactsContainer {
@@ -65,19 +64,13 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    position: absolute;
     width: 440px;
-    height: 80px;
-    left: 0px;
-    top: 296px;
+    height: 96px;
 }
 
 .rightAddTaskContainer {
-    position: absolute;
     width: 440px;
     height: 416px;
-    left: 864.25px;
-    top: 327px;
 }
 
 .taskDateContainer {
@@ -86,11 +79,8 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    position: absolute;
     width: 440px;
     height: 96px;
-    left: 0px;
-    top: 0px;
 }
 
 .prioPickerContainer {
@@ -99,11 +89,8 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    position: absolute;
     width: 440px;
-    height: 88px;
-    left: 0px;
-    top: 120px;
+    height: 96px;
 }
 
 .prioPickerButtonsContainer {
@@ -126,11 +113,8 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    position: absolute;
     width: 440px;
-    height: 80px;
-    left: 0px;
-    top: 232px;
+    height: 96px;
 }
 
 .subtaskContainer {
@@ -139,25 +123,18 @@ body {
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
-    position: absolute;
     width: 440px;
-    height: 80px;
-    left: 0px;
-    top: 336px;
+    height: 96px;
 }
 
 .clearCreateButtonsContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
     padding: 0px;
     gap: 16px;
-    position: absolute;
     width: 309px;
     height: 56px;
-    left: 995.25px;
-    top: 889px;
+    right: 0;
 }
 
 .input-container {
@@ -169,8 +146,6 @@ body {
     gap: 8px;
     width: 440px;
     height: 80px;
-    left: 0px;
-    top: 336px;
 }
 
 .todo-subtask-container {

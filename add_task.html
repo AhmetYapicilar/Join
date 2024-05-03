@@ -30,88 +30,92 @@
         </div>
 
         <form id="addTaskForm" onsubmit="return false">
-            <div class="leftAddTaskContainer fontSize20px">
-                <div class="titleContainer">
-                    <div class="flex-start">
-                        <span>Title</span>
-                        <p class="redText">*</p>
-                    </div>
-                    <input required class="titleInputAddTask fontSize20px" id="titleInput" type="text"
-                        placeholder="Enter a title">
-                </div>
-
-                <div class="descriptionContainer">
-                    <span>Description</span>
-                    <textarea class="descriptionTextArea fontSize20px" name="" id="description" cols="30" rows="10"
-                        placeholder="Enter a Description"></textarea>
-                </div>
-
-                <div class="assignContactsContainer">
-                    <span>Assigned to</span>
-                    <div class="dropdown">
-                        <div class="contactsInputField">
-                            <input type="text" id="searchInput" class="searchInput fontSize20px"
-                                placeholder="Search contacts" onkeyup="searchContacts()">
-                            <img src="./assets/img/arrow-drop-down.png" class="dropdownIcon" onclick="toggleDropdown()">
+            <div class="addTaskFormContainer">
+                <div class="leftAddTaskContainer fontSize20px">
+                    <div class="titleContainer ma-bo-8">
+                        <div class="flex-start">
+                            <span>Title</span>
+                            <p class="redText">*</p>
                         </div>
-                        <div class="dropdownContent"></div>
-                        <div id="selectedContactsContainer" class="selectedContactsContainer"></div>
+                        <input required class="titleInputAddTask fontSize20px" id="titleInput" type="text"
+                            placeholder="Enter a title">
                     </div>
-                </div>
 
-            </div>
-
-            <div class="addTaskDividingBar"></div>
-
-            <div class="rightAddTaskContainer fontSize20px">
-                <div class="taskDateContainer">
-                    <div class="flex-start">
-                        <span>Due Date</span>
-                        <p class="redText">*</p>
+                    <div class="descriptionContainer ma-bo-8">
+                        <span>Description</span>
+                        <textarea class="descriptionTextArea fontSize20px" name="" id="description" cols="30" rows="10"
+                            placeholder="Enter a Description"></textarea>
                     </div>
-                    <input required class="dateInput fontSize20px" id="dateInputPicker" type="date" id="date">
-                </div>
-                <div class="prioPickerContainer">
-                    <span>Prio</span>
-                    <div class="prioPickerButtonsContainer">
-                        <button type="button" class="urgentButton fontSize20px" id="urgent"
-                            onclick="selectPriority('urgent')">Urgent <img src="./assets/img/prioUp.png"></button>
-                        <button type="button" class="mediumButton fontSize20px mediumButtonSelected" id="medium"
-                            onclick="selectPriority('medium')">Medium <img src="./assets/img/prioEven.png"></button>
-                        <button type="button" class="lowButton fontSize20px" id="low"
-                            onclick="selectPriority('low')">Low <img src="./assets/img/prioDown.png"></button>
-                    </div>
-                </div>
-                <div class="categoryContainer">
-                    <div class="flex-start">
-                        <span>Category</span>
-                        <p class="redText">*</p>
-                    </div>
-                    <select required class="categoryPicker fontSize20px" id="category" name="category">
-                        <option value="1" disabled selected hidden>Select task category</option>
-                        <option value="User Story">User Story</option>
-                        <option value="Technical Task">Technical Task</option>
-                    </select>
-                </div>
 
-                <div class="input-container">
-                    <div class="">
-                        <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off"
-                            placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)"
-                            size="10" />
-                        <img src="./assets/img/add-subtask.png"
-                            onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask"
-                            class="add-subtasks-btn" />
-                        <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn d-none">
-                            <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
-                                onclick="submitSubtask('subtask-input')" />
-                            <span class="vertical-line-sub"></span>
-                            <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
+                    <div class="assignContactsContainer">
+                        <span>Assigned to</span>
+                        <div class="dropdown">
+                            <div class="contactsInputField">
+                                <input type="text" id="searchInput" class="searchInput fontSize20px"
+                                    placeholder="Search contacts" onkeyup="searchContacts()">
+                                <img src="./assets/img/arrow-drop-down.png" class="dropdownIcon"
+                                    onclick="toggleDropdown()">
+                            </div>
+                            <div class="dropdownContent"></div>
+                            <div id="selectedContactsContainer" class="selectedContactsContainer"></div>
                         </div>
                     </div>
-                    <ul id="subtask-container"></ul>
+
                 </div>
 
+
+                <div class="addTaskDividingBar"></div>
+
+                <div class="rightAddTaskContainer fontSize20px">
+                    <div class="taskDateContainer ma-bo-8">
+                        <div class="flex-start">
+                            <span>Due Date</span>
+                            <p class="redText">*</p>
+                        </div>
+                        <input required class="dateInput fontSize20px" id="dateInputPicker" type="date" id="date">
+                    </div>
+                    <div class="prioPickerContainer ma-bo-8">
+                        <span>Prio</span>
+                        <div class="prioPickerButtonsContainer">
+                            <button type="button" class="urgentButton fontSize20px" id="urgent"
+                                onclick="selectPriority('urgent')">Urgent <img src="./assets/img/prioUp.png"></button>
+                            <button type="button" class="mediumButton fontSize20px mediumButtonSelected" id="medium"
+                                onclick="selectPriority('medium')">Medium <img src="./assets/img/prioEven.png"></button>
+                            <button type="button" class="lowButton fontSize20px" id="low"
+                                onclick="selectPriority('low')">Low <img src="./assets/img/prioDown.png"></button>
+                        </div>
+                    </div>
+                    <div class="categoryContainer ma-bo-8">
+                        <div class="flex-start">
+                            <span>Category</span>
+                            <p class="redText">*</p>
+                        </div>
+                        <select required class="categoryPicker fontSize20px" id="category" name="category">
+                            <option value="1" disabled selected hidden>Select task category</option>
+                            <option value="User Story">User Story</option>
+                            <option value="Technical Task">Technical Task</option>
+                        </select>
+                    </div>
+
+                    <div class="input-container ma-bo-8">
+                        <span>Subtasks</span>
+                        <div>
+                            <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off"
+                                placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)"
+                                size="10" />
+                            <img src="./assets/img/add-subtask.png"
+                                onclick="event.stopPropagation(); activateInput(); setFocus()" id="add-subtask"
+                                class="add-subtasks-btn" />
+                            <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn d-none">
+                                <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
+                                    onclick="submitSubtask('subtask-input')" />
+                                <span class="vertical-line-sub"></span>
+                                <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
+                            </div>
+                        </div>
+                        <ul id="subtask-container"></ul>
+                    </div>
+                </div>
             </div>
             <div class="fieldRequiredText">
                 <div class="flex-start">
