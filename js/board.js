@@ -13,6 +13,7 @@ let taskCounts = {
 };
 let draggedTask;
 let users = [];
+let selectedContacts = [];
 
 document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('click', function (event) {
