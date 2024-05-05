@@ -14,6 +14,29 @@ let taskCounts = {
 let draggedTask;
 let users = [];
 
+document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('click', function (event) {
+      const dropdownContent = document.querySelector('.dropdownContent');
+      const dropdownIcon = document.querySelector('.dropdownIcon');
+      const clickedElement = event.target;
+
+      const isDropdownContentClicked = dropdownContent && dropdownContent.contains(clickedElement);
+      const isDropdownIconClicked = dropdownIcon && dropdownIcon.contains(clickedElement);
+
+      if (!isDropdownContentClicked && !isDropdownIconClicked && dropdownContent) {
+          dropdownContent.classList.remove('show');
+      }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdownIcon = document.querySelector('.dropdownIcon');
+
+  dropdownIcon.addEventListener('click', function (event) {
+      event.preventDefault();
+  });
+});
+
 async function initBoard() {
   removeAllClassesWhenInit();
   for (let x = 0; x < ids.length; x++) {
@@ -949,11 +972,18 @@ function addTaskOnBoardHTML(newTaskNumber) {
             </div>
 
             <div class="assignContactsContainer">
-                <span>Assigned to</span>
-                <select class="assignContacts-select fontSize20px" id="contacts" name="contacts">
-                    <option value="">Select contacts to assign</option>
-                </select>
+            <span>Assigned to</span>
+            <div class="dropdown">
+                <div class="contactsInputField">
+                    <input type="text" id="searchInput" class="searchInput fontSize20px"
+                        placeholder="Search contacts" onkeyup="searchContacts()">
+                    <img src="./assets/img/arrow-drop-down.png" class="dropdownIcon"
+                        onclick="toggleDropdown()">
+                </div>
+                <div class="dropdownContent"></div>
+                <div id="selectedContactsContainer" class="selectedContactsContainer"></div>
             </div>
+        </div>
         </div>
 
         <div class="addTaskDividingBar"></div>
@@ -991,8 +1021,8 @@ function addTaskOnBoardHTML(newTaskNumber) {
 
             <div class="input-container">
             <div class="">
-            <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off" placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)" size="10">
-            <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation();  activateInputForCreateTask()" id="add-subtask" class="add-subtasks-btn">
+            <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off" placeholder="Add new subtask" onkeydown="checkSubmit(event)" size="10">
+            <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation();  activateInputForCreateTask(); setFocus()" id="add-subtask" class="add-subtasks-btn">
             <div id="subtask-input-Actions" class="d-flex align-c add-subtasks-btn d-none">
                                 <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
                                     onclick="submitSubtaskForNewTask()" />
@@ -1021,4 +1051,109 @@ function addTaskOnBoardHTML(newTaskNumber) {
     </form>
 
 </div>`;
+}
+
+function toggleDropdown() {
+  const dropdownContent = document.querySelector('.dropdownContent');
+  const isOpen = dropdownContent.classList.contains('show');
+
+  if (!isOpen) {
+      dropdownContent.classList.add('show');
+  } else {
+      dropdownContent.classList.remove('show');
+  }
+}
+
+async function loadAndRenderNames() {
+  try {
+      const loadedUsers = JSON.parse(await getItem('users'));
+      renderNames(loadedUsers);
+  } catch (error) {
+      console.error('Fehler beim Laden und Rendern von Namen:', error);
+  }
+}
+
+function renderNames(loadedUsers) {
+  const dropdownContent = document.querySelector('.dropdownContent');
+  dropdownContent.innerHTML = '';
+  const nameSet = new Set();
+  const filteredUsers = [];
+
+  loadedUsers.forEach(user => {
+      const name = user.name || user.Name;
+      if (name && !nameSet.has(name)) {
+          nameSet.add(name);
+          dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+          filteredUsers.push(user);
+      }
+  });
+  users.push(...filteredUsers);
+}
+
+function searchContacts() {
+  const searchInput = document.querySelector('.searchInput');
+  const filter = searchInput.value.trim().toUpperCase();
+  const dropdownContent = document.querySelector('.dropdownContent');
+  dropdownContent.innerHTML = '';
+
+  for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      const name = user.name || user.Name;
+      if (name && name.toUpperCase().startsWith(filter)) {
+          dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+      }
+  }
+  dropdownContent.classList.add('show');
+  selectContactStyleChanger();
+}
+
+function selectContact(name) {
+  const selectedContactIndex = selectedContacts.indexOf(name);
+  if (selectedContactIndex === -1) {
+      selectedContacts.push(name);
+  } else {
+      selectedContacts.splice(selectedContactIndex, 1);
+  }
+  name = name.toUpperCase();
+  selectContactStyleChanger(name);
+  renderSelectedContacts();
+}
+
+function selectContactStyleChanger() {
+  const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
+  selectedDropdownContent.forEach(span => {
+      const contactName = span.textContent.trim();
+      const isSelected = selectedContacts.includes(contactName);
+      if (isSelected) {
+          span.classList.add('selectedDropdownContent');
+          const img = span.querySelector('img');
+          if (img) {
+              img.src = './assets/img/checkbox-check-white.png';
+          }
+      } else {
+          span.classList.remove('selectedDropdownContent');
+          const img = span.querySelector('img');
+          if (img) {
+              img.src = './assets/img/Checkbox.png';
+          }
+      }
+  });
+}
+
+function renderSelectedContacts() {
+  const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
+  selectedContactsContainer.innerHTML = '';
+  const maxContactsToShow = 5;
+  const remainingCount = selectedContacts.length - maxContactsToShow;
+
+  for (let i = 0; i < Math.min(selectedContacts.length, maxContactsToShow); i++) {
+      const contact = selectedContacts[i];
+      const initials = contact.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
+      const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${randomColor};">${initials}</div>`;
+  }
+
+  if (remainingCount > 0) {
+      selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: #aaa;">+${remainingCount}</div>`;
+  }
 }
