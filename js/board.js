@@ -30,13 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const dropdownIcon = document.querySelector('.dropdownIcon');
 
-  dropdownIcon.addEventListener('click', function (event) {
-      event.preventDefault();
-  });
-});
 
 async function initBoard() {
   removeAllClassesWhenInit();
@@ -535,7 +529,16 @@ for (let j = 0; j < initials.length; j++) {
   circlesHTML.innerHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
 }
   proofPrio(priority, i);
-}
+    setTimeout(() => {
+      document.addEventListener('DOMContentLoaded', function () {
+      const dropdownIcon = document.querySelector('.dropdownIcon');
+      dropdownIcon.addEventListener('click', function (event) {
+        event.preventDefault();
+    }, 50);
+    });
+  });
+  }
+
 
 async function proofPrio(priority, i) {
   priority = priority.toLowerCase();
@@ -587,11 +590,18 @@ function editTaskHTML(i) {
             <button onclick="newPrioToLow(${i})" id="lowButton-id${i}" class="lowButton-edit">Low<img id="low-img-id${i}" src="./assets/img/prioDown.png"></button>
         </div>
     </div> 
-    <div class="column-edit margin-top-16">
-        <span>Assigned to</span>
-        <select class="assignContacts">
-            <option value="">Select contacts to assign</option>
-        </select>
+    <div class="assignContactsContainerLittle margin-top-16">
+    <span>Assigned to</span>
+    <div class="dropdown">
+        <div class="contactsInputFieldLittle">
+            <input type="text" id="searchInput" class="searchInputLittle fontSize20px"
+                placeholder="Search contacts" onkeyup="searchContacts()">
+            <img src="./assets/img/arrow-drop-down.png" class="dropdownIcon"
+                onclick="toggleDropdown()">
+        </div>
+        <div class="dropdownContent"></div>
+        <div id="selectedContactsContainer" class="selectedContactsContainer"></div>
+</div>
         <div class="flex-board" id="initial-in-circle">
         </div>
     </div>
@@ -736,6 +746,15 @@ async function addTaskOnBoard(selectedCategory) {
       .getElementById(`newTask${newTaskNumber}`)
       .classList.add("showAddTask");
   }, 100);
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(() => {
+      const dropdownIcon = document.querySelector('.dropdownIcon');
+      dropdownIcon.addEventListener('click', function (event) {
+        event.preventDefault();
+    }, 50);
+    });
+  });
+  renderNames(users);
 }
 
 async function initVariablesForNewTask() {
@@ -1065,22 +1084,15 @@ function toggleDropdown() {
   }
 }
 
-async function loadAndRenderNames() {
-  try {
-      const loadedUsers = JSON.parse(await getItem('users'));
-      renderNames(loadedUsers);
-  } catch (error) {
-      console.error('Fehler beim Laden und Rendern von Namen:', error);
-  }
-}
 
-function renderNames(loadedUsers) {
+
+function renderNames(users) {
   const dropdownContent = document.querySelector('.dropdownContent');
   dropdownContent.innerHTML = '';
   const nameSet = new Set();
   const filteredUsers = [];
 
-  loadedUsers.forEach(user => {
+  users.forEach(user => {
       const name = user.name || user.Name;
       if (name && !nameSet.has(name)) {
           nameSet.add(name);
@@ -1092,7 +1104,7 @@ function renderNames(loadedUsers) {
 }
 
 function searchContacts() {
-  const searchInput = document.querySelector('.searchInput');
+  const searchInput = document.querySelector('.searchInputLittle');
   const filter = searchInput.value.trim().toUpperCase();
   const dropdownContent = document.querySelector('.dropdownContent');
   dropdownContent.innerHTML = '';

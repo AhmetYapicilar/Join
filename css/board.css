@@ -853,6 +853,14 @@ cursor: pointer;
     top: 296px;
 }
 
+.assignContactsContainerLittle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+}
+
 .assignContacts-select {
     box-sizing: border-box;
     display: flex;
@@ -1208,6 +1216,26 @@ width: 300px;
     height: 40px;
     border: none;
     border-radius: 10px;
+}
+
+.searchInputLittle{
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.contactsInputFieldLittle {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 300px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
 }
 
 .contactsInputField {
