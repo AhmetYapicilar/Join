@@ -537,6 +537,7 @@ for (let j = 0; j < initials.length; j++) {
     }, 50);
     });
   });
+  renderNames(users);
   }
 
 
