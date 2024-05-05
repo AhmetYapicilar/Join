@@ -1026,6 +1026,12 @@ width: 440px;
     position: absolute;
     right: 12px;
     top: 12px;
+    cursor: pointer;
+}
+
+.align-c{
+    display: flex;
+    align-items: center;
 }
 
 .subtask-actions {

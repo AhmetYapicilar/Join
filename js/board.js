@@ -723,6 +723,7 @@ async function initVariablesForNewTask() {
   let newCategory = document.querySelector(".categoryPicker").value;
   let newCategory2 = newTaskCategory;
   let newPriority = newAddedPrio[0]; 
+  let newSubtasks = newTaskSubtask;
 
   return {
     newTitle,
@@ -731,6 +732,7 @@ async function initVariablesForNewTask() {
     newCategory,
     newCategory2,
     newPriority,
+    newSubtasks
   };
 }
 
@@ -742,6 +744,7 @@ async function createNewTask() {
     newCategory,
     newCategory2,
     newPriority,
+    newSubtasks
   } = await initVariablesForNewTask();
   tasks.push({
     title: newTitle,
@@ -750,6 +753,7 @@ async function createNewTask() {
     category: newCategory,
     category2: newCategory2,
     priority: newPriority,
+    subTasks: newSubtasks
   });
   await setItem("task", JSON.stringify(tasks));
   showTaskIsAdded();
@@ -832,6 +836,14 @@ function activateInput() {
   subtasksInputActions.classList.remove("d-none");
 }
 
+function activateInputForCreateTask() {
+  let addSubtask = document.getElementById("add-subtask");
+  let subtasksInputActions = document.getElementById("subtask-input-Actions");
+
+  addSubtask.classList.add("d-none");
+  subtasksInputActions.classList.remove("d-none");
+}
+
 function checkSubmit(event) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -846,6 +858,15 @@ function deactivateInput(i) {
   addSubtask.classList.remove("d-none");
   subtasksInputActions.classList.add("d-none");
   document.getElementById(`subtask-input${i}`).value = "";
+}
+
+function deactivateInputForCreateTask(){
+  let addSubtask = document.getElementById("add-subtask");
+  let subtasksInputActions = document.getElementById("subtask-input-Actions");
+
+  addSubtask.classList.remove("d-none");
+  subtasksInputActions.classList.add("d-none");
+  document.getElementById('subtask-input').value = "";
 }
 
 function setFocus() {
@@ -876,6 +897,30 @@ async function submitSubtask(i) {
     subtaskContent = "";
     deactivateInput(i);
   }
+
+  let newTaskSubtask = [];
+
+function submitSubtaskForNewTask(){
+  let subtask = document.getElementById('subtask-input').value;
+  newTaskSubtask = [];
+  let createdSubtask = {
+    subtaskName: subtask,
+    done: false
+  }
+  newTaskSubtask.push(createdSubtask);
+  for(let x=0; x<newTaskSubtask.length; x++){
+  document.getElementById('addedNewSubtasks').innerHTML += `<div>${newTaskSubtask[x]['subtaskName']}</div>`;
+  }
+  document.getElementById('subtask-input').value = '';
+}
+
+function clearForm(){
+  let form = document.getElementById("addTaskForm");
+  form.reset();
+  newSubtask = [];
+  document.getElementById('addedNewSubtasks').innerHTML = '';
+  selectPriority('medium');
+}
 
 
 function addTaskOnBoardHTML(newTaskNumber) {
@@ -947,13 +992,14 @@ function addTaskOnBoardHTML(newTaskNumber) {
             <div class="input-container">
             <div class="">
             <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off" placeholder="Add new subtask" onclick="activateInput()" onkeydown="checkSubmit(event)" size="10">
-            <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation(); activateInput()" id="add-subtask" class="add-subtasks-btn">
-            <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn">
+            <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation();  activateInputForCreateTask()" id="add-subtask" class="add-subtasks-btn">
+            <div id="subtask-input-Actions" class="d-flex align-c add-subtasks-btn d-none">
                                 <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
-                                    onclick="submitSubtask('subtask-input')" />
+                                    onclick="submitSubtaskForNewTask()" />
                                 <span class="vertical-line-sub"></span>
-                                <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
+                                <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInputForCreateTask()" />
                             </div>
+                <div id="addedNewSubtasks"></div>
         </div>
                 <ul class="subtask-container-board"></ul>
             </div>
