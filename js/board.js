@@ -336,6 +336,7 @@ async function showFoundedTasks() {
   }
 }
 
+
 async function showTaskInBig(i) {
   await loadTasks();
   let {
@@ -373,12 +374,14 @@ async function showTaskInBig(i) {
     document.getElementById(`bigtask${i}`).classList.add("animation");
     activateCheckboxIfClickedBefore(i, allSubtasks);
   }, 100);
+  selectedContacts = [];
   let circlesHTML = document.getElementById(`assigned-to-contacts${i}`);
   for(let x=0; x<initials.length; x++){
   circlesHTML.innerHTML += `<div class="flex-board">
                               <div class="circle-board-big" style="background-color:${bgColor[x]}">${initials[x]}</div>
                               <span class="contact-name">${assignedTo[x]}</span>
                             </div>`;
+  selectedContacts.push(assignedTo[x]);
   }
 }
 
@@ -521,10 +524,10 @@ async function editTask(i) {
   document.getElementById(`duedate-id${i}`).value = dueDate;
   for (let j = 0; j < allSubtasks.length; j++) {
     let subtask = allSubtasks[j];
-    document.getElementById(`subtask-container${i}`).innerHTML += `<div id="showSubtask${i}-${j}" class="space-between-board">${subtask}
-    <div class="flex-board"><img id="delete-icon-edit${i}-${j}" src="./assets/img/delete.png"><img id="pencil-icon-edit${i}-${j}" src="./assets/img/edit.png"></div>`;
+    document.getElementById(`subtask-container${i}`).innerHTML += `<div id="showSubtask${i}-${j}" class="space-between-board subtask-div">${subtask}
+    <div class="visibility flex-board"><img onclick="deleteSubtask(${i}, ${j})" id="delete-icon-edit${i}-${j}" src="./assets/img/delete.png"><div class="grey-line"></div><img onclick="editSubtask(${i}, ${j})" id="pencil-icon-edit${i}-${j}" src="./assets/img/edit.png"></div>`;
 }
-let circlesHTML = document.getElementById('initial-in-circle');
+let circlesHTML = document.getElementById(`selectedContactsContainer${i}`);
 for (let j = 0; j < initials.length; j++) {
   circlesHTML.innerHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
 }
@@ -538,7 +541,24 @@ for (let j = 0; j < initials.length; j++) {
     });
   });
   renderNames(users);
+  renderSelectedContacts();
   }
+
+async function deleteSubtask(i, j){
+  let subtasks = tasks[i]['subTasks'];
+  subtasks.splice(j, 1);
+  await setItem("task", JSON.stringify(tasks));
+  editTask(i);
+}
+
+async function editSubtask(i, j){
+  let subtask = tasks[i]['subTasks'][j]['subtaskName'];
+  document.getElementById(`showSubtask${i}-${j}`).remove();
+  document.getElementById(`subtask-input${i}`).value = subtask;
+  let task = tasks[i]['subTasks'];
+  task.splice(j, 1);
+  await setItem("task", JSON.stringify(tasks));
+}
 
 
 async function proofPrio(priority, i) {
@@ -601,7 +621,7 @@ function editTaskHTML(i) {
                 onclick="toggleDropdown()">
         </div>
         <div class="dropdownContent"></div>
-        <div id="selectedContactsContainer" class="selectedContactsContainer"></div>
+        <div id="selectedContactsContainer${i}" class="selectedContactsContainer"></div>
 </div>
         <div class="flex-board" id="initial-in-circle">
         </div>
@@ -618,9 +638,11 @@ function editTaskHTML(i) {
                                 <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
              </div>    
         </div>
-        <ul id="subtask-container${i}"></ul>
+        <div id="subtask-container${i}"></div>
     </div>
+    <div class="saveDiv">
     <button onclick="saveChangedTask(${i})" class="ok-button">Ok <img src="./assets/img/check.png" alt=""></button>
+    </div>
 </div>`;
 }
 
@@ -642,10 +664,14 @@ async function saveChangedTask(i) {
   };
   allSubTasks.push(newSubtask);
   }
+  if(selectedContacts.length>1 && selectedContacts.includes('Guest')){
+    selectedContacts = selectedContacts.filter(contact => contact !== 'Guest');
+  }
   tasks[i]["title"] = title;
   tasks[i]["description"] = description;
   tasks[i]["dueDate"] = dueDate;
   tasks[i]["subTasks"] = allSubTasks;
+  tasks[i]['assignedTo'] = selectedContacts;
   await setItem("task", JSON.stringify(tasks));
   showTaskInBig(i);
 }
@@ -768,6 +794,7 @@ async function initVariablesForNewTask() {
   let newCategory2 = newTaskCategory;
   let newPriority = newAddedPrio[0]; 
   let newSubtasks = newTaskSubtask;
+  let newAssignedTo = selectedContacts;
 
   return {
     newTitle,
@@ -776,7 +803,8 @@ async function initVariablesForNewTask() {
     newCategory,
     newCategory2,
     newPriority,
-    newSubtasks
+    newSubtasks,
+    newAssignedTo
   };
 }
 
@@ -788,7 +816,8 @@ async function createNewTask() {
     newCategory,
     newCategory2,
     newPriority,
-    newSubtasks
+    newSubtasks,
+    newAssignedTo
   } = await initVariablesForNewTask();
   tasks.push({
     title: newTitle,
@@ -797,10 +826,12 @@ async function createNewTask() {
     category: newCategory,
     category2: newCategory2,
     priority: newPriority,
-    subTasks: newSubtasks
+    subTasks: newSubtasks,
+    assignedTo: newAssignedTo
   });
   await setItem("task", JSON.stringify(tasks));
   showTaskIsAdded();
+  newTaskSubtask = [];
 }
 
 function showTaskIsAdded() {
@@ -946,12 +977,12 @@ async function submitSubtask(i) {
 
 function submitSubtaskForNewTask(){
   let subtask = document.getElementById('subtask-input').value;
-  newTaskSubtask = [];
   let createdSubtask = {
     subtaskName: subtask,
     done: false
   }
   newTaskSubtask.push(createdSubtask);
+  document.getElementById('addedNewSubtasks').innerHTML = '';
   for(let x=0; x<newTaskSubtask.length; x++){
   document.getElementById('addedNewSubtasks').innerHTML += `<div>${newTaskSubtask[x]['subtaskName']}</div>`;
   }
@@ -997,7 +1028,7 @@ function addTaskOnBoardHTML(newTaskNumber) {
             <div class="dropdown">
                 <div class="contactsInputField">
                     <input type="text" id="searchInput" class="searchInput fontSize20px"
-                        placeholder="Search contacts" onkeyup="searchContacts()">
+                        placeholder="Search contacts" onkeyup="searchContactsAddTask()">
                     <img src="./assets/img/arrow-drop-down.png" class="dropdownIcon"
                         onclick="toggleDropdown()">
                 </div>
@@ -1121,6 +1152,23 @@ function searchContacts() {
   selectContactStyleChanger();
 }
 
+function searchContactsAddTask() {
+  const searchInput = document.querySelector('.searchInput');
+  const filter = searchInput.value.trim().toUpperCase();
+  const dropdownContent = document.querySelector('.dropdownContent');
+  dropdownContent.innerHTML = '';
+
+  for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      const name = user.name || user.Name;
+      if (name && name.toUpperCase().startsWith(filter)) {
+          dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+      }
+  }
+  dropdownContent.classList.add('show');
+  selectContactStyleChanger();
+}
+
 function selectContact(name) {
   const selectedContactIndex = selectedContacts.indexOf(name);
   if (selectedContactIndex === -1) {
@@ -1154,20 +1202,24 @@ function selectContactStyleChanger() {
   });
 }
 
-function renderSelectedContacts() {
+async function renderSelectedContacts() {
   const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
   selectedContactsContainer.innerHTML = '';
   const maxContactsToShow = 5;
   const remainingCount = selectedContacts.length - maxContactsToShow;
+  if(selectedContacts.length>1 && selectedContacts.includes('Guest')){
+    selectedContacts = selectedContacts.filter(contact => contact !== 'Guest');
+  }
 
   for (let i = 0; i < Math.min(selectedContacts.length, maxContactsToShow); i++) {
       const contact = selectedContacts[i];
       const initials = contact.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
-      const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-      selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${randomColor};">${initials}</div>`;
+      const color = await initVariableBgColor(contact);
+      selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${color};">${initials}</div>`;
   }
 
   if (remainingCount > 0) {
       selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: #aaa;">+${remainingCount}</div>`;
   }
 }
+
