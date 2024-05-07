@@ -45,22 +45,26 @@ a {
 
 .legalNoticeContentContainer {
     display: flex;
-    height: 100vh;
-    width: auto;
+    flex-direction: column;
+    position: absolute;
+    top: 96px;
+    bottom: 0;
+    right: 0;
+    left: 232px;
+    margin: 110px 0 0 96px;
+    max-width: 978px;
+    gap: 32px;
 }
 
 .legalNoticeHeadlineContainer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 0px;
     gap: 30px;
-    position: absolute;
-    width: 419px;
+    width: 990px;
     height: 73px;
-    left: 328px;
-    top: 206px;
 }
 
 .legalNoticeHeadline {
@@ -72,17 +76,11 @@ a {
     font-size: 61px;
     line-height: 120%;
     color: #000000;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .backArrow {
-    position: absolute;
     width: 37px;
     height: 37px;
-    left: 1307px;
-    top: 225px;
 }
 
 .backArrow img {
@@ -102,11 +100,8 @@ a {
     align-items: flex-start;
     padding: 0px;
     gap: 24px;
-    position: absolute;
     width: 1014px;
     height: 720px;
-    left: 328px;
-    top: 311px;
     overflow: auto;
 }
 
@@ -126,4 +121,8 @@ a {
     font-size: 19px;
     line-height: 120%;
     color: #000000;
+}
+
+#navLN a {
+    color: #32aee3;
 }

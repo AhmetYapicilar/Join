@@ -5,6 +5,10 @@ body {
     margin: 0 auto;
 }
 
+#navBoard {
+    color: #32aee3;
+}
+
 .section-board {
     margin-left: 328px;
     margin-right: 64px;

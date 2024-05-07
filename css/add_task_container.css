@@ -17,8 +17,9 @@ body {
 
 .headlineAddTaskContainer {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     padding: 0px;
     gap: 1px;
     width: 278px;
@@ -135,6 +136,7 @@ body {
     width: 309px;
     height: 56px;
     right: 0;
+    margin-bottom: 32px;
 }
 
 .input-container {

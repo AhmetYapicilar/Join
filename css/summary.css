@@ -6,6 +6,10 @@ body{
     margin: 0 auto;
 }
 
+#navSummary {
+    color: #32aee3;
+}
+
 .headline-summary{
     margin-top: 206px;
     margin-left: 328px;

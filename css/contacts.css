@@ -34,6 +34,10 @@ body {
     background-color: #29ABE2;
 }
 
+#navContacts {
+    color: #32aee3;
+}
+
 .main {
     display: flex;
     position: relative;
