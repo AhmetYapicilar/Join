@@ -34,20 +34,25 @@
         left: 0;
         height: 80px;
     }
+
     header span {
         display: none;
     }
+
     .JoinLogoHeaderImg {
         display: block;
         margin-left: 32px;
     }
+
     .fixed-width-104 {
         display: flex !important;
-        margin-right: 32px; 
+        margin-right: 32px;
     }
+
     .circle span {
         display: block;
     }
+
     .addTaskContentContainer {
         left: 0;
         top: 80px;
@@ -58,13 +63,16 @@
         flex-direction: column;
         align-items: center;
     }
+
     .headlineAddTaskContainer {
         margin-top: 16px;
     }
+
     #addTaskForm {
         margin-bottom: 16px;
         margin-left: 8px;
     }
+
     .data {
         display: none;
     }
@@ -117,6 +125,7 @@
         height: 60px;
         border-radius: 12px;
     }
+
     #navAddTask {
         background-color: rgba(0, 0, 0, 0.15);
         width: 75px;
@@ -130,103 +139,130 @@
     li p {
         overflow: hidden;
     }
+
     .fontSize20px {
         font-size: 16px;
     }
+
     .headlineAddTask {
         font-size: 40px;
     }
+
     .leftAddTaskContainer {
         width: 300px;
     }
+
     .titleContainer {
         width: 300px;
     }
+
     .titleInputAddTask {
         width: 300px;
     }
+
     .descriptionContainer {
         width: 300px;
     }
+
     .descriptionTextArea {
         width: 300px;
     }
+
     .assignContactsContainer {
         width: 300px;
     }
+
     .contactsInputField {
         width: 300px;
     }
+
     .searchInput {
         width: 300px;
     }
+
     .dropdownContent {
         width: 298px;
     }
+
     .rightAddTaskContainer {
         width: 300px;
     }
+
     .taskDateContainer {
         width: 300px;
     }
+
     .dateInput {
         width: 300px;
     }
+
     .prioPickerContainer {
         width: 300px;
     }
+
     .prioPickerButtonsContainer {
         width: 300px;
         gap: 8px;
     }
+
     .urgentButton {
         width: 94px;
         height: 48px;
     }
+
     .mediumButton {
         width: 94px;
         height: 48px;
     }
+
     .lowButton {
         width: 94px;
         height: 48px;
     }
+
     .categoryContainer {
         width: 300px;
     }
+
     .categoryPicker {
         width: 300px;
     }
+
     .input-container {
         width: 300px;
     }
+
     .subtask-input {
         width: 300px;
     }
+
     .add-subtasks-btn {
         top: 38px;
     }
+
     #subtask-container {
         width: 300px;
     }
+
     .todo-subtask {
         width: 238px;
     }
 
-    .clearCreateButtonsContainer{
+    .clearCreateButtonsContainer {
         width: 300px;
     }
+
     .clearButton {
         width: 100px;
         height: 50px;
         color: #2A3647;
         font-size: 16px;
     }
-    
+
     .createButton {
         width: 183px;
         height: 50px;
         font-size: 16px;
     }
-    
+
 }
