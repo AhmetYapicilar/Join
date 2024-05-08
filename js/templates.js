@@ -11,7 +11,7 @@ let user = JSON.parse(localStorage.getItem('user-name'));
     
 
     function openAddTask(){
-        window.location.href = 'add_task.html?user=' + user;
+        window.location.href = 'addTask.html?user=' + user;
 }
 
     function openSummary(){

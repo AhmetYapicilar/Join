@@ -1,31 +1,34 @@
+/**
+ * Array for storing tasks.
+ * @type {Array<Object>}
+ */
 let tasks = [];
+
+
+/**
+ * Array for storing subtasks.
+ * @type {Array<Object>}
+ */
 let subtasks = [];
+
+
+/**
+ * Array for storing users.
+ * @type {Array<Object>}
+ */
 let users = [];
+
+
+/**
+ * Array for storing selected contacts.
+ * @type {Array<string>}
+ */
 let selectedContacts = [];
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.addEventListener('click', function (event) {
-        const dropdownContent = document.querySelector('.dropdownContent');
-        const dropdownIcon = document.querySelector('.dropdownIcon');
-        const clickedElement = event.target;
 
-        const isDropdownContentClicked = dropdownContent && dropdownContent.contains(clickedElement);
-        const isDropdownIconClicked = dropdownIcon && dropdownIcon.contains(clickedElement);
-
-        if (!isDropdownContentClicked && !isDropdownIconClicked && dropdownContent) {
-            dropdownContent.classList.remove('show');
-        }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const dropdownIcon = document.querySelector('.dropdownIcon');
-
-    dropdownIcon.addEventListener('click', function (event) {
-        event.preventDefault();
-    });
-});
-
+/**
+ * Function to toggle the dropdown menu.
+ */
 function toggleDropdown() {
     const dropdownContent = document.querySelector('.dropdownContent');
     const isOpen = dropdownContent.classList.contains('show');
@@ -37,6 +40,11 @@ function toggleDropdown() {
     }
 }
 
+
+/**
+ * Function for loading and rendering user names.
+ * @async
+ */
 async function loadAndRenderNames() {
     try {
         const loadedUsers = JSON.parse(await getItem('users'));
@@ -46,6 +54,11 @@ async function loadAndRenderNames() {
     }
 }
 
+
+/**
+ * Function for rendering user names.
+ * @param {Array<Object>} loadedUsers - Array of user objects.
+ */
 function renderNames(loadedUsers) {
     const dropdownContent = document.querySelector('.dropdownContent');
     dropdownContent.innerHTML = '';
@@ -63,6 +76,10 @@ function renderNames(loadedUsers) {
     users.push(...filteredUsers);
 }
 
+
+/**
+ * Function for searching contacts.
+ */
 function searchContacts() {
     const searchInput = document.querySelector('.searchInput');
     const filter = searchInput.value.trim().toUpperCase();
@@ -80,6 +97,11 @@ function searchContacts() {
     selectContactStyleChanger();
 }
 
+
+/**
+ * Function for selecting a contact.
+ * @param {string} name - The name of the selected contact.
+ */
 function selectContact(name) {
     const selectedContactIndex = selectedContacts.indexOf(name);
     if (selectedContactIndex === -1) {
@@ -92,6 +114,11 @@ function selectContact(name) {
     renderSelectedContacts();
 }
 
+
+/**
+ * Function for changing the style for selected contacts.
+ * @param {string} [name] - The name of the selected contact.
+ */
 function selectContactStyleChanger() {
     const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
     selectedDropdownContent.forEach(span => {
@@ -113,6 +140,10 @@ function selectContactStyleChanger() {
     });
 }
 
+
+/**
+ * Function for rendering the selected contacts.
+ */
 function renderSelectedContacts() {
     const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
     selectedContactsContainer.innerHTML = '';
@@ -131,6 +162,11 @@ function renderSelectedContacts() {
     }
 }
 
+
+/**
+ * Function for loading tasks.
+ * @async
+ */
 async function loadTasks() {
     try {
         const storedTasks = await getItem('task');
@@ -143,6 +179,14 @@ async function loadTasks() {
     }
 }
 
+
+/**
+ * Function for saving an item to storage.
+ * @async
+ * @param {string} key - The key of the item.
+ * @param {any} value - The value of the item.
+ * @returns {Promise<Object>} - The result of the request.
+ */
 async function setItem(key, value) {
     const payload = { key, value, token: STORAGE_TOKEN };
     try {
@@ -156,6 +200,13 @@ async function setItem(key, value) {
     }
 }
 
+
+/**
+ * Function for getting an item from storage.
+ * @async
+ * @param {string} key - The key of the item.
+ * @returns {Promise<any>} - The retrieved item.
+ */
 async function getItem(key) {
     const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
     try {
@@ -174,18 +225,13 @@ async function getItem(key) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('addTaskForm');
 
-    form.addEventListener('submit', function (event) {
-        if (form.checkValidity()) {
-            createTask();
-        } else {
-            console.log('Das Formular ist ungültig. Bitte überprüfe deine Eingaben.');
-        }
-    });
-});
-
+/**
+ * Asynchronously creates a new task based on form inputs and stores it.
+ * @async
+ * @function createTask
+ * @throws {Error} If an error occurs during task creation.
+ */
 async function createTask() {
     try {
         tasks.push({
@@ -206,6 +252,10 @@ async function createTask() {
     }
 }
 
+
+/**
+ * Function to reset priority buttons.
+ */
 function resetButtons() {
     document.querySelectorAll('.urgentButton, .mediumButton, .lowButton').forEach(button => {
         button.classList.remove('urgentButtonSelected', 'mediumButtonSelected', 'lowButtonSelected');
@@ -226,6 +276,11 @@ function resetButtons() {
     });
 }
 
+
+/**
+ * Function to select a priority.
+ * @param {string} priority - The selected priority.
+ */
 function selectPriority(priority) {
     resetButtons();
     const selectedButton = document.getElementById(priority);
@@ -246,6 +301,11 @@ function selectPriority(priority) {
     selectedButton.classList.add(`${priority}ButtonSelected`);
 }
 
+
+/**
+ * Function to get the priority.
+ * @returns {string} - The selected priority.
+ */
 function getPriority() {
     let priority;
     if (document.getElementById('urgent').classList.contains('urgentButtonSelected')) {
@@ -260,21 +320,27 @@ function getPriority() {
     return priority;
 }
 
+
+/**
+ * Function to select the "Medium" priority.
+ */
 function selectMedium() {
     resetButtons();
     selectPriority('medium');
 }
 
+
+/**
+ * Function called when the document is loaded.
+ */
 function onLoad() {
     selectMedium();
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', onLoad);
-} else {
-    onLoad();
-}
 
+/**
+ * Function to clear the form.
+ */
 function clearForm() {
     let form = document.getElementById("addTaskForm");
     form.reset();
@@ -283,6 +349,10 @@ function clearForm() {
     loadAndRenderNames();
 }
 
+
+/**
+ * Function to clear arrays and reset input fields.
+ */
 function clearArrays() {
     let contactsInput = document.getElementById("searchInput");
     let subtasksContainer = document.getElementById("subtask-container");
@@ -292,89 +362,4 @@ function clearArrays() {
     selectedContactsContainer.innerHTML = ``;
     subtasks = [];
     selectedContacts = [];
-}
-
-function activateInput() {
-    let addSubtask = document.getElementById("add-subtask");
-    let subtasksInputActions = document.getElementById("subtask-input-actions");
-
-    addSubtask.classList.add("d-none");
-    subtasksInputActions.classList.remove("d-none");
-}
-
-function checkSubmit(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        submitSubtask();
-    }
-}
-
-function submitSubtask() {
-    if (subtasks.length >= 6) {
-        alert('Maximale Anzahl von Subtasks erreicht. Neue Subtasks können nicht hinzugefügt werden.');
-        return;
-    }
-    let subtaskContent = document.querySelector("#subtask-input").value;
-    if (subtaskContent == "") {
-        deactivateInput();
-    } else {
-        let newSubtask = {
-            subtaskName: subtaskContent,
-            done: false,
-        };
-        subtasks.push(newSubtask);
-        document.querySelector("#subtask-input").value = "";
-        renderSubtasks();
-        deactivateInput();
-    }
-}
-
-function deactivateInput() {
-    let addSubtask = document.querySelector("#add-subtask");
-    let subtasksInputActions = document.querySelector("#subtask-input-actions");
-
-    addSubtask.classList.remove("d-none");
-    subtasksInputActions.classList.add("d-none");
-    document.querySelector("#subtask-input").value = "";
-}
-
-function setFocus() {
-    document.getElementById("subtask-input").focus();
-}
-
-function deleteSubtask(i) {
-    subtasks.splice(i, 1);
-    renderSubtasks();
-}
-
-function editSubtask(i) {
-    let subtaskContent = document.querySelector(`#subtask-element${i}`);
-    let editContainer = document.getElementById("edit-subtask-container");
-    let subtaskEditInput = document.querySelector(`#edit-subtask-${i}`);
-    subtaskContent.classList.add("d-none");
-    editContainer.classList.remove("d-none");
-    document.getElementById(`edit-subtask-${i}`).focus();
-    subtaskEditInput.value = subtasks[i].subtaskName;
-}
-
-function checkEditSubmit(i, event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        submitChange(i);
-    }
-}
-
-function submitChange(i) {
-    let newSubtaskContent = document.querySelector(`#edit-subtask-${i}`).value;
-    subtasks[i].subtaskName = newSubtaskContent;
-    renderSubtasks();
-}
-
-function renderSubtasks() {
-    let subtaskList = document.querySelector("#subtask-container");
-    subtaskList.innerHTML = "";
-    for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i].subtaskName;
-        subtaskList.innerHTML += subtaskHtml(element, i);
-    }
 }
