@@ -1322,11 +1322,11 @@ li {
 
 /*addContact*/
 
-    .leftrightContainer {
-        flex-direction: column;
-        height: 850px;
-        width: 550px;
-    }
+.leftrightContainer {
+    flex-direction: column;
+    height: 780px;
+    width: 550px;
+}
 
     .centerAll {
         margin-top: 18%;
@@ -1432,7 +1432,7 @@ li {
 
     .leftrightContainer-edit {
         flex-direction: column;
-        height: 850px;
+        height: 780px;
         width: 550px;
     }
 
@@ -1578,9 +1578,16 @@ li {
 
     .leftrightContainer-edit {
         flex-direction: column;
-        height: 800px;
+        height: 700px;
         width: 434px;
         margin-top: 2%;
+    }
+
+    .initials-circle-edit-contacts {
+        position: absolute;
+        margin-right: 0px;
+        width: 90px;
+        height: 90px;
     }
 
     .contactAddedSuccesfully {
@@ -1588,7 +1595,7 @@ li {
     }
 
     .initials-circle-edit-contacts {
-        top: 45%;
+        top: 47%;
     }
 
     .rightContainer-edit {
@@ -1606,11 +1613,12 @@ li {
         gap: 0px;
         width: 94%;
         padding-left: 16px;
+        scale: 0.9;
     }
 
     .rightContainer-edit {
         width: 80%;
-        margin-top: 125px;
+        margin-top: 130px;
     }
 
     .addContactMobileImg {
@@ -1630,7 +1638,7 @@ li {
 
     .leftrightContainer {
         flex-direction: column;
-        height: 800px;
+        height: 700px;
         width: 434px;
         margin-top: 2%;
     }
@@ -1699,6 +1707,7 @@ li {
         width: 100%;
         gap: 16px;
         justify-content: center;
+        scale: 0.9;
     }
 
     .inputfieldAddContact {
@@ -1719,10 +1728,10 @@ li {
     }
 
     .profilepictureSize {
-        width: 120px;
-        height: 120px;
+        width: 110px;
+        height: 110px;
         position: absolute;
-        top: 46%;
+        top: 47%;
     }
 
     .createAccountButton {
