@@ -447,9 +447,18 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 
 function addContactWindowClose() {
     let addContactContainer = document.getElementById("letAddContactSlideIn");
+
+    if (window.innerWidth >= 1320) {
     addContactContainer.classList.remove("show-slide-in-Desktop");
     addContactContainer.classList.add("show-slide-out-Desktop");
     document.getElementById(`overlayOnMobileEditContacts`).style.display = "none";
+    } else {
+        addContactContainer.classList.remove("show-slide-in-bottom");
+        addContactContainer.classList.add("show-slide-out-bottom");
+    setTimeout(() => {
+        document.getElementById(`letAddContactSlideIn`).style.display = "none";
+    }, 500);
+    }
 }
 
 //Werte des inputs lesen und weitergeben an addKontakt

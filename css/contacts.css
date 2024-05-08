@@ -1067,8 +1067,35 @@ li {
     }
 }
 
+@media (min-height: 1305px) and (max-width: 1320px) {
+    .sidebar {
+        background-color: #2a3647;
+        width: 100% !important;
+        position: fixed;
+        bottom: 0 !important;
+        height: 80px !important;
+        top: 94% !important;
+    }
 
-@media (max-width: 1320px) {
+    .showAllContacts {
+        width: 80%;
+        top: 1%;
+        height: 87%;
+    }
+}
+
+@media (max-height: 945px) and (max-width: 1320px) {
+    .sidebar {
+        background-color: #2a3647;
+        width: 100% !important;
+        position: fixed;
+        bottom: 0 !important;
+        height: 80px !important;
+        top: 92% !important;
+    }
+}
+
+@media  (max-width: 1320px) {
     .phoneListAndButton {
         position: relative;
         /*width: 56%;*/
@@ -1084,6 +1111,7 @@ li {
         position: fixed;
         bottom: 10% !important;
         top: 80% !important;
+        left: 40px;
     }
 
     .betterWaT {
@@ -1122,7 +1150,7 @@ li {
         position: fixed;
         bottom: 0 !important;
         height: 80px !important;
-        top: 92% !important
+        top: 92%;
     }
 
     .menu {
@@ -1553,6 +1581,10 @@ li {
         height: 800px;
         width: 434px;
         margin-top: 2%;
+    }
+
+    .contactAddedSuccesfully {
+        left: 20px;
     }
 
     .initials-circle-edit-contacts {
