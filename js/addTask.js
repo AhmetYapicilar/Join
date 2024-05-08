@@ -339,6 +339,17 @@ function onLoad() {
 
 
 /**
+ * Checks if the document is still loading. If it is, adds an event listener for the 'DOMContentLoaded' event,
+ * otherwise calls the onLoad function immediately.
+ */
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onLoad);
+} else {
+    onLoad();
+}
+
+
+/**
  * Function to clear the form.
  */
 function clearForm() {
