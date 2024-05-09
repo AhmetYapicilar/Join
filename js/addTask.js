@@ -374,3 +374,15 @@ function clearArrays() {
     subtasks = [];
     selectedContacts = [];
 }
+
+
+/**
+ * Sets the minimum date for the specified date input field to today's date.
+ * @function setMinDateToday
+ */
+function setMinDateToday() {
+    const dateInput = document.getElementById('dateInputPicker');
+    const today = new Date().toISOString().split('T')[0];
+
+    dateInput.setAttribute('min', today);
+}
