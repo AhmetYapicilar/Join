@@ -15,6 +15,7 @@ let draggedTask;
 let users = [];
 let selectedContacts = [];
 
+
 document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('click', function (event) {
       const dropdownContent = document.querySelector('.dropdownContent');
@@ -46,6 +47,7 @@ async function initBoard() {
   await showTasks();
   await calculateProgressBar();
   checkEmptyTasks();
+  newTaskSubtask = [];
 }
 
 
@@ -542,6 +544,7 @@ for (let j = 0; j < initials.length; j++) {
   });
   renderNames(users);
   renderSelectedContacts();
+  selectContactStyleChanger();
   }
 
 async function deleteSubtask(i, j){
@@ -549,6 +552,7 @@ async function deleteSubtask(i, j){
   subtasks.splice(j, 1);
   await setItem("task", JSON.stringify(tasks));
   editTask(i);
+  selectContactStyleChanger()
 }
 
 async function editSubtask(i, j){
@@ -761,6 +765,10 @@ let newAddedPrio = [];
 let newTaskCategory;
 
 async function addTaskOnBoard(selectedCategory) {
+  if(window.innerWidth < 770){
+    openAddTask();
+  } else{
+  selectedContacts=[];
   newTaskCategory = selectedCategory;
   document
     .getElementById("overlay-add-task-board")
@@ -782,7 +790,7 @@ async function addTaskOnBoard(selectedCategory) {
     });
   });
   renderNames(users);
-}
+}}
 
 async function initVariablesForNewTask() {
   let newTitle = document.getElementById(`newTaskTitle${newTaskNumber}`).value;
@@ -831,7 +839,6 @@ async function createNewTask() {
   });
   await setItem("task", JSON.stringify(tasks));
   showTaskIsAdded();
-  newTaskSubtask = [];
 }
 
 function showTaskIsAdded() {
@@ -1096,6 +1103,10 @@ function addTaskOnBoardHTML(newTaskNumber) {
         <div class="clearCreateButtonsContainer">
             <button type="button" class="clearButton" onclick="clearForm()">Clear <img
                     src="./assets/img/iconoir_cancel.png" alt=""></button>
+            <div class="fieldRequiredText2">
+                        <p class="redText">*</p>
+                        <span>This field is required</span>
+                </div>
             <button type="submit" class="createButton" id="createTaskButton">Create Task <img
                     src="./assets/img/check.png" alt=""></button>
 

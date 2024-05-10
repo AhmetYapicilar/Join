@@ -25,7 +25,6 @@ let users = [];
  */
 let selectedContacts = [];
 
-
 /**
  * Function to toggle the dropdown menu.
  */

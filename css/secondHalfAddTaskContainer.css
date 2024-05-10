@@ -1,0 +1,186 @@
+.fieldRequiredText {
+    position: absolute;
+    width: 170px;
+    height: 27px;
+    left: 20px;
+    bottom: 50px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.clearButton {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    gap: 4px;
+    width: 110px;
+    height: 56px;
+    background: #F6F7F8;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    flex: none;
+    color: #2A3647;
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.createButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    gap: 4px;
+    width: 183px;
+    height: 56px;
+    background: #2A3647;
+    border-radius: 10px;
+    flex: none;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.close-task {
+    cursor: pointer;
+}
+
+.middle-of-the-page {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.added-to-board {
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999;
+    background-color: #2A3647;
+    color: #FFFFFF;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.searchInput {
+    padding-left: 18px;
+    width: 440px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.searchInputLittle{
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.contactsInputFieldLittle {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 300px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+}
+
+.contactsInputField {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 440px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+}
+
+.dropdownIcon {
+    position: absolute;
+    width: 24px;
+    cursor: pointer;
+    right: 8px;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    max-height: 170px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.show {
+    display: block;
+}
+
+.selectedDropdownContent {
+    background-color: #2A3647;
+    color: #FFFFFF;
+
+}
+
+.dropdownContent span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px 8px 18px;
+    cursor: pointer;
+}
+
+.dropdownContent span:hover {
+    background-color: #29ABE2;
+}
+
+.d-none{
+    display: none;
+}
+
+.selectedContactsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px;
+}
+
+.selectedContact {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}

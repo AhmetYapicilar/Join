@@ -26,6 +26,7 @@ header{
 
 .JoinLogoHeaderImg {
     display: none;
+    cursor: pointer;
 }
 
 .headline{

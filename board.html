@@ -14,15 +14,34 @@
     <script src="./js/board.js"></script>
     <link rel="shortcut icon" href="assets/img/joinFavIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/addTaskContainer.css">
+    <link rel="stylesheet" href="./css/board-showBig.css">
+    <link rel="stylesheet" href="./css/firstHalfAddTaskContainer.css">
+    <link rel="stylesheet" href="./css/secondHalfAddTaskContainer.css">
+    <link rel="stylesheet" href="./css/board-Responsive.css">
 </head>
 
 
 <body id="body-board" onload="includeHTML(); initBoard(); showInitials()">
+    
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
 
 <section class="section-board">
+
+    <div class="responsive-first-line">
+    <div class="space-between-board width-80percent">
+        <h1>Board</h1>
+        <button class="addTaskOnBoardResponsive-Button" onclick="addTaskOnBoard('To-Do')"><img src="./assets/img/addTaskBoardMobile.png"></button>
+    </div>
+            <div class="input-container-board margin-top-16">
+                <input id="search-input" class="inputFindTask" required type="text" placeholder="Find Task" onkeyup="searchTask()">
+                <img class="inputfield-icon-search" src="./assets/img/search-icon.png">
+                <img class="inputfield-icon-vertical-line" src="./assets/img/vertical-line-board.png">
+            </div>
+    </div>
+
     <div class="space-between-board">
+        <div class="just-normal-version">
         <h1>Board</h1>
         <div class="flex-board gap-32">
             <div class="input-container-board">
@@ -30,12 +49,15 @@
                 <img class="inputfield-icon-search" src="./assets/img/search-icon.png">
                 <img class="inputfield-icon-vertical-line" src="./assets/img/vertical-line-board.png">
             </div>
-            <button onclick="addTaskOnBoard('To-Do')">Add Task <img src="./assets/img/button-plus-board.png"></button>
+            <button class="addTaskOnBoard-Button" onclick="addTaskOnBoard('To-Do')">Add Task <img src="./assets/img/button-plus-board.png"></button>
+            <button class="addTaskOnBoardResponsive-Button" onclick="addTaskOnBoard('To-Do')"><img src="./assets/img/addTaskBoardMobile.png"></button>
+        </div>
         </div>
     </div>
+
 <div class="board-distribution">
     <div class="card-board">
-        <div class="space-between-board height-board">
+        <div class="space-between-board height-board width-80percent">
             <span class="title-board">To do</span>
             <img onclick="addTaskOnBoard('To-Do')" class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
@@ -43,7 +65,7 @@
     </div>
 
     <div class="card-board">
-        <div class="space-between-board height-board">
+        <div class="space-between-board height-board width-80percent">
             <span class="title-board">In progress</span>
             <img onclick="addTaskOnBoard('In-Progress')" class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
@@ -52,7 +74,7 @@
     </div>
 
     <div class="card-board">
-        <div class="space-between-board height-board">
+        <div class="space-between-board height-board width-80percent">
             <span class="title-board">Await feedback</span>
             <img onclick="addTaskOnBoard('Await-Feedback')" class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
@@ -68,6 +90,8 @@
 </div>
 
 </section>
+
+
 
 <section id="section-board-overlay" class="section-board-overlay">
 </section>

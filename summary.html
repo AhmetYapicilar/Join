@@ -14,7 +14,7 @@
     <script src="./js/board.js"></script>
     <script src="./js/summary.js"></script>
   </head>
-  <body onload="includeHTML(); initSummary(); showInitials()">
+  <body onload="includeHTML(); initSummary(); showInitials(); greetingUser()">
 
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
@@ -80,7 +80,7 @@
       </div>
 
       <div class="right-content">
-        <span>Good Morning,<br> <b id="greeting-name" class="greeting-name"></b></span>
+        <span><b id="greeting"></b><br> <b id="greeting-name" class="greeting-name"></b></span>
       </div>
     </div>
   </body>
