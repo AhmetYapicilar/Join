@@ -15,33 +15,30 @@ let draggedTask;
 let users = [];
 let selectedContacts = [];
 
+document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("click", function (event) {
+    const dropdownContent = document.querySelector(".dropdownContent");
+    const dropdownIcon = document.querySelector(".dropdownIcon");
+    const clickedElement = event.target;
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('click', function (event) {
-      const dropdownContent = document.querySelector('.dropdownContent');
-      const dropdownIcon = document.querySelector('.dropdownIcon');
-      const clickedElement = event.target;
+    const isDropdownContentClicked =
+      dropdownContent && dropdownContent.contains(clickedElement);
+    const isDropdownIconClicked =
+      dropdownIcon && dropdownIcon.contains(clickedElement);
 
-      const isDropdownContentClicked = dropdownContent && dropdownContent.contains(clickedElement);
-      const isDropdownIconClicked = dropdownIcon && dropdownIcon.contains(clickedElement);
-
-      if (!isDropdownContentClicked && !isDropdownIconClicked && dropdownContent) {
-          dropdownContent.classList.remove('show');
-      }
+    if (
+      !isDropdownContentClicked &&
+      !isDropdownIconClicked &&
+      dropdownContent
+    ) {
+      dropdownContent.classList.remove("show");
+    }
   });
 });
 
-
-
 async function initBoard() {
-  removeAllClassesWhenInit();
-  for (let x = 0; x < ids.length; x++) {
-    let category = ids[x];
-    taskCounts[category] = 0;
-    let contentBefore = document.getElementById(`${ids[x]}`);
-    contentBefore.classList.remove("drag-area-highlight");
-    contentBefore.innerHTML = "";
-  }
+  generateCSSForInit();
+  cleanAllFieldsBeforeInit();
   await loadUsers();
   await loadTasks();
   await showTasks();
@@ -50,8 +47,17 @@ async function initBoard() {
   newTaskSubtask = [];
 }
 
+function cleanAllFieldsBeforeInit(){
+  for (let x = 0; x < ids.length; x++) {
+    let category = ids[x];
+    taskCounts[category] = 0;
+    let contentBefore = document.getElementById(`${ids[x]}`);
+    contentBefore.classList.remove("drag-area-highlight");
+    contentBefore.innerHTML = "";
+  }
+}
 
-function removeAllClassesWhenInit() {
+function generateCSSForInit() {
   document
     .getElementById("middle-of-the-page")
     .classList.remove("middle-of-the-page");
@@ -91,11 +97,15 @@ function checkEmptyTasks() {
   }
 }
 
+function removeBigTaskBeforeInitAllTasks(i){
+  if (document.getElementById(`bigtask${i}`)) {
+    document.getElementById(`bigtask${i}`).classList.add("d-none");
+  }
+}
+
 async function showTasks() {
   for (let i = 0; i < tasks.length; i++) {
-    if (document.getElementById(`bigtask${i}`)) {
-      document.getElementById(`bigtask${i}`).classList.add("d-none");
-    }
+    removeBigTaskBeforeInitAllTasks(i);
     let {
       TASK,
       category2,
@@ -113,6 +123,7 @@ async function showTasks() {
       category2 = "To-Do";
     }
     await countTasks(category2);
+    let circlesHTML = addCirclesWithInitials(bgColor, initials);
     let content = document.getElementById(category2);
     content.innerHTML += generateShowTasksHTML(
       i,
@@ -120,12 +131,11 @@ async function showTasks() {
       description,
       priorityIcon,
       allSubtasks,
-      initials,
-      bgColor
+      circlesHTML
     );
     userStoryOrTechnicalTask(TASK, i);
+    activateCheckboxIfClickedBefore(i, allSubtasks);
   }
-  activateCheckboxIfClickedBefore;
 }
 
 async function initialOfAssignTo(assignedTo) {
@@ -186,7 +196,7 @@ async function initVariableAssignedTo(TASK) {
 }
 
 async function initVariableBgColor(newContact) {
-  const index = users.findIndex(user => user.name === newContact);
+  const index = users.findIndex((user) => user.name === newContact);
   let bgColor;
   if (index !== -1 && users[index].Color) {
     bgColor = users[index].Color;
@@ -210,19 +220,22 @@ async function initVariableSubTask(TASK) {
   return allSubtasks;
 }
 
+function addCirclesWithInitials(bgColor, initials){
+  let circlesHTML = "";
+  for (let j = 0; j < initials.length; j++) {
+    circlesHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
+  }
+  return circlesHTML;
+}
+
 function generateShowTasksHTML(
   i,
   title,
   description,
   priorityIcon,
   allSubtasks,
-  initials,
-  bgColor
+  circlesHTML
 ) {
-  let circlesHTML = "";
-  for (let j = 0; j < initials.length; j++) {
-    circlesHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
-  }
   return `
     <div id='task${i}' draggable="true" class="tasks-board" onclick=showTaskInBig(${i}) ondragstart="startDragging(${i})">
     <div id="user-technical-board${i}"></div>
@@ -338,6 +351,12 @@ async function showFoundedTasks() {
   }
 }
 
+function generateCSSBeforeBigTaskIsShowed(){
+  document
+    .getElementById("section-board-overlay")
+    .classList.add("section-board-overlay");
+  document.getElementById("body-board").style.overflow = "hidden";
+}
 
 async function showTaskInBig(i) {
   await loadTasks();
@@ -354,10 +373,8 @@ async function showTaskInBig(i) {
     bgColor,
   } = await initVariablesForShowTasks(i);
   let initials = await initialOfAssignTo(assignedTo);
-  document
-    .getElementById("section-board-overlay")
-    .classList.add("section-board-overlay");
-  document.getElementById("body-board").style.overflow = "hidden";
+  generateCSSBeforeBigTaskIsShowed();
+  let subtaskHTML = showSubtasksInBigTask(i, allSubtasks);
   let content = document.getElementById("section-board-overlay");
   content.innerHTML = generateBigTaskHTML(
     i,
@@ -366,36 +383,35 @@ async function showTaskInBig(i) {
     dueDate,
     priority,
     priorityIcon,
-    allSubtasks,
+    subtaskHTML,
     assignedTo,
-    bgColor,
-    
+    bgColor
   );
   userStoryOrTechnicalTaskBig(TASK, i);
+  settimeoutForBigTask(i, allSubtasks);
+  selectedContacts = [];
+  initCirclesInBigTask(i, initials, bgColor, assignedTo);
+  }
+
+
+function initCirclesInBigTask(i, initials, bgColor, assignedTo){
+  let circlesHTML = document.getElementById(`assigned-to-contacts${i}`);
+  for (let x = 0; x < initials.length; x++) {
+    circlesHTML.innerHTML += `<div class="flex-board">
+                              <div class="circle-board-big" style="background-color:${bgColor[x]}">${initials[x]}</div>
+                              <span class="contact-name">${assignedTo[x]}</span>
+                            </div>`;
+                            selectedContacts.push(assignedTo[x]);
+}}
+
+function settimeoutForBigTask(i, allSubtasks){
   setTimeout(() => {
     document.getElementById(`bigtask${i}`).classList.add("animation");
     activateCheckboxIfClickedBefore(i, allSubtasks);
   }, 100);
-  selectedContacts = [];
-  let circlesHTML = document.getElementById(`assigned-to-contacts${i}`);
-  for(let x=0; x<initials.length; x++){
-  circlesHTML.innerHTML += `<div class="flex-board">
-                              <div class="circle-board-big" style="background-color:${bgColor[x]}">${initials[x]}</div>
-                              <span class="contact-name">${assignedTo[x]}</span>
-                            </div>`;
-  selectedContacts.push(assignedTo[x]);
-  }
 }
 
-function generateBigTaskHTML(
-  i,
-  title,
-  description,
-  dueDate,
-  priority,
-  priorityIcon,
-  allSubtasks
-) {
+function showSubtasksInBigTask(i, allSubtasks){
   let subtaskHTML = "";
   for (let j = 0; j < allSubtasks.length; j++) {
     const checkboxId = `subtaskCheckbox${i}-${j}`;
@@ -407,6 +423,18 @@ function generateBigTaskHTML(
         <p class="checkbox-p">${allSubtasks[j]}</p>
         </div>`;
   }
+  return subtaskHTML;
+}
+
+function generateBigTaskHTML(
+  i,
+  title,
+  description,
+  dueDate,
+  priority,
+  priorityIcon,
+  subtaskHTML
+) {
   return `
     <div id='bigtask${i}' class="tasks-board-big">
     <div class="space-between-board">
@@ -448,12 +476,37 @@ function activateCheckboxIfClickedBefore(i, allSubtasks) {
   for (let j = 0; j < allSubtasks.length; j++) {
     let checkboxId = `subtaskCheckbox${i}-${j}`;
     if (subTaskCheckBox.includes(checkboxId)) {
+      if(document.getElementById(checkboxId)){
       document.getElementById(checkboxId).checked = true;
+    }
       tasks[i]["subTasks"][j]["done"] = true;
     } else {
       tasks[i]["subTasks"][j]["done"] = false;
     }
   }
+}
+
+function getCompletedSubtasks(SUBTASKS, i){
+  let completedSubtasks = 0;
+    for (let j = 0; j < SUBTASKS.length; j++) {
+      let checkboxId = `subtaskCheckbox${i}-${j}`;
+      if (subTaskCheckBox.includes(checkboxId)) {
+        tasks[i]["subTasks"][j]["done"] = true;
+        completedSubtasks++;
+      } else {
+        tasks[i]["subTasks"][j]["done"] = false;
+      }
+    }
+    return completedSubtasks;
+}
+
+function generateWidthOfProgressBar(i, completedSubtasks, SUBTASKS){
+  let progressPercentage = (completedSubtasks / SUBTASKS.length) * 100;
+    document.getElementById(
+      `progressbar${i}`
+    ).style.width = `${progressPercentage}%`;
+    document.getElementById(`completedSubTasks${i}`).innerHTML =
+      completedSubtasks;
 }
 
 async function calculateProgressBar() {
@@ -465,22 +518,8 @@ async function calculateProgressBar() {
       document.getElementById(`completedSubTasks${i}`).innerHTML = 0;
       continue;
     }
-    let completedSubtasks = 0;
-    for (let j = 0; j < SUBTASKS.length; j++) {
-      let checkboxId = `subtaskCheckbox${i}-${j}`;
-      if (subTaskCheckBox.includes(checkboxId)) {
-        tasks[i]["subTasks"][j]["done"] = true;
-        completedSubtasks++;
-      } else {
-        tasks[i]["subTasks"][j]["done"] = false;
-      }
-    }
-    let progressPercentage = (completedSubtasks / SUBTASKS.length) * 100;
-    document.getElementById(
-      `progressbar${i}`
-    ).style.width = `${progressPercentage}%`;
-    document.getElementById(`completedSubTasks${i}`).innerHTML =
-      completedSubtasks;
+    let completedSubtasks = getCompletedSubtasks(SUBTASKS, i);
+   generateWidthOfProgressBar(i, completedSubtasks, SUBTASKS);
   }
 }
 
@@ -518,52 +557,62 @@ async function editTask(i) {
   } = await initVariablesForShowTasks(i);
   let initials = await initialOfAssignTo(assignedTo);
   priority = priority.toLowerCase();
-  let content = document.getElementById("section-board-overlay");
-  content.innerHTML = "";
-  content.innerHTML = editTaskHTML(i);
-  document.getElementById(`title-id${i}`).value = title;
-  document.getElementById(`description-id${i}`).value = description;
-  document.getElementById(`duedate-id${i}`).value = dueDate;
-  for (let j = 0; j < allSubtasks.length; j++) {
-    let subtask = allSubtasks[j];
-    document.getElementById(`subtask-container${i}`).innerHTML += `<div id="showSubtask${i}-${j}" class="space-between-board subtask-div">${subtask}
-    <div class="visibility flex-board"><img onclick="deleteSubtask(${i}, ${j})" id="delete-icon-edit${i}-${j}" src="./assets/img/delete.png"><div class="grey-line"></div><img onclick="editSubtask(${i}, ${j})" id="pencil-icon-edit${i}-${j}" src="./assets/img/edit.png"></div>`;
-}
-let circlesHTML = document.getElementById(`selectedContactsContainer${i}`);
-for (let j = 0; j < initials.length; j++) {
-  circlesHTML.innerHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
-}
+  showEditTask(i);
+  setValuesInForm(i, title, description, dueDate);
+  addSubtasksToEditHTML(allSubtasks, i);
+  addCirclesEditHTML(i, initials, bgColor);
   proofPrio(priority, i);
-    setTimeout(() => {
-      document.addEventListener('DOMContentLoaded', function () {
-      const dropdownIcon = document.querySelector('.dropdownIcon');
-      dropdownIcon.addEventListener('click', function (event) {
-        event.preventDefault();
-    }, 50);
-    });
-  });
+ showNamesWhenClickAssignedTo();
   renderNames(users);
   renderSelectedContacts();
   selectContactStyleChanger();
-  }
+}
 
-async function deleteSubtask(i, j){
-  let subtasks = tasks[i]['subTasks'];
+function showEditTask(i){
+  let content = document.getElementById("section-board-overlay");
+  content.innerHTML = "";
+  content.innerHTML = editTaskHTML(i);
+}
+
+function addCirclesEditHTML(i, initials, bgColor){
+  let circlesHTML = document.getElementById(`selectedContactsContainer${i}`);
+  for (let j = 0; j < initials.length; j++) {
+    circlesHTML.innerHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
+  }
+}
+
+function setValuesInForm(i, title, description, dueDate){
+  document.getElementById(`title-id${i}`).value = title;
+  document.getElementById(`description-id${i}`).value = description;
+  document.getElementById(`duedate-id${i}`).value = dueDate;
+}
+
+function addSubtasksToEditHTML(allSubtasks, i){
+  for (let j = 0; j < allSubtasks.length; j++) {
+    let subtask = allSubtasks[j];
+    document.getElementById(
+      `subtask-container${i}`
+    ).innerHTML += `<div id="showSubtask${i}-${j}" class="space-between-board subtask-div">${subtask}
+    <div class="visibility flex-board"><img onclick="deleteSubtask(${i}, ${j})" id="delete-icon-edit${i}-${j}" src="./assets/img/delete.png"><div class="grey-line"></div><img onclick="editSubtask(${i}, ${j})" id="pencil-icon-edit${i}-${j}" src="./assets/img/edit.png"></div>`;
+  }
+}
+
+async function deleteSubtask(i, j) {
+  let subtasks = tasks[i]["subTasks"];
   subtasks.splice(j, 1);
   await setItem("task", JSON.stringify(tasks));
   editTask(i);
-  selectContactStyleChanger()
+  selectContactStyleChanger();
 }
 
-async function editSubtask(i, j){
-  let subtask = tasks[i]['subTasks'][j]['subtaskName'];
+async function editSubtask(i, j) {
+  let subtask = tasks[i]["subTasks"][j]["subtaskName"];
   document.getElementById(`showSubtask${i}-${j}`).remove();
   document.getElementById(`subtask-input${i}`).value = subtask;
-  let task = tasks[i]['subTasks'];
+  let task = tasks[i]["subTasks"];
   task.splice(j, 1);
   await setItem("task", JSON.stringify(tasks));
 }
-
 
 async function proofPrio(priority, i) {
   priority = priority.toLowerCase();
@@ -650,32 +699,48 @@ function editTaskHTML(i) {
 </div>`;
 }
 
-async function saveChangedTask(i) {
+function initVariablesForSaveChangedTask(i){
   const TASK = tasks[i];
   let title = document.getElementById(`title-id${i}`).value;
   let description = document.getElementById(`description-id${i}`).value;
   let dueDate = document.getElementById(`duedate-id${i}`).value;
   let priority = TASK["priority"];
   let priorityIcon = proofPriority(priority);
+  return {TASK, title, description, dueDate, priority, priorityIcon};
+}
+
+function saveNewSubtasks(i, TASK){
+  const SUBTASK = TASK["subTasks"];
   let allSubTasks = [];
-  const SUBTASK = TASK['subTasks'];
   for (let j = 0; j < SUBTASK.length; j++) {
     let subtask = document.getElementById(`showSubtask${i}-${j}`);
     let subtaskName = subtask.textContent;
     let newSubtask = {
       subtaskName: subtaskName,
       done: false,
-  };
-  allSubTasks.push(newSubtask);
+    };
+    allSubTasks.push(newSubtask);
   }
-  if(selectedContacts.length>1 && selectedContacts.includes('Guest')){
-    selectedContacts = selectedContacts.filter(contact => contact !== 'Guest');
+  return allSubTasks;
+}
+
+function deleteGuestFromSelectedContacts(){
+  if (selectedContacts.length > 1 && selectedContacts.includes("Guest")) {
+    selectedContacts = selectedContacts.filter(
+      (contact) => contact !== "Guest"
+    );
   }
+}
+
+async function saveChangedTask(i) {
+  let {TASK, title, description, dueDate, priority, priorityIcon} = initVariablesForSaveChangedTask(i);
+  let allSubTasks = saveNewSubtasks(i, TASK);
+ deleteGuestFromSelectedContacts();
   tasks[i]["title"] = title;
   tasks[i]["description"] = description;
   tasks[i]["dueDate"] = dueDate;
   tasks[i]["subTasks"] = allSubTasks;
-  tasks[i]['assignedTo'] = selectedContacts;
+  tasks[i]["assignedTo"] = selectedContacts;
   await setItem("task", JSON.stringify(tasks));
   showTaskInBig(i);
 }
@@ -765,32 +830,49 @@ let newAddedPrio = [];
 let newTaskCategory;
 
 async function addTaskOnBoard(selectedCategory) {
-  if(window.innerWidth < 770){
+  if (window.innerWidth < 770) {
     openAddTask();
-  } else{
-  selectedContacts=[];
-  newTaskCategory = selectedCategory;
+  } else {
+    selectedContacts = [];
+    newTaskCategory = selectedCategory;
+   generateCSSForAddTask();
+    let content = document.getElementById("overlay-add-task-board");
+    content.innerHTML = addTaskOnBoardHTML(newTaskNumber);
+   showAddTaskForm();
+   showNamesWhenClickAssignedTo();
+    renderNames(users);
+  }
+}
+
+function generateCSSForAddTask(){
   document
-    .getElementById("overlay-add-task-board")
-    .classList.add("overlay-add-task-board");
-  document.getElementById("body-board").style.overflow = "hidden";
-  let content = document.getElementById("overlay-add-task-board");
-  content.innerHTML = addTaskOnBoardHTML(newTaskNumber);
+  .getElementById("overlay-add-task-board")
+  .classList.add("overlay-add-task-board");
+document.getElementById("body-board").style.overflow = "hidden";
+}
+
+function showAddTaskForm(){
   setTimeout(() => {
     document
       .getElementById(`newTask${newTaskNumber}`)
       .classList.add("showAddTask");
   }, 100);
-  document.addEventListener('DOMContentLoaded', function () {
+}
+
+function showNamesWhenClickAssignedTo(){
+  document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
-      const dropdownIcon = document.querySelector('.dropdownIcon');
-      dropdownIcon.addEventListener('click', function (event) {
-        event.preventDefault();
-    }, 50);
+      const dropdownIcon = document.querySelector(".dropdownIcon");
+      dropdownIcon.addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+        },
+        50
+      );
     });
   });
-  renderNames(users);
-}}
+}
 
 async function initVariablesForNewTask() {
   let newTitle = document.getElementById(`newTaskTitle${newTaskNumber}`).value;
@@ -800,7 +882,7 @@ async function initVariablesForNewTask() {
   let newDueDate = document.getElementById(`newTaskDate${newTaskNumber}`).value;
   let newCategory = document.querySelector(".categoryPicker").value;
   let newCategory2 = newTaskCategory;
-  let newPriority = newAddedPrio[0]; 
+  let newPriority = newAddedPrio[0];
   let newSubtasks = newTaskSubtask;
   let newAssignedTo = selectedContacts;
 
@@ -812,7 +894,7 @@ async function initVariablesForNewTask() {
     newCategory2,
     newPriority,
     newSubtasks,
-    newAssignedTo
+    newAssignedTo,
   };
 }
 
@@ -825,7 +907,7 @@ async function createNewTask() {
     newCategory2,
     newPriority,
     newSubtasks,
-    newAssignedTo
+    newAssignedTo,
   } = await initVariablesForNewTask();
   tasks.push({
     title: newTitle,
@@ -835,7 +917,7 @@ async function createNewTask() {
     category2: newCategory2,
     priority: newPriority,
     subTasks: newSubtasks,
-    assignedTo: newAssignedTo
+    assignedTo: newAssignedTo,
   });
   await setItem("task", JSON.stringify(tasks));
   showTaskIsAdded();
@@ -891,23 +973,29 @@ function selectPriority(priority) {
 }
 
 function resetButtons() {
-  document.querySelectorAll('.urgentButton, .mediumButton, .lowButton').forEach(button => {
-      button.classList.remove('urgentButtonSelected', 'mediumButtonSelected', 'lowButtonSelected');
-      const img = button.querySelector('img');
+  document
+    .querySelectorAll(".urgentButton, .mediumButton, .lowButton")
+    .forEach((button) => {
+      button.classList.remove(
+        "urgentButtonSelected",
+        "mediumButtonSelected",
+        "lowButtonSelected"
+      );
+      const img = button.querySelector("img");
       switch (button.id) {
-          case 'low':
-              img.src = './assets/img/prioDown.png';
-              break;
-          case 'medium':
-              img.src = './assets/img/prioEven.png';
-              break;
-          case 'urgent':
-              img.src = './assets/img/prioUp.png';
-              break;
-          default:
-              break;
+        case "low":
+          img.src = "./assets/img/prioDown.png";
+          break;
+        case "medium":
+          img.src = "./assets/img/prioEven.png";
+          break;
+        case "urgent":
+          img.src = "./assets/img/prioUp.png";
+          break;
+        default:
+          break;
       }
-  });
+    });
 }
 
 function activateInput() {
@@ -942,13 +1030,13 @@ function deactivateInput(i) {
   document.getElementById(`subtask-input${i}`).value = "";
 }
 
-function deactivateInputForCreateTask(){
+function deactivateInputForCreateTask() {
   let addSubtask = document.getElementById("add-subtask");
   let subtasksInputActions = document.getElementById("subtask-input-Actions");
 
   addSubtask.classList.remove("d-none");
   subtasksInputActions.classList.add("d-none");
-  document.getElementById('subtask-input').value = "";
+  document.getElementById("subtask-input").value = "";
 }
 
 function setFocus() {
@@ -956,7 +1044,7 @@ function setFocus() {
 }
 
 async function submitSubtask(i) {
-  if (tasks[i]['subTasks'] && tasks[i]['subTasks'].length >= 6) {
+  if (tasks[i]["subTasks"] && tasks[i]["subTasks"].length >= 6) {
     alert(
       "Maximale Anzahl von Subtasks erreicht. Neue Subtasks können nicht hinzugefügt werden."
     );
@@ -966,44 +1054,49 @@ async function submitSubtask(i) {
   if (subtaskContent == "") {
     deactivateInput();
   } else {
-    const SUBTASK = tasks[i]['subTasks'];
+    const SUBTASK = tasks[i]["subTasks"];
     let newSubtask = {
       subtaskName: subtaskContent,
       done: false,
-  };
-  SUBTASK.push(newSubtask);
+    };
+    SUBTASK.push(newSubtask);
     await setItem("task", JSON.stringify(tasks));
     editTask(i);
-    };
-    
-    subtaskContent = "";
-    deactivateInput(i);
   }
 
-  let newTaskSubtask = [];
-
-function submitSubtaskForNewTask(){
-  let subtask = document.getElementById('subtask-input').value;
-  let createdSubtask = {
-    subtaskName: subtask,
-    done: false
-  }
-  newTaskSubtask.push(createdSubtask);
-  document.getElementById('addedNewSubtasks').innerHTML = '';
-  for(let x=0; x<newTaskSubtask.length; x++){
-  document.getElementById('addedNewSubtasks').innerHTML += `<div>${newTaskSubtask[x]['subtaskName']}</div>`;
-  }
-  document.getElementById('subtask-input').value = '';
+  subtaskContent = "";
+  deactivateInput(i);
 }
 
-function clearForm(){
+let newTaskSubtask = [];
+
+function submitSubtaskForNewTask() {
+  let subtask = document.getElementById("subtask-input").value;
+  let createdSubtask = {
+    subtaskName: subtask,
+    done: false,
+  };
+  newTaskSubtask.push(createdSubtask);
+  showSubtaskForNewTask();
+}
+
+function showSubtaskForNewTask(){
+  document.getElementById("addedNewSubtasks").innerHTML = "";
+  for (let x = 0; x < newTaskSubtask.length; x++) {
+    document.getElementById(
+      "addedNewSubtasks"
+    ).innerHTML += `<div>${newTaskSubtask[x]["subtaskName"]}</div>`;
+  }
+  document.getElementById("subtask-input").value = "";
+}
+
+function clearForm() {
   let form = document.getElementById("addTaskForm");
   form.reset();
   newSubtask = [];
-  document.getElementById('addedNewSubtasks').innerHTML = '';
-  selectPriority('medium');
+  document.getElementById("addedNewSubtasks").innerHTML = "";
+  selectPriority("medium");
 }
-
 
 function addTaskOnBoardHTML(newTaskNumber) {
   return `
@@ -1117,75 +1210,73 @@ function addTaskOnBoardHTML(newTaskNumber) {
 }
 
 function toggleDropdown() {
-  const dropdownContent = document.querySelector('.dropdownContent');
-  const isOpen = dropdownContent.classList.contains('show');
+  const dropdownContent = document.querySelector(".dropdownContent");
+  const isOpen = dropdownContent.classList.contains("show");
 
   if (!isOpen) {
-      dropdownContent.classList.add('show');
+    dropdownContent.classList.add("show");
   } else {
-      dropdownContent.classList.remove('show');
+    dropdownContent.classList.remove("show");
   }
 }
 
-
-
 function renderNames(users) {
-  const dropdownContent = document.querySelector('.dropdownContent');
-  dropdownContent.innerHTML = '';
+  const dropdownContent = document.querySelector(".dropdownContent");
+  dropdownContent.innerHTML = "";
   const nameSet = new Set();
   const filteredUsers = [];
 
-  users.forEach(user => {
-      const name = user.name || user.Name;
-      if (name && !nameSet.has(name)) {
-          nameSet.add(name);
-          dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
-          filteredUsers.push(user);
-      }
+  users.forEach((user) => {
+    const name = user.name || user.Name;
+    if (name && !nameSet.has(name)) {
+      nameSet.add(name);
+      dropdownContent.innerHTML += `<span onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+      filteredUsers.push(user);
+    }
   });
   users.push(...filteredUsers);
 }
 
 function searchContacts() {
-  const searchInput = document.querySelector('.searchInputLittle');
+  const searchInput = document.querySelector(".searchInputLittle");
   const filter = searchInput.value.trim().toUpperCase();
-  const dropdownContent = document.querySelector('.dropdownContent');
-  dropdownContent.innerHTML = '';
+  const dropdownContent = document.querySelector(".dropdownContent");
+  dropdownContent.innerHTML = "";
 
   for (let i = 0; i < users.length; i++) {
-      const user = users[i];
-      const name = user.name || user.Name;
-      if (name && name.toUpperCase().startsWith(filter)) {
-          dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
-      }
+    const user = users[i];
+    const name = user.name || user.Name;
+    if (name && name.toUpperCase().startsWith(filter)) {
+      dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+    }
   }
-  dropdownContent.classList.add('show');
+  dropdownContent.classList.add("show");
   selectContactStyleChanger();
 }
 
 function searchContactsAddTask() {
-  const searchInput = document.querySelector('.searchInput');
+  const searchInput = document.querySelector(".searchInput");
   const filter = searchInput.value.trim().toUpperCase();
-  const dropdownContent = document.querySelector('.dropdownContent');
-  dropdownContent.innerHTML = '';
+  const dropdownContent = document.querySelector(".dropdownContent");
+  dropdownContent.innerHTML = "";
 
   for (let i = 0; i < users.length; i++) {
-      const user = users[i];
-      const name = user.name || user.Name;
-      if (name && name.toUpperCase().startsWith(filter)) {
-          dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
-      }
+    const user = users[i];
+    const name = user.name || user.Name;
+    if (name && name.toUpperCase().startsWith(filter)) {
+      dropdownContent.innerHTML += `<span id="contact${i}" onclick="selectContact('${name}')">${name}<img src="./assets/img/Checkbox.png" width="24px"></span>`;
+    }
   }
-  dropdownContent.classList.add('show');
+  dropdownContent.classList.add("show");
   selectContactStyleChanger();
 }
 
 function selectContact(name) {
   const selectedContactIndex = selectedContacts.indexOf(name);
   if (selectedContactIndex === -1) {
-      selectedContacts.push(name);
+    selectedContacts.push(name);
   } else {
-      selectedContacts.splice(selectedContactIndex, 1);
+    selectedContacts.splice(selectedContactIndex, 1);
   }
   name = name.toUpperCase();
   selectContactStyleChanger(name);
@@ -1193,44 +1284,57 @@ function selectContact(name) {
 }
 
 function selectContactStyleChanger() {
-  const selectedDropdownContent = document.querySelectorAll('.dropdownContent span');
-  selectedDropdownContent.forEach(span => {
-      const contactName = span.textContent.trim();
-      const isSelected = selectedContacts.includes(contactName);
-      if (isSelected) {
-          span.classList.add('selectedDropdownContent');
-          const img = span.querySelector('img');
-          if (img) {
-              img.src = './assets/img/checkbox-check-white.png';
-          }
-      } else {
-          span.classList.remove('selectedDropdownContent');
-          const img = span.querySelector('img');
-          if (img) {
-              img.src = './assets/img/Checkbox.png';
-          }
+  const selectedDropdownContent = document.querySelectorAll(
+    ".dropdownContent span"
+  );
+  selectedDropdownContent.forEach((span) => {
+    const contactName = span.textContent.trim();
+    const isSelected = selectedContacts.includes(contactName);
+    if (isSelected) {
+      span.classList.add("selectedDropdownContent");
+      const img = span.querySelector("img");
+      if (img) {
+        img.src = "./assets/img/checkbox-check-white.png";
       }
+    } else {
+      span.classList.remove("selectedDropdownContent");
+      const img = span.querySelector("img");
+      if (img) {
+        img.src = "./assets/img/Checkbox.png";
+      }
+    }
   });
 }
 
 async function renderSelectedContacts() {
-  const selectedContactsContainer = document.querySelector('.selectedContactsContainer');
-  selectedContactsContainer.innerHTML = '';
+  const selectedContactsContainer = document.querySelector(
+    ".selectedContactsContainer"
+  );
+  selectedContactsContainer.innerHTML = "";
   const maxContactsToShow = 5;
   const remainingCount = selectedContacts.length - maxContactsToShow;
-  if(selectedContacts.length>1 && selectedContacts.includes('Guest')){
-    selectedContacts = selectedContacts.filter(contact => contact !== 'Guest');
+  if (selectedContacts.length > 1 && selectedContacts.includes("Guest")) {
+    selectedContacts = selectedContacts.filter(
+      (contact) => contact !== "Guest"
+    );
   }
 
-  for (let i = 0; i < Math.min(selectedContacts.length, maxContactsToShow); i++) {
-      const contact = selectedContacts[i];
-      const initials = contact.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
-      const color = await initVariableBgColor(contact);
-      selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${color};">${initials}</div>`;
+  for (
+    let i = 0;
+    i < Math.min(selectedContacts.length, maxContactsToShow);
+    i++
+  ) {
+    const contact = selectedContacts[i];
+    const initials = contact
+      .split(" ")
+      .map((word) => word.charAt(0))
+      .join("")
+      .toUpperCase();
+    const color = await initVariableBgColor(contact);
+    selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: ${color};">${initials}</div>`;
   }
 
   if (remainingCount > 0) {
-      selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: #aaa;">+${remainingCount}</div>`;
+    selectedContactsContainer.innerHTML += `<div class="selectedContact" style="background-color: #aaa;">+${remainingCount}</div>`;
   }
 }
-
