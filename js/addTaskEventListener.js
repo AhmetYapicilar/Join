@@ -48,3 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+/**
+ * Event listener for DOMContentLoaded event. 
+ * Calls setMinDateToday function when the DOM content is loaded.
+ */
+document.addEventListener("DOMContentLoaded", function() {
+    setMinDateToday();
+});
