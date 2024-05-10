@@ -31,6 +31,10 @@ body{
     background-color: #29ABE2;
 }
 
+.horizontal-line{
+    display: none;
+}
+
 .span-thin{
     font-weight: 400;
     font-size: 27px;

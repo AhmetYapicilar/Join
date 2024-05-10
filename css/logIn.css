@@ -103,6 +103,23 @@ body {
     display: flex;
 }
 
+.displayColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.greeting{
+    font-weight: 500;
+    font-size: 47px;
+    color: #2A3647;
+}
+
+.greeting-name{
+    font-weight: 700;
+    font-size: 64px;
+    color: #29ABE2;
+}
+
 
 .justifyContent {
     justify-content: space-around;

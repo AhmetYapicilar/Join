@@ -27,19 +27,57 @@ async function logIn(){
     let user = users.find(u => u.email == email && u.password == password);
     if(user){
         setUserNameToLocalStorage('user-name', user.name);
-        window.location.href = 'summary.html?user=' + user.name;
-    } else {
+        if(window.innerWidth < 1242){
+        greetUserFirst(user.name);
+        }
+        setTimeout(() => {
+            window.location.href = 'summary.html?user=' + user.name;
+         }, 2000)}
+         else {
         window.location.reload();
         alert('User ist nicht registriert');
-    }
+    }}
+
+
+function greetUserFirst(username){
+    let content = document.getElementById('inhalt'); 
+    let greet = getTime();
+        content.innerHTML = '';
+        if(username === 'Guest'){
+            username = '';
+            content.innerHTML = ` <span class="greeting">${greet}</span>`;
+        } else{
+        content.innerHTML = `<div class="displayColumn">
+            <span class="greeting">${greet}</span>
+            <span class="greeting-name">${username}</span>
+            </div>`;
+        }
+}
+
+function getTime(){
+    let now = new Date();
+    let hours = now.getHours();
+    let x;
+    if(hours < 17 && hours > 10)
+           x = 'Good Afternoon'
+     else if(hours < 10 && hours > 4)
+            x = 'Good Morning'
+     else {
+            x = 'Good Evening'
+}
+    return x;
 }
 
 function guestLogIn(){
     document.getElementById('inputEmail').value = '';
     document.getElementById('passwordInput').value = '';
     setUserNameToLocalStorage('user-name', 'Guest');
-    window.location.href = 'summary.html?user=Guest' ;
-}
+    if(window.innerWidth < 1242){
+    greetUserFirst('Guest');}
+        setTimeout(() => {
+            window.location.href = 'summary.html?user=Guest';
+         }, 2000)}
+
 
 function saveUserToLocalStorage(){
     savedUsers.push({
