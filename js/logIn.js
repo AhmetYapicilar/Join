@@ -1,5 +1,12 @@
+/**
+ * Array for storing one user.
+ * @type {Array<Object>}
+ */
 let savedUsers = [];
 
+/**
+ * Toggles the visibility of the password in the password input field.
+ */
 function toggleShowPassword() {
   const passwordInput = document.getElementById("passwordInput");
   const type =
@@ -7,6 +14,9 @@ function toggleShowPassword() {
   passwordInput.setAttribute("type", type);
 }
 
+/**
+ * Initializes the login form by loading saved users from localStorage and populating the input fields.
+ */
 async function initLogIn() {
   await loadUsers();
   getLocalStorage();
@@ -15,6 +25,9 @@ async function initLogIn() {
   document.getElementById("passwordInput").value = savedUsers[x]["password"];
 }
 
+/**
+ * Saves the user's email and password to localStorage if the "Remember Me" checkbox is checked.
+ */
 function checkedFunction() {
   let checkBox = document.getElementById("myCheck");
   if (checkBox.checked == true) {
@@ -22,6 +35,9 @@ function checkedFunction() {
   }
 }
 
+/**
+ * Logs the user in by checking if the entered email and password match any user in the database.
+ */
 async function logIn() {
   let email = document.getElementById("inputEmail").value;
   let password = document.getElementById("passwordInput").value;
@@ -40,6 +56,10 @@ async function logIn() {
   }
 }
 
+/**
+ * Displays a greeting message for the user based on the time of day.
+ * @param {string} username - The username to greet.
+ */
 function greetUserFirst(username) {
   let content = document.getElementById("inhalt");
   let greet = getTime();
@@ -55,6 +75,10 @@ function greetUserFirst(username) {
   }
 }
 
+/**
+ * Returns a greeting message based on the current time of day.
+ * @returns {string} - The greeting message.
+ */
 function getTime() {
   let now = new Date();
   let hours = now.getHours();
@@ -67,6 +91,9 @@ function getTime() {
   return x;
 }
 
+/**
+ * Logs in the user as a guest and redirects to the summary page.
+ */
 function guestLogIn() {
   document.getElementById("inputEmail").value = "";
   document.getElementById("passwordInput").value = "";
@@ -79,6 +106,9 @@ function guestLogIn() {
   }, 2000);
 }
 
+/**
+ * Saves the user's email and password to localStorage.
+ */
 function saveUserToLocalStorage() {
   savedUsers.push({
     email: inputEmail.value,
@@ -87,20 +117,34 @@ function saveUserToLocalStorage() {
   setLocalStorage("savedUsers", savedUsers);
 }
 
+/**
+ * Sets data to localStorage.
+ */
 function setLocalStorage() {
   let userAsText = JSON.stringify(savedUsers);
   localStorage.setItem("savedUsers", userAsText);
 }
 
+/**
+ * Retrieves data from localStorage.
+ */
 function getLocalStorage() {
   let textInArray = localStorage.getItem("savedUsers");
   savedUsers = JSON.parse(textInArray);
 }
 
+/**
+ * Sets a specified key-value pair to localStorage.
+ * @param {string} key - The key to set.
+ * @param {string} value - The value to set.
+ */
 function setUserNameToLocalStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+/**
+ * Waits for the DOM to be fully loaded, then adjusts the position and opacity of elements.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
     const bild = document.getElementById("meinBild");
