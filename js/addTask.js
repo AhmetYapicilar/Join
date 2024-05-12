@@ -27,13 +27,6 @@ let selectedContacts = [];
 
 
 /**
- * An array representing the workflow, initially empty.
- * @type {Array}
- */
-let workflow = [];
-
-
-/**
  * Function to toggle the dropdown menu.
  */
 function toggleDropdown() {
@@ -257,7 +250,7 @@ async function createTask() {
             dueDate: document.querySelector(".dateInput").value,
             priority: getPriority(),
             category: document.querySelector(".categoryPicker").value,
-            workflow: workflow,
+            workflow: loadWorkflow(),
             subTasks: subtasks
         });
         await setItem('task', JSON.stringify(tasks));
