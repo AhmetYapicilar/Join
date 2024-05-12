@@ -1074,7 +1074,7 @@ li {
         position: fixed;
         bottom: 0 !important;
         height: 80px !important;
-        top: 94% !important;
+        top: auto !important;
     }
 
     .showAllContacts {
@@ -1091,7 +1091,7 @@ li {
         position: fixed;
         bottom: 0 !important;
         height: 80px !important;
-        top: 92% !important;
+        top: auto !important;
     }
 }
 
@@ -1203,7 +1203,7 @@ li {
     }
 
     .fixed-width-104 {
-        margin-right: 5% !important;
+        margin-right: 4% !important;
     }
 
     .circle {
@@ -1279,7 +1279,7 @@ li {
     .arrowLeftShowContact {
         width: 32px;
         height: 32px;
-        margin-right: 5%;
+        margin-right: 4%;
         display: flex;
     }
 
