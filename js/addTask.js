@@ -25,6 +25,14 @@ let users = [];
  */
 let selectedContacts = [];
 
+
+/**
+ * An array representing the workflow, initially empty.
+ * @type {Array}
+ */
+let workflow = [];
+
+
 /**
  * Function to toggle the dropdown menu.
  */
@@ -224,12 +232,15 @@ async function getItem(key) {
     }
 }
 
-let category2 = [];
 
-function loadCategory2(){
-    category2 = [];
-    category2 = JSON.parse(localStorage.getItem('selectedCategory'));
+/**
+ * Loads the workflow from local storage or initializes it to a default value ('To-Do').
+ * @returns {void}
+ */
+function loadWorkflow(){
+    workflow = JSON.parse(localStorage.getItem('selectedCategory')) || 'To-Do';
 }
+
 
 /**
  * Asynchronously creates a new task based on form inputs and stores it.
@@ -237,16 +248,8 @@ function loadCategory2(){
  * @function createTask
  * @throws {Error} If an error occurs during task creation.
  */
-
 async function createTask() {
     try {
-        loadCategory2();
-        let category2;
-        if(category2){
-            category2 = category2; 
-        } else{
-            category2 = 'To-Do';
-        }
         tasks.push({
             title: document.querySelector(".titleInputAddTask").value,
             description: document.querySelector(".descriptionTextArea").value,
@@ -254,11 +257,10 @@ async function createTask() {
             dueDate: document.querySelector(".dateInput").value,
             priority: getPriority(),
             category: document.querySelector(".categoryPicker").value,
-            category2: category2,
+            workflow: workflow,
             subTasks: subtasks
         });
         await setItem('task', JSON.stringify(tasks));
-        console.log('Task successfully created.');
         openBoard();
     } catch (error) {
         console.log('Error creating task.');
