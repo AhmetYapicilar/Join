@@ -176,7 +176,7 @@ async function showTasks() {
     removeBigTaskBeforeInitAllTasks(i);
     let {
       TASK,
-      category2,
+      workflow,
       title,
       description,
       dueDate,
@@ -187,12 +187,12 @@ async function showTasks() {
       bgColor,
     } = await initVariablesForShowTasks(i);
     let initials = await initialOfAssignTo(assignedTo);
-    if (!category2) {
-      category2 = "To-Do";
+    if (!workflow) {
+      workflow = "To-Do";
     }
-    await countTasks(category2);
+    await countTasks(workflow);
     let circlesHTML = addCirclesWithInitials(bgColor, initials);
-    let content = document.getElementById(category2);
+    let content = document.getElementById(workflow);
     content.innerHTML += generateShowTasksHTML(
       i,
       title,
@@ -230,7 +230,7 @@ async function initialOfAssignTo(assignedTo) {
  */
 async function initVariablesForShowTasks(i) {
   const TASK = tasks[i];
-  let category2 = TASK["category2"];
+  let workflow = TASK["workflow"];
   let title = TASK["title"];
   let description = TASK["description"];
   let dueDate = TASK["dueDate"];
@@ -244,7 +244,7 @@ async function initVariablesForShowTasks(i) {
   let allSubtasks = await initVariableSubTask(TASK);
   return {
     TASK,
-    category2,
+    workflow,
     title,
     description,
     dueDate,
@@ -448,7 +448,7 @@ async function showSearchedTasks(search) {
       const TASK = tasks[x];
       let tasktitle = TASK["title"];
       if (
-        TASK["category2"] === ids[i] &&
+        TASK["workflow"] === ids[i] &&
         tasktitle.toLowerCase().startsWith(search)
       ) {
         foundedTasks.push(TASK);
@@ -467,7 +467,7 @@ async function showFoundedTasks() {
     let foundedTask = foundedTasks[j];
     let {
       TASK,
-      category2,
+      workflow,
       title,
       description,
       dueDate,
@@ -477,7 +477,7 @@ async function showFoundedTasks() {
       assignedTo,
       bgColor,
     } = await initVariablesForShowTasks(tasks.indexOf(foundedTask));
-    let content = document.getElementById(category2);
+    let content = document.getElementById(workflow);
     content.innerHTML += generateShowTasksHTML(
       tasks.indexOf(foundedTask),
       title,
@@ -510,7 +510,7 @@ async function showTaskInBig(i) {
   await loadTasks();
   let {
     TASK,
-    category2,
+    workflow,
     title,
     description,
     dueDate,
@@ -762,7 +762,7 @@ async function deleteTask(i) {
 async function editTask(i) {
   let {
     TASK,
-    category2,
+    workflow,
     title,
     description,
     dueDate,
@@ -1139,7 +1139,7 @@ function startDragging(id) {
  * @returns {Promise<void>}
  */
 async function moveTo(category) {
-  tasks[draggedTask]["category2"] = category;
+  tasks[draggedTask]["workflow"] = category;
   await setItem("task", JSON.stringify(tasks));
   initBoard();
 }
@@ -1239,7 +1239,7 @@ async function initVariablesForNewTask() {
   ).value;
   let newDueDate = document.getElementById(`newTaskDate${newTaskNumber}`).value;
   let newCategory = document.querySelector(".categoryPicker").value;
-  let newCategory2 = newTaskCategory;
+  let newWorkflow = newTaskCategory;
   let newPriority = newAddedPrio[0];
   let newSubtasks = newTaskSubtask;
   let newAssignedTo = selectedContacts;
@@ -1249,7 +1249,7 @@ async function initVariablesForNewTask() {
     newDescription,
     newDueDate,
     newCategory,
-    newCategory2,
+    newWorkflow,
     newPriority,
     newSubtasks,
     newAssignedTo,
@@ -1266,7 +1266,7 @@ async function createNewTask() {
     newDescription,
     newDueDate,
     newCategory,
-    newCategory2,
+    newWorkflow,
     newPriority,
     newSubtasks,
     newAssignedTo,
@@ -1276,7 +1276,7 @@ async function createNewTask() {
     description: newDescription,
     dueDate: newDueDate,
     category: newCategory,
-    category2: newCategory2,
+    workflow: newWorkflow,
     priority: newPriority,
     subTasks: newSubtasks,
     assignedTo: newAssignedTo,
