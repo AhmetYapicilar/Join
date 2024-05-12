@@ -34,6 +34,11 @@
         gap: 0px !important;
     }
 
+    .circle {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
     .data {
         display: none;
     }
@@ -101,6 +106,7 @@
 
     .fixed-width-104 {
         margin-right: 5% !important;
+        display: flex;
     }
 
     .circle {
