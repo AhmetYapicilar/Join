@@ -27,12 +27,16 @@
 }
 
 
-
 @media  (max-width: 1320px) {
     .menu {
         width: 100% !important;
         height: 100% !important;
         gap: 0px !important;
+    }
+
+    .circle {
+        width: 40px !important;
+        height: 40px !important;
     }
 
     .sidebar {
