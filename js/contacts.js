@@ -543,41 +543,46 @@ Object.assign(element.style, styles);
 /**
  * Display the contacts that should be shown.
  * 
- * @param {string} contact - contact array
- * @param {number} index - number of clicked contact
- * @returns - returns the html code for clicked contact
+ * @param {Object} contact - The contact object containing details like Color, Initials, Name, Email, and Number.
+ * @param {number} index - The index of the clicked contact.
+ * @returns {string} - The HTML code for the clicked contact.
+ * 
+ * @description This function generates HTML code for displaying contact details. 
+ * If a phone number is provided in the contact object,
+ * it is displayed; otherwise, the phone number section is omitted from the generated HTML.
  */
 function generateContactDetailsHTML(contact, index) {
-const { Color, Initials, Name, Email, Number } = contact;
-return `
-    <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
-        <div id="showContactMobile" class="showContacts">
-            <div class="align-items-contacts-slide-in">    
-                <span class="initials-circle-show-contacts" style="background-color:${Color};">${Initials}</span>
-                <div class="showContactsNameEditDelete">
-                    <h1 style="font-size: 47px;">${Name}</h1>
-                    <div id="editDeleteContactsMobile" class="editDeleteContacts">
-                        <div onclick="editContacts(${index})" class="editShowContacts cursorPointer">
-                            <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
-                            <p>Edit</p>
-                        </div>
-                        <div onclick="deleteContacts(${index})" class="deleteShowContacts cursorPointer">
-                            <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
-                            <p>Delete</p>
+    const { Color, Initials, Name, Email, Number } = contact;
+    return `
+        <div class="showContactsDetails" id="slideShowContacts" style="overflow: hidden;">
+            <div id="showContactMobile" class="showContacts">
+                <div class="align-items-contacts-slide-in">    
+                    <span class="initials-circle-show-contacts" style="background-color:${Color};">${Initials}</span>
+                    <div class="showContactsNameEditDelete">
+                        <h1 style="font-size: 47px;">${Name}</h1>
+                        <div id="editDeleteContactsMobile" class="editDeleteContacts">
+                            <div onclick="editContacts(${index})" class="editShowContacts cursorPointer">
+                                <img class="contacts-icon-edit-showContacts" src="assets/img/edit.png">
+                                <p>Edit</p>
+                            </div>
+                            <div onclick="deleteContacts(${index})" class="deleteShowContacts cursorPointer">
+                                <img class="contacts-icon-delete-showContacts" src="assets/img/delete.png">
+                                <p>Delete</p>
+                            </div>
                         </div>
                     </div>
+                </div>    
+                <p class="font-size-20">Contact Information</p>
+                <div class="emailPhone">
+                    <h4>Email</h4>
+                    <a href="https://gmail.com" class="lightblue decorationNone">${Email}</a>
+                    <h4>Phone</h4>
+                    ${Number ? `<p class="font-size-15 cursorPointer">+${Number}</p>` : ''}
                 </div>
-            </div>    
-            <p class="font-size-20">Contact Information</p>
-            <div class="emailPhone">
-                <h4>Email</h4>
-                <a href="https://gmail.com" class="lightblue decorationNone">${Email}</a>
-                <h4>Phone</h4>
-                <p class="font-size-15 cursorPointer">+${Number}</p>
             </div>
-        </div>
-    `;
+        `;
 }
+
 
 /**
  * Sets up event listeners after the DOM is fully loaded. Specifically, it prevents the default form submission of 'contactForm', 
