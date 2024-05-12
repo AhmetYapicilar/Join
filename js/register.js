@@ -44,7 +44,11 @@ async function register(){
         initials: result,
         email: email.value,
         password: passwordInput.value,
-        Color: color
+        Color: color,
+        Initials: result,
+        Name: name1.value,
+        Email: email.value,
+        InitialLetter: result
     });
     await setItem('users', JSON.stringify(users));
     resetForm();
