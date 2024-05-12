@@ -18,9 +18,18 @@ button {
     flex: none;
 }
 
+.urgentButton:hover {
+    background: #e3e3e3;
+}
+
 .urgentButtonSelected {
     background: #ff3d00;
     color: #FFFFFF;
+}
+
+.urgentButtonSelected:hover {
+    background: #ff3d00;
+    color: #000000;
 }
 
 .mediumButton {
@@ -39,9 +48,18 @@ button {
     flex: none;
 }
 
+.mediumButton:hover {
+    background: #e3e3e3;
+}
+
 .mediumButtonSelected {
     background: #FFA800;
     color: #FFFFFF;
+}
+
+.mediumButtonSelected:hover {
+    background: #FFA800;
+    color: #000000;
 }
 
 .lowButton {
@@ -60,9 +78,18 @@ button {
     flex: none;
 }
 
+.lowButton:hover {
+    background: #e3e3e3;
+}
+
 .lowButtonSelected {
     background: #7ae229;
     color: #FFFFFF;
+}
+
+.lowButtonSelected:hover {
+    background: #7ae229;
+    color: #000000;
 }
 
 .clearButton {
@@ -84,6 +111,10 @@ button {
     font-weight: 400;
 }
 
+.clearButton:hover {
+    background: #32aee3;
+}
+
 .createButton {
     display: flex;
     flex-direction: row;
@@ -101,8 +132,14 @@ button {
     font-weight: 700;
 }
 
+.createButton:hover {
+    background: #32aee3;
+    color: #000000;
+}
+
 .add-subtasks-btn {
     position: absolute;
     right: 12px;
     top: 42px;
+    cursor: pointer;
 }
