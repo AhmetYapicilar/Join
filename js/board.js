@@ -1172,6 +1172,7 @@ let newTaskCategory;
  */
 async function addTaskOnBoard(selectedCategory) {
   if (window.innerWidth < 770) {
+    localStorage.setItem('selectedCategory', JSON.stringify(selectedCategory));
     openAddTask();
   } else {
     selectedContacts = [];
