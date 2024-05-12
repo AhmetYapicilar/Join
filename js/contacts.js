@@ -7,12 +7,16 @@ let lastIndex = null;
 const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
-//speichern und abrufen der Daten für die Telefonliste
+/**
+ * Initializes the application by loading users' data and displaying the contact list.
+ */
 function init() {
     loadUsers();
 }
 
-//Kontakte aus dem Array laden und anzeigen lassen
+/**
+ * Loads the list of users from the storage, updates the contact list, and displays the contact list.
+ */
 async function loadUsers(){
     try {
         contactList = JSON.parse(await getItem('users'));
@@ -22,13 +26,25 @@ async function loadUsers(){
     showContactlist();
 }
 
-//Array im backend speichern
+/**
+ * Sets a key-value pair in the storage using a token.
+ *
+ * @param {string} key - The key under which to store the value.
+ * @param {any} value - The value to be stored.
+ * @returns {Promise<any>} - A promise that resolves with the response from the storage server.
+ */
 async function setItem(key, value) {
     const payload = { key, value, token: STORAGE_TOKEN };
     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json());
 }
 
-//Array vom backend laden
+/**
+ * Retrieves the value associated with the provided key from the storage URL using a token.
+ *
+ * @param {string} key - The key used to retrieve the value from the storage.
+ * @returns {Promise<any>} - A promise that resolves with the retrieved value from the storage.
+ * @throws {string} - Throws an error if the data associated with the key is not found.
+ */
 async function getItem(key) {
     const URL = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
     return fetch(URL).then(res => res.json()).then(res => {
@@ -38,8 +54,17 @@ async function getItem(key) {
     });
 }
 
-//Dateien von addKontakt im backend speichern lassen mit bestimmten keys, function ausführen die eine zufällige
-//Farbe generiert und abspeichert
+/**
+ * Adds a new contact to the local storage with the provided details and updates the contact list.
+ *
+ * @param {string} contactId - The unique identifier for the new contact.
+ * @param {string} name - The name of the new contact.
+ * @param {string} email - The email address of the new contact.
+ * @param {string} number - The phone number of the new contact.
+ * @param {string} initials - The initials of the new contact.
+ * @param {string} initialLetter - The initial letter of the new contact's name.
+ * @returns {Promise<void>} - A promise that resolves once the operation is completed.
+ */
 async function setItemLocalStorage(contactId, name, email, number, initials, initialLetter) {
     const color = randomColor();
     contactList.push({
@@ -54,7 +79,11 @@ async function setItemLocalStorage(contactId, name, email, number, initials, ini
     await setItem('users', JSON.stringify(contactList));
 }
 
-//Eine zufällige Farbe für den Hintergund im Kreis generieren lassen
+/**
+ * Generates a random color from a predefined list of colors and ensures that the same color is not generated consecutively.
+ * 
+ * @returns {string} - A randomly selected color in hexadecimal format.
+ */
 function randomColor() {
     const colors = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', '#ADD8E6', '#FF6347', '#FFC0CB', '#00FF00', '#00BFFF', '#9370DB', '#FF69B4', '#FFA07A', '#BA55D3', '#7FFFD4']; 
     if (colors.length === 1) return colors[0]; 
@@ -67,7 +96,10 @@ function randomColor() {
     return colors[randomIndex];
 }
 
-//Ruft die Funktion zum gruppieren der Kontakte auf, zeigt Telefonbuch an
+/**
+ * Displays the contact list in the phonebook element by grouping contacts by their initial letters.
+ * It clears the existing content of the phonebook element and creates a grouped display of contacts.
+ */
 function showContactlist() {
     const List = contactList;
     const phonebook = document.getElementById('phonebook');
@@ -78,7 +110,13 @@ function showContactlist() {
     createGroupedDisplay(groups, phonebook);
 }
 
-//Gruppiert die Kontakte, filtert Kontakte raus, die benötigte Informationen vermissen
+/**
+ * Groups contacts by their initial letter and returns an object where keys represent letters
+ * and values are arrays containing contacts whose names start with the corresponding letter.
+ *
+ * @param {Array<Object>} List - An array of contact objects.
+ * @returns {Object} - An object containing groups of contacts where keys represent letters and values are arrays of contact objects.
+ */
 function groupContactsByLetter(List) {
     let groups = {};
     for (let contact of List) {
@@ -95,8 +133,12 @@ function groupContactsByLetter(List) {
     return groups;
 }
 
-//Nimmt die gruppierten Kontakte und fügt sie dem 
-//Telefonbuch-Element hinzu, indem es für jeden Buchstaben einen eigenen Display-Block erstellt.
+/**
+ * Creates a grouped display of contacts based on the provided groups and appends it to the phonebook element.
+ *
+ * @param {Object} groups - An object containing groups of contacts where keys represent letters and values are arrays of contact objects.
+ * @param {HTMLElement} phonebook - The HTML element to which the grouped display will be appended.
+ */
 function createGroupedDisplay(groups, phonebook) {
     let sortedLetters = Object.keys(groups).sort();
 
@@ -106,8 +148,14 @@ function createGroupedDisplay(groups, phonebook) {
     }
 }
 
-//Erstellt einen Block für eine Gruppe von Kontakten, die demselben Anfangsbuchstaben zugeordnet sind. 
-//Generiert den HTML-Code für den Buchstabenkopf, das Buchstabenbild und die Liste der Kontakte.
+/**
+ * Creates a letter group containing a header with the specified letter,
+ * an image, and an unordered list of contacts.
+ *
+ * @param {string} letter - The letter representing the group.
+ * @param {Array<Object>} contacts - An array of contact objects.
+ * @returns {HTMLDivElement} - The created letter group element.
+ */
 function createLetterGroup(letter, contacts) {
     let groupDiv = document.createElement('div');
     let letterHeader = document.createElement('h2');
@@ -124,8 +172,14 @@ function createLetterGroup(letter, contacts) {
     return groupDiv;
 }
 
-//Erstellt eine HTML-Liste (ul) für eine Gruppe von Kontakten. 
-//Jeder Kontakt wird als Listeneintrag (li) dargestellt, mit Klick-Event, das eine Detailanzeige auslöst.
+/**
+ * Creates an HTML unordered list (ul) containing contact information.
+ * Each list item (li) represents a contact, displaying their name, email, and initials in a colored circle.
+ * Clicking on a contact list item triggers a function to show the contact's details.
+ *
+ * @param {Array<Object>} contacts - An array of contact objects containing 'Name', 'Email', 'Initials', and 'Color' properties.
+ * @returns {HTMLUListElement} - The created unordered list element containing contact information.
+ */
 function createContactsList(contacts) {
     let contactListUl = document.createElement('ul');
     for (let i = 0; i < contacts.length; i++) {
@@ -144,7 +198,12 @@ function createContactsList(contacts) {
     return contactListUl;
 }
 
-//Öffnen und anzeigen des edit Feldes
+/**
+ * Initializes and displays the edit contact modal for a specific contact. The function loads the edit contact form with pre-filled data,
+ * sets up form submission handling to update or validate the contact information, and shows the contact in an edit box.
+ * If the form is not valid upon submission, an alert prompts the user to fill in all required fields.
+ * @param {number} i - The index of the contact in the contact list array to be edited.
+ */
 function editContacts(i) {
     let editContactModal = document.getElementById(`editContactsOnclick`);
     let contactLists = contactList;
@@ -162,7 +221,13 @@ function editContacts(i) {
     showEditContactBox(contactLists[i])
 }
 
-//Inhalt der inputbox ändern zum Array wert
+/**
+ * Displays and animates the edit contact box with pre-filled contact details. The function adjusts animations and visuals
+ * based on the screen width. It sets up the edit contact box with sliding animations for either mobile or desktop viewports,
+ * fills in the contact's existing details into form fields, and updates the edit icon accordingly.
+ * 
+ * @param {Object} contact - An object containing the contact's details (`Name`, `Email`, `Number`) to be edited.
+ */
 function showEditContactBox(contact) {
     let addContactContainer = document.getElementById("letEditContactSlideIn");
     if (window.innerWidth < 1320) {
@@ -187,7 +252,15 @@ function showEditContactBox(contact) {
     }
 }
 
-//Generiert das geöffnete Edit Contact Feld
+/**
+ * Generates an HTML form for editing contact details. The form includes input fields for name, email, and phone number,
+ * along with icons and buttons for submitting changes, deleting the contact, or closing the form.
+ * Contact details such as initials and color are used to personalize the form display.
+ * 
+ * @param {Object} contact - The contact object containing data like color and initials to be displayed.
+ * @param {number} index - The index of the contact in the contact list, used for identifying which contact is being edited or deleted.
+ * @returns {string} HTML string representing the edit contact form.
+ */
 function generateEditContactForm(contact, index) {
     return `
     <form id="editContactForm">
@@ -234,7 +307,14 @@ function generateEditContactForm(contact, index) {
     </form>`;
 }
 
-//Contacts im Array löschen und Telefonliste aktualisieren
+/**
+ * Asynchronously clears the contact information at a specified index in the contact list and updates persistent storage.
+ * It checks if the index is valid before proceeding. After updating the data, it closes the edit window,
+ * refreshes the contact display, and clears the inner HTML of a specific element.
+ * If the index is invalid, logs an error message to the console.
+ * 
+ * @param {number} index - The index of the contact in the list to be deleted.
+ */
 async function deleteContactsCloseWindow(index) {
     if (index >= 0 && index < contactList.length) {
         contactList[index][`Name`] = ``;
@@ -249,12 +329,22 @@ async function deleteContactsCloseWindow(index) {
     document.getElementById(`showInnerHTML`).innerHTML = ``;
 }
 
-//Anzeigen und aktualieseren der Telefonliste
+/**
+ * Calls a function to update and display the contact list. This function acts as a 
+ * wrapper or shortcut to initiate the display update,
+ * making it easier to handle updates from various points within the application.
+ */
 function updateContactDisplay() {
     showContactlist(); 
 }
 
-//Edit Feld schließen
+/**
+ * Closes the edit contact window with a sliding animation and hides the overlay. The function adjusts its behavior based on the screen width.
+ * If the screen width is less than 1320 pixels, it applies bottom sliding animations. Otherwise, 
+ * it applies desktop-specific animations.
+ * Additionally, it ensures the image for mobile edits is set to a default image when the window width is 1320 pixels or more.
+ * The function also sets a timeout to completely hide the edit contact container after the animation, ensuring a smooth transition.
+ */
 function closeEditWindow() {
     let addContactContainer = document.getElementById("letEditContactSlideIn");
     if (window.innerWidth < 1320) {
@@ -275,13 +365,27 @@ function closeEditWindow() {
     }
 }
 
-//Edit Feld schließen und deleteContacts ausführen
+/**
+ * Executes two actions: closing the edit window and deleting a specific contact.
+ * This function is typically called when a user confirms the deletion of a contact from a UI element.
+ * 
+ * @param {number} i - The index of the contact to be deleted from the contacts list.
+ */
 function deleteContactsCloseWindow(i) {
     closeEditWindow();
     deleteContacts(i);
 }
 
-//addNewContact Feld anzeigen lassen mit eventListener
+/**
+ * Sets up an event listener that triggers when the DOM content has fully loaded. It then attaches another 
+ * click event listener to the 'addNewContactToPhoneList' button.
+ * Upon clicking, this function removes a class indicating a slide-out animation and adds a class for 
+ * a slide-in animation to the 'letAddContactSlideIn' element, initiating the display of contact addition UI.
+ * A timeout is set to change the display style of 'overlayOnMobileEditContacts' to 'flex' after 200 milliseconds, 
+ * ensuring the overlay appears smoothly.
+ * The display style of 'letAddContactSlideIn' is also set to 'flex' to make it visible immediately.
+ * Additionally, it updates the source of an image (assumed to be related to the contact addition interface) to a specific asset.
+ */
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addNewContactToPhoneList').addEventListener('click', function() {
         document.getElementById(`letAddContactSlideIn`).classList.remove(`show-slide-out-Desktop`);
@@ -294,7 +398,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-//addNewContact Feld schließen lassen mit eventListener
+/**
+ * Attaches a click event listener to the element with the ID 'closeButton'.
+ * This event listener executes a function that manages the closure animation of a contact addition container.
+ * The function removes the class that triggers the slide-in effect and adds a class for the slide-out effect on the 'letAddContactSlideIn' element.
+ * Additionally, it hides the 'overlayOnMobileEditContacts' by setting its display style to 'none', effectively removing the overlay
+ *  visibility.
+ */
 document.getElementById('closeButton').addEventListener('click', function() {
     let addContactContainer = document.getElementById("letAddContactSlideIn");
     addContactContainer.classList.remove("show-slide-in-Desktop");
@@ -302,7 +412,12 @@ document.getElementById('closeButton').addEventListener('click', function() {
     document.getElementById(`overlayOnMobileEditContacts`).style.display = "none";
 });
 
-//addNewContact Feld anzeigen lassen mit eventListener
+/**
+ * Attaches a click event listener to the element with the ID 'cancelAccountSubmit'.
+ * Upon clicking, it executes a function that controls the visibility of the 'letAddContactSlideIn' container.
+ * The function removes the class that triggers a slide-in animation and adds a class for a slide-out animation.
+ * Additionally, it hides the overlay for mobile edits by setting its display style to 'none'.
+ */
 document.getElementById('cancelAccountSubmit').addEventListener('click', function() {
     let addContactContainer = document.getElementById("letAddContactSlideIn");
     addContactContainer.classList.remove("show-slide-in-Desktop");
@@ -312,7 +427,14 @@ document.getElementById('cancelAccountSubmit').addEventListener('click', functio
 });
 });
 
-//Contacts slide in von rechts
+/**
+ * Displays contact details in a sliding container, adapting behavior based on the window width.
+ * If the window width is less than 1320 pixels, it sets specific containers' display styles and updates the inner HTML directly.
+ * For window widths of 1320 pixels or more, it prepares and triggers a sliding animation.
+ * This function checks if essential elements are present and exits if any are missing.
+ * 
+ * @param {number} index - The index of the contact whose details are to be displayed.
+ */
 function showContactsSlideInRightContainer(index) {
 const contacts = document.getElementById('showContactDetailsOnSlide');
 const target = document.getElementById('targetArea');
@@ -349,7 +471,13 @@ if (window.innerWidth < 1320) {
 }
 
 
-//angeklickte LI kriegt neue Css class und altem Li wird diese entfernt
+/**
+ * Updates the class list of list items by removing a class from the previously selected item and 
+ * adding it to the currently selected item.
+ * The function uses the global variable `lastIndex` to keep track of the previously selected item.
+ * 
+ * @param {number} index - The index of the current list item to which the class 'showClickedLi' should be added.
+ */
 function lastLiGetsNewClass(index) {
     if (lastIndex !== null) {
         const lastItem = document.getElementById(`${lastIndex}`);
@@ -364,7 +492,12 @@ function lastLiGetsNewClass(index) {
     lastIndex = index;
 }
 
-//auf anfangswert setzen
+/**
+ * Prepares an element for an animation by initially setting its width, opacity, and left position. 
+ * This function is typically used to set the initial state before an animation sequence begins.
+ * 
+ * @param {HTMLElement} contacts - The DOM element that will undergo animation.
+ */
 function prepareAnimation(contacts) {
 applyStyles(contacts, {
     width: '0px',
@@ -373,7 +506,15 @@ applyStyles(contacts, {
 });
 }
 
-//neue style Werte definieren
+/**
+ * Triggers a slide-in animation for displaying contact details. The animation starts after a delay and adjusts the position and 
+ * visibility of the contacts element based on the target's location.
+ * 
+ * @param {HTMLElement} target - The element used as a reference for the slide-in animation's start position.
+ * @param {HTMLElement} contacts - The container element where the contact details will be displayed and styled.
+ * @param {HTMLElement} slideInContacts - The element into which the HTML content of the contact details is injected.
+ * @param {number} index - The index of the contact in the contact list whose details are to be displayed.
+ */
 function triggerSlideInAnimation(target, contacts, slideInContacts, index) {
 setTimeout(() => {
     const { left } = target.getBoundingClientRect();
@@ -387,12 +528,25 @@ setTimeout(() => {
 }, 350);
 }
 
-//Style werte hinzufügen
+
+/**
+ * Applies multiple CSS styles to a specified DOM element.
+ * 
+ * @param {HTMLElement} element - The DOM element to which styles will be applied.
+ * @param {Object} styles - An object containing CSS property-value pairs to be applied to the element.
+ */
 function applyStyles(element, styles) {
 Object.assign(element.style, styles);
 }
 
-//Den Kontakt darstellen, die angezeigt werden sollen
+
+/**
+ * Display the contacts that should be shown.
+ * 
+ * @param {string} contact - contact array
+ * @param {number} index - number of clicked contact
+ * @returns - returns the html code for clicked contact
+ */
 function generateContactDetailsHTML(contact, index) {
 const { Color, Initials, Name, Email, Number } = contact;
 return `
@@ -425,7 +579,11 @@ return `
     `;
 }
 
-//Neuen Kontakt hinzufügen
+/**
+ * Sets up event listeners after the DOM is fully loaded. Specifically, it prevents the default form submission of 'contactForm', 
+ * handles data validation and submission, and updates the UI accordingly. If valid data is provided, a new contact is added, 
+ * and various UI elements are updated to reflect the addition, including animations and visibility changes.
+ */
 document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -444,7 +602,11 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 });
 });
 
-
+/**
+ * Closes the add contact window with animation effects.
+ * For screens wider than or equal to 1320 pixels, it triggers horizontal slide-out animations.
+ * For narrower screens, it triggers a bottom slide-out animation and then hides the element after a 500ms delay.
+ */
 function addContactWindowClose() {
     let addContactContainer = document.getElementById("letAddContactSlideIn");
 
@@ -461,7 +623,10 @@ function addContactWindowClose() {
     }
 }
 
-//Werte des inputs lesen und weitergeben an addKontakt
+/**
+ * Read values of the input and pass them to addKontakt.
+ * 
+ */
 function addNewContact() {
 const name = document.getElementById('newContactName').value.trim();
 const email = document.getElementById('newContactEmail').value.trim();
@@ -477,7 +642,15 @@ if (name) {
 }
 }
 
-//Kontakt zum Array hinzufügen, Initialen function aufrufen
+/**
+ * Add contact to the array, call the initials function.
+ * 
+ * @param {string} name - name from inputfield
+ * @param {string} email - email from inputfield
+ * @param {number} number - telefonenumber from inputfield
+ * @param {number} targetElement - this is the targetted Element, set from null to this
+ */
+
 function addContact(name, email, number, targetElement = null) {
 const initialLetter = name.charAt(0).toUpperCase();
 const initials = getInitials(name);
@@ -490,7 +663,11 @@ hideEmptySections();
 showContactlist();
 }
 
-//Verstecke abschnitte, die keinen Inhalt haben
+
+/**
+ * Hide sections that have no content.
+ * 
+ */
 function hideEmptySections() {
 const sections = document.querySelectorAll('#phonebook > div');
 sections.forEach(section => {
@@ -502,7 +679,15 @@ sections.forEach(section => {
 });
 }
 
-//Initialen für den Kreis bekommen
+/**
+ * Get initials for the circle.
+ * 
+ * @param {string} name - Name from the inputfield
+ * 
+ * 
+ * @returns - returns the Initials from the Name
+ */
+
 function getInitials(name) {
 const nameParts = name.split(' ');
 if (nameParts.length > 1) {
@@ -512,8 +697,11 @@ if (nameParts.length > 1) {
 }
 }
 
-//Animation dass ein Contact erfolgreich hinzugefügt wurde, Contacts Bild ausblenden 
-//an der stelle added succesfully anzeigen
+/**
+ * Animate that a contact was successfully added, hide the contact's image
+ * display "added successfully" at that location.
+ * 
+ */
 function toggleContactAdded() {
 const contactAdded = document.getElementById('contactAddedSuccesfullyId');
 const betterWaT = document.getElementById('BetterWaTId');
@@ -536,7 +724,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//Neue Contacts erstellen, mit addKontakt function
+/**
+ * Create new contacts using the addKontakt function.
+ * 
+ * @param {number} index - index of the current Contact which should get updated
+ */
 function updateContact(index) {
     const name = document.getElementById('placeholderName').value.trim();
     const email = document.getElementById('placeholderEmail').value.trim();
@@ -555,7 +747,13 @@ function updateContact(index) {
     refreshContacts(index);
 }
 
-//löschen des Contacts im Array, neuen Kontakt reinsliden lassen, telefonliste aktualisieren
+
+/**
+ * Delete the contact in the array, slide in a new contact, update the phone list.
+ * 
+ * @param {number} index - index of the current Contact which should get updated
+ */
+
 async function refreshContacts(index) {
     if (index >= 0 && index < contactList.length) {
         contactList[index]['Name'] = '';
@@ -570,7 +768,11 @@ async function refreshContacts(index) {
     updateContactDisplay();
 }
 
-//Löschen des Contacts im Array, leeren von inner.HTML in dem der Contact angezeigt wurde
+/**
+ * Delete the contact in the array, clear the inner.HTML where the contact was displayed.
+ * 
+ * @param {number} index -index of the current Contact which should get deleted
+ */
 async function deleteContacts(index) {
     if (index >= 0 && index < contactList.length) {
         contactList[index]['Name'] = '';
@@ -588,16 +790,25 @@ async function deleteContacts(index) {
 }
 
 
+
+//Mobile Javascript
+
+
+/**
+ * Shows the Contactlist and hides the overlay and right Container
+ * 
+ */
 function showContactListMobile() {
         document.getElementById(`rightContainerContacts`).style.display = "none";
         document.getElementById(`leftContainerContacts`).style.display = "flex";
         document.getElementById(`overlayOnMobileAddContacts`).style.display = "none"
 }
-  
-//Mobile Javascript
 
 
-//Zeigt addContact in Mobile Version an
+/**
+ * Display addContact in the mobile version.
+ * 
+ */
 function showMobileAddContact() {
     document.getElementById(`addContactImgChange`).src = `assets/img/MobileAddContact.png`;
     document.getElementById(`letAddContactSlideIn`).style.display = "flex";
@@ -609,7 +820,10 @@ function showMobileAddContact() {
 } 
 
 
-//schließt addContact in Mobile version
+/**
+ * Close addContact in the mobile version.
+ * 
+ */
 function closeAddContactMobile() {
     document.getElementById(`overlayOnMobileAddContacts`).style.display = "none";
     let addContactContainer = document.getElementById("letAddContactSlideIn");
@@ -621,7 +835,10 @@ function closeAddContactMobile() {
 }
 
 
-//Zeigt Kontaktliste wieder an, nachdem man auf Kontaktdetails gegangen ist
+/**
+ * Display the contact list again after visiting contact details.
+ * 
+ */
 function showContactListMobile() {
     document.getElementById("leftContainerContacts").style.display = "flex";
     document.getElementById(`leftContainerContacts`).classList.remove(`dontDisplayOnMobile`)
@@ -632,10 +849,16 @@ function showContactListMobile() {
 }
 
 
-//EventListener, der darauf achtet wenn sich die winwo width ändert
+/**
+ * Event listener that monitors changes to the window width.
+ * 
+ */
 window.addEventListener("resize", displayLeftAndRightContainer);
   
-//Wenn die window width größer als 1320px ist, werden die Container angezeigt, sonst nur der linke Container
+/**
+ * If the window width is greater than 1320px, display the containers, otherwise only display the left container.
+ * 
+ */
 function displayLeftAndRightContainer() {
     if (window.innerWidth >= 1320) {
         document.getElementById("rightContainerContacts").style.display = "flex";
@@ -650,7 +873,10 @@ function displayLeftAndRightContainer() {
     }
 }
 
-//Zeigt die button edit und delete an
+/**
+ * Display the edit and delete buttons.
+ * 
+ */
 function showEditDeleteMobileOnSlide() {
     document.getElementById(`menuOptionsContactMobile`).style.display = "none";
     document.getElementById(`editDeleteContactsMobile`).style.display = "flex";
@@ -660,7 +886,10 @@ function showEditDeleteMobileOnSlide() {
     editDeleteEdit.classList.add("show-slide-in");
 }
 
-//schließt das overlay, indem man drücken kann um den edit und delete button wieder zu verstecken
+/**
+ * Close the overlay by pressing to hide the edit and delete buttons again.
+ * 
+ */
 function closeDeleteAndEdit() {
     setTimeout(() => {
         document.getElementById(`menuOptionsContactMobile`).style.display = "flex";
