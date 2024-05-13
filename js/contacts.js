@@ -1,10 +1,48 @@
+/**
+ * An array containing the list of contacts.
+ * Each contact is represented as an object with properties such as 'Name', 'Email', 'Number', 'Initials', 'InitialLetter', and 'Color'.
+ * Initially, it's an empty array.
+ */
 let contactList = [];
+
+/**
+ * A counter representing the unique identifier for new contacts.
+ * It is incremented each time a new contact is added to the list.
+ * Initially set to 0.
+ */
 let contactId = 0;
+
+/**
+ * Stores the last randomly generated color.
+ * Used to prevent consecutive generation of the same color.
+ * Initially set to null.
+ */
 let lastColor = null;
+
+/**
+ * Represents the index of the currently selected contact in the global contact list.
+ * Used for tracking the index when navigating through contacts.
+ * Initially set to 0.
+ */
 let globalContactIndex = 0;
+
+/**
+ * Stores the index of the last accessed contact.
+ * Used for navigating through contacts.
+ * Initially set to null.
+ */
 let lastIndex = null;
 
+/**
+ * The token used for authentication when accessing the remote storage API.
+ * This token grants permission to read and write data to the storage.
+ */
 const STORAGE_TOKEN = '3HDM5PQUHYXFJ42ELVGHJHKC15X2E80YC0TD1RAR';
+
+/**
+ * The URL of the remote storage API where data is stored.
+ * This URL is used for fetching and storing data remotely.
+ */
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 /**
