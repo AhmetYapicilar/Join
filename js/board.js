@@ -108,6 +108,9 @@ function cleanAllFieldsBeforeInit(){
  * Generates CSS for initialization.
  */
 function generateCSSForInit() {
+  if(document.getElementById('overlay-add-task-board')){
+    document.getElementById('overlay-add-task-board').classList.add('d-none');
+  }
   document
     .getElementById("middle-of-the-page")
     .classList.remove("middle-of-the-page");
@@ -1187,6 +1190,7 @@ async function addTaskOnBoard(selectedCategory) {
     selectedContacts = [];
     newTaskCategory = selectedCategory;
    generateCSSForAddTask();
+   document.getElementById('overlay-add-task-board').classList.remove('d-none');
     let content = document.getElementById("overlay-add-task-board");
     content.innerHTML = addTaskOnBoardHTML(newTaskNumber);
    showAddTaskForm();
@@ -1304,7 +1308,7 @@ function showTaskIsAdded() {
     .classList.add("middle-of-the-page");
   document.getElementById("added-to-board").classList.remove("d-none");
   setTimeout(() => {
-    document.getElementById(`newTask${newTaskNumber}`).classList.add("d-none");
+    closeAddTask(newTaskNumber);
     initBoard();
     newTaskNumber++;
   }, 2000);
