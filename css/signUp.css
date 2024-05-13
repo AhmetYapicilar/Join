@@ -362,6 +362,101 @@ body {
 }
 
 
+@media (min-height: 1305px) and (max-width: 1320px) {
+    #zielbereich {
+        position: absolute;
+        width: 100px;
+        height: 122px;
+        top: 15% !important;
+        left: 77px;
+    }
+
+    #meinBild {
+        width: 70px;
+        top: 50%;
+        left: 45%;
+    }
+
+    .notAJoinUser {
+        position: fixed;
+        display: flex;
+        width: 100%;
+        height: 49px;
+        top: 74%;
+        right: 0%;
+        gap: 35px;
+        align-items: center;
+        justify-content: center;
+    }
+  }
+
+
+  @media (max-height: 945px) and (max-width: 800px) {
+    #zielbereich {
+        position: absolute;
+        width: 50px;
+        height: 70px;
+        top: 5% !important;
+        left: 77px;
+    }
+
+    #meinBild {
+        width: 70px !important;
+        top: 50%;
+        left: 45%;
+    }
+  }
+
+  @media (max-height: 945px) {
+    .privacyPolicyLegalNotice {
+        display: flex;
+        position: relative;
+        width: 246px;
+        height: 35px;
+        top: 7%;
+        justify-content: space-around;
+        color: #A8A8A8;
+    }
+  }
+
+  @media (max-height: 945px) and (max-width: 700px) {
+    #zielbereich {
+        position: absolute;
+        width: 50px;
+        height: 70px;
+        top: 5% !important;
+        left: 77px;
+    }
+
+    #meinBild {
+        width: 70px !important;
+        top: 50%;
+        left: 45%;
+    }
+
+    .notAJoinUser {
+        position: fixed;
+        display: flex;
+        width: 100%;
+        height: 49px;
+        top: 83%;
+        right: 0%;
+        gap: 35px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .privacyPolicyLegalNotice {
+        display: flex;
+        position: relative;
+        width: 246px;
+        height: 35px;
+        top: 7%;
+        justify-content: space-around;
+        color: #A8A8A8;
+    }
+  }
+
 @media (max-width: 700px) {
     .LogInField {
         display: flex;
@@ -383,21 +478,8 @@ body {
         top: -15%;
         cursor: pointer;
     }
-
-    #zielbereich {
-        position: absolute;
-        width: 100px;
-        height: 122px;
-        top: 15% !important;
-        left: 77px;
-    }
-
-    #meinBild {
-        width: 70px;
-        top: 50%;
-        left: 45%;
-    }
 }
+
 
 @media (max-width: 570px) {
     .LogInField {

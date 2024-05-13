@@ -75,5 +75,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000); 
 });
 
-
+/**
+ * Adds an event listener to the window that listens for resize events.
+ * If the window's inner width changes from below 700 pixels to above 700 pixels, the page will be reloaded once.
+ */
+window.addEventListener('resize', (function() {
+    let hasReloaded = false;
+    
+    return function() {
+        if (window.innerWidth > 700 && !hasReloaded) {
+            window.location.reload();
+            hasReloaded = true;
+        } else if (window.innerWidth <= 700) {
+            hasReloaded = false;
+        }
+    };
+})());
 
