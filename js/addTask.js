@@ -227,21 +227,13 @@ async function getItem(key) {
 
 
 /**
- * Loads the workflow from local storage or initializes it to a default value ('To-Do').
- * @returns {void}
- */
-function loadWorkflow(){
-    workflow = JSON.parse(localStorage.getItem('selectedCategory')) || 'To-Do';
-}
-
-
-/**
  * Asynchronously creates a new task based on form inputs and stores it.
  * @async
  * @function createTask
  * @throws {Error} If an error occurs during task creation.
  */
 async function createTask() {
+    let taskWorkflow = JSON.parse(localStorage.getItem('selectedCategory')) || 'To-Do';
     try {
         tasks.push({
             title: document.querySelector(".titleInputAddTask").value,
@@ -250,7 +242,7 @@ async function createTask() {
             dueDate: document.querySelector(".dateInput").value,
             priority: getPriority(),
             category: document.querySelector(".categoryPicker").value,
-            workflow: loadWorkflow(),
+            workflow: taskWorkflow,
             subTasks: subtasks
         });
         await setItem('task', JSON.stringify(tasks));
