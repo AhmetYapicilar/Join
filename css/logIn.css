@@ -337,8 +337,14 @@ body {
         position: absolute;
         width: 100px;
         height: 122px;
-        top: 10%;
+        top: 15% !important;
         left: 77px;
+    }
+
+    #meinBild {
+        width: 70px;
+        top: 50%;
+        left: 45%;
     }
     
 

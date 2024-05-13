@@ -360,3 +360,93 @@ body {
 .hoverLegalNotice:hover {
     cursor: pointer;
 }
+
+
+@media (max-width: 700px) {
+    .LogInField {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 530px;
+        height: 630px;
+        background-color: white;
+        border-radius: 30px;
+        padding: 48px, 115px, 48px, 115px;
+        gap: 32px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .arrow-left {
+        position: relative;
+        right: 54%;
+        top: -15%;
+        cursor: pointer;
+    }
+
+    #zielbereich {
+        position: absolute;
+        width: 100px;
+        height: 122px;
+        top: 15% !important;
+        left: 77px;
+    }
+
+    #meinBild {
+        width: 70px;
+        top: 50%;
+        left: 45%;
+    }
+}
+
+@media (max-width: 570px) {
+    .LogInField {
+        scale: 0.9;
+        width: 100%;
+    }
+
+    .formSignUp {
+        width: 100%;
+    }
+}
+
+@media (max-width: 530px) {
+    .LogInField {
+        scale: 0.8;
+    }
+
+    .emailPassword {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 85%;
+        height: 326px;
+    }
+
+    .arrow-left {
+        position: relative;
+        right: 45%;
+        top: -15%;
+        cursor: pointer;
+    }
+
+    .signUpLogo {
+        scale: 0.9;
+    }
+
+    .logInButton {
+        background-color: rgb(42, 54, 71);
+        color: white;
+        width: 180px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        gap: 10px;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+}
