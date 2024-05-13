@@ -225,13 +225,13 @@ async function getItem(key) {
     }
 }
 
-
 /**
  * Loads the workflow from local storage or initializes it to a default value ('To-Do').
  * @returns {void}
  */
 function loadWorkflow(){
     workflow = JSON.parse(localStorage.getItem('selectedCategory')) || 'To-Do';
+    return workflow;
 }
 
 
