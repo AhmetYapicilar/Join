@@ -175,6 +175,13 @@
         align-items: center;
     }
 
+    .responsive-done{
+        width: 80%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
     .just-normal-version{
         display: none;
     }
@@ -230,7 +237,7 @@
     }
 
     .fields{
-        width: 80%;
+        width: 100%;
         padding: 10px;
         display: flex;
         flex-wrap: wrap;
@@ -245,8 +252,8 @@
 
     .tasks-board {
         box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
-        width: 39%;
-        height: 250px;
+        width: 40%;
+        height: auto;
     }
 
     .title-board{
@@ -282,7 +289,6 @@
 
     .tasks-board-big {
         width: 50%;
-        height: 400px;
     }
 
     .last-line{
@@ -306,6 +312,24 @@
 
     .input-container-board{
         margin-right: 20px;
+    }
+
+    .edit-input {
+        width: 250px;
+        height: 48px;
+    }
+
+    .contactsInputFieldLittle {
+        width: 250px;
+        height: 48px;
+    }
+
+    .subtask-input {
+        width: 250px;
+    }
+
+    .flex-board-edit {
+        width: 250px;
     }
 }
 

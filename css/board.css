@@ -284,6 +284,8 @@ cursor: pointer;
     font-weight: 400;
     font-size: 16px;
     color: #A8A8A8;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 
 .progressbar-background {

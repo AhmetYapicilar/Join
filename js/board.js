@@ -84,6 +84,7 @@ async function initBoard() {
   cleanAllFieldsBeforeInit();
   await loadUsers();
   await loadTasks();
+  removeBigTaskBeforeInitAllTasks();
   await showTasks();
   await calculateProgressBar();
   checkEmptyTasks();
@@ -161,11 +162,12 @@ function checkEmptyTasks() {
  * Removes the big task before initializing all tasks.
  * @param {number} i - Index of the task.
  */
-function removeBigTaskBeforeInitAllTasks(i){
+function removeBigTaskBeforeInitAllTasks(){
+  for (let i = 0; i < tasks.length+1; i++) {
   if (document.getElementById(`bigtask${i}`)) {
     document.getElementById(`bigtask${i}`).classList.add("d-none");
   }
-}
+}}
 
 /**
  * Shows all tasks on the board.
@@ -173,7 +175,6 @@ function removeBigTaskBeforeInitAllTasks(i){
  */
 async function showTasks() {
   for (let i = 0; i < tasks.length; i++) {
-    removeBigTaskBeforeInitAllTasks(i);
     let {
       TASK,
       workflow,
@@ -201,9 +202,17 @@ async function showTasks() {
       allSubtasks,
       circlesHTML
     );
+    shortenDescriptionIfTooLong(i);
     userStoryOrTechnicalTask(TASK, i);
     activateCheckboxIfClickedBefore(i, allSubtasks);
   }
+}
+
+function shortenDescriptionIfTooLong(i){
+  let description = document.getElementById(`description${i}`);
+  if (description.textContent.length > 50) {
+    description.textContent = description.textContent.substring(0, 50) + '...';
+}
 }
 
 /**
@@ -348,7 +357,7 @@ function generateShowTasksHTML(
   return `
     <div id='task${i}' draggable="true" class="tasks-board" onclick=showTaskInBig(${i}) ondragstart="startDragging(${i})">
     <div id="user-technical-board${i}"></div>
-    <div class="name-of-task-board"><span>${title}</span><p>${description}</p></div>
+    <div class="name-of-task-board"><span>${title}</span><p id="description${i}">${description}</p></div>
     <div class="space-between-board width-100percent margin-top-16">
         <div class="progressbar-background">
             <div id="progressbar${i}" class="progressbar-board" role="progressbar"></div>
