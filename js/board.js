@@ -148,6 +148,20 @@ async function loadUsers() {
   users = JSON.parse(await getItem("users"));
 }
 
+let lastColor = null;
+
+function randomColor() {
+  const colors = ['#FFA500', '#90EE90', '#FF4500', '#FFD700', '#FF8C00', '#ADD8E6', '#FF6347', '#FFC0CB', '#00FF00', '#00BFFF', '#9370DB', '#FF69B4', '#FFA07A', '#BA55D3', '#7FFFD4']; 
+  if (colors.length === 1) return colors[0]; 
+  let randomIndex;
+  do {
+      randomIndex = Math.floor(Math.random() * colors.length);
+  } while (colors[randomIndex] === lastColor); 
+
+  lastColor = colors[randomIndex];
+  return colors[randomIndex];
+}
+
 /**
  * Checks for empty tasks in each category and adds a message if no tasks are available.
  */
