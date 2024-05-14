@@ -29,6 +29,7 @@
         justify-content: center;
         margin-left: 20px;
         margin-top: 32px;
+        margin-bottom: 200px;
     }
 
     .left-content{
@@ -122,6 +123,26 @@
 }
 
 @media(max-width: 500px){
+    .left-content{
+        width: auto;
+    }
+
+    .first-line{
+        width: 300px;
+    }
+
+    .second-line{
+        width: 300px;
+    }
+
+    .tasks{
+        width: 90px;
+    }
+
+    .To-do{
+        width: 115px;
+    }
+
     .flex-start-respo{
         width: 100%;
         display: flex;
