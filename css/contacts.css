@@ -1065,6 +1065,52 @@ li {
     .showAllContacts {
         height: 93%;
     }
+
+    .leftrightContainer-edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 640px;
+        width: 1212px;
+        border-radius: 10px;
+    }
+
+    .leftrightContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 640px;
+        width: 1212px;
+        border-radius: 10px;
+    }
+
+    .addContactImg img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        height: 100%;
+    }
+
+    .addContactImg {
+        width: 38.5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .addContactImg-edit img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        height: 100%;
+    }
+
+    .addContactImg-edit {
+        width: 38.5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
 }
 
 @media (min-height: 1305px) and (max-width: 1320px) {
@@ -1081,6 +1127,18 @@ li {
         width: 80%;
         top: 1%;
         height: 87%;
+    }
+}
+
+@media (max-height: 945px) and (min-width: 1321px) {
+    .main {
+        display: flex;
+        position: relative;
+        top: 96px;
+        left: 232px;
+        height: 89.8vh;
+        width: 100%;
+        right: 0px;
     }
 }
 
