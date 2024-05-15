@@ -168,16 +168,36 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * Adds an event listener to the window that listens for resize events.
  * If the window's inner width changes from below 700 pixels to above 700 pixels, the page will be reloaded once.
+ * The page will not reload again until the width goes back to 700 pixels or less and then exceeds 700 pixels again.
  */
 window.addEventListener('resize', (function() {
+  /**
+   * Indicates whether the page has been reloaded due to crossing the 700 pixels threshold.
+   * @type {boolean}
+   */
   let hasReloaded = false;
-  
+
+  /**
+   * Indicates whether the window's width was below or equal to 700 pixels before the last resize event.
+   * @type {boolean}
+   */
+  let wasBelowThreshold = window.innerWidth <= 700;
+
   return function() {
-      if (window.innerWidth > 700 && !hasReloaded) {
+      /**
+       * Indicates whether the window's width is currently above 700 pixels.
+       * @type {boolean}
+       */
+      const isAboveThreshold = window.innerWidth > 700;
+
+      if (isAboveThreshold && !hasReloaded && wasBelowThreshold) {
           window.location.reload();
           hasReloaded = true;
-      } else if (window.innerWidth <= 700) {
+      } else if (!isAboveThreshold) {
           hasReloaded = false;
+          wasBelowThreshold = true;
+      } else {
+          wasBelowThreshold = false;
       }
   };
 })());
