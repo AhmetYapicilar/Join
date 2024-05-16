@@ -364,6 +364,7 @@ async function deleteContactsCloseWindow(index) {
     }
     closeEditWindow();
     updateContactDisplay();
+    toggleContactDeleted(); 
     document.getElementById(`showInnerHTML`).innerHTML = ``;
 }
 
@@ -746,8 +747,8 @@ if (nameParts.length > 1) {
  * 
  */
 function toggleContactAdded() {
-const contactAdded = document.getElementById('contactAddedSuccesfullyId');
-const betterWaT = document.getElementById('BetterWaTId');
+let contactAdded = document.getElementById('contactAddedSuccesfullyId');
+let betterWaT = document.getElementById('BetterWaTId');
 betterWaT.classList.remove('show');
 setTimeout(() => {
     betterWaT.style.display = 'none';
@@ -766,6 +767,36 @@ setTimeout(() => {
 document.addEventListener('DOMContentLoaded', function() {
 });
 
+/**
+ * Toggles the display of the "Contact Deleted Successfully" message and another element with animation.
+ * 
+ * This function hides the element with ID 'BetterWaTId', then shows the element with ID 'contactDeletedSuccesfullyId'
+ * for a brief period, before hiding it again and showing the 'BetterWaTId' element once more. Each transition
+ * includes a fade-in and fade-out effect.
+ *
+ * @function toggleContactDeleted
+ * @returns {void}
+ */
+function toggleContactDeleted() {
+    let contactAdded = document.getElementById('contactDeletedSuccesfullyId');
+    let betterWaT = document.getElementById('BetterWaTId');
+    betterWaT.classList.remove('show');
+    setTimeout(() => {
+        betterWaT.style.display = 'none';
+        contactAdded.style.display = 'flex';
+        setTimeout(() => contactAdded.classList.add('show'), 10); 
+        setTimeout(() => {
+            contactAdded.classList.remove('show');
+            setTimeout(() => {
+                contactAdded.style.display = 'none';
+                betterWaT.style.display = 'flex';
+                setTimeout(() => betterWaT.classList.add('show'), 10);
+            }, 500); 
+        }, 2000);
+    }, 500);
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+    });
 
 /**
  * Create new contacts using the addKontakt function.
@@ -817,6 +848,7 @@ async function refreshContacts(index) {
  * @param {number} index -index of the current Contact which should get deleted
  */
 async function deleteContacts(index) {
+    toggleContactDeleted();
     if (index >= 0 && index < contactList.length) {
         contactList[index]['Name'] = '';
         contactList[index]['Email'] = '';

@@ -80,7 +80,8 @@ button {
 
 
 .betterWaT,
-.contactAddedSuccesfully {
+.contactAddedSuccesfully,
+.contactSuccesfullyDeleted  {
     position: relative;
     width: 569px;
     height: 73px;
@@ -108,7 +109,12 @@ button {
 }
 
 
-
+.contactSuccesfullyDeleted {
+    position: relative;
+    top: 110px;
+    left: 200px;
+    display: flex;
+}
 
 
 
@@ -948,7 +954,7 @@ li {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10; /* Die Überlagerung hat einen niedrigen Z-Index */
+    z-index: 3; /* Die Überlagerung hat einen niedrigen Z-Index */
     display: none; /* Zunächst verborgen */
 }
 
@@ -1183,17 +1189,32 @@ li {
 
 @media  (max-width: 1320px) {
     .phoneListAndButton {
-        position: relative;
-        /*width: 56%;*/
         justify-content: center;
         align-items: center;
         display: flex;
         flex-direction: column;
-        height: 99.3vh;
+    }
+
+    .phoneListAndButton {
+        width: 100%;
+        top: 0px;
+        height: 100%;
+        position: fixed;
+    }
+
+    .main {
+        left: 0px;
     }
 
 
     .contactAddedSuccesfully {
+        position: fixed;
+        bottom: 10% !important;
+        top: 80% !important;
+        left: 40px;
+    }
+
+    .contactSuccesfullyDeleted {
         position: fixed;
         bottom: 10% !important;
         top: 80% !important;
@@ -1328,6 +1349,11 @@ li {
 @media (max-width: 1320px) {
     .leftContainer {
         width: 100%;
+        top: 70px;
+    }
+
+    .rightContainer {
+        top: 0px;
     }
 
     .phoneListAndButton {
@@ -1337,7 +1363,7 @@ li {
     .showAllContacts {
         width: 80%;
         top: 1%;
-        height: 83%;
+        height: 81%;
     }
 
     .addNewContact {
@@ -1671,6 +1697,10 @@ li {
         left: 20px;
     }
 
+    .contactSuccesfullyDeleted {
+        left: 20px;
+    }
+
     .initials-circle-edit-contacts {
         top: 47%;
     }
@@ -1682,8 +1712,7 @@ li {
 
     .showAllContacts {
         width: 100%;
-        height: 83%;
-        top: 1%;
+        height: 81%;
     }
 
     .inPutfields-edit {
@@ -1951,8 +1980,7 @@ li {
 
     .showAllContacts {
         width: 100%;
-        height: 83%;
-        top: 1%;
+        height: 81%;
     }
 
     .createAccountButton {
