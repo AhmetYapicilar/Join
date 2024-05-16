@@ -1,5 +1,6 @@
 button {
     cursor: pointer;
+    font-family: "Inter";
 }
 
 .urgentButton {

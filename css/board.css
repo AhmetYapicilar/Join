@@ -5,6 +5,10 @@ body {
     margin: 0 auto;
 }
 
+button {
+    font-family: "Inter";
+}
+
 #navBoard {
     color: #32aee3;
 }
