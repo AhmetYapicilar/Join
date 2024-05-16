@@ -358,12 +358,24 @@ button {
     color: #A8A8A8;
 }
 
-.hoverPrivacyPolicy:hover {
-    cursor: pointer;
+.PrivacyPolicy {
+    text-decoration: none;
+    color: #A8A8A8;
 }
 
-.hoverLegalNotice:hover {
+.PrivacyPolicy:hover {
     cursor: pointer;
+    color: #32aee3;
+}
+
+.LegalNotice {
+    text-decoration: none;
+    color: #A8A8A8;
+}
+
+.LegalNotice:hover {
+    cursor: pointer;
+    color: #32aee3;
 }
 
 
