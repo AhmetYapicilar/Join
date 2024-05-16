@@ -137,6 +137,8 @@ header{
 
 .sidebar_nav span{
     width: 95px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .data{
