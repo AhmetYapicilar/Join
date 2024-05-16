@@ -122,8 +122,6 @@ function getTime() {
  * Logs in the user as a guest and redirects to the summary page.
  */
 function guestLogIn() {
-  document.getElementById("inputEmail").value = "";
-  document.getElementById("passwordInput").value = "";
   const emailInput = document.getElementById('inputEmail');
   const passwordInput = document.getElementById('passwordInput');
   // Temporarily remove the required attribute
