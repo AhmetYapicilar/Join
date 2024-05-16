@@ -1,5 +1,6 @@
 body {
     margin: 0px;
+    font-family: "Inter", sans-serif;
     background-color: rgb(230, 228, 228);
 }
 
@@ -277,16 +278,26 @@ body {
     height: 35px;
     top: 12%;
     justify-content: space-around;
+}
+
+.PrivacyPolicy {
+    text-decoration: none;
     color: #A8A8A8;
 }
 
-
-.hoverPrivacyPolicy:hover {
+.PrivacyPolicy:hover {
     cursor: pointer;
+    color: #32aee3;
 }
 
-.hoverLegalNotice:hover {
+.LegalNotice {
+    text-decoration: none;
+    color: #A8A8A8;
+}
+
+.LegalNotice:hover {
     cursor: pointer;
+    color: #32aee3;
 }
 
 
