@@ -338,11 +338,12 @@ button {
 
 
 .privacyPolicyLegalNotice {
+    font-size: 20px;
     display: flex;
     position: relative;
     width: 246px;
     height: 35px;
-    top: 12%;
+    top: 6%;
     justify-content: space-around;
     color: #A8A8A8;
 }
@@ -417,7 +418,6 @@ button {
         position: relative;
         width: 246px;
         height: 35px;
-        top: 7%;
         justify-content: space-around;
         color: #A8A8A8;
     }
@@ -455,7 +455,6 @@ button {
         position: relative;
         width: 246px;
         height: 35px;
-        top: 7%;
         justify-content: space-around;
         color: #A8A8A8;
     }
