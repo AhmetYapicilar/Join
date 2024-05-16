@@ -149,20 +149,24 @@ function showContactlist() {
 }
 
 /**
- * Groups contacts by their initial letter and returns an object where keys represent letters
- * and values are arrays containing contacts whose names start with the corresponding letter.
- *
- * @param {Array<Object>} List - An array of contact objects.
- * @returns {Object} - An object containing groups of contacts where keys represent letters and values are arrays of contact objects.
+ * Groups contacts by the first letter of their initials.
+ * 
+ * @param {Array<Object>} List - The list of contact objects.
+ * @param {string} List[].Initials - The initials of the contact.
+ * @param {string} List[].Name - The name of the contact.
+ * @param {string} List[].Email - The email of the contact.
+ * @param {string} List[].Color - The color associated with the contact.
+ * @returns {Object} An object where the keys are the initial letters and the values are arrays of contact objects.
  */
 function groupContactsByLetter(List) {
     let groups = {};
     for (let contact of List) {
-        if (!contact['InitialLetter'] || !contact['Initials'] || !contact['Name'] || !contact['Email'] || !contact['Color']) {
+        if (!contact['Initials'] || !contact['Name'] || !contact['Email'] || !contact['Color']) {
             continue;
         }
 
-        let initialLetter = contact['InitialLetter'].toUpperCase(); 
+        // Get the first letter of the initials
+        let initialLetter = contact['Initials'].charAt(0).toUpperCase(); 
         if (!groups[initialLetter]) {
             groups[initialLetter] = [];
         }
