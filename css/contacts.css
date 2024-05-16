@@ -1,8 +1,8 @@
 body {
-    margin: 0px;
-    font-family: "Inter", sans-serif;
-    height: 100vh;
-}
+        margin: 0px;
+        font-family: "Inter", sans-serif;
+        height: 89.8vh;
+    }
 
 button {
     font-family: "Inter";
@@ -2049,5 +2049,31 @@ li {
 
     h1 {
         font-size: 25px !important;
+    }
+}
+
+
+@media (max-height: 668px) and (max-width: 376px) {
+    .addContactMobileImg {
+        bottom: 12%;
+    }
+
+    .menuOptionsContact {
+        bottom: 12%;
+    }
+
+    .editDeleteContacts {
+        bottom: 12%;
+    }
+
+    #targetArea {
+        left: 20px;
+        top: 145px;
+        width: 354px;
+        height: 418px;
+    }
+
+    .showContacts {
+        gap: 15px;
     }
 }
