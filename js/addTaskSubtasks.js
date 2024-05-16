@@ -111,7 +111,11 @@ function checkEditSubmit(i, event) {
  */
 function submitChange(i) {
     let newSubtaskContent = document.querySelector(`#edit-subtask-${i}`).value;
-    subtasks[i].subtaskName = newSubtaskContent;
+    if (newSubtaskContent.trim() === "") {
+        deleteSubtask(i);
+    } else {
+        subtasks[i].subtaskName = newSubtaskContent;
+    }
     renderSubtasks();
 }
 

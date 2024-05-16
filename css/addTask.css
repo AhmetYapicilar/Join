@@ -248,6 +248,7 @@ li p {
     border: none;
     font-size: 16px;
     height: 100%;
+    margin-left: 16px;
 }
 
 .set-edit .subtask-imgs {
