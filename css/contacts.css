@@ -1195,6 +1195,12 @@ li {
         flex-direction: column;
     }
 
+    .sidebar_nav {
+        width: 100px !important;
+        padding: 0px !important;
+        height: 100%;
+    }
+
     .phoneListAndButton {
         width: 100%;
         top: 0px;
@@ -1351,6 +1357,13 @@ li {
         width: 100%;
         top: 70px;
     }
+
+    .sidebar_nav {
+        width: 100px !important;
+        padding: 0px !important;
+        height: 100% !important;
+    }
+
 
     .rightContainer {
         top: 0px;
@@ -1674,6 +1687,12 @@ li {
     .sidebar_nav {
         padding: 0px !important;
     }
+
+    .sidebar_nav {
+        width: 100px !important;
+        padding: 0px !important;
+        height: 100%;
+    }
 }
 
 
@@ -1684,6 +1703,12 @@ li {
         height: 700px;
         width: 434px;
         margin-top: 2%;
+    }
+
+    .sidebar_nav {
+        width: 100px !important;
+        padding: 0px !important;
+        height: 100%;
     }
 
     .initials-circle-edit-contacts {
