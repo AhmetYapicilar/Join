@@ -19,10 +19,12 @@ function toggleShowPassword() {
  */
 async function initLogIn() {
   await loadUsers();
+  if(savedUsers.length >0){
   getLocalStorage();
   let x = savedUsers.length - 1;
   document.getElementById("inputEmail").value = savedUsers[x]["email"];
   document.getElementById("passwordInput").value = savedUsers[x]["password"];
+  }
 }
 
 /**
@@ -51,10 +53,35 @@ async function logIn() {
       window.location.href = "summary.html?user=" + user.name;
     }, 2000);
   } else {
-    window.location.reload();
-    alert("User ist nicht registriert");
+    wrongPassword();
   }
 }
+
+function setFocus() {
+  removePasswordError();
+}
+
+function wrongPassword(){
+  // Fehlerbehandlung für falsches Passwort
+  const passwordInput = document.getElementById("passwordInput");
+  const passwordError = document.getElementById("passwordError");
+  passwordInput.classList.add("error");
+  passwordError.classList.add("visible");
+  passwordError.textContent = "Wrong password Ups! Try again.";
+}
+
+/**
+ * Removes error classes from the password input field and hides the error message.
+ */
+function removePasswordError() {
+  const passwordInput = document.getElementById("passwordInput");
+  const passwordError = document.getElementById("passwordError");
+  passwordInput.classList.remove("error");
+  passwordError.classList.remove("visible");
+  passwordError.textContent = "";
+}
+
+
 
 /**
  * Displays a greeting message for the user based on the time of day.
@@ -97,6 +124,11 @@ function getTime() {
 function guestLogIn() {
   document.getElementById("inputEmail").value = "";
   document.getElementById("passwordInput").value = "";
+  const emailInput = document.getElementById('inputEmail');
+  const passwordInput = document.getElementById('passwordInput');
+  // Temporarily remove the required attribute
+  emailInput.removeAttribute('required');
+  passwordInput.removeAttribute('required');
   setUserNameToLocalStorage("user-name", "Guest");
   if (window.innerWidth < 1242) {
     greetUserFirst("Guest");
@@ -104,6 +136,9 @@ function guestLogIn() {
   setTimeout(() => {
     window.location.href = "summary.html?user=Guest";
   }, 2000);
+  // Restore the required attribute
+  emailInput.setAttribute('required', 'required');
+  passwordInput.setAttribute('required', 'required');
 }
 
 /**

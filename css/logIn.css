@@ -335,6 +335,22 @@ button {
     color: #000;
 }
 
+/* Stile für das Passwortfeld bei Fehler */
+.inputPassword.error {
+    border: 1px solid rgb(255,128,143);
+  }
+  
+  /* Stile für die Fehlermeldung */
+  .error-message {
+    color: rgb(255,128,143);
+    font-size: 12px;
+    visibility: hidden; /* Anfangs nicht sichtbar */
+  }
+  
+  .error-message.visible {
+    visibility: visible;
+  }
+
 @media (min-height: 1305px) and (max-width: 1320px) {
     #zielbereich {
         position: absolute;

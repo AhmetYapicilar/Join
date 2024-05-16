@@ -288,6 +288,33 @@ button {
     align-items: center;
 }
 
+.inputPasswordConfirm{
+    height: 27px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 20px;
+    width: 95%;
+    display: flex;
+    align-items: center;
+}
+
+/* Stile für das Passwortfeld bei Fehler */
+.inputPasswordConfirm.error {
+    border: 1px solid rgb(255,128,143);
+  }
+  
+  /* Stile für die Fehlermeldung */
+  .error-message {
+    color: rgb(255,128,143);
+    font-size: 12px;
+    visibility: hidden; /* Anfangs nicht sichtbar */
+  }
+  
+  .error-message.visible {
+    visibility: visible;
+  }
+
 
 .rememberMe {
     display: flex;

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join | Sign Up</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="css/signUp.css">
     <script src="js/signUp.js"></script>
     <script src="js/register.js"></script>
@@ -52,8 +51,9 @@
                 <img onclick="toggleShowPassword()" src="assets/img/lock.png" class="inputfield-icon lock-icon">
             </div>
             <div class="input-container">
-                <input id="confirmPasswordInput" class="inputPassword" required type="password" placeholder="Confirm Password">
+                <input onclick="setFocus()" id="confirmPasswordInput" class="inputPasswordConfirm" required type="password" placeholder="Confirm Password">
                 <img onclick="toggleShowConfirmPassword()" src="assets/img/lock.png" class="inputfield-icon lock-icon">
+                <div id="passwordErrorSignUp" class="error-message"></div>
             </div>
         </div>
         <div class="displayFLex rememberMe">

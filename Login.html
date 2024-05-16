@@ -46,8 +46,9 @@
                 <img src="assets/img/mail.png" class="inputfield-icon">
             </div>
             <div class="input-container">
-                <input id="passwordInput" class="inputPassword" required type="password" placeholder="Password">
+                <input onclick="setFocus()" id="passwordInput" class="inputPassword" required type="password" placeholder="Password">
                 <img onclick="toggleShowPassword()" src="assets/img/lock.png" class="inputfield-icon lock-icon">
+                <div id="passwordError" class="error-message"></div>
             </div>
         </div>
         <div class="displayFLex rememberMe">

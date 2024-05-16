@@ -29,11 +29,53 @@ async function loadUsers(){
     }
 }
 
+function checkWetherPasswordsAreSame(){
+    let password1 = document.getElementById('passwordInput').value;
+    let password2 = document.getElementById('confirmPasswordInput').value;
+    if(password1 === password2){
+        let password = password1;
+        return password;
+    } else{
+        wrongPassword();
+        return null;
+    }
+}
+
+function setFocus() {
+    removePasswordError();
+  }
+
+function wrongPassword(){
+    // Fehlerbehandlung für falsches Passwort
+    const passwordInput = document.getElementById("confirmPasswordInput");
+    const passwordError = document.getElementById("passwordErrorSignUp");
+    passwordInput.classList.add("error");
+    passwordError.classList.add("visible");
+    passwordError.textContent = "Ups! Your password don't match.";
+  }
+
+/**
+ * Removes error classes from the password input field and hides the error message.
+ */
+function removePasswordError() {
+    const passwordInput = document.getElementById("confirmPasswordInput");
+    const passwordError = document.getElementById("passwordErrorSignUp");
+    passwordInput.classList.remove("error");
+    passwordError.classList.remove("visible");
+    passwordError.textContent = "";
+  }
+  
+
 /**
  * Registers a new user by collecting input data, generating initials, and storing the user in localStorage.
  * Disables the register button after submission.
  */
 async function register(){
+    let password = checkWetherPasswordsAreSame();
+    if (!password) {
+        // Abbrechen, wenn die Passwörter nicht übereinstimmen
+        return;
+    }
     let input = document.getElementById(`name1`).value;
     let initials = input.match(/\b\w/g) || [];
     let result = initials.join('');
@@ -43,7 +85,7 @@ async function register(){
         name: name1.value,
         initials: result,
         email: email.value,
-        password: passwordInput.value,
+        password: password,
         Color: color,
         Initials: result,
         Name: name1.value,
