@@ -177,7 +177,7 @@ async function calculateProgressBar() {
   for (let i = 0; i < tasks.length; i++) {
     const SUBTASKS = tasks[i]["subTasks"];
     if (SUBTASKS.length === 0) {
-      document.getElementById(`progressbar${i}`).style.width = "0px";
+      document.getElementById(`progressbar-background${i}`).style.display = 'none';
       document.getElementById(`completedSubTasks${i}`).innerHTML = 0;
       continue;
     }

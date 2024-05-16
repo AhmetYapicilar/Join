@@ -20,7 +20,7 @@ function generateShowTasksHTML(
       <div id='task${i}' draggable="true" class="tasks-board" onclick=showTaskInBig(${i}) ondragstart="startDragging(${i})">
       <div id="user-technical-board${i}"></div>
       <div class="name-of-task-board"><span>${title}</span><p id="description${i}">${description}</p></div>
-      <div class="space-between-board width-100percent margin-top-16">
+      <div id="progressbar-background${i}" class="space-between-board width-100percent margin-top-16">
           <div class="progressbar-background">
               <div id="progressbar${i}" class="progressbar-board" role="progressbar"></div>
           </div>

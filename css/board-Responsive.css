@@ -5,7 +5,7 @@
        margin-bottom: 80px;
     }
 
-    .fields{
+    .card-board{
         width: 150px;
     }
 
@@ -198,7 +198,7 @@
     }
 
     .width-80percent{
-        width: 80%;
+        width: 100%;
     }
 
     .addTaskOnBoardResponsive-Button{
@@ -225,7 +225,8 @@
     .card-board{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        width: 100%;
     }
 
     .title-board{
@@ -249,7 +250,7 @@
     }
 
     .no-tasks-board {
-        width: 80%;
+        width: 100%;
         height: 48px;
     }
 
@@ -304,7 +305,7 @@
 
 @media(max-width: 664px){
     .tasks-board {
-        width: 33%;
+        width: 50%;
     }
 }
 
@@ -333,6 +334,10 @@
 
     .flex-board-edit {
         width: 250px;
+    }
+
+    .fields{
+        width: 90%;
     }
 }
 
