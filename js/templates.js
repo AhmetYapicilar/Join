@@ -16,28 +16,6 @@ function showInitials() {
 }
 
 /**
- * Greets the user based on the time of the day.
- */
-function greetingUser() {
-  let content = document.getElementById("greeting");
-  let now = new Date();
-  let hours = now.getHours();
-  if (hours < 17 && hours > 10) {
-    setTimeout(() => {
-      content.innerHTML = "Good Afternoon,";
-    }, 1000);
-  } else if (hours < 10 && hours > 4) {
-    setTimeout(() => {
-      content.innerHTML = "Good Morning,";
-    }, 1000);
-  } else {
-    setTimeout(() => {
-      content.innerHTML = "Good Evening,";
-    }, 1000);
-  }
-}
-
-/**
  * Redirects the user to the addTask page.
  */
 function openAddTask() {

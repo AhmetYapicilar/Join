@@ -1,18 +1,33 @@
 /**
- * Waits for the DOM to be fully loaded, then sets the greeting name if available.
- * @param {Event} event - The DOMContentLoaded event.
+ * Returns a greeting message based on the current time of day.
+ * @returns {string} - The greeting message.
  */
-document.addEventListener("DOMContentLoaded", (event) => {
-  setTimeout(() => {
-    let name = JSON.parse(localStorage.getItem("user-name"));
-    if (name != "Guest") {
-      document.getElementById("greeting-name").innerHTML = name;
-    }
-    if (name = "Guest") {
-      document.getElementById("greeting-name").innerHTML = '';
-    }
-  }, 1000);
-});
+function getTime() {
+  let now = new Date();
+  let hours = now.getHours();
+  let x;
+  if (hours < 17 && hours > 10) x = "Good Afternoon";
+  else if (hours < 10 && hours > 4) x = "Good Morning";
+  else {
+    x = "Good Evening";
+  }
+  return x;
+}
+
+/**
+ * Greets the user based on the time of the day.
+ */
+function greetingUser() {
+  let content = document.getElementById("greeting");
+  let nameToGreet = document.getElementById('greeting-name');
+  let name = JSON.parse(localStorage.getItem("user-name"));
+  if(name === 'Guest'){
+    content.innerHTML = getTime();
+  } else{
+    content.innerHTML = getTime() + ',';
+    nameToGreet.innerHTML = name;
+  }
+}
 
 /**
  * Initializes the summary by loading the task counters and displaying the task summary.
