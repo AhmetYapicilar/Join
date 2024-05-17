@@ -134,9 +134,11 @@ function guestLogIn() {
   setTimeout(() => {
     window.location.href = "summary.html?user=Guest";
   }, 2000);
-  // Restore the required attribute
-  emailInput.setAttribute('required', 'required');
-  passwordInput.setAttribute('required', 'required');
+   // Restore the required attribute after redirection (outside the delay to avoid interference)
+   setTimeout(() => {
+    emailInput.setAttribute('required', 'required');
+    passwordInput.setAttribute('required', 'required');
+  }, 2100); // Ensure this happens after the redirection delay
 }
 
 /**

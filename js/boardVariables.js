@@ -50,6 +50,9 @@ async function initVariableAssignedTo(TASK) {
       assignedTo = ["Guest"];
       bgColor = ["#FF7A00"];
     }
+    if(assignedTo.length > 6){
+      assignedTo.splice(6, assignedTo.length);
+    }
     return { assignedTo, bgColor };
   }
 
@@ -117,6 +120,9 @@ async function initVariablesForNewTask() {
     let newWorkflow = newTaskCategory;
     let newPriority = newAddedPrio[0];
     let newSubtasks = newTaskSubtask;
+    if(selectedContacts.length > 6){
+      selectedContacts.splice(6, selectedContacts.length);
+    }
     let newAssignedTo = selectedContacts;
   
     return {

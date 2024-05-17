@@ -221,7 +221,23 @@ async function saveChangedTask(i) {
  */
 async function searchTask() {
  
-    let search = document.getElementById("search-input").value;
+    let search = document.getElementById("search-input1").value;
+    search = search.toLowerCase();
+    if (search === "") {
+      initBoard();
+    } else {
+      await showSearchedTasks(search);
+      checkEmptyTasks();
+    }
+  }
+
+/**
+ * Searches for tasks based on the input value for responsive Input.
+ * @returns {Promise<void>}
+ */
+async function searchTaskResponsive() {
+ 
+    let search = document.getElementById("search-input2").value;
     search = search.toLowerCase();
     if (search === "") {
       initBoard();

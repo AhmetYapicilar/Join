@@ -27,7 +27,7 @@ function generateShowTasksHTML(
           <span class="sub-tasks"><b id="completedSubTasks${i}"></b>/<b>${allSubtasks.length}</b> Subtasks</span>
       </div>
       <div class="space-between-board width-100percent margin-top-16">
-          <div class="flex-board">
+          <div style=width:135px class="flex-board">
               ${circlesHTML}
           </div>
           <img class="priority-icon-board" src="${priorityIcon}">

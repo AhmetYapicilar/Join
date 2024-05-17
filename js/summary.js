@@ -5,8 +5,11 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   setTimeout(() => {
     let name = JSON.parse(localStorage.getItem("user-name"));
-    if (name != "guest") {
+    if (name != "Guest") {
       document.getElementById("greeting-name").innerHTML = name;
+    }
+    if (name = "Guest") {
+      document.getElementById("greeting-name").innerHTML = '';
     }
   }, 1000);
 });

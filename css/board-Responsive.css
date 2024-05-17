@@ -2,7 +2,6 @@
     .section-board{
         margin-left: 245px;
        width: 700px;
-       margin-bottom: 80px;
     }
 
     .card-board{
@@ -66,7 +65,6 @@
     .section-board{
         margin-left: 20px;
        padding: 10px;
-       margin-bottom: 80px;
     }
 
     .technical-task-board{
@@ -167,11 +165,10 @@
 
 }
 
-@media(max-width: 740px){
+@media(max-width: 826px){
     .section-board{
         padding: 16px;
         margin-top: 80px;
-        margin-bottom: 80px;
         width: 85vw;
         display: flex;
         flex-direction: column;
@@ -311,7 +308,7 @@
 
 @media(max-width: 448px){
     .tasks-board {
-        width: 60%;
+        width: 85%;
     }
 
     .input-container-board{
