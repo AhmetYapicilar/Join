@@ -4,7 +4,7 @@
  */
 let savedUsers = [];
 
-let checked = false;
+let checked;
 
 /**
  * Toggles the visibility of the password in the password input field.
@@ -22,10 +22,11 @@ function toggleShowPassword() {
 async function initLogIn() {
   await loadUsers();
   getLocalStorage();
-  if(savedUsers.length >0 && checked === true){
-  let x = savedUsers.length - 1;
-  document.getElementById("inputEmail").value = savedUsers[x]["email"];
-  document.getElementById("passwordInput").value = savedUsers[x]["password"];
+  checked = JSON.parse(localStorage.getItem('checked'));
+  if(savedUsers && checked === true){
+  document.getElementById("inputEmail").value = savedUsers[0]["email"];
+  document.getElementById("passwordInput").value = savedUsers[0]["password"];
+  document.getElementById('myCheck').checked = true;
   }
 }
 
@@ -35,10 +36,10 @@ async function initLogIn() {
 function checkedFunction() {
   let checkBox = document.getElementById("myCheck");
   if (checkBox.checked == true) {
-    checked = true;
+    localStorage.setItem('checked', 'true');
     saveUserToLocalStorage();
-  } else{
-    checked = false;
+  } else if(!checkBox.checked){
+    localStorage.setItem('checked', 'false');
   }
 }
 
@@ -140,10 +141,10 @@ function guestLogIn() {
  * Saves the user's email and password to localStorage.
  */
 function saveUserToLocalStorage() {
-  savedUsers.push({
+  savedUsers = [{
     email: inputEmail.value,
     password: passwordInput.value,
-  });
+  }];
   setLocalStorage("savedUsers", savedUsers);
 }
 
