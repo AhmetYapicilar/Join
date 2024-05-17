@@ -4,6 +4,8 @@
  */
 let savedUsers = [];
 
+let checked = false;
+
 /**
  * Toggles the visibility of the password in the password input field.
  */
@@ -19,8 +21,8 @@ function toggleShowPassword() {
  */
 async function initLogIn() {
   await loadUsers();
-  if(savedUsers.length >0){
   getLocalStorage();
+  if(savedUsers.length >0 && checked === true){
   let x = savedUsers.length - 1;
   document.getElementById("inputEmail").value = savedUsers[x]["email"];
   document.getElementById("passwordInput").value = savedUsers[x]["password"];
@@ -33,7 +35,10 @@ async function initLogIn() {
 function checkedFunction() {
   let checkBox = document.getElementById("myCheck");
   if (checkBox.checked == true) {
+    checked = true;
     saveUserToLocalStorage();
+  } else{
+    checked = false;
   }
 }
 

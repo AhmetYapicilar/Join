@@ -125,6 +125,14 @@
     }
 }
 
+@media(max-width: 800px){
+    .help-section {
+        padding-top: 100px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
 @media (max-width: 730px) {
     .column {
         gap: 2% !important;
@@ -170,11 +178,5 @@
     .column {
         gap: 4% !important;
         left: 0px;
-    }
-
-    .help-section {
-        padding-top: 100px;
-        padding-left: 24px;
-        padding-right: 24px;
     }
 }
