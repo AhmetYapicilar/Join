@@ -484,7 +484,6 @@ const target = document.getElementById('targetArea');
 const slideInContacts = document.getElementById('showInnerHTML');
 
 if (window.innerWidth < 1320) {
-    console.log("Die Fensterbreite ist unter 1320px.");
 
     if (!contacts || !target || !slideInContacts) {
         // Falls eine der Variablen leer ist, wird die Funktion beendet
