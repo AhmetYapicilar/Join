@@ -122,23 +122,13 @@ function getTime() {
  * Logs in the user as a guest and redirects to the summary page.
  */
 function guestLogIn() {
-  const emailInput = document.getElementById('inputEmail');
-  const passwordInput = document.getElementById('passwordInput');
-  // Temporarily remove the required attribute
-  emailInput.removeAttribute('required');
-  passwordInput.removeAttribute('required');
-  setUserNameToLocalStorage("user-name", "Guest");
+  document.getElementById('inhalt').innerHTML = '';
   if (window.innerWidth < 1242) {
     greetUserFirst("Guest");
   }
   setTimeout(() => {
     window.location.href = "summary.html?user=Guest";
-  }, 2000);
-   // Restore the required attribute after redirection (outside the delay to avoid interference)
-   setTimeout(() => {
-    emailInput.setAttribute('required', 'required');
-    passwordInput.setAttribute('required', 'required');
-  }, 2100); // Ensure this happens after the redirection delay
+  }, 1000);
 }
 
 /**
