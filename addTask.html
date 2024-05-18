@@ -31,7 +31,7 @@
             <h1 class="headlineAddTask">Add Task</h1>
         </div>
 
-        <form id="addTaskForm" onsubmit="return false">
+        <form id="addTaskForm" onsubmit="return false; showTaskAddedMessage();">
             <div class="addTaskFormContainer">
                 <div class="leftAddTaskContainer fontSize20px">
                     <div class="titleContainer ma-bo-8">
@@ -118,6 +118,9 @@
                         <ul id="subtask-container"></ul>
                     </div>
                 </div>
+                <div class="taskAddedMessageContainer">
+                    <img id="taskAddedMessage" class="hidden" src="./assets/img/taskAddedToBoard.png" alt="Task Added">
+                </div>
             </div>
             <div class="fieldRequiredText">
                 <div class="flex-start">
@@ -136,7 +139,6 @@
 
     </div>
     <div w3-include-html="./assets/templates/side_menu.html"></div>
-
 </body>
 
 </html>

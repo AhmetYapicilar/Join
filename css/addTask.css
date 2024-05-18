@@ -348,3 +348,24 @@ li p {
     color: white;
     text-transform: uppercase;
 }
+
+.hidden {
+    display: none;
+}
+
+#taskAddedMessage {
+    padding-left: 3%;
+    width: 450px;
+    height: auto;
+    animation: taskAddedMessageSlide 2s cubic-bezier(0.68, -0.6, 0.32, 1.2) 0s 1 normal forwards;
+}
+
+@keyframes taskAddedMessageSlide {
+	0% {
+		transform: scale(0.4);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}

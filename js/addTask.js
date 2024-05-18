@@ -245,10 +245,10 @@ async function createTask() {
             subTasks: subtasks
         });
         await setItem('task', JSON.stringify(tasks));
-        openBoard();
     } catch (error) {
         console.log('Error creating task.');
     }
+
 }
 
 
@@ -384,4 +384,18 @@ function setMinDateToday() {
     const today = new Date().toISOString().split('T')[0];
 
     dateInput.setAttribute('min', today);
+}
+
+
+/**
+ * Displays a message indicating that a task has been successfully added.
+ * The message fades in and the image scales up, and after a delay, the user is redirected to the board page.
+ */
+function showTaskAddedMessage() {
+    
+    const messageDiv = document.getElementById('taskAddedMessage');
+    messageDiv.classList.remove('hidden');
+    setTimeout(() => {
+        window.location.href = './board.html';
+    }, 3000);
 }

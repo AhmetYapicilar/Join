@@ -160,3 +160,12 @@ body {
     min-height: 135px;
     overflow: auto;
 }
+
+.taskAddedMessageContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 97%;
+    height: 40%;
+}
