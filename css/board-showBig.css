@@ -16,6 +16,8 @@
 
 .tasks-board-big {
     width: 20%;
+    height: 700px;
+    overflow-y: auto;
     border-radius: 30px;
     padding: 48px 40px 48px 40px;
     gap: 24px;
