@@ -219,14 +219,18 @@ async function saveChangedTask(i) {
  * Searches for tasks based on the input value.
  * @returns {Promise<void>}
  */
-async function searchTask() {
+async function searchTaskResponsive() {
  
     let search = document.getElementById("search-input1").value;
     search = search.toLowerCase();
+    cleanAllFieldsBeforeInit();
     if (search === "") {
-      initBoard();
+      await showTasks();
+      await calculateProgressBar();
+      checkEmptyTasks();
     } else {
       await showSearchedTasks(search);
+      await calculateProgressBar();
       checkEmptyTasks();
     }
   }
@@ -235,14 +239,18 @@ async function searchTask() {
  * Searches for tasks based on the input value for responsive Input.
  * @returns {Promise<void>}
  */
-async function searchTaskResponsive() {
+async function searchTask() {
  
     let search = document.getElementById("search-input2").value;
     search = search.toLowerCase();
+    cleanAllFieldsBeforeInit();
     if (search === "") {
-      initBoard();
+      await showTasks();
+      await calculateProgressBar();
+      checkEmptyTasks();
     } else {
       await showSearchedTasks(search);
+      await calculateProgressBar();
       checkEmptyTasks();
     }
   }
@@ -264,9 +272,14 @@ async function searchTaskResponsive() {
       for (let x = 0; x < tasks.length; x++) {
         const TASK = tasks[x];
         let tasktitle = TASK["title"];
+        let taskdescription = TASK["description"];
+        if(foundedTasks.includes(TASK)){
+          continue;
+        }
         if (
           TASK["workflow"] === ids[i] &&
-          tasktitle.toLowerCase().startsWith(search)
+          tasktitle.toLowerCase().startsWith(search) ||
+          taskdescription.toLowerCase().startsWith(search)
         ) {
           foundedTasks.push(TASK);
         }

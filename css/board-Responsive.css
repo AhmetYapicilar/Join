@@ -8,6 +8,14 @@
         width: 150px;
     }
 
+    .no-tasks-board{
+        width: 150px;
+        }
+        
+        .tasks-board{
+        width: 150px;
+        }
+
     .technical-task-board{
         width: 65px;
     }
@@ -61,10 +69,19 @@
     }
 }
 
-@media(max-width: 1000px){
+@media(max-width: 1050px){
     .section-board{
         margin-left: 20px;
        padding: 10px;
+       width: 90vw;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+    }
+
+    .tasks-board-big {
+        overflow-y: auto;
+        height: 500px;
     }
 
     .technical-task-board{

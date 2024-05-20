@@ -161,11 +161,15 @@ function getCompletedSubtasks(SUBTASKS, i){
  */
 function generateWidthOfProgressBar(i, completedSubtasks, SUBTASKS){
   let progressPercentage = (completedSubtasks / SUBTASKS.length) * 100;
+  if(document.getElementById(
+    `progressbar${i}`
+  )){
     document.getElementById(
       `progressbar${i}`
     ).style.width = `${progressPercentage}%`;
     document.getElementById(`completedSubTasks${i}`).innerHTML =
       completedSubtasks;
+  }
 }
 
 /**
@@ -176,7 +180,7 @@ async function calculateProgressBar() {
   subTaskCheckBox = JSON.parse(localStorage.getItem("subTaskCheckBox")) || [];
   for (let i = 0; i < tasks.length; i++) {
     const SUBTASKS = tasks[i]["subTasks"];
-    if (SUBTASKS.length === 0) {
+    if (SUBTASKS.length === 0 && document.getElementById(`progressbar-background${i}`)) {
       document.getElementById(`progressbar-background${i}`).style.display = 'none';
       document.getElementById(`completedSubTasks${i}`).innerHTML = 0;
       continue;
