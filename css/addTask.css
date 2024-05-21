@@ -359,6 +359,11 @@ li p {
     font-weight: bold;
     color: black;
     text-transform: uppercase;
+    text-shadow: 
+    0.5px 0.5px 0 white,
+    -0.5px 0.5px 0 white,
+    0.5px -0.5px 0 white,
+    -0.5px -0.5px 0 white;
 }
 
 .hidden {
