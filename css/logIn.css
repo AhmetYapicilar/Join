@@ -422,6 +422,16 @@ button {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 
+    .privacyPolicyLegalNotice {
+        font-size: 20px;
+        display: flex;
+        position: relative;
+        height: 35px;
+        top: 12%;
+        justify-content: space-around;
+        scale: 0.9;
+    }
+
     .LogInBottomLogIn {
         height: 120px;
         display: flex;
