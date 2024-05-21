@@ -5,6 +5,18 @@ body {
     margin: 0 auto;
 }
 
+textarea {
+    font-family: 'inter';
+}
+
+input {
+    font-family: 'inter';
+}
+
+select {
+    font-family: 'inter';
+}
+
 button {
     font-family: "Inter";
 }

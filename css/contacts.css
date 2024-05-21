@@ -8,6 +8,18 @@ button {
     font-family: "Inter";
 }
 
+textarea {
+    font-family: 'inter';
+}
+
+input {
+    font-family: 'inter';
+}
+
+select {
+    font-family: 'inter';
+}
+
 *::-webkit-scrollbar {
     height: 4px;
     width: 8px;
