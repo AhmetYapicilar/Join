@@ -1,19 +1,9 @@
-@media (max-width: 1350px) {
-    .legalNoticeHeadlineContainer {
-        width: 600px;
-    }
-
-    .legalNoticeContent {
-        width: 600px;
-    }
-}
-
 @media (max-width: 950px) {
     .legalNoticeContentContainer {
         position: static;
         align-items: center;
         margin-left: 0;
-        padding-left: 0;
+        padding: 0 32px 0 32px;
     }
 
     .legalNoticeContent {
