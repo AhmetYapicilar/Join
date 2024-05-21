@@ -350,8 +350,8 @@ li p {
 }
 
 .selectedContact {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
