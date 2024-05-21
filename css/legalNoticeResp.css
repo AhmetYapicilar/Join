@@ -35,13 +35,12 @@
     }
 
     .legalNoticeContentContainer {
-        width: 280px;
         margin-left: 16px;
         margin-right: 16px;
     }
 
     .legalNoticeContent {
-        width: 280px;
+        width: 90vw;
     }
 
     .legalNoticeContent h4 {

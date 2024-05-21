@@ -52,8 +52,10 @@ a {
     right: 0;
     left: 232px;
     margin: 110px 0 0 96px;
-    max-width: 978px;
+    max-width: 1600px;
+    width: auto;
     gap: 32px;
+    margin-right: 64px;
 }
 
 .legalNoticeHeadlineContainer {
@@ -100,7 +102,7 @@ a {
     align-items: flex-start;
     padding: 0px;
     gap: 24px;
-    width: 1014px;
+    width: auto;
     height: 720px;
     overflow: auto;
 }
