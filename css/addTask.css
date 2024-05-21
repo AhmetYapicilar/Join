@@ -148,10 +148,10 @@ li p {
 }
 
 .categoryPicker {
-    font-family: "inter";
+    font-family: 'inter';
     width: 440px;
     height: 48px;
-    padding: 12px 16px;
+    padding: 10px 16px;
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none;
