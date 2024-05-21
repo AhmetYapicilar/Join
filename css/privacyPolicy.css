@@ -30,6 +30,17 @@
     background-color: #29ABE2;
 }
 
+span {
+    font-family: 'inter';
+}
+
+p {
+    font-family: 'inter';
+}
+
+li {
+    font-family: 'inter';
+}
 
 body {
     margin: 0;

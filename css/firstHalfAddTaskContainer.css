@@ -1,5 +1,17 @@
 /* addTask-Container */
 
+textarea {
+    font-family: 'inter';
+}
+
+input {
+    font-family: 'inter';
+}
+
+select {
+    font-family: 'inter';
+}
+
 .overlay-add-task-board {
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 20;

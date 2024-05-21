@@ -53,29 +53,6 @@ async function getItem(key) {
 }
 
 /**
- * Initializes the DOM content after it has been loaded.
- */
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(() => {
-        const bild = document.getElementById('meinBild');
-        const ziel = document.getElementById('zielbereich');
-        const inhalt = document.getElementById('inhalt');
-        if (ziel) {
-            const zielRect = ziel.getBoundingClientRect();
-            bild.style.width = '100px'; 
-            bild.style.top = zielRect.top + 'px';
-            bild.style.left = zielRect.left + 'px';
-        }
-        setTimeout(() => {
-            if (inhalt) {
-                inhalt.style.opacity = 1; 
-                inhalt.style.filter = 'blur(0px)';
-            }
-        }, 1000); 
-    }, 1000); 
-});
-
-/**
  * Adds an event listener to the window that listens for resize events.
  * If the window's inner width changes from below 700 pixels to above 700 pixels, the page will be reloaded once.
  * The page will not reload again until the width goes back to 700 pixels or less and then exceeds 700 pixels again.

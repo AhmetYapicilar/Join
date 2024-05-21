@@ -169,3 +169,7 @@ body {
     width: 97%;
     height: 40%;
 }
+
+.z-index {
+    z-index: -1;
+}

@@ -8,6 +8,18 @@ button {
     font-family: "Inter";
 }
 
+textarea {
+    font-family: 'inter';
+}
+
+input {
+    font-family: 'inter';
+}
+
+select {
+    font-family: 'inter';
+}
+
 .centerAll {
     justify-content: center;
     align-items: center;
@@ -53,7 +65,7 @@ button {
 .notAJoinUser {
     position: fixed;
     display: flex;
-    width: 279px;
+    width: 330px;
     height: 49px;
     top: 67px;
     right: 5%;
@@ -279,7 +291,7 @@ button {
     font-size: 20px;
     display: flex;
     position: relative;
-    width: 246px;
+    width: 330px;
     height: 35px;
     top: 6%;
     justify-content: space-around;
@@ -384,7 +396,7 @@ button {
         position: absolute;
         width: 50px;
         height: 70px;
-        top: 5% !important;
+        top: 3% !important;
         left: 77px;
     }
 
@@ -420,6 +432,16 @@ button {
         padding: 48px, 115px, 48px, 115px;
         gap: 32px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .privacyPolicyLegalNotice {
+        font-size: 20px;
+        display: flex;
+        position: relative;
+        height: 35px;
+        top: 12%;
+        justify-content: space-around;
+        scale: 0.9;
     }
 
     .LogInBottomLogIn {
@@ -496,6 +518,7 @@ button {
 
     .notAJoinUser {
         gap: 10px;
+        scale: 0.9;
     }
 }
 
@@ -529,10 +552,10 @@ button {
         font-size: 20px;
         display: flex;
         position: relative;
-        width: 246px;
         height: 35px;
         top: 12%;
         justify-content: space-around;
+        scale: 0.9;
     }
 }
 
@@ -582,11 +605,10 @@ button {
 
     .privacyPolicyLegalNotice {
         top: 2%;
-        scale: 0.8;
+        scale: 0.7;
     }
 
     .formLogIn {
-        width: 90%;
-        margin-right: 0px;
+        width: 100%;
     }
 }

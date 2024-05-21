@@ -1,5 +1,17 @@
 /* Anzeige in Groß */
 
+textarea {
+    font-family: 'inter';
+}
+
+input {
+    font-family: 'inter';
+}
+
+select {
+    font-family: 'inter';
+}
+
 .section-board-overlay {
     position: fixed;
     top: 0;

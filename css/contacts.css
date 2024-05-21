@@ -1,11 +1,23 @@
 body {
         margin: 0px;
-        font-family: "Inter", sans-serif;
+        font-family: "Inter", sans-serif !important;
         height: 100vh;
     }
 
 button {
     font-family: "Inter";
+}
+
+textarea {
+    font-family: 'inter';
+}
+
+input {
+    font-family: 'inter';
+}
+
+select {
+    font-family: 'inter';
 }
 
 *::-webkit-scrollbar {
@@ -1262,7 +1274,7 @@ li {
         width: 100% !important;
         position: fixed;
         bottom: 0 !important;
-        height: 80px !important;
+        height: 90px !important;
         top: 92%;
     }
 

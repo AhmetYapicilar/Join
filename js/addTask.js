@@ -392,9 +392,10 @@ function setMinDateToday() {
  * The message fades in and the image scales up, and after a delay, the user is redirected to the board page.
  */
 function showTaskAddedMessage() {
-    
-    const messageDiv = document.getElementById('taskAddedMessage');
-    messageDiv.classList.remove('hidden');
+    const messageImg = document.getElementById('taskAddedMessage');
+    const messageContainer = document.getElementById('taskAddedMessageContainer');
+    messageImg.classList.remove('hidden');
+    messageContainer.classList.remove('z-index');
     setTimeout(() => {
         window.location.href = './board.html';
     }, 3000);
