@@ -30,6 +30,18 @@
     background-color: #29ABE2;
 }
 
+textarea {
+    font-family: 'inter';
+}
+
+input {
+    font-family: 'inter';
+}
+
+select {
+    font-family: 'inter';
+}
+
 .headlineAddTask {
     font-size: 60px;
 }
@@ -345,7 +357,7 @@ li p {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    color: white;
+    color: black;
     text-transform: uppercase;
 }
 
