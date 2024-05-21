@@ -27,7 +27,7 @@ async function initVariablesForShowTasks(i) {
       priorityIcon,
       allSubtasks,
       assignedTo,
-      bgColor,
+      bgColor
     };
   }
 
@@ -49,9 +49,6 @@ async function initVariableAssignedTo(TASK) {
     } else {
       assignedTo = ["Guest"];
       bgColor = ["#FF7A00"];
-    }
-    if(assignedTo.length > 6){
-      assignedTo.splice(6, assignedTo.length);
     }
     return { assignedTo, bgColor };
   }
@@ -120,9 +117,6 @@ async function initVariablesForNewTask() {
     let newWorkflow = newTaskCategory;
     let newPriority = newAddedPrio[0];
     let newSubtasks = newTaskSubtask;
-    if(selectedContacts.length > 6){
-      selectedContacts.splice(6, selectedContacts.length);
-    }
     let newAssignedTo = selectedContacts;
   
     return {
@@ -162,8 +156,12 @@ async function initialOfAssignTo(assignedTo) {
  */
 function addCirclesWithInitials(bgColor, initials){
     let circlesHTML = "";
-    for (let j = 0; j < initials.length; j++) {
+    for (let j = 0; j < Math.min(initials.length, 5); j++) {
       circlesHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:${bgColor[j]}">${initials[j]}</div>`;
+    }
+    if(initials.length>5){
+      let number = initials.length - 5;
+      circlesHTML += `<div class="circle-board margin-left-9px colorWhite" style="background-color:orange">+${number}</div>`;
     }
     return circlesHTML;
   }

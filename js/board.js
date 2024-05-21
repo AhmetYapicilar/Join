@@ -16,19 +16,6 @@ async function initBoard() {
 }
 
 /**
- * Checks for empty tasks in each category and adds a message if no tasks are available.
- */
-function checkEmptyTasks() {
-  for (let i = 0; i < ids.length; i++) {
-    const ID = ids[i];
-    let content = document.getElementById(ID);
-    if (content.innerHTML === "") {
-      content.innerHTML = `<div class="no-tasks-board">No tasks available</div>`;
-    }
-  }
-}
-
-/**
  * Removes the big task before initializing all tasks.
  * @param {number} i - Index of the task.
  */
@@ -190,6 +177,17 @@ async function calculateProgressBar() {
   }
 }
 
+async function calculateProgressBarForOneTask(i){
+  subTaskCheckBox = JSON.parse(localStorage.getItem("subTaskCheckBox")) || [];
+    const SUBTASKS = tasks[i]["subTasks"];
+    if (SUBTASKS.length === 0 && document.getElementById(`progressbar-background${i}`)) {
+      document.getElementById(`progressbar-background${i}`).style.display = 'none';
+      document.getElementById(`completedSubTasks${i}`).innerHTML = 0;
+    }
+    let completedSubtasks = getCompletedSubtasks(SUBTASKS, i);
+   generateWidthOfProgressBar(i, completedSubtasks, SUBTASKS);
+}
+
 /**
  * Handles click event on subtask checkbox.
  * @param {string} checkboxId - ID of the checkbox.
@@ -215,9 +213,17 @@ function checkBOXClick(checkboxId, i, j) {
  * @returns {Promise<void>}
  */
 async function deleteTask(i) {
+  let currentWorkflow = tasks[i]["workflow"];
+  taskCounts[currentWorkflow] - 2;
+  await countTasks(currentWorkflow);
+  let taskElement = document.getElementById(`task${i}`);
+  taskElement.remove();
+  checkEmptyTasks();
   tasks.splice(i, 1);
   await setItem("task", tasks);
-  initBoard();
+  document.getElementById(`bigtask${i}`).classList.remove("animation");
+  document.getElementById("body-board").style.overflow = "auto";
+  document.getElementById("section-board-overlay").classList.remove("section-board-overlay"); 
 }
 
 /**
@@ -300,13 +306,15 @@ function deleteGuestFromSelectedContacts(){
  * @returns {Promise<void>}
  */
 async function closeTaskInBig(i) {
+  let taskElement = document.getElementById(`task${i}`);
+  taskElement.remove();
   document.getElementById(`bigtask${i}`).classList.remove("animation");
   document.getElementById("body-board").style.overflow = "auto";
   setTimeout(() => {
     document
       .getElementById("section-board-overlay")
       .classList.remove("section-board-overlay"); // Verstecke das Element nach der Animation
-    initBoard();
+      addOneTaskToBoard(i);
   }, 400);
 }
 
@@ -346,9 +354,15 @@ function startDragging(id) {
  * @returns {Promise<void>}
  */
 async function moveTo(category) {
+  let currentWorkflow = tasks[draggedTask]["workflow"];
   tasks[draggedTask]["workflow"] = category;
   await setItem("task", JSON.stringify(tasks));
-  initBoard();
+  let taskElement = document.getElementById(`task${draggedTask}`);
+  taskElement.remove();
+  taskCounts[currentWorkflow]--;
+  await addOneTaskToBoard(draggedTask);
+  removeHighlight(category);
+  checkEmptyTasks();
 }
 
 /**
@@ -367,3 +381,6 @@ function removeHighlight(id) {
   document.getElementById(id).classList.remove("drag-area-highlight");
 }
 
+async function closeEdit(i){
+  showTaskInBig(i);
+}

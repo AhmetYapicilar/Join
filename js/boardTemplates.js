@@ -96,6 +96,8 @@ function generateBigTaskHTML(
 function editTaskHTML(i) {
     return `
       <div class="task-edit">
+      <div class="width-100percent flex-end">
+      <img onclick="closeEdit(${i})" class="close-icon" src="./assets/img/close.png"></div>
       <div class="column-edit">
           <span>Title</span>
           <input id="title-id${i}" class="edit-input" type="text">

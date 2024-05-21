@@ -70,7 +70,7 @@ function cleanAllFieldsBeforeInit(){
       contentBefore.innerHTML = "";
     }
   }
-  
+
   /**
    * Generates CSS for initialization.
    */

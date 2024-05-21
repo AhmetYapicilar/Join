@@ -1,4 +1,4 @@
-@media(max-width: 1230px){
+@media(max-width: 1320px){
     .section-board{
         margin-left: 245px;
        width: 700px;
@@ -8,8 +8,12 @@
         width: 150px;
     }
 
+    .card-board-title{
+        width: 125%;
+    }
+
     .no-tasks-board{
-        width: 150px;
+        width: 183px;
         }
         
         .tasks-board{
@@ -69,7 +73,7 @@
     }
 }
 
-@media(max-width: 1050px){
+@media(max-width: 1079px){
     .section-board{
         margin-left: 20px;
        padding: 10px;
@@ -182,7 +186,11 @@
 
 }
 
-@media(max-width: 826px){
+@media(max-width: 836px){
+    .addTaskContentContainerBoard{
+        display: none;
+    }
+
     .section-board{
         padding: 16px;
         margin-top: 80px;
@@ -190,6 +198,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .card-board-title{
+        width: 100%;
     }
 
     .responsive-done{
@@ -220,7 +232,7 @@
     }
 
     .input-container-board{
-        width: 80%;
+        width: 100%;
     }
 
     .inputfield-icon-search {
@@ -308,13 +320,6 @@
     .tasks-board-big {
         width: 50%;
     }
-
-    .last-line{
-        position: absolute;
-        bottom: 10px;
-        right: 15px;
-    }
-  
 }
 
 @media(max-width: 664px){

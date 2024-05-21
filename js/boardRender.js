@@ -1,4 +1,23 @@
 /**
+ * Checks for empty tasks in each category and adds a message if no tasks are available.
+ */
+function checkEmptyTasks() {
+  for (let i = 0; i < ids.length; i++) {
+    const ID = ids[i];
+    let content = document.getElementById(ID);
+    if (content.children.length === 0) {
+      content.innerHTML = `<div class="no-tasks-board">No tasks available</div>`;
+    }
+    else {
+      let noTasksMessage = content.querySelector('.no-tasks-board');
+      if (noTasksMessage) {
+        noTasksMessage.remove();
+      }
+    }
+  }
+}
+
+/**
  * Shows all tasks on the board.
  * @returns {Promise<void>}
  */
@@ -36,6 +55,41 @@ async function showTasks() {
       activateCheckboxIfClickedBefore(i, allSubtasks);
     }
   }
+
+async function addOneTaskToBoard(i){
+  await loadTasks();
+  let {
+    TASK,
+    workflow,
+    title,
+    description,
+    dueDate,
+    priority,
+    priorityIcon,
+    allSubtasks,
+    assignedTo,
+    bgColor,
+  } = await initVariablesForShowTasks(i);
+  let initials = await initialOfAssignTo(assignedTo);
+      if (!workflow) {
+        workflow = "To-Do";
+      }
+      await countTasks(workflow);
+      let circlesHTML = addCirclesWithInitials(bgColor, initials);
+      let content = document.getElementById(workflow);
+      content.innerHTML += generateShowTasksHTML(
+        i,
+        title,
+        description,
+        priorityIcon,
+        allSubtasks,
+        circlesHTML
+      );
+      shortenDescriptionIfTooLong(i);
+      userStoryOrTechnicalTask(TASK, i);
+      activateCheckboxIfClickedBefore(i, allSubtasks);
+      calculateProgressBarForOneTask(i);
+}
 
 /**
  * Shows a task in a big view.
@@ -86,13 +140,23 @@ async function showTaskInBig(i) {
  */
 function initCirclesInBigTask(i, initials, bgColor, assignedTo){
     let circlesHTML = document.getElementById(`assigned-to-contacts${i}`);
-    for (let x = 0; x < initials.length; x++) {
+    for (let x = 0; x < Math.min(initials.length, 6); x++) {
       circlesHTML.innerHTML += `<div class="flex-board">
                                 <div class="circle-board-big" style="background-color:${bgColor[x]}">${initials[x]}</div>
                                 <span class="contact-name">${assignedTo[x]}</span>
                               </div>`;
                               selectedContacts.push(assignedTo[x]);
-  }}
+  }
+  if(initials.length>6){
+    let number = initials.length - 6;
+    circlesHTML.innerHTML += `<div class="flex-board">
+    <div class="circle-board-big" style="background-color:orange">+${number}</div>
+  </div>`
+  for(let j=6; j<initials.length; j++){
+  selectedContacts.push(assignedTo[j]);
+  }
+  }
+}
 
 /**
  * Sets a timeout before showing a big task with animations.
@@ -329,7 +393,7 @@ async function searchTask() {
  * @returns {void}
  */
 async function addTaskOnBoard(selectedCategory) {
-    if (window.innerWidth < 770) {
+    if (window.innerWidth < 837) {
       localStorage.setItem('selectedCategory', JSON.stringify(selectedCategory));
       openAddTask();
     } else {

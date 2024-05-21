@@ -77,16 +77,19 @@ async function createNewTask() {
  * Shows a message indicating that the task has been added to the board.
  * @returns {void}
  */
-function showTaskIsAdded() {
+async function showTaskIsAdded() {
+  await loadTasks;
+  let i = tasks.length - 1;
   document
     .getElementById("middle-of-the-page")
     .classList.add("middle-of-the-page");
   document.getElementById("added-to-board").classList.remove("d-none");
   setTimeout(() => {
     closeAddTask(newTaskNumber);
-    initBoard();
     newTaskNumber++;
   }, 2000);
+  await addOneTaskToBoard(i);
+  checkEmptyTasks();
 }
 
 /**
@@ -103,6 +106,10 @@ async function closeAddTask(newTaskNumber) {
     document
       .getElementById("overlay-add-task-board")
       .classList.remove("overlay-add-task-board"); // Verstecke das Element nach der Animation
+      document.getElementById("added-to-board").classList.add("d-none");
+      document
+      .getElementById("middle-of-the-page")
+      .classList.remove("middle-of-the-page");
   }, 400);
 }
 

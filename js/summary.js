@@ -1,4 +1,21 @@
 /**
+ * Array of the ids as a string.
+ * @type {Array<Object>}
+ */
+let workflows = ["To-Do", "In-Progress", "Await-Feedback", "Done"];
+
+/**
+ * Array for counting the tasks in the fields.
+ * @type {Array<Object>}
+ */
+let taskCounts = {
+  "To-Do": 0,
+  "In-Progress": 0,
+  "Await-Feedback": 0,
+  "Done": 0,
+};
+
+/**
  * Returns a greeting message based on the current time of day.
  * @returns {string} - The greeting message.
  */
@@ -34,16 +51,41 @@ function greetingUser() {
  * @returns {Promise<void>}
  */
 async function initSummary() {
-  await loadCountTasks();
+  await loadTasks();
+  await countTasks();
   await showSummaryTasks();
 }
 
-/**
- * Loads the task counts from storage.
- * @returns {Promise<void>}
- */
-async function loadCountTasks() {
-  taskCounts = JSON.parse(await getItem("taskCount"));
+ /**
+   * Loads tasks from the storage.
+   * @returns {Promise<void>}
+   */
+ async function loadTasks() {
+  try {
+    const storedTasks = await getItem("task");
+
+    if (storedTasks) {
+      tasks = JSON.parse(storedTasks);
+    }
+  } catch (error) {
+    console.error("Loading error:", error);
+  }
+}
+
+async function countTasks(){
+  for(let x = 0; x<workflows.length; x++){
+    let currentWorkflow = workflows[x];
+  for(let i=0; i<tasks.length; i++){
+    const TASK = tasks[i];
+    let workflow = TASK['workflow'];
+    if(workflow === currentWorkflow){
+      taskCounts[currentWorkflow]++;
+    }
+    else{
+      continue;
+    }
+  }
+}
 }
 
 /**
@@ -59,10 +101,9 @@ let dates = [];
 async function showSummaryTasks() {
   await showHowManyTasks();
   let urgentTasks = 0;
-  await loadTasks();
   for (let i = 0; i < tasks.length; i++) {
     const TASK = tasks[i];
-    if (TASK["priority"].toLowerCase() === "urgent") {
+    if (TASK["priority"] && TASK["priority"].toLowerCase() === "urgent") {
       urgentTasks++;
       dates.push(TASK["dueDate"]);
     }
