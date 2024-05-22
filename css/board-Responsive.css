@@ -1,4 +1,8 @@
 @media(max-width: 1320px){
+    .body-board{
+        overflow-x: hidden;
+    }
+
     .section-board{
         margin-left: 245px;
        width: 700px;
@@ -74,6 +78,10 @@
 }
 
 @media(max-width: 1079px){
+    .body-board{
+        overflow-x: hidden;
+    }
+
     .section-board{
         margin-left: 20px;
        padding: 10px;
@@ -187,6 +195,10 @@
 }
 
 @media(max-width: 836px){
+    .body-board{
+        overflow-x: hidden;
+    }
+
     .addTaskContentContainerBoard{
         display: none;
     }
@@ -323,12 +335,20 @@
 }
 
 @media(max-width: 664px){
+    .body-board{
+        overflow-x: hidden;
+    }
+
     .tasks-board {
         width: 50%;
     }
 }
 
 @media(max-width: 448px){
+    .body-board{
+        overflow-x: hidden;
+    }
+    
     .tasks-board {
         width: 85%;
     }

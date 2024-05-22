@@ -17,7 +17,7 @@ function generateShowTasksHTML(
     circlesHTML
   ) {
     return `
-      <div id='task${i}' draggable="true" class="tasks-board" onclick=showTaskInBig(${i}) ondragstart="startDragging(${i})">
+      <div id='task${i}' draggable="true" class="tasks-board" onclick="showTaskInBig(${i})" ontouchstart="startTouch(${i})" ondragstart="startDragging(${i})">
       <div id="user-technical-board${i}"></div>
       <div class="name-of-task-board"><span>${title}</span><p id="description${i}">${description}</p></div>
       <div id="progressbar-background${i}" class="space-between-board width-100percent margin-top-16">

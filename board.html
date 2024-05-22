@@ -19,12 +19,14 @@
     <script src="./js/boardRender.js"></script>
     <script src="./js/boardPriorities.js"></script>
     <script src="./js/boardNewTask.js"></script>
+    <script src="./js/draganddropmobile.js"></script>
     <link rel="shortcut icon" href="assets/img/joinFavIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/addTaskContainer.css">
     <link rel="stylesheet" href="./css/board-showBig.css">
     <link rel="stylesheet" href="./css/firstHalfAddTaskContainer.css">
     <link rel="stylesheet" href="./css/secondHalfAddTaskContainer.css">
     <link rel="stylesheet" href="./css/board-Responsive.css">
+    <link rel="stylesheet" href="./css/boardDragDropResponsive.css">
     <link rel="shortcut icon" href="assets/img/joinFavIcon.png" type="image/x-icon">
 </head>
 
@@ -69,7 +71,7 @@
             <span class="title-board">To do</span>
             <img onclick="addTaskOnBoard('To-Do')" class="plus-border-board" src="./assets/img/plus-button-board.png">
         </div>
-        <div id="To-Do" class="fields" ondragleave="removeHighlight('To-Do')" ondrop="moveTo('To-Do')" ondragover="allowDrop(event); highlight('To-Do')"></div>
+        <div id="To-Do" class="fields"  ondragleave="removeHighlight('To-Do')" ondrop="moveTo('To-Do')" ondragover="allowDrop(event); highlight('To-Do')"></div>
     </div>
 
     <div class="card-board">
@@ -100,6 +102,13 @@
 </div>
 
 </section>
+
+<div id="responsive-DragAndDrop" class="responsive-DragAndDrop">
+    <div class="mini-box-To-Do">To Do</div>
+    <div class="mini-box-In-Progress">In Progress</div>
+    <div class="mini-box-Await-Feedback">Await feedback</div>
+    <div class="mini-box-Done">Done</div>
+</div>
 
 
 

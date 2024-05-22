@@ -1,0 +1,57 @@
+.responsive-DragAndDrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 20;
+    display: none;
+}
+
+.mini-box-To-Do{
+    width: 100%;
+    height: 25%;
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.mini-box-In-Progress{
+    width: 100%;
+    height: 25%;
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.mini-box-Await-Feedback{
+    width: 100%;
+    height: 25%;
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.mini-box-Done{
+    width: 100%;
+    height: 25%;
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: lightgray;
+}
+
