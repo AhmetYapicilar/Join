@@ -1,3 +1,21 @@
 .center-nav {
     display: none !important;
 }
+
+.data {
+    display: none !important;
+}
+
+.sidebar_logo {
+    width: 100.03px;
+    height: 121.97px;
+    object-fit: cover;
+    cursor: pointer;
+    top: 67px;
+    position: fixed;
+}
+
+.space-around {
+    display: flex;
+    justify-content: flex-start;
+}
