@@ -129,6 +129,7 @@ async function showTaskInBig(i) {
     settimeoutForBigTask(i, allSubtasks);
     selectedContacts = [];
     initCirclesInBigTask(i, initials, bgColor, assignedTo);
+    activateCheckboxIfClickedBefore(i, allSubtasks);
     }
 
 /**

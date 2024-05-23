@@ -313,6 +313,22 @@ padding-right: 110px;
 width: 300px;
 }
 
+.subtask-input-newTask{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 21px;
+    gap: 10px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    flex: none;
+    padding-right: 110px;
+    width: 440px;
+}
+
 .add-subtasks-btn {
     position: absolute;
     right: 12px;

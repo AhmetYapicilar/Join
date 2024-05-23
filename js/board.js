@@ -214,6 +214,9 @@ function checkBOXClick(checkboxId, i, j) {
  */
 async function deleteTask(i) {
   let currentWorkflow = tasks[i]["workflow"];
+  let subtasks = tasks[i]['subTasks'];
+  for(let j = 0; j< subtasks.length; j++){
+  deleteFromCheckbox(i, j);}
   taskCounts[currentWorkflow] - 2;
   await countTasks(currentWorkflow);
   let taskElement = document.getElementById(`task${i}`);
@@ -249,7 +252,7 @@ async function deleteSubtask(i, j) {
   let subtasks = tasks[i]["subTasks"];
   subtasks.splice(j, 1);
   await setItem("task", JSON.stringify(tasks));
-  editTask(i);
+  document.getElementById(`showSubtask${i}-${j}`).remove();
   selectContactStyleChanger();
 }
 
@@ -261,11 +264,42 @@ async function deleteSubtask(i, j) {
  */
 async function editSubtask(i, j) {
   let subtask = tasks[i]["subTasks"][j]["subtaskName"];
-  document.getElementById(`showSubtask${i}-${j}`).remove();
-  document.getElementById(`subtask-input${i}`).value = subtask;
-  let task = tasks[i]["subTasks"];
-  task.splice(j, 1);
+  const subtaskElement = document.getElementById(`showSubtask${i}-${j}`);
+  let subtaskToEdit = document.getElementById(`showSubtask${i}-${j}`).textContent.trim();
+  subtaskElement.innerHTML = `<input class="subtask-edit" type="text" id="editSubtaskInput${i}-${j}" value="${subtaskToEdit}" />
+  <div class="visibility flex-board"><img onclick="deleteSubtask(${i}, ${j})" id="delete-icon-edit${i}-${j}" src="./assets/img/delete.png"><div class="grey-line"></div><img onclick="saveEditedSubtask(${i}, ${j})" id="pencil-icon-edit${i}-${j}" src="./assets/img/check-blue.png"></div>`;
+}
+
+async function saveEditedSubtask(i, j){
+  let inputElement = document.getElementById(`editSubtaskInput${i}-${j}`);
+  let updatedSubtask = inputElement.value.trim();
+  let subtaskElement = document.getElementById(`showSubtask${i}-${j}`);
+  if(updatedSubtask === ""){
+    deleteSubtask(i, j);
+  }
+  subtaskElement.innerHTML = renderHTMLforEdittedSubtask(updatedSubtask, i, j);
+  tasks[i]["subTasks"][j]["subtaskName"] = updatedSubtask;
+  tasks[i]["subTasks"][j]["done"] = false;
+  deleteFromCheckbox(i, j);
   await setItem("task", JSON.stringify(tasks));
+}
+
+function renderHTMLforEdittedSubtask(updatedSubtask, i, j){
+  return `${updatedSubtask}
+  <div class="visibility flex-board">
+  <img onclick="deleteSubtask(${i}, ${j})" id="delete-icon-edit${i}-${j}" src="./assets/img/delete.png"><div class="grey-line"></div>
+      <img onclick="editSubtask(${i}, ${j})" id="pencil-icon-edit${i}-${j}" src="./assets/img/edit.png">
+  </div>`
+}
+
+function deleteFromCheckbox(i, j){
+  const subTaskCheckBox = JSON.parse(localStorage.getItem("subTaskCheckBox")) || [];
+  const checkboxId = `subtaskCheckbox${i}-${j}`;
+  const checkboxIndex = subTaskCheckBox.indexOf(checkboxId);
+  if (checkboxIndex !== -1) {
+      subTaskCheckBox.splice(checkboxIndex, 1);
+      localStorage.setItem("subTaskCheckBox", JSON.stringify(subTaskCheckBox));
+  }
 }
 
 /**
@@ -279,6 +313,9 @@ function saveNewSubtasks(i, TASK){
   let allSubTasks = [];
   for (let j = 0; j < SUBTASK.length; j++) {
     let subtask = document.getElementById(`showSubtask${i}-${j}`);
+    if(!subtask){
+      continue;
+    }
     let subtaskName = subtask.textContent;
     let newSubtask = {
       subtaskName: subtaskName,

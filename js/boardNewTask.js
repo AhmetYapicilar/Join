@@ -90,6 +90,7 @@ async function showTaskIsAdded() {
   }, 2000);
   await addOneTaskToBoard(i);
   checkEmptyTasks();
+  newTaskSubtask = [];
 }
 
 /**
@@ -180,8 +181,8 @@ function deactivateInputForCreateTask() {
  * Sets focus on the subtask input field.
  * @returns {void}
  */
-function setFocus() {
-  document.getElementById("subtask-input").focus();
+function setFocus(x) {
+  document.getElementById(x).focus();
 }
 
 /**
@@ -200,6 +201,12 @@ async function submitSubtask(i) {
   if (subtaskContent == "") {
     deactivateInput();
   } else {
+    addOneSubtask(i, subtaskContent)
+  }
+}
+
+async function addOneSubtask(i, subtaskContent){
+  let j = tasks[i]["subTasks"].length;
     const SUBTASK = tasks[i]["subTasks"];
     let newSubtask = {
       subtaskName: subtaskContent,
@@ -207,9 +214,10 @@ async function submitSubtask(i) {
     };
     SUBTASK.push(newSubtask);
     await setItem("task", JSON.stringify(tasks));
-    editTask(i);
-  }
-
+    document.getElementById(
+      `subtask-container${i}`
+    ).innerHTML += `<div id="showSubtask${i}-${j}" class="space-between-board subtask-div">${subtaskContent}
+    <div class="visibility flex-board"><img onclick="deleteSubtask(${i}, ${j})" id="delete-icon-edit${i}-${j}" src="./assets/img/delete.png"><div class="grey-line"></div><img onclick="editSubtask(${i}, ${j})" id="pencil-icon-edit${i}-${j}" src="./assets/img/edit.png"></div>`;
   subtaskContent = "";
   deactivateInput(i);
 }
@@ -235,13 +243,52 @@ function submitSubtaskForNewTask() {
  * @returns {void}
  */
 function showSubtaskForNewTask(){
-  document.getElementById("addedNewSubtasks").innerHTML = "";
-  for (let x = 0; x < newTaskSubtask.length; x++) {
-    document.getElementById(
-      "addedNewSubtasks"
-    ).innerHTML += `<div>${newTaskSubtask[x]["subtaskName"]}</div>`;
-  }
+ let content = document.getElementById("addedNewSubtasks");
+ content.innerHTML = '';  
+ for (let i = 0; i < newTaskSubtask.length; i++) {
+  let subtask = newTaskSubtask[i]['subtaskName'];
+  content.innerHTML += `<div id="newSubtask${i}" class="space-between-board subtask-div">${subtask}
+  <div class="visibility flex-board"><img onclick="deleteNewSubtask(${i})" id="delete-new-icon-edit${i}" src="./assets/img/delete.png"><div class="grey-line"></div>
+    <img onclick="editNewSubtask(${i})" id="pencil-new-icon-edit${i}" src="./assets/img/edit.png"></div>`;
+ }
   document.getElementById("subtask-input").value = "";
+}
+
+function deleteNewSubtask(i){
+  document.getElementById(`newSubtask${i}`).remove();
+  newTaskSubtask.splice(i, 1);
+  if(newTaskSubtask.length === 1){
+    newTaskSubtask = [];
+  }
+}
+
+function editNewSubtask(i){
+  let subtask = newTaskSubtask[i]["subtaskName"];
+  const subtaskElement = document.getElementById(`newSubtask${i}`);
+  let subtaskToEdit = document.getElementById(`newSubtask${i}`).textContent.trim();
+  subtaskElement.innerHTML = `<input class="subtask-edit" type="text" id="editNewSubtaskInput${i}" value="${subtaskToEdit}" />
+  <div class="visibility flex-board"><img onclick="deleteNewSubtask(${i})" id="delete-edittedNew-icon-edit${i}" src="./assets/img/delete.png"><div class="grey-line"></div>
+  <img onclick="saveEditedNewSubtask(${i})" id="pencil-newEditted-icon-edit${i}" src="./assets/img/check-blue.png"></div>`;
+}
+
+async function saveEditedNewSubtask(i){
+  let inputElement = document.getElementById(`editNewSubtaskInput${i}`);
+  let updatedSubtask = inputElement.value.trim();
+  let subtaskElement = document.getElementById(`newSubtask${i}`);
+  if(updatedSubtask === ""){
+    deleteNewSubtask(i);
+  }
+  subtaskElement.innerHTML = renderHTMLforEdittedNewSubtask(updatedSubtask, i);
+  newTaskSubtask[i]["subtaskName"] = updatedSubtask;
+  newTaskSubtask[i]["done"] = false;
+}
+
+function renderHTMLforEdittedNewSubtask(updatedSubtask, i){
+  return `${updatedSubtask}
+  <div class="visibility flex-board">
+  <img onclick="deleteNewSubtask(${i})" id="delete-new-icon-edit${i}" src="./assets/img/delete.png"><div class="grey-line"></div>
+      <img onclick="editNewSubtask(${i})" id="pencil-new-icon-edit${i}" src="./assets/img/edit.png">
+  </div>`
 }
 
 /**

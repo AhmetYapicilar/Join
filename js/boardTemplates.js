@@ -135,13 +135,13 @@ function editTaskHTML(i) {
       <div class="column-edit margin-top-16">
           <span>Subtasks</span>
           <div class="relative">
-              <input type="text" class="subtask-input" placeholder="Add new subtask" id="subtask-input${i}">
-              <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation(); activateInput()" id="add-subtask-edit" class="add-subtasks-btn-edit">
+              <input onclick="activateInput(${i})" type="text" class="subtask-input" placeholder="Add new subtask" id="subtask-input${i}">
+              <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation(); activateInput(${i})" id="add-subtask-edit" class="add-subtasks-btn-edit">
               <div id="subtask-input-actions" class="d-flex align-c add-subtasks-btn d-none">
                                   <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
                                       onclick="submitSubtask(${i})" />
                                   <span class="vertical-line-sub"></span>
-                                  <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput()" />
+                                  <img src="./assets/img/close.png" class="subtask-actions" onclick="deactivateInput(${i})" />
                </div>    
           </div>
           <div id="subtask-container${i}"></div>
@@ -232,8 +232,8 @@ function addTaskOnBoardHTML(newTaskNumber) {
   
               <div class="input-container">
               <div class="">
-              <input type="text" id="subtask-input" class="subtask-input fontSize20px" autocomplete="off" placeholder="Add new subtask" onkeydown="checkSubmit(event)" size="10">
-              <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation();  activateInputForCreateTask(); setFocus()" id="add-subtask" class="add-subtasks-btn">
+              <input type="text" onclick="activateInputForCreateTask()" id="subtask-input" class="subtask-input-newTask fontSize20px" autocomplete="off" placeholder="Add new subtask" onkeydown="checkSubmit(event)" size="10">
+              <img src="./assets/img/add-subtask.png" onclick="event.stopPropagation();  activateInputForCreateTask(); setFocus("subtask-input") id="add-subtask" class="add-subtasks-btn">
               <div id="subtask-input-Actions" class="d-flex align-c add-subtasks-btn d-none">
                                   <img src="./assets/img/check-blue.png" class="subtask-actions submit-input"
                                       onclick="submitSubtaskForNewTask()" />

@@ -32,6 +32,10 @@
         width: 65px;
     }
 
+    .subtask-input-newTask{
+        width: 300px;
+    }
+
     .titleInputAddTask{
         width: 300px;
     }
@@ -112,10 +116,10 @@
         z-index: 99;
         position: relative;
         border-radius: 20px;
-        
         transition: all ease-in-out 800ms;
         display: flex;
         flex-direction: column;
+        align-items: center;
         overflow-y: auto;
     }
 
@@ -178,10 +182,13 @@
     }
 
     .clearCreateButtonsContainer {
-      position: static;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      width: 250px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      margin-top: 32px;
     }
 
     .clearButton {
@@ -367,7 +374,19 @@
         height: 48px;
     }
 
+    .subtask-input-newTask{
+        width: 250px;
+    }
+
     .subtask-input {
+        width: 250px;
+    }
+
+    .subtask-div{
+        width: 250px;
+    }
+
+    .relative{
         width: 250px;
     }
 

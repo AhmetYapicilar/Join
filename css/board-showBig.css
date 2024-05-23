@@ -379,6 +379,7 @@ select {
     position: absolute;
     right: 12px;
     top: 12px;
+    cursor: pointer;
 }
 
 .relative {
@@ -406,62 +407,3 @@ select {
     color: white !important;
 }
 
-.saveDiv{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-
-.ok-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    gap: 4px;
-    width: 70px;
-    height: 40px;
-    background: #2A3647;
-    border-radius: 10px;
-    flex: none;
-    color: #FFFFFF;
-    font-size: 20px;
-    font-weight: 700;
-    cursor: pointer;
-    border-width: 0px;
-}
-
-.ok-button:hover {
-    background-color: rgb(13, 153, 255);
-}
-
-.subtask-div{
-    border-radius: 10px;
-    padding: 4px;
-}
-
-.subtask-div:hover{
-    background-color: rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-.grey-line{
-    width: 1px;
-    height: 19px;
-    background-color: #676767;
-}
-
-.d-none{
-    display: none;
-}
-
-.visibility{
-    visibility: hidden;
-    gap: 4px;
-}
-
-.subtask-div:hover .visibility {
-    visibility: visible;
-}
