@@ -19,3 +19,11 @@
     display: flex;
     justify-content: flex-start;
 }
+
+.help-icon {
+    display: none;
+}
+
+.circle {
+    display: none;
+}
