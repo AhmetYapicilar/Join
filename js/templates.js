@@ -7,18 +7,25 @@ let user = JSON.parse(localStorage.getItem("user-name"));
  * Displays the initials of the user on the page.
  */
 function showInitials() {
-  let name = JSON.stringify(user);
+  let name = user;
+  if(name === null || name === 'Guest'){
+    setTimeout(() => {
+      document.getElementById("initials").innerHTML = 'G';
+    }, 1000);
+  } else{
   let initials = name.match(/\b\w/g) || [];
   let result = initials.join("");
   setTimeout(() => {
     document.getElementById("initials").innerHTML = result;
   }, 1000);
-}
+}}
 
 /**
  * Redirects the user to the addTask page.
  */
 function openAddTask() {
+  if(user === null || user === 'Guest'){
+    user = 'Guest';}
   window.location.href = "addTask.html?user=" + user;
 }
 
@@ -26,6 +33,8 @@ function openAddTask() {
  * Redirects the user to the summary page.
  */
 function openSummary() {
+  if(user === null || user === 'Guest'){
+    user = 'Guest';}
   window.location.href = "summary.html?user=" + user;
 }
 
@@ -33,6 +42,8 @@ function openSummary() {
  * Redirects the user to the contact page.
  */
 function openContacts() {
+  if(user === null || user === 'Guest'){
+    user = 'Guest';}
   window.location.href = "contacts.html?user=" + user;
 }
 
@@ -40,6 +51,8 @@ function openContacts() {
  * Redirects the user to the board page.
  */
 function openBoard() {
+  if(user === null || user === 'Guest'){
+    user = 'Guest';}
   window.location.href = "board.html?user=" + user;
 }
 

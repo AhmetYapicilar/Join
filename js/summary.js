@@ -38,7 +38,7 @@ function greetingUser() {
   let content = document.getElementById("greeting");
   let nameToGreet = document.getElementById('greeting-name');
   let name = JSON.parse(localStorage.getItem("user-name"));
-  if(name === 'Guest'){
+  if(name === 'Guest' || name === null){
     content.innerHTML = getTime();
   } else{
     content.innerHTML = getTime() + ',';
