@@ -5,7 +5,7 @@
  */
 async function initBoard() {
   generateCSSForInit();
-  cleanAllFieldsBeforeInit();
+  await cleanAllFieldsBeforeInit();
   await loadUsers();
   await loadTasks();
   removeBigTaskBeforeInitAllTasks();

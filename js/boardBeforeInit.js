@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * Cleans all fields before initializing the board.
  */
-function cleanAllFieldsBeforeInit(){
+async function cleanAllFieldsBeforeInit(){
     for (let x = 0; x < ids.length; x++) {
       let category = ids[x];
       taskCounts[category] = 0;

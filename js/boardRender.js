@@ -288,7 +288,7 @@ async function searchTaskResponsive() {
  
     let search = document.getElementById("search-input1").value;
     search = search.toLowerCase();
-    cleanAllFieldsBeforeInit();
+    await cleanAllFieldsBeforeInit();
     if (search === "") {
       await showTasks();
       await calculateProgressBar();
@@ -308,7 +308,7 @@ async function searchTask() {
  
     let search = document.getElementById("search-input2").value;
     search = search.toLowerCase();
-    cleanAllFieldsBeforeInit();
+    await cleanAllFieldsBeforeInit();
     if (search === "") {
       await showTasks();
       await calculateProgressBar();
@@ -343,8 +343,8 @@ async function searchTask() {
         }
         if (
           TASK["workflow"] === ids[i] &&
-          tasktitle.toLowerCase().startsWith(search) ||
-          taskdescription.toLowerCase().startsWith(search)
+          tasktitle.toLowerCase().includes((search)) ||
+          taskdescription.toLowerCase().includes((search))
         ) {
           foundedTasks.push(TASK);
         }
