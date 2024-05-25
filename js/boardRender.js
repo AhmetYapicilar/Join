@@ -288,7 +288,10 @@ async function searchTaskResponsive() {
  
     let search = document.getElementById("search-input1").value;
     search = search.toLowerCase();
-    await cleanAllFieldsBeforeInit();
+    for (let x = 0; x < ids.length; x++) {
+      let contentBefore = document.getElementById(`${ids[x]}`);
+      contentBefore.innerHTML = "";
+    }
     if (search === "") {
       await showTasks();
       await calculateProgressBar();
@@ -308,7 +311,10 @@ async function searchTask() {
  
     let search = document.getElementById("search-input2").value;
     search = search.toLowerCase();
-    await cleanAllFieldsBeforeInit();
+    for (let x = 0; x < ids.length; x++) {
+      let contentBefore = document.getElementById(`${ids[x]}`);
+      contentBefore.innerHTML = "";
+    }
     if (search === "") {
       await showTasks();
       await calculateProgressBar();
